@@ -43,6 +43,12 @@ class usersControllers {
   editUser = (req, res) => {
     console.log("aqui puedes editar tu usuario");
   };
+  terms = (req, res) => {
+    console.log("terminos y condiciones");
+  };
+  privacy = (req, res) => {
+    console.log("esta es la pagina de privacidad");
+  };
 }
 
 module.exports = new usersControllers();
