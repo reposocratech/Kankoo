@@ -9,6 +9,7 @@ import { Favorites } from "../pages/users/Favorites/Favorites";
 import { EditUser } from "../pages/users/EditUser/EditUser";
 import { BoughtTours } from "../pages/users/BoughtTours/BoughtTours";
 import { CreateTour } from "../pages/tours/CreateTour/CreateTour";
+import { RegisterForm } from "../pages/auth/Register/RegisterForm";
 import { LoginForm } from "../pages/auth/Login/LoginForm";
 
 export const AppRoutes = () => {
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<ToursGallery />} />
           <Route path="/users/userprofile" element={<UserProfile />} />
+          <Route path="/users/registeruser" element={<RegisterForm />} />
           <Route path="/users/mytours" element={<MyTours />} />
           <Route path="/users/favtours" element={<Favorites />} />
           <Route path="/users/boughttours" element={<BoughtTours />} />
