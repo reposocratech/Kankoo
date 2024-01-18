@@ -6,20 +6,18 @@ export const TermsConditions = () => {
   const navigate = useNavigate();
   return (
     <Container>
-      <div className="termsBackCombo">
+      <div
+        className="termsBackCombo"
+        onClick={() => navigate("/users/userprofile")}
+      >
         <img
           className="termsBackArrow"
           src="/icons/back.png"
           alt="flecha a la izquierda"
         />
-        <button
-          className="termsButton"
-          onClick={() => navigate("/users/userprofile")}
-        >
-          Volver
-        </button>
+        <button className="termsButton">Volver</button>
       </div>
-      <div className="termsGeneral p-8">
+      <div className="termsGeneral">
         <h2>Terminos y condiciones de uso</h2>
         <p>
           Términos de servicio para la aplicación móvil Kankoo ¡Bienvenido a
