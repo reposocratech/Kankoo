@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import { Col, Row, Form, Button } from "react-bootstrap";
 
 const initialValue = {
-  name: "",
+  first_name: "",
+  last_name: "",
   email: "",
   password: "",
 };
@@ -20,6 +22,30 @@ export const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (
+      !registerForm.first_name ||
+      !registerForm.last_name ||
+      !registerForm.email ||
+      !registerForm.password
+    ) {
+      setMsgError("Algun campo no esta relleno");
+    } else {
+      axios
+        .post("http://localhost:3000/registeruser", registerForm)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.data.error.errno === 1062) {
+            setMsgError("Email duplicado");
+          } else if (err.response.data.error.errno === 1406) {
+            setMsgError("Campo demasiado largo ");
+          } else {
+            setMsgError("ups ocurrio un error");
+          }
+        });
+    }
   };
 
   return (
@@ -32,9 +58,19 @@ export const RegisterForm = () => {
             <Form.Control
               type="text"
               placeholder="Nombre"
-              value={registerForm.name}
+              value={registerForm.first_name}
               onChange={handleChange}
-              name="name"
+              name="first_name"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formGroupLastName">
+            <Form.Label>Apellidos </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Apellido"
+              value={registerForm.last_name}
+              onChange={handleChange}
+              name="last_name"
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupEmail">
