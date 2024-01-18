@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const initialValue = {
   first_name: "",
@@ -11,8 +13,20 @@ export const LoginForm = () => {
   const [login, setLogin] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
 
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLogin({ ...login, [name]: value });
+  };
+  const handleSubmit = () => {
+    axios
+      .post("http://localhost:3000/users/login", login)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Row className="d-flex justify-content-center">
@@ -27,17 +41,6 @@ export const LoginForm = () => {
         <Form>
           <h1>Bienvenid@</h1>
           <h3>Inicie sesión</h3>
-
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nombre"
-              name="nombre"
-              value={login.first_name}
-              onChange={handleChange}
-            />
-          </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Email</Form.Label>

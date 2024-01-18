@@ -10,6 +10,8 @@ import { EditUser } from "../pages/users/EditUser/EditUser";
 import { BoughtTours } from "../pages/users/BoughtTours/BoughtTours";
 import { CreateTour } from "../pages/tours/CreateTour/CreateTour";
 import { RegisterForm } from "../pages/auth/Register/RegisterForm";
+import { LoginForm } from "../pages/auth/Login/LoginForm";
+
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -24,6 +26,7 @@ export const AppRoutes = () => {
           <Route path="/users/boughttours" element={<BoughtTours />} />
           <Route path="/users/edituser" element={<EditUser />} />
           <Route path="/tours/newguide" element={<CreateTour />} />
+          <Route path="/login" element={<LoginForm />} />
         </Routes>
       </Row>
     </BrowserRouter>
