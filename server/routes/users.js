@@ -9,8 +9,7 @@ router.get("/mytours", usersControllers.ownTours);
 router.get("/favtours", usersControllers.favTours);
 router.get("/boughttours", usersControllers.boughtTours);
 router.get("/edituser", usersControllers.editUser);
-
-
-
+router.get("/terms", usersControllers.terms);
+router.get("/privacy", usersControllers.privacy);
 
 module.exports = router;
