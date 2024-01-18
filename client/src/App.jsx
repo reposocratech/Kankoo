@@ -1,23 +1,13 @@
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios'
+import "bootstrap/dist/css/bootstrap.min.css";
+import { AppRoutes } from "./Routes/AppRoutes";
+import { Container } from "react-bootstrap";
 
 function App() {
-
-
-  const testear = (e) => {
-   axios.get("http://localhost:3000")
-   .then((res) => console.log(res, "patata Kankoo"))
-  }
-
   return (
-    <>
-     <h1>Kankoo che</h1>
-    <button onClick={testear}>Epa </button>
-
-
-    </>
-  )
+    <Container fluid>
+      <AppRoutes />
+    </Container>
+  );
 }
 
-export default App
+export default App;
