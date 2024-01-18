@@ -4,6 +4,8 @@ var router = express.Router();
 //http://localhost:3000/users
 
 router.post("/registeruser", usersControllers.registerUser);
+router.post("/login", usersControllers.login);
+router.get("/otheruser:id", usersControllers.otherUser);
 router.get("/userprofile", usersControllers.viewProfile);
 router.get("/mytours", usersControllers.ownTours);
 router.get("/favtours", usersControllers.favTours);
