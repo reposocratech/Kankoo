@@ -18,6 +18,14 @@
   @include BotonBlanco;
 }
 
+.NavbarBrand {
+  img {
+    width: 8rem;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+}
+
 .navBoton {
   @include BotonBlanco;
 
