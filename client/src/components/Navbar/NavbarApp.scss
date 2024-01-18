@@ -1,11 +1,33 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.navContainer {
+  max-width: 1600px;
+  width: 100%;
+  max-height: 70px;
+  height: 70px;
+  margin: 0 auto;
+}
+
 .bg-body-tertiary {
   background-color: #f07674 !important;
+  color: white;
 }
 
 .navBoton {
-  background-color: white;
-  color: #f07674;
-  border-radius: 2rem;
-  padding: 1rem;
-  border: none;
+  @include BotonBlanco;
+}
+
+.navBoton {
+  @include BotonBlanco;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
 }
