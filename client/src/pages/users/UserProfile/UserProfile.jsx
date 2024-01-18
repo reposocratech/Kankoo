@@ -57,7 +57,7 @@ export const UserProfile = () => {
         <Col className="perfilButton d-flex flex-column align-items-center">
           <div className="perfilCircle">
             <img
-              onClick={() => navigate("/users/newtour")}
+              onClick={() => navigate("/tours/newtour")}
               className="perfilIcono"
               src="/icons/nuevaguia.png"
               alt="icono de un mapa"
