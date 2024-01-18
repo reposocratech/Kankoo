@@ -1,0 +1,17 @@
+@import "./../../styles/mixins.scss";
+
+.termsGeneral {
+  > p {
+    padding-top: 2rem;
+  }
+}
+.termsButton {
+  @include BotonCoral;
+}
+.termsBackArrow {
+  width: 1.8rem;
+  margin: 0.5rem;
+}
+.termsBackCombo {
+  padding: 2rem;
+}

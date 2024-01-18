@@ -54,6 +54,12 @@ class usersControllers {
       }
     });
   };
+  terms = (req, res) => {
+    console.log("terminos y condiciones");
+  };
+  privacy = (req, res) => {
+    console.log("esta es la pagina de privacidad");
+  };
 }
 
 module.exports = new usersControllers();
