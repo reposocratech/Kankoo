@@ -50,7 +50,7 @@ class usersControllers {
       if (err) {
         res.status(400).json({ err });
       } else {
-        res.status(200).json({ result, img });
+        res.status(200).json({ result });
       }
     });
   };
@@ -59,6 +59,19 @@ class usersControllers {
   };
   privacy = (req, res) => {
     console.log("esta es la pagina de privacidad");
+  };
+
+  otherUser = (req, res) => {
+    const user_id = req.params.id;
+    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND user_is_deleted = 0`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json({ err });
+      } else {
+        res.status(200).json({ result });
+      }
+    });
   };
 }
 
