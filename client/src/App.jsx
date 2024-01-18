@@ -3,10 +3,12 @@ import { AppRoutes } from "./Routes/AppRoutes";
 import { Container } from "react-bootstrap";
 
 import "./App.scss";
+import { EditUser } from "./pages/users/EditUser/EditUser";
 
 function App() {
   return (
     <Container fluid>
+      <EditUser />
       <AppRoutes />
     </Container>
   );
