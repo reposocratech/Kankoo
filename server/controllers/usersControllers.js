@@ -41,7 +41,18 @@ class usersControllers {
     console.log("estas son mis guías adquiridas");
   };
   editUser = (req, res) => {
-    console.log("aqui puedes editar tu usuario");
+    const { first_name, last_name, birthdate, user_id } = JSON.parse(
+      req.body.editUser
+    );
+    let sql = `UPDATE user SET first_name = "${first_name}", last_name = "${last_name}", birthdate = "${birthdate}" WHERE user_id = ${user_id}  `;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json({ err });
+      } else {
+        res.status(200).json({ result, img });
+      }
+    });
   };
   terms = (req, res) => {
     console.log("terminos y condiciones");

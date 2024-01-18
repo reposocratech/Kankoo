@@ -52,7 +52,7 @@ export const RegisterForm = () => {
     <Row className="d-flex justify-content-center p-5">
       <h2>Regístrate:</h2>
       <Col md={4}>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <Form.Group className="mb-3" controlId="formGroupName">
             <Form.Label>Nombre </Form.Label>
             <Form.Control
