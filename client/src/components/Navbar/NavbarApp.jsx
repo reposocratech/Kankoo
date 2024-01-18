@@ -1,14 +1,16 @@
 import { Button, Nav, NavDropdown, Form } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./NavbarApp.scss";
 
 function NavBarApp() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand href="#">KANKOO</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          KANKOO
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -16,7 +18,9 @@ function NavBarApp() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
             <Nav.Link href="#action2">Top lugares</Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -27,9 +31,14 @@ function NavBarApp() {
             navbarScroll
           >
             <Nav.Link href="#action1">
-              <button className="navBoton">Registro</button>
+              <button
+                className="navBoton"
+                onClick={() => Navigate("/register")}
+              >
+                Registro
+              </button>
             </Nav.Link>
-            <Nav.Link href="#action1">
+            <Nav.Link as={Link} to="/login">
               <button className="navBoton">Inicia sesión</button>
             </Nav.Link>
           </Nav>

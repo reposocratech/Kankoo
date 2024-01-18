@@ -1,7 +1,7 @@
 const connection = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+require("dotenv").config();
 
 class usersControllers {
   registerUser = (req, res) => {
@@ -42,6 +42,41 @@ class usersControllers {
   };
   editUser = (req, res) => {
     console.log("aqui puedes editar tu usuario");
+  };
+
+  login = (req, res) => {
+    const { email, password } = req.body;
+    let sql = `SELECT * FROM user WHERE email = '${email}'`;
+    connection.query(sql, (error, result) => {
+      if (error) return res.status(500).json(error);
+      console.log(result);
+
+      if (!result || result.length === 0 || result[0].is_deleted == 1) {
+        res.status(401).json("Email no registrado");
+      } else {
+        const user = result[0];
+        const hash = user.password;
+        bcrypt.compare(password, hash, (error, response) => {
+          if (error) return res.status(500).json(error);
+          if (response == true) {
+            const token = jwt.sign(
+              {
+                user: {
+                  id: user.user_id,
+                  type: user.type,
+                },
+              },
+              process.env.SECRET,
+              { expiresIn: "1d" }
+            );
+
+            res.status(200).json({ token, user });
+          } else {
+            res.status(401).json("Contraseña no válida");
+          }
+        });
+      }
+    });
   };
 }
 
