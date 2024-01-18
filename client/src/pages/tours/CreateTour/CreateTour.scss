@@ -1,0 +1,14 @@
+@import "./../../../styles/mixins.scss";
+.createTourButton {
+  @include BotonCoral;
+  margin: 0.2rem;
+}
+.createTourGeneral {
+  padding: 3rem;
+  > h2 {
+    padding-bottom: 1rem;
+  }
+}
+.createTourSide {
+  padding: 2rem 0rem 0rem 2rem;
+}
