@@ -1,0 +1,17 @@
+@import "./../../styles/mixins.scss";
+
+.policyGeneral {
+  > p {
+    padding-top: 2rem;
+  }
+}
+.policyButton {
+  @include BotonCoral;
+}
+.policyBackArrow {
+  width: 1.8rem;
+  margin: 0.5rem;
+}
+.policyBackCombo {
+  padding: 2rem;
+}
