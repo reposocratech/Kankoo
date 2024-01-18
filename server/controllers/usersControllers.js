@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
 class usersControllers {
-    registerUser = (req, res) => {
+  registerUser = (req, res) => {
     const { first_name, last_name, email, password } = req.body;
 
     let saltRounds = 8;
@@ -14,7 +14,7 @@ class usersControllers {
         if (err) {
           console.log(err);
         } else {
-          let sql = `INSERT INTO user (first_name, last_name, email, password) VALUES ("${first_name}", "${last_name}", "${email}", "${password}")`;
+          let sql = `INSERT INTO user (first_name, last_name, email, password) VALUES ("${first_name}", "${last_name}", "${email}", "${hash}")`;
 
           connection.query(sql, (error, result) => {
             console.log(error);
@@ -43,7 +43,6 @@ class usersControllers {
   editUser = (req, res) => {
     console.log("aqui puedes editar tu usuario");
   };
-} 
-
+}
 
 module.exports = new usersControllers();
