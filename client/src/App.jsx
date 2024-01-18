@@ -4,10 +4,12 @@ import { Container } from "react-bootstrap";
 import { KankooProvider } from "./context/KankooContext";
 
 import "./App.scss";
+import { EditUser } from "./pages/users/EditUser/EditUser";
 
 function App() {
   return (
     <Container fluid>
+      <AppRoutes />
       <KankooProvider>
         <AppRoutes />
       </KankooProvider>
