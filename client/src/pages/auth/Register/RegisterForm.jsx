@@ -31,7 +31,7 @@ export const RegisterForm = () => {
       setMsgError("Algun campo no esta relleno");
     } else {
       axios
-        .post("http://localhost:3000/registeruser", registerForm)
+        .post("http://localhost:3000/users/registeruser", registerForm)
         .then((res) => {
           console.log(res);
         })
@@ -57,7 +57,7 @@ export const RegisterForm = () => {
             <Form.Label>Nombre </Form.Label>
             <Form.Control
               type="text"
-              placeholder="Nombre"
+              placeholder="nombre"
               value={registerForm.first_name}
               onChange={handleChange}
               name="first_name"
@@ -93,7 +93,8 @@ export const RegisterForm = () => {
               name="password"
             />
           </Form.Group>
-          <Button variant="danger me-2" type="submit">
+          {msgError && <p> {msgError} </p>}
+          <Button variant="danger me-2" onClick={handleSubmit}>
             Regístrate
           </Button>
           <Button variant="danger me-2">Cancelar</Button>
