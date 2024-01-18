@@ -35,6 +35,7 @@ function NavBarApp() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
+
             <Nav.Link onClick={() => navigate("/users/registeruser")}>
               <button className="navBoton">Registro</button>
             </Nav.Link>
