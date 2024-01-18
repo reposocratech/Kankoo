@@ -6,20 +6,18 @@ export const PrivacyPolicy = () => {
   const navigate = useNavigate();
   return (
     <Container>
-      <div className="policyBackCombo">
+      <div
+        className="policyBackCombo"
+        onClick={() => navigate("/users/userprofile")}
+      >
         <img
           className="policyBackArrow"
           src="/icons/back.png"
           alt="flecha a la izquierda"
         />
-        <button
-          className="policyButton"
-          onClick={() => navigate("/users/userprofile")}
-        >
-          Volver
-        </button>
+        <button className="policyButton">Volver</button>
       </div>
-      <div className="policyGeneral p-8">
+      <div className="policyGeneral">
         <h2>Política de privacidad</h2>
         <p>
           Política de privacidad para Kankoo Aplicación móvil En Kankoo, estamos

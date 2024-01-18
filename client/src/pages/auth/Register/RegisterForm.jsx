@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import "./RegisterForm.scss";
 import { Col, Row, Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const initialValue = {
   first_name: "",
@@ -13,7 +14,7 @@ const initialValue = {
 export const RegisterForm = () => {
   const [registerForm, setRegisterForm] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(e.target.value);
@@ -94,10 +95,12 @@ export const RegisterForm = () => {
             />
           </Form.Group>
           {msgError && <p> {msgError} </p>}
-          <Button variant="danger me-2" onClick={handleSubmit}>
+          <Button onClick={handleSubmit} className="registerButton">
             Regístrate
           </Button>
-          <Button variant="danger me-2">Cancelar</Button>
+          <Button className="registerButton" onClick={() => navigate("/")}>
+            Cancelar
+          </Button>
           <p>
             Al registrarte, aceptas los <span>términos y condiciones</span> y
             <span>la política de privacidad.</span>
