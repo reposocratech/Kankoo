@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./UserProfile.scss";
+import { KankooContext } from "../../../context/KankooContext";
+
 export const UserProfile = () => {
+  const { user } = useContext(KankooContext);
   const navigate = useNavigate();
   return (
     <Container className="perfilGeneral d-flex flex-column align-items-center">
-      <h1>¡Bienvenido/a!</h1>
+      <h1>¡Bienvenido/a! {user?.first_name}</h1>
       <Row>
         <Col className="perfilButton d-flex flex-column align-items-center">
           <div className="perfilCircle">
