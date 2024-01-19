@@ -15,6 +15,7 @@ export const RegisterForm = () => {
   const [registerForm, setRegisterForm] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(e.target.value);

@@ -1,61 +1,75 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./CreateTour.scss";
+import { KankooContext } from "../../../context/KankooContext";
+
 const initialValueTour = {
   tour_name: "",
   tour_description: "",
+  tour_acces: "",
+  location: "",
   tour_city: "",
-  tour_location: "",
-  tour_language: "",
-  tour_price: "",
-  cover_resource_text: "",
-  section_name: "",
-  section_description: "",
-  travel_distance: "",
-  text: "",
+  cover: "",
+  price: "",
 };
 
-export const CreateTour = () => {
+export const CreateTour = ({ setShowCreateTour, user_id }) => {
   const [addTour, setAddTour] = useState(initialValueTour);
   const [showPoint, setShowPoint] = useState(false);
   const [msgError, setMsgError] = useState("");
   const [submitedSection, setSubmitedSection] = useState(false);
+  const [file, setFile] = useState();
   const navigate = useNavigate();
+
+  const { setTours } = useContext(KankooContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddTour({ ...addTour, [name]: value });
+    console.log(e.target.value);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  // const handleFile = (e) => {
+  //   setFile(e.target.files[0]);
+  // };
+
+  const handleSubmit = () => {
     if (
       !addTour.tour_name ||
       !addTour.tour_description ||
       !addTour.tour_city ||
-      !addTour.tour_location ||
-      !addTour.tour_language ||
-      !addTour.tour_price ||
-      !addTour.cover_resource_text ||
-      setSubmitedSection(false)
+      !addTour.location
     ) {
       setMsgError("Rellena todos los campos");
     } else {
+      let temp = { ...addTour, user_id };
+      const { tour_name, tour_description, tour_city, location, user_id } =
+        temp;
+
+      console.log("Datos a enviar:", temp);
+      const newFormData = new FormData();
+
+      newFormData.append("regTour", JSON.stringify(temp));
+      // newFormData.append("file", file);
+
       axios
-        .post("http://localhost:3000/tours/newtour", addTour)
+        .post("http://localhost:3000/tours/newtour", newFormData)
         .then((res) => {
-          console.log(res);
+          setTours(res.data);
+          setShowCreateTour(false);
+          console.log("Respuesta del servidor:", res.data);
         })
         .catch((err) => {
           console.log(err);
+          console.log(err.response);
           setMsgError("Oops ocurrió un error");
         });
     }
   };
-  const handleSubmitSection = (e) => {
-    setSubmitedSection(true);
-  };
+  console.log(addTour);
+
   return (
     <Row className="createTourGeneral">
       <h2>Crear nueva guía turística</h2>
@@ -97,21 +111,21 @@ export const CreateTour = () => {
               type="text"
               placeholder="Introduce el link de la ubicación"
               name="location"
-              value={addTour.tour_login}
+              value={addTour.location}
               onChange={handleChange}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Idioma de la guía</Form.Label>
+            <Form.Label>Accesibilidad</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Introduce las siglas del idioma"
-              name="tour_language"
-              value={addTour.tour_language}
+              placeholder="Info acces"
+              name="tour_acces"
+              value={addTour.tour_acces}
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          {/* <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Precio de la guía</Form.Label>
             <Form.Control
               type="text"
@@ -120,9 +134,13 @@ export const CreateTour = () => {
               value={addTour.tour_price}
               onChange={handleChange}
             />
-          </Form.Group>
+          </Form.Group> */}
+          {/* <Form.Group controlId="formFileLg" className="mb-3">
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control type="file" onChange={handleFile} />
+          </Form.Group> */}
           <p>{msgError}</p>
-          <div>
+          {/* <div>
             <button
               type="button"
               className="createTourButton"
@@ -130,9 +148,10 @@ export const CreateTour = () => {
             >
               Añadir un punto en tu guía
             </button>
-          </div>
+          </div> */}
           <div>
             <button
+              type="button"
               className="createTourButton"
               variant="primary me-2"
               onClick={handleSubmit}
@@ -140,6 +159,7 @@ export const CreateTour = () => {
               Solicitar aprobación
             </button>
             <button
+              type="button"
               className="createTourButton"
               variant="primary"
               onClick={() => navigate("/")}
@@ -149,7 +169,7 @@ export const CreateTour = () => {
           </div>
         </Form>
       </Col>
-      {showPoint && (
+      {/* {showPoint && (
         <Col sm={2} md={2} lg={4} className="createTourSide">
           <h2>Añadir un punto a la guía turística</h2>
           <Form>
@@ -201,7 +221,7 @@ export const CreateTour = () => {
             </button>
           </Form>
         </Col>
-      )}
+      )} */}
     </Row>
   );
 };
