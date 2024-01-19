@@ -16,7 +16,7 @@ export const EditUser = () => {
   const [msgError, setMsgError] = useState("");
   const [file, setFile] = useState();
 
-  const { user, setUser } = useContext(KankooContext);
+  const { user, setUser, setResetImg, resetImg } = useContext(KankooContext);
 
   useEffect(() => {
     if (user) {
@@ -55,6 +55,7 @@ export const EditUser = () => {
           } else {
             setUser(editUser);
           }
+          setResetImg(!resetImg);
           navigate("/users/userprofile");
         })
         .catch((err) => {
@@ -93,16 +94,6 @@ export const EditUser = () => {
                 name="last_name"
               />
             </Form.Group>
-            {/* <Form.Group className="mb-3" controlId="formGroupBirthday">
-              <Form.Label>Fecha de nacimiento </Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Fecha de nacimiento"
-                value={editUser.birthdate ? editUser.birthdate : ""}
-                onChange={handleChange}
-                name="birthdate"
-              />
-            </Form.Group> */}
 
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Imagen</Form.Label>
