@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./RegisterForm.scss";
 import { Col, Row, Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const initialValue = {
   first_name: "",
@@ -101,10 +101,13 @@ export const RegisterForm = () => {
           <Button className="registerButton" onClick={() => navigate("/")}>
             Cancelar
           </Button>
-          <p>
-            Al registrarte, aceptas los <span>términos y condiciones</span> y
-            <span>la política de privacidad.</span>
-          </p>
+          <div className="Termsandprivacytext">
+            Al registrarte, aceptas los
+            <p>
+              <Link to={"/users/terms"}>términos y condiciones</Link>
+              <Link to={"/users/privacy"}> política de privacidad.</Link>
+            </p>
+          </div>
           <p>
             ¿Ya estás registrado? <span>Inicia sesión aquí</span>
           </p>
