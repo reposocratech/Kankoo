@@ -29,6 +29,8 @@
 .avatar {
   img {
     width: 4rem;
+    aspect-ratio: 1/1;
+    object-fit: cover;
     border-radius: 50%;
   }
 }
