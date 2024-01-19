@@ -58,7 +58,7 @@ export const RegisterForm = () => {
             <Form.Label>Nombre </Form.Label>
             <Form.Control
               type="text"
-              placeholder="nombre"
+              placeholder="Nombre"
               value={registerForm.first_name}
               onChange={handleChange}
               name="first_name"
@@ -102,7 +102,7 @@ export const RegisterForm = () => {
             Cancelar
           </Button>
           <div className="Termsandprivacytext">
-            Al registrarte, aceptas los
+            Al registrarte, aceptaras los
             <p>
               <Link to={"/users/terms"}>términos y condiciones</Link>
               <Link to={"/users/privacy"}> política de privacidad.</Link>
