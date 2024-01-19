@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { KankooContext } from "../../../context/KankooContext";
+import { saveLocalStorage } from "../../../../helpers/localStorageUtils";
 
 const initialValue = {
   first_name: "",
@@ -13,6 +15,10 @@ export const LoginForm = () => {
   const [login, setLogin] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
 
+  const { setUser, setToken, setIsLogged } = useContext(KankooContext);
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
@@ -21,7 +27,12 @@ export const LoginForm = () => {
     axios
       .post("http://localhost:3000/users/login", login)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.user);
+        navigate("/");
+        setUser(res.data.user);
+        setToken(res.data.token);
+        saveLocalStorage("token", res.data.token);
+        setIsLogged(true);
       })
       .catch((err) => {
         console.log(err);

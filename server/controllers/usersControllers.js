@@ -30,7 +30,22 @@ class usersControllers {
 
   viewProfile = (req, res) => {
     console.log("este es tu perfil personal");
+
+    const user_id = req.params.id;
+
+    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND user_is_deleted = 0`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        return res.status(500).json(err);
+      } else {
+        return res.status(200).json({ result: result[0] });
+      }
+    });
+
+    console.log(user_id);
   };
+
   ownTours = (req, res) => {
     console.log("estas son mis guías");
   };
@@ -40,20 +55,31 @@ class usersControllers {
   boughtTours = (req, res) => {
     console.log("estas son mis guías adquiridas");
   };
+
   editUser = (req, res) => {
-    const { first_name, last_name, birthdate, user_id } = JSON.parse(
+    const { first_name, last_name, user_language, user_id } = JSON.parse(
       req.body.editUser
     );
-    let sql = `UPDATE user SET first_name = "${first_name}", last_name = "${last_name}", birthdate = "${birthdate}" WHERE user_id = ${user_id}  `;
+    let sql = `UPDATE user SET first_name = "${first_name}", last_name = "${last_name}", user_language = "${user_language}" WHERE user_id = ${user_id}  `;
+
+    let avatar;
+
+    if (req.file) {
+      avatar = req.file.filename;
+      sql = `UPDATE user SET first_name = "${first_name}", last_name = "${last_name}", user_language = "${user_language}", avatar = "${avatar}" WHERE user_id = ${user_id} `;
+    }
 
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(400).json({ err });
+        console.log(err);
       } else {
-        res.status(200).json({ result });
+        res.status(200).json({ result, avatar });
+        console.log(result);
       }
     });
   };
+
   terms = (req, res) => {
     console.log("terminos y condiciones");
   };

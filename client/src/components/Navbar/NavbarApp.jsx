@@ -44,12 +44,15 @@ function NavBarApp() {
 
             <div
               className="d-flex user"
-              onClick={() => navigate("/userprofile")}
+              onClick={() => navigate("/users/userprofile")}
             >
               <p className="mt-3 me-3">
                 {user?.first_name} {user?.last_name}
               </p>
-              <div className="avatar">
+              <div
+                className="avatar"
+                onClick={() => navigate("/users/userprofile")}
+              >
                 {user?.avatar ? (
                   <img
                     src={`http://localhost:3000/images/users/${user.avatar}`}
