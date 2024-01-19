@@ -16,19 +16,29 @@ export const KankooProvider = ({ children }) => {
     setToken(tokenLocalStorage);
 
     if (tokenLocalStorage) {
-      const { id, type } = jwtDecode(tokenLocalStorage).user;
+      const { id } = jwtDecode(tokenLocalStorage).user;
 
-      axios.get(`http://localhost:3000/users/userprofile`).then((res) => {});
+      axios
+        .get(`http://localhost:3000/users/userprofile/${id}`)
+        .then((res) => {
+          setUser(res.data.result);
+          setIsLogged(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, []);
+  }, [isLogged]);
 
   return (
     <KankooContext.Provider
       value={{
         user,
         setUser,
-        tours,
-        setTours,
+        token,
+        setToken,
+        isLogged,
+        setIsLogged,
       }}
     >
       {children}
