@@ -35,6 +35,7 @@ export const RegisterForm = () => {
         .post("http://localhost:3000/users/registeruser", registerForm)
         .then((res) => {
           console.log(res);
+          navigate("/users/login");
         })
         .catch((err) => {
           console.log(err);
