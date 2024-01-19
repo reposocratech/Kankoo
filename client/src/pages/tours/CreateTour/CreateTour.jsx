@@ -10,23 +10,52 @@ const initialValueTour = {
   tour_location: "",
   tour_language: "",
   tour_price: "",
+  cover_resource_text: "",
   section_name: "",
   section_description: "",
   travel_distance: "",
+  text: "",
 };
 
 export const CreateTour = () => {
   const [addTour, setAddTour] = useState(initialValueTour);
   const [showPoint, setShowPoint] = useState(false);
   const [msgError, setMsgError] = useState("");
+  const [submitedSection, setSubmitedSection] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddTour({ ...addTour, [name]: value });
   };
-  const handleSubmit = (e) => {};
-  const handleSubmitSection = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      !addTour.tour_name ||
+      !addTour.tour_description ||
+      !addTour.tour_city ||
+      !addTour.tour_location ||
+      !addTour.tour_language ||
+      !addTour.tour_price ||
+      !addTour.cover_resource_text ||
+      setSubmitedSection(false)
+    ) {
+      setMsgError("Rellena todos los campos");
+    } else {
+      axios
+        .post("http://localhost:3000/tours/newtour", addTour)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          setMsgError("Oops ocurrió un error");
+        });
+    }
+  };
+  const handleSubmitSection = (e) => {
+    setSubmitedSection(true);
+  };
   return (
     <Row className="createTourGeneral">
       <h2>Crear nueva guía turística</h2>
