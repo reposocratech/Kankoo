@@ -35,11 +35,10 @@ function NavBarApp() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-
             <Nav.Link onClick={() => navigate("/users/registeruser")}>
               <button className="navBoton">Registro</button>
             </Nav.Link>
-            <Nav.Link onClick={() => navigate("/login")}>
+            <Nav.Link onClick={() => navigate("/users/login")}>
               <button className="navBoton">Inicia sesión</button>
             </Nav.Link>
 
