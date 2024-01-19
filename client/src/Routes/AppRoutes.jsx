@@ -30,7 +30,7 @@ export const AppRoutes = () => {
           <Route path="/tours/newtour" element={<CreateTour />} />
           <Route path="/users/terms" element={<TermsConditions />} />
           <Route path="/users/privacy" element={<PrivacyPolicy />} />
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/users/login" element={<LoginForm />} />
         </Routes>
       </Row>
     </BrowserRouter>
