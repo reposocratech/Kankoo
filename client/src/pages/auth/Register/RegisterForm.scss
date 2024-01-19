@@ -2,3 +2,12 @@
 .registerButton {
   @include BotonCoral;
 }
+
+.Termsandprivacytext {
+  p {
+    margin-bottom: 10px; // Ajusta el margen inferior según tus necesidades
+    a {
+      margin-right: 10px; // Ajusta el margen derecho entre los enlaces según tus necesidades
+    }
+  }
+}

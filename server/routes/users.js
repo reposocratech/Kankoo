@@ -14,5 +14,4 @@ router.get("/terms", usersControllers.terms);
 router.get("/privacy", usersControllers.privacy);
 router.put("/edituser", usersControllers.editUser);
 
-
 module.exports = router;
