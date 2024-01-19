@@ -58,7 +58,7 @@ export const RegisterForm = () => {
             <Form.Label>Nombre </Form.Label>
             <Form.Control
               type="text"
-              placeholder="nombre"
+              placeholder="Nombre"
               value={registerForm.first_name}
               onChange={handleChange}
               name="first_name"
