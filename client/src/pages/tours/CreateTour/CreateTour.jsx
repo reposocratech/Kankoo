@@ -44,7 +44,7 @@ export const CreateTour = ({ setShowCreateTour, user_id }) => {
     ) {
       setMsgError("Rellena todos los campos");
     } else {
-      let temp = { ...addTour, user_id };
+      let temp = { ...addTour, user_id: user_id };
       const { tour_name, tour_description, tour_city, location, user_id } =
         temp;
 
