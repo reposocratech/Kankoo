@@ -12,32 +12,58 @@ class toursControllers {
       location,
       tour_city,
       user_id,
-    } = JSON.parse(req.body.regTour);
+    } = JSON.parse(req.body.addTour);
 
-    console.log(req);
+    let cover;
 
-    let sql = `INSERT INTO tour (tour_name, tour_description, tour_acces, location, tour_city, user_id) VALUES ("${tour_name}", "${tour_description}", "${tour_acces}", "${location}", "${tour_city}", ${user_id})`;
+    if (req.file) {
+      cover = req.file.filename;
+    }
 
-    let sqlTours = `SELECT * FROM tour WHERE user_id = ${user_id} AND tour_is_deleted = 0`;
+    let sql = `INSERT INTO tour (tour_name, tour_description, tour_acces, location, tour_city,user_id, cover) VALUES ("${tour_name}", "${tour_description}", "${tour_acces}", "${location}", "${tour_city}", ${user_id} , "${cover}")`;
 
     connection.query(sql, (err, result) => {
       if (err) {
         // res.status(500).json(err);
-        console.log("sqlllllllllllllllllll", sql);
+        res.status(400).json({ err });
         console.log(err);
+      } else {
+        res.status(200).json({ result, cover });
+        console.log(result);
       }
-      console.log(result);
 
-      connection.query(sqlTours, (errorTours, resultTours) => {
-        if (errorTours) {
-          // res.status(500).json(errorTours);
-          console.log(errorTours);
-          console.log("tourrsssssssssssssss", sqlTours);
-        }
-        res.status(200).json(resultTours);
-      });
+      /* let sqlTours = `SELECT * FROM tour WHERE user_id = ${user_id} AND tour_is_deleted = 0`; */
+
+      /*  connection.query(sqlTours, (errorTours, resultTours) => {
+         if (errorTours) {
+           // res.status(500).json(errorTours);
+           console.log(errorTours);
+           console.log("tourrsssssssssssssss", sqlTours);
+         }
+         res.status(200).json(resultTours);
+       });
+     });
+     console.log(req.body.regTour); */
     });
-    console.log(req.body.regTour);
+  };
+
+  addSection = (req, res) => {
+    const { tour_id, section_id, section_name, section_description } =
+      req.params;
+
+    let sql = `INSERT INTO section (tour_id, section_id, section_name, section_description, travel_distance)
+VALUES ( ${tour_id} , ${section_id} , '${section_name}', '${section_description}'', 10); `;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        // res.status(500).json(err);
+        res.status(400).json({ err });
+        console.log(err);
+      } else {
+        res.status(200).json({ result, cover });
+        console.log(result);
+      }
+    });
   };
 }
 
