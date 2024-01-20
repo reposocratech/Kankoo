@@ -7,7 +7,6 @@ export const KankooContext = createContext();
 
 export const KankooProvider = ({ children }) => {
   const [user, setUser] = useState();
-  const [tours, setTours] = useState();
   const [token, setToken] = useState();
   const [isLogged, setIsLogged] = useState(false);
   const [resetImg, setResetImg] = useState(false);
@@ -43,8 +42,6 @@ export const KankooProvider = ({ children }) => {
         setIsLogged,
         resetImg,
         setResetImg,
-        tours,
-        setTours,
       }}
     >
       {children}
