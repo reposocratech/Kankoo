@@ -41,27 +41,28 @@ function NavBarApp() {
             <Nav.Link onClick={() => navigate("/users/login")}>
               <button className="navBoton">Inicia sesión</button>
             </Nav.Link>
-
-            <div
-              className="d-flex user"
-              onClick={() => navigate("/users/userprofile")}
-            >
-              <p className="mt-3 me-3">
-                {user?.first_name} {user?.last_name}
-              </p>
+            <Navbar.Brand>
               <div
-                className="avatar"
+                className="d-flex user"
                 onClick={() => navigate("/users/userprofile")}
               >
-                {user?.avatar ? (
-                  <img
-                    src={`http://localhost:3000/images/users/${user.avatar}`}
-                  />
-                ) : (
-                  <p>{user?.first_name.charAt(0).toUpperCase()}</p>
-                )}
+                <p className="mt-3 me-3">
+                  {user?.first_name} {user?.last_name}
+                </p>
+                <div
+                  className="avatar"
+                  onClick={() => navigate("/users/userprofile")}
+                >
+                  {user?.avatar ? (
+                    <img
+                      src={`http://localhost:3000/images/users/${user.avatar}`}
+                    />
+                  ) : (
+                    <p>{user?.first_name.charAt(0).toUpperCase()}</p>
+                  )}
+                </div>
               </div>
-            </div>
+            </Navbar.Brand>
           </Nav>
         </Navbar.Collapse>
       </Container>

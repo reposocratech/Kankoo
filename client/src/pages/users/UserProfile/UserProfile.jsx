@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./UserProfile.scss";
 import { KankooContext } from "../../../context/KankooContext";
+import { CreateTour } from "../../tours/CreateTour/CreateTour";
 
 export const UserProfile = () => {
+  const [showCreateTour, setShowCreateTour] = useState(false);
   const { user } = useContext(KankooContext);
   const navigate = useNavigate();
   return (
@@ -60,13 +62,19 @@ export const UserProfile = () => {
         <Col className="perfilButton d-flex flex-column align-items-center">
           <div className="perfilCircle">
             <img
-              onClick={() => navigate("/tours/newtour")}
+              onClick={() => setShowCreateTour(true)}
               className="perfilIcono"
               src="/icons/nuevaguia.png"
               alt="icono de un mapa"
             />
           </div>
           <p>Crear nueva guía</p>
+          {showCreateTour && (
+            <CreateTour
+              setShowCreateTour={setShowCreateTour}
+              user_id={user?.user_id}
+            />
+          )}
         </Col>
       </Row>
       <Row>
