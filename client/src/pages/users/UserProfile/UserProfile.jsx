@@ -3,7 +3,6 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./UserProfile.scss";
 import { KankooContext } from "../../../context/KankooContext";
-import { CreateTour } from "../../tours/CreateTour/CreateTour";
 
 export const UserProfile = () => {
   const [showCreateTour, setShowCreateTour] = useState(false);
@@ -62,19 +61,13 @@ export const UserProfile = () => {
         <Col className="perfilButton d-flex flex-column align-items-center">
           <div className="perfilCircle">
             <img
-              onClick={() => setShowCreateTour(true)}
+              onClick={() => navigate("/tours/newtour")}
               className="perfilIcono"
               src="/icons/nuevaguia.png"
               alt="icono de un mapa"
             />
           </div>
           <p>Crear nueva guía</p>
-          {showCreateTour && (
-            <CreateTour
-              setShowCreateTour={setShowCreateTour}
-              user_id={user?.user_id}
-            />
-          )}
         </Col>
       </Row>
       <Row>
