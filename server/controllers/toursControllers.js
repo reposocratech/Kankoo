@@ -81,19 +81,23 @@ class toursControllers {
         });
       }
     });
-
-    /*   connection.query(sql, (err, result) => {
-      if (err) {
-        // res.status(500).json(err);
-        res.status(400).json(err);
-        console.log(err);
-      } else {
-        let section_id = result.insertId;
-        res.status(200).json(result);
-        console.log(result);
-      }
-    }); */
   };
+
+  addPics = (req, res) => {
+    const { tour_id } = req.params;
+    req.files.forEach((elem) => {
+      let sql = `INSERT INTO section_resource (tour_id, section_id, resource_type, text) VALUES ("${tour_id}", ${section_id}, "${elem.resource_type}", "${elem.text}")`;
+      connection.query(sql, (error, result) => {
+        error && res.status(500).json(error);
+      });
+    });
+    /* 
+       let sql2 = `SELECT * FROM picture WHERE travel_id = ${travel_id} AND is_deleted = 0`;
+       connection.query(sql2, (error, result) => {
+         error ? res.status(500).json(error) : res.status(200).json(result);
+       }); */
+  };
+
   waiting = (req, res) => {
     console.log("espera a que confirmen tu guía");
   };
