@@ -7,6 +7,7 @@ export const KankooContext = createContext();
 
 export const KankooProvider = ({ children }) => {
   const [user, setUser] = useState();
+  const [allTours, setAllTours] = useState();
   const [token, setToken] = useState();
   const [isLogged, setIsLogged] = useState(false);
   const [resetImg, setResetImg] = useState(false);
@@ -14,6 +15,15 @@ export const KankooProvider = ({ children }) => {
   useEffect(() => {
     const tokenLocalStorage = getLocalStorage("token");
     setToken(tokenLocalStorage);
+    axios
+      .get(`http://localhost:3000/tours/alltours`)
+      .then((res) => {
+        setAllTours(res.data.resultTravels);
+        console.log(res.data.resultTravels);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     if (tokenLocalStorage) {
       const { id } = jwtDecode(tokenLocalStorage).user;
@@ -23,6 +33,7 @@ export const KankooProvider = ({ children }) => {
         .then((res) => {
           setUser(res.data.result);
           setIsLogged(true);
+          console.log(res.data.result);
         })
         .catch((err) => {
           console.log(err);
@@ -41,6 +52,8 @@ export const KankooProvider = ({ children }) => {
         setIsLogged,
         resetImg,
         setResetImg,
+        allTours,
+        setAllTours,
       }}
     >
       {children}
