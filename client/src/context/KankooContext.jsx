@@ -23,7 +23,6 @@ export const KankooProvider = ({ children }) => {
         .then((res) => {
           setUser(res.data.result);
           setIsLogged(true);
-          setTours(res.data.resultTour);
         })
         .catch((err) => {
           console.log(err);
