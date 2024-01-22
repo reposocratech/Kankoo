@@ -1,0 +1,23 @@
+@import "./../../../styles/mixins.scss";
+
+.waitingFrame {
+  background-color: #f07674;
+  color: white;
+  border-radius: 5rem;
+  text-align: center;
+  padding: 5rem;
+  margin: 3rem;
+  width: 35rem;
+  aspect-ratio: 1/1;
+  > p {
+    margin: 1.5rem;
+  }
+}
+.waitingIcon {
+  width: 13rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+.waitingVolver {
+  @include BotonBlanco;
+}

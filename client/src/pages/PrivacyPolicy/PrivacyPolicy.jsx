@@ -6,10 +6,7 @@ export const PrivacyPolicy = () => {
   const navigate = useNavigate();
   return (
     <Container>
-      <div
-        className="policyBackCombo"
-        onClick={() => navigate("/users/userprofile")}
-      >
+      <div className="policyBackCombo" onClick={() => navigate(-1)}>
         <img
           className="policyBackArrow"
           src="/icons/back.png"

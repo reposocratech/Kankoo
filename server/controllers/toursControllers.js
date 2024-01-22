@@ -65,6 +65,9 @@ VALUES ( ${tour_id} , ${section_id} , '${section_name}', '${section_description}
       }
     });
   };
+  waiting = (req, res) => {
+    console.log("espera a que confirmen tu guía");
+  };
 }
 
 module.exports = new toursControllers();
