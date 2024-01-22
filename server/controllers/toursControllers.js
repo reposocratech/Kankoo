@@ -28,7 +28,9 @@ class toursControllers {
         res.status(400).json({ err });
         console.log(err);
       } else {
-        res.status(200).json({ result, cover });
+        let tour_id = result.insertId;
+
+        res.status(200).json({ result, cover, tour_id });
         console.log(result);
       }
 
@@ -48,22 +50,52 @@ class toursControllers {
   };
 
   addSection = (req, res) => {
-    const { tour_id, section_id, section_name, section_description } =
-      req.params;
+    console.log(req.body);
 
-    let sql = `INSERT INTO section (tour_id, section_id, section_name, section_description, travel_distance)
-VALUES ( ${tour_id} , ${section_id} , '${section_name}', '${section_description}'', 10); `;
+    const { section_name, section_description, travel_distance, tour_id } =
+      req.body;
 
-    connection.query(sql, (err, result) => {
+    let sql_cont = `SELECT max(section_id) as id from section where tour_id = ${tour_id}`;
+
+    connection.query(sql_cont, (err, result_id) => {
       if (err) {
-        // res.status(500).json(err);
-        res.status(400).json({ err });
         console.log(err);
       } else {
-        res.status(200).json({ result, cover });
-        console.log(result);
+        let id = result_id[0].id;
+        console.log(id);
+        if (id == null) {
+          id = 1;
+        } else {
+          id++;
+        }
+        let sql = `INSERT INTO section (tour_id,section_id, section_name, section_description, travel_distance) VALUES ( ${tour_id} , ${id} ," ${section_name}", "${section_description}", ${Number(
+          travel_distance
+        )}); `;
+        connection.query(sql, (err, result) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).json(err);
+          }
+
+          res.status(201).json({ section_id: id });
+        });
       }
     });
+
+    /*   connection.query(sql, (err, result) => {
+      if (err) {
+        // res.status(500).json(err);
+        res.status(400).json(err);
+        console.log(err);
+      } else {
+        let section_id = result.insertId;
+        res.status(200).json(result);
+        console.log(result);
+      }
+    }); */
+  };
+  waiting = (req, res) => {
+    console.log("espera a que confirmen tu guía");
   };
 }
 
