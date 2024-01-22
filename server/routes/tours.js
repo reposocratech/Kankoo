@@ -13,5 +13,5 @@ router.put(
   multerMulti("section"),
   toursControllers.addSection
 );
-
+router.get("/waiting", toursControllers.waiting);
 module.exports = router;

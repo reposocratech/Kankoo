@@ -83,7 +83,8 @@ export const LoginForm = () => {
             Cancelar
           </Button>
           <p>
-            No estás registrado? <Link to={"/register"}>Regístrate</Link>
+            No estás registrado?{" "}
+            <Link to={"/users/registeruser"}>Regístrate</Link>
           </p>
         </Form>
       </Col>
