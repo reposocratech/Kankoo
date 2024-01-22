@@ -3,6 +3,14 @@
   @include BotonCoral;
 }
 
+.regLogo {
+  width: 20rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .Termsandprivacytext {
   p {
     margin-bottom: 10px; // Ajusta el margen inferior según tus necesidades

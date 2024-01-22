@@ -52,12 +52,14 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5">
-      <h2>Regístrate:</h2>
+    <Row className="d-flex align-items-center justify-content-center p-5">
+      <Col md={4} className="text-center">
+        <img className="regLogo" src="/logofondoblanco.png" alt="Logo" />
+      </Col>
       <Col md={4}>
         <Form>
           <Form.Group className="mb-3" controlId="formGroupName">
-            <Form.Label>Nombre </Form.Label>
+            <Form.Label className="fs-5">Nombre </Form.Label>
             <Form.Control
               type="text"
               placeholder="Nombre"
@@ -96,7 +98,7 @@ export const RegisterForm = () => {
               name="password"
             />
           </Form.Group>
-          {msgError && <p> {msgError} </p>}
+          {msgError && <p className="fs-6 text-danger"> {msgError} </p>}
           <Button onClick={handleSubmit} className="registerButton">
             Regístrate
           </Button>
@@ -104,14 +106,19 @@ export const RegisterForm = () => {
             Cancelar
           </Button>
           <div className="Termsandprivacytext">
-            Al registrarte, aceptaras los
+            Al registrarse, aceptará los
             <p>
-              <Link to={"/users/terms"}>términos y condiciones</Link>
-              <Link to={"/users/privacy"}> política de privacidad.</Link>
+              <Link to={"/users/terms"} className="fs-6">
+                términos y condiciones
+              </Link>
+              y la .
+              <Link to={"/users/privacy"} className="fs-6">
+                política de privacidad
+              </Link>
             </p>
           </div>
           <p>
-            ¿Ya estás registrado? <span>Inicia sesión aquí</span>
+            ¿Ya está registrado? <span>Inicie sesión aquí</span>
           </p>
         </Form>
       </Col>
