@@ -7,6 +7,9 @@
   max-height: 70px;
   height: 70px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bg-body-tertiary {
@@ -14,8 +17,8 @@
   color: white;
 }
 
-.navBoton {
-  @include BotonBlanco;
+.navEnlaces {
+  color: white;
 }
 
 .NavbarBrand {
@@ -35,8 +38,22 @@
   }
 }
 
+.d-flex.mx-auto {
+  justify-content: center;
+}
+
+.d-flex.mx-auto .form-control {
+  width: 18rem;
+  border-radius: 20px;
+}
+
 .navBoton {
   @include BotonBlanco;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   @media only screen and (max-width: 768px) {
     font-size: 14px;
