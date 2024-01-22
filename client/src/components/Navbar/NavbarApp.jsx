@@ -10,6 +10,10 @@ function NavBarApp() {
   const { user, setUser } = useContext(KankooContext);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    setUser(null);
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -23,41 +27,58 @@ function NavBarApp() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link className="navEnlaces" as={Link} to="/">
-              Home
-            </Nav.Link>
             <Nav.Link className="navEnlaces" href="#action2">
               Top Lugares
             </Nav.Link>
           </Nav>
 
-          <Form className="d-flex mx-auto">
-            <FormControl
-              type="search"
-              placeholder="🔍 ¿Qué le apetece visitar?"
-              className="mr-2"
-              aria-label="Buscar"
-            />
-          </Form>
-
           <Nav className="ml-auto">
-            <Nav.Link onClick={() => navigate("/users/registeruser")}>
-              <button className="navBoton">Registro</button>
-            </Nav.Link>
-            <Nav.Link onClick={() => navigate("/users/login")}>
-              <button className="navBoton">Inicia sesión</button>
-            </Nav.Link>
+            {user ? (
+              <>
+                <Nav.Link>
+                  <button className="navBoton" onClick={handleLogout}>
+                    Cerrar sesión
+                  </button>
+                </Nav.Link>
+                <Navbar.Brand>
+                  <div
+                    className="d-flex user"
+                    onClick={() => navigate("/users/userprofile")}
+                  >
+                    <div
+                      className="navAvatar"
+                      onClick={() => navigate("/users/userprofile")}
+                    >
+                      {user.avatar ? (
+                        <img
+                          src={`http://localhost:3000/images/users/${user.avatar}`}
+                          alt="User Avatar"
+                        />
+                      ) : (
+                        <p>{user.first_name.charAt(0).toUpperCase()}</p>
+                      )}
+                    </div>
+                  </div>
+                </Navbar.Brand>
+              </>
+            ) : (
+              <>
+                <Nav.Link onClick={() => navigate("/users/registeruser")}>
+                  <button className="navBoton">Registro</button>
+                </Nav.Link>
+                <Nav.Link onClick={() => navigate("/users/login")}>
+                  <button className="navBoton">Inicia sesión</button>
+                </Nav.Link>
+              </>
+            )}
           </Nav>
           <Navbar.Brand>
             <div
               className="d-flex user"
               onClick={() => navigate("/users/userprofile")}
             >
-              <p className="mt-3 me-3">
-                {user?.first_name} {user?.last_name}
-              </p>
               <div
-                className="avatar"
+                className="navAvatar"
                 onClick={() => navigate("/users/userprofile")}
               >
                 {user?.avatar ? (
