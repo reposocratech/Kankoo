@@ -2,7 +2,7 @@ const connection = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-
+const main = require("../utils/nodemailer");
 class toursControllers {
   newTour = (req, res) => {
     const {
@@ -31,6 +31,7 @@ class toursControllers {
         let tour_id = result.insertId;
 
         res.status(200).json({ result, cover, tour_id });
+        main();
         console.log(result);
       }
 
@@ -76,7 +77,6 @@ class toursControllers {
             console.log(err);
             return res.status(500).json(err);
           }
-
           res.status(201).json({ section_id: id });
         });
       }
@@ -100,6 +100,19 @@ class toursControllers {
 
   waiting = (req, res) => {
     console.log("espera a que confirmen tu guía");
+  };
+  allTours = (req, res) => {
+    let sql = `SELECT * from tour`;
+    connection.query(sql, (err, resultTravels) => {
+      if (err) {
+        res.status(400).json({ err });
+        console.log(err);
+      } else {
+        let tour_id = resultTravels.insertId;
+        res.status(200).json({ resultTravels, tour_id });
+        console.log(resultTravels);
+      }
+    });
   };
 }
 

@@ -1,0 +1,21 @@
+.CarOneTourCover {
+  width: 20rem;
+  border-radius: 2rem;
+  aspect-ratio: 1/1;
+}
+.CardOneTourInfo {
+  > h3 {
+    color: gray;
+  }
+  padding-left: 3.5rem;
+}
+.CardOneTourLike {
+  > img {
+    width: 3rem;
+    text-align: center;
+  }
+  > img:hover {
+    width: 3.4rem;
+    text-align: center;
+  }
+}
