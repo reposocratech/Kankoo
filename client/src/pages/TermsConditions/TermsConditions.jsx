@@ -6,16 +6,15 @@ export const TermsConditions = () => {
   const navigate = useNavigate();
   return (
     <Container>
-      <div
-        className="termsBackCombo"
-        onClick={() => navigate("/users/userprofile")}
-      >
+      <div className="termsBackCombo" onClick={() => navigate(-1)}>
         <img
           className="termsBackArrow"
           src="/icons/back.png"
           alt="flecha a la izquierda"
         />
-        <button className="termsButton">Volver</button>
+        <button className="termsButton" onClick={() => navigate(-1)}>
+          Volver
+        </button>
       </div>
       <div className="termsGeneral">
         <h2>Terminos y condiciones de uso</h2>
