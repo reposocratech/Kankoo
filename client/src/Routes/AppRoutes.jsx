@@ -14,6 +14,7 @@ import { RegisterForm } from "../pages/auth/Register/RegisterForm";
 
 import { FatherCreateTour } from "../pages/tours/CreateTour/FatherCreateTour";
 import { LoginForm } from "../pages/auth/Login/LoginForm";
+import { WaitingValidation } from "../pages/tours/WaitingValidation/WaitingValidation";
 
 export const AppRoutes = () => {
   return (
@@ -32,6 +33,7 @@ export const AppRoutes = () => {
           <Route path="/tours/newtour" element={<FatherCreateTour />} />
           <Route path="/users/terms" element={<TermsConditions />} />
           <Route path="/users/privacy" element={<PrivacyPolicy />} />
+          <Route path="/tours/waiting" element={<WaitingValidation />} />
         </Routes>
       </Row>
     </BrowserRouter>

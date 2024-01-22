@@ -94,6 +94,9 @@ class toursControllers {
       }
     }); */
   };
+  waiting = (req, res) => {
+    console.log("espera a que confirmen tu guía");
+  };
 }
 
 module.exports = new toursControllers();
