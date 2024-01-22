@@ -13,7 +13,7 @@ const initialValueTour = {
   tour_city: "",
 };
 
-export const CreateTour = () => {
+export const CreateTour = ({ tour, setTour, setShowSections }) => {
   const [addTour, setAddTour] = useState(initialValueTour);
   const [msgError, setMsgError] = useState("");
   const [file, setFile] = useState();
@@ -24,7 +24,8 @@ export const CreateTour = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddTour({ ...addTour, [name]: value });
-    console.log(e.target.value);
+
+    /*   console.log(e.target.value); */
   };
 
   const handleFile = (e) => {
@@ -32,37 +33,38 @@ export const CreateTour = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     if (
+      !file ||
       !addTour.tour_name ||
       !addTour.tour_description ||
       !addTour.tour_city ||
       !addTour.location
     ) {
-      setMsgError("Rellena todos los campos");
+      setMsgError("Campo obligatorio");
     } else {
       const newFormData = new FormData();
       const temp = { ...addTour, user_id: user?.user_id };
       newFormData.append("addTour", JSON.stringify(temp));
       newFormData.append("file", file);
-
+      console.log(setShowSections);
       axios
         .post("http://localhost:3000/tours/newtour", newFormData)
         .then((res) => {
-          if (res.data.img) {
-            setAddTour({ ...addTour, cover: res.data.img });
-          } else {
-            setAddTour(addTour);
-          }
-          navigate("/users/userprofile");
+          console.log(res.data);
+          setShowSections(true);
+          setTour({
+            ...addTour,
+            cover: res.data.img,
+            tour_id: res.data.tour_id,
+          });
         })
         .catch((err) => {
           console.log(err.response);
         });
     }
   };
-  console.log(addTour);
-
+  /*   console.log(addTour);
+   */
   return (
     <Row className="createTourGeneral">
       <h2>Crear nueva guía turística</h2>
@@ -132,6 +134,14 @@ export const CreateTour = () => {
               onClick={handleSubmit}
             >
               Solicitar aprobación
+            </button>
+            <button
+              type="button"
+              className="createTourButton"
+              variant="primary me-2"
+              onClick={handleSubmit}
+            >
+              Guardar cambios
             </button>
             <button
               type="button"
