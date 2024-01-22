@@ -1,0 +1,8 @@
+@import "./../../../styles/mixins.scss";
+.galleryButton {
+  @include BotonCoral;
+  margin-left: 0.5rem;
+}
+.gallerySearchbar {
+  margin: 1rem;
+}
