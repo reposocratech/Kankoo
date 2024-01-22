@@ -14,6 +14,52 @@ function NavBarApp() {
     setUser(null);
   };
 
+  const renderUserContent = () => {
+    if (user) {
+      return (
+        <>
+          <Nav.Link
+            className="navCsesion ml-auto" // Agregado ml-auto aquí
+            onClick={() => navigate("/users/userprofile")}
+          >
+            <button className="navBoton" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
+          </Nav.Link>
+          <Nav.Link
+            className="navAvatarContainer"
+            onClick={() => navigate("/users/userprofile")}
+          >
+            <div className="navAvatar">
+              {user.avatar ? (
+                <img
+                  src={`http://localhost:3000/images/users/${user.avatar}`}
+                  alt="User Avatar"
+                  className="navAvatarImg"
+                />
+              ) : (
+                <p className="navAvatarInitial">
+                  {user.first_name.charAt(0).toUpperCase()}
+                </p>
+              )}
+            </div>
+          </Nav.Link>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Nav.Link onClick={() => navigate("/users/registeruser")}>
+            <button className="navBoton">Registro</button>
+          </Nav.Link>
+          <Nav.Link onClick={() => navigate("/users/login")}>
+            <button className="navBoton">Inicia sesión</button>
+          </Nav.Link>
+        </>
+      );
+    }
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -22,76 +68,12 @@ function NavBarApp() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
+          <Nav className="me-auto">
             <Nav.Link className="navEnlaces" href="#action2">
-              Top Lugares
+              Guías Top
             </Nav.Link>
           </Nav>
-
-          <Nav className="ml-auto">
-            {user ? (
-              <>
-                <Nav.Link>
-                  <button className="navBoton" onClick={handleLogout}>
-                    Cerrar sesión
-                  </button>
-                </Nav.Link>
-                <Navbar.Brand>
-                  <div
-                    className="d-flex user"
-                    onClick={() => navigate("/users/userprofile")}
-                  >
-                    <div
-                      className="navAvatar"
-                      onClick={() => navigate("/users/userprofile")}
-                    >
-                      {user.avatar ? (
-                        <img
-                          src={`http://localhost:3000/images/users/${user.avatar}`}
-                          alt="User Avatar"
-                        />
-                      ) : (
-                        <p>{user.first_name.charAt(0).toUpperCase()}</p>
-                      )}
-                    </div>
-                  </div>
-                </Navbar.Brand>
-              </>
-            ) : (
-              <>
-                <Nav.Link onClick={() => navigate("/users/registeruser")}>
-                  <button className="navBoton">Registro</button>
-                </Nav.Link>
-                <Nav.Link onClick={() => navigate("/users/login")}>
-                  <button className="navBoton">Inicia sesión</button>
-                </Nav.Link>
-              </>
-            )}
-          </Nav>
-          <Navbar.Brand>
-            <div
-              className="d-flex user"
-              onClick={() => navigate("/users/userprofile")}
-            >
-              <div
-                className="navAvatar"
-                onClick={() => navigate("/users/userprofile")}
-              >
-                {user?.avatar ? (
-                  <img
-                    src={`http://localhost:3000/images/users/${user.avatar}`}
-                    alt="User Avatar"
-                  />
-                ) : (
-                  <p>{user?.first_name.charAt(0).toUpperCase()}</p>
-                )}
-              </div>
-            </div>
-          </Navbar.Brand>
+          <Nav className="ml-auto">{renderUserContent()}</Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
