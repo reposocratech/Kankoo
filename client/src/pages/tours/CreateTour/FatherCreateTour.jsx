@@ -11,6 +11,9 @@ export const FatherCreateTour = () => {
 
   console.log("padreee", tour);
   console.log(sections);
+
+  console.log(tour.cover);
+
   return (
     <>
       {!showSections && (
@@ -23,7 +26,18 @@ export const FatherCreateTour = () => {
 
       {showSections && (
         <>
-          <h2> {tour?.tour_name} </h2>
+          <div>
+            <h2> {tour?.tour_name} </h2>
+
+            {tour?.cover && (
+              <img
+                src={`http://localhost:3000/images/tours/${tour.cover}`}
+                alt=""
+                style={{ width: "50px", height: "50" }}
+              />
+            )}
+          </div>
+
           {sections.map((elem) => {
             return <p>{elem.section_name}</p>;
           })}

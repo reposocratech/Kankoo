@@ -10,4 +10,10 @@ router.post("/newtour", multerSingle("tours"), toursControllers.newTour);
 router.get("/waiting", toursControllers.waiting);
 router.post("/addsection", toursControllers.addSection);
 
+router.put(
+  "/addPics/:tour_id",
+  multerMulti("imgsection"),
+  toursControllers.addPics
+);
+
 module.exports = router;
