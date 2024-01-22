@@ -11,4 +11,10 @@ router.get("/waiting", toursControllers.waiting);
 router.post("/addsection", toursControllers.addSection);
 router.get("/alltours", toursControllers.allTours);
 
+router.put(
+  "/addPics/:tour_id",
+  multerMulti("imgsection"),
+  toursControllers.addPics
+);
+
 module.exports = router;
