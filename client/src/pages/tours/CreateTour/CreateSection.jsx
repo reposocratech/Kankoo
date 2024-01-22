@@ -19,6 +19,8 @@ export const CreateSection = ({
 }) => {
   console.log("Tour prop:", tour);
 
+  const { tour_id } = tour;
+
   const [addSection, setAddSection] = useState(initialValueSection);
   const [files, setFiles] = useState();
   const [msgError, setMsgError] = useState("");
@@ -29,7 +31,19 @@ export const CreateSection = ({
   };
 
   const handleFiles = (e) => {
-    setFiles(e.target.files);
+    console.log(e.target.files);
+    const newFormData = new FormData();
+    for (const elem of e.target.files) {
+      newFormData.append("text", elem);
+    }
+    axios
+      .put(`http://localhost:3000/tours/addPics/${tour_id}`, newFormData)
+      .then((res) => {
+        setFiles(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -40,22 +54,27 @@ export const CreateSection = ({
       !addSection.travel_distance
     ) {
       setMsgError("Rellena todos los campos");
+    } else if (!/^\d{1,5}(\.\d{1,2})?$/.test(addSection.travel_distance)) {
+      setMsgError(
+        "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
+      );
     } else {
       const temp = { ...addSection, tour_id: tour?.tour_id };
 
       axios
         .post(`http://localhost:3000/tours/addsection`, temp)
         .then((res) => {
-          let temp = [
+          let tempSections = [
             ...sections,
             { ...addSection, section_id: res.data.section_id },
           ];
-          setSections(temp);
+          setSections(tempSections);
           setShowFormSection(false);
           console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
+          // Puedes agregar lógica adicional para manejar el error, por ejemplo, mostrar un mensaje de error al usuario.
         });
     }
   };
@@ -87,19 +106,20 @@ export const CreateSection = ({
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Distancia </Form.Label>
+              <Form.Label>Distancia(km)</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Distancia del punto"
+                type="number"
+                placeholder="Ej. 2.5"
                 name="travel_distance"
                 onChange={handleChange}
                 value={addSection.travel_distance}
               />
             </Form.Group>
-            {/*     <Form.Group controlId="formFileLg" className="mb-3">
-            <Form.Label>Imagenes</Form.Label>
-            <Form.Control type="file" onChange={handleFiles} multiple />
-          </Form.Group> */}
+            <Form.Group controlId="formFileLg" className="mb-3">
+              <Form.Label>Imagenes</Form.Label>
+              <Form.Control type="file" onChange={handleFiles} multiple />
+            </Form.Group>
+            {msgError && <p> {msgError} </p>}
             <Button onClick={handleSubmit}>Crear punto</Button>
             <Button>Cancelar</Button>
           </Form>
