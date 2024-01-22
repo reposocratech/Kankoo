@@ -7,11 +7,7 @@ var router = express.Router();
 
 //ruta base http://localhost:3000/tours/
 router.post("/newtour", multerSingle("tours"), toursControllers.newTour);
-
-router.put(
-  "/addsection/:tour_id",
-  multerMulti("section"),
-  toursControllers.addSection
-);
 router.get("/waiting", toursControllers.waiting);
+router.post("/addsection", toursControllers.addSection);
+
 module.exports = router;
