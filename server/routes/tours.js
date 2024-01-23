@@ -15,6 +15,7 @@ router.post(
   toursControllers.addSection
 );
 router.get("/alltours", toursControllers.allTours);
+router.get("/onetour/:tour_id", toursControllers.oneTour);
 
 // router.put(
 //   "/addPics/:section_id",

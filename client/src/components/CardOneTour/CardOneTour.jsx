@@ -1,9 +1,14 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import "./CardOneTour.scss";
+import { useNavigate } from "react-router-dom";
 export const CardOneTour = ({ elem }) => {
+  const navigate = useNavigate();
   return (
-    <Row className="CardOneTour d-flex flex-column align-items-center">
+    <Row
+      className="CardOneTour d-flex flex-column align-items-center"
+      onClick={() => navigate(`/tours/onetour/${elem.tour_id}`)}
+    >
       <img
         className="CarOneTourCover"
         variant="top"
