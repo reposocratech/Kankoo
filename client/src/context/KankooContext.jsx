@@ -18,8 +18,8 @@ export const KankooProvider = ({ children }) => {
     axios
       .get(`http://localhost:3000/tours/alltours`)
       .then((res) => {
-        setAllTours(res.data.resultTravels);
-        console.log(res.data.resultTravels);
+        setAllTours(res.data.resultTours);
+        console.log(res.data.resultTours);
       })
       .catch((err) => {
         console.log(err);

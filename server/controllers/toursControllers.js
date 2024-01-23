@@ -1,4 +1,5 @@
 const connection = require("../config/db");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -103,14 +104,31 @@ class toursControllers {
   };
   allTours = (req, res) => {
     let sql = `SELECT * from tour`;
-    connection.query(sql, (err, resultTravels) => {
+    connection.query(sql, (err, resultTours) => {
       if (err) {
         res.status(400).json({ err });
         console.log(err);
       } else {
-        let tour_id = resultTravels.insertId;
-        res.status(200).json({ resultTravels, tour_id });
-        console.log(resultTravels);
+        let tour_id = resultTours.insertId;
+        res.status(200).json({ resultTours, tour_id });
+        console.log(resultTours);
+      }
+    });
+  };
+  oneTour = (req, res) => {
+    const { tour_id } = req.params;
+    let sql = `SELECT * 
+                from tour
+	              join section on tour.tour_id = section.tour_id
+                join section_resource on section.section_id = section_resource.section_id
+              where tour.tour_id = ${tour_id};`;
+
+    connection.query(sql, (err, resultOneTour) => {
+      if (err) {
+        res.status(400).json({ err });
+        console.log(err);
+      } else {
+        res.status(200).json({ resultOneTour, tour_id });
       }
     });
   };
