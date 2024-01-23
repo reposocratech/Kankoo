@@ -1,0 +1,11 @@
+@import "./../../../styles/mixins.scss";
+.OneTourButton {
+  @include BotonCoral;
+}
+.OneTourImg {
+  width: 25rem;
+  border-radius: 1.5rem;
+}
+.OneTourSectionImg {
+  width: 10rem;
+}

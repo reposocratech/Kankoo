@@ -3,7 +3,7 @@ import { Form, FormControl, Col, Row } from "react-bootstrap";
 import "./ToursGallery.scss";
 import { KankooContext } from "../../../context/KankooContext";
 import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
-
+import { textSensitive } from "../../../../helpers/utils";
 export const ToursGallery = () => {
   const { allTours, setAllTours } = useContext(KankooContext);
   const [showAllTours, setShowAllTours] = useState(true);

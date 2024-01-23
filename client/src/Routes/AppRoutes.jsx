@@ -12,7 +12,6 @@ import { TermsConditions } from "../pages/TermsConditions/TermsConditions";
 import { PrivacyPolicy } from "../pages/PrivacyPolicy/PrivacyPolicy";
 import { RegisterForm } from "../pages/auth/Register/RegisterForm";
 import { ErrorPage } from "../pages/errorPage/ErrorPage";
-
 import { FatherCreateTour } from "../pages/tours/CreateTour/FatherCreateTour";
 import { LoginForm } from "../pages/auth/Login/LoginForm";
 import { WaitingValidation } from "../pages/tours/WaitingValidation/WaitingValidation";
@@ -32,7 +31,7 @@ export const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<ToursGallery />} />
           <Route path="*" element={<ErrorPage />} />
-          <Route path="/tours/OneTour" element={<OneTour />} />
+          <Route path="/tours/onetour/:tour_id" element={<OneTour />} />
 
           {!token && !user && <></>}
           <Route path="/users/registeruser" element={<RegisterForm />} />
