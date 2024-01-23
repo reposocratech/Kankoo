@@ -19,10 +19,9 @@ export const CreateSection = ({
 }) => {
   console.log("Tour prop:", tour);
 
-  const { tour_id } = tour;
-
   const [addSection, setAddSection] = useState(initialValueSection);
-  const [files, setFiles] = useState();
+  const [images, setImages] = useState();
+  const [audios, setAudios] = useState();
   const [msgError, setMsgError] = useState("");
 
   const handleChange = (e) => {
@@ -30,20 +29,13 @@ export const CreateSection = ({
     setAddSection({ ...addSection, [name]: value });
   };
 
-  const handleFiles = (e) => {
-    console.log(e.target.files);
-    const newFormData = new FormData();
-    for (const elem of e.target.files) {
-      newFormData.append("text", elem);
-    }
-    axios
-      .put(`http://localhost:3000/tours/addPics/${tour_id}`, newFormData)
-      .then((res) => {
-        setFiles(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  console.log(images);
+  const handleImages = (e) => {
+    setImages(e.target.files);
+  };
+
+  const handleAudios = (e) => {
+    setAudios(e.target.files);
   };
 
   const handleSubmit = (e) => {
@@ -59,10 +51,26 @@ export const CreateSection = ({
         "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
       );
     } else {
-      const temp = { ...addSection, tour_id: tour?.tour_id };
+      let temp = { ...addSection, tour_id: tour?.tour_id };
 
+      const newFormData = new FormData();
+      newFormData.append("addSection", JSON.stringify(temp));
+
+      if (images) {
+        for (const elem of images) {
+          newFormData.append("file", elem);
+        }
+      }
+
+      if (audios) {
+        for (const elem of audios) {
+          newFormData.append("file", elem);
+        }
+      }
+
+      console.log(newFormData);
       axios
-        .post(`http://localhost:3000/tours/addsection`, temp)
+        .post(`http://localhost:3000/tours/addsection`, newFormData)
         .then((res) => {
           let tempSections = [
             ...sections,
@@ -74,7 +82,6 @@ export const CreateSection = ({
         })
         .catch((err) => {
           console.log(err);
-          // Puedes agregar lógica adicional para manejar el error, por ejemplo, mostrar un mensaje de error al usuario.
         });
     }
   };
@@ -115,10 +122,27 @@ export const CreateSection = ({
                 value={addSection.travel_distance}
               />
             </Form.Group>
+
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Imagenes</Form.Label>
-              <Form.Control type="file" onChange={handleFiles} multiple />
+              <Form.Control
+                type="file"
+                onChange={handleImages}
+                multiple
+                accept="image/*"
+              />
             </Form.Group>
+
+            <Form.Group controlId="formFileLg" className="mb-3">
+              <Form.Label>Audios</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleAudios}
+                multiple
+                accept="audio/*"
+              />
+            </Form.Group>
+
             {msgError && <p> {msgError} </p>}
             <Button onClick={handleSubmit}>Crear punto</Button>
             <Button>Cancelar</Button>
