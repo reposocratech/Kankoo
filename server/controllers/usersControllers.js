@@ -46,8 +46,16 @@ class usersControllers {
     console.log(user_id);
   };
 
-  ownTours = (req, res) => {
-    console.log("estas son mis guías");
+  myTours = (req, res) => {
+    const user_id = req.params.id;
+    let sql = `SELECT * FROM tour WHERE user_id = ${user_id} AND tour_is_deleted = true`;
+    connection.query(sql, (err, resultMyTours) => {
+      if (err) {
+        return res.status(500).json(err);
+      } else {
+        return res.status(200).json({ resultMyTours });
+      }
+    });
   };
   favTours = (req, res) => {
     console.log("estas son mis guías favoritas");
