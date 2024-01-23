@@ -8,7 +8,7 @@ router.post("/registeruser", usersControllers.registerUser);
 router.post("/login", usersControllers.login);
 router.get("/userprofile/:id", usersControllers.viewProfile);
 router.get("/otheruser:id", usersControllers.otherUser);
-router.get("/mytours", usersControllers.ownTours);
+router.get("/mytours/:id", usersControllers.myTours);
 router.get("/favtours", usersControllers.favTours);
 router.get("/boughttours", usersControllers.boughtTours);
 router.get("/terms", usersControllers.terms);
