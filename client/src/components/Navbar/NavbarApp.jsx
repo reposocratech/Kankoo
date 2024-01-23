@@ -5,13 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import "./NavbarApp.scss";
 import { KankooContext } from "../../context/KankooContext";
+import { delLocalStorage } from "../../../helpers/localStorageUtils";
 
 function NavBarApp() {
-  const { user, setUser } = useContext(KankooContext);
+  const { user, setUser, token, setToken, setIsLogged } =
+    useContext(KankooContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    delLocalStorage("token");
     setUser(null);
+    setIsLogged(false);
+    setToken();
   };
 
   const renderUserContent = () => {
