@@ -54,7 +54,7 @@ export const CreateTour = ({ tour, setTour, setShowSections }) => {
           setShowSections(true);
           setTour({
             ...addTour,
-            cover: res.data.img,
+            cover: res.data.cover,
             tour_id: res.data.tour_id,
           });
         })
@@ -133,16 +133,9 @@ export const CreateTour = ({ tour, setTour, setShowSections }) => {
               variant="primary me-2"
               onClick={handleSubmit}
             >
-              Solicitar aprobación
+              Siguiente
             </button>
-            <button
-              type="button"
-              className="createTourButton"
-              variant="primary me-2"
-              onClick={handleSubmit}
-            >
-              Guardar cambios
-            </button>
+
             <button
               type="button"
               className="createTourButton"
@@ -152,23 +145,6 @@ export const CreateTour = ({ tour, setTour, setShowSections }) => {
               Cancelar
             </button>
           </div>
-          <p>Puntos creados: </p>
-          {/*   <div className='contPictures'>
-        {images?.map((elem)=>{
-            return(
-                <div key={elem.picture_id}>
-                    <img src={`http://localhost:3000/images/travels/${elem.picture_img}`} alt="" />
-                    <button 
-                        onClick={()=>delPicture(elem.picture_id)}
-                        style={{color:"red", border:"none"}}>
-                        <img 
-                            style={{width:"40px", height:"40px", color:"red"}}
-                        src={trash}/>
-                    </button>
-                </div>
-            )
-        })}
-        <div></div> */}
         </Form>
       </Col>
     </Row>
