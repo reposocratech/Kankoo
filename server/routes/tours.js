@@ -14,6 +14,7 @@ router.post(
   multerMulti("resources"),
   toursControllers.addSection
 );
+router.put("/edittour", multerSingle("tours"), toursControllers.editTour);
 router.get("/alltours", toursControllers.allTours);
 router.get("/onetour/:tour_id", toursControllers.oneTour);
 
