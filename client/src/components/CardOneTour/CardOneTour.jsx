@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import "./CardOneTour.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { KankooContext } from "../../context/KankooContext";
 export const CardOneTour = ({ elem }) => {
+  //showEdit(boton editar) se muestra si existe el ususario y su id coincide con el user_id del tour
+
   const navigate = useNavigate();
   /* console.log(elem); */
   return (
