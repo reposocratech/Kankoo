@@ -101,18 +101,34 @@ class toursControllers {
     });
   };
 
-  // addPics = (req, res) => {
-  //   const { section_id } = req.params;
-  //   const { text } = req;
+  editTour = (req, res) => {
+    const {
+      tour_name,
+      tour_description,
+      tour_acces,
+      location,
+      tour_city,
+      tour_id,
+    } = JSON.parse(req.boduy.editTour);
 
-  //   req.files.forEach((elem) => {
-  //     let sql = `INSERT INTO section_resource (tour_id, section_id, resource_type, text) VALUES ("${tour_id}", ${section_id}, "${elem.resource_type}", "${elem.text}")`;
-  //     connection.query(sql, (error, result) => {
-  //       error && res.status(500).json(error);
-  //     });
-  //   });
+    let sql = `UPDATE tour set tour_name = "${tour_name}" , tour_description = "${tour_description}", tour_acces = "${tour_acces}", location = "${location}", tour_city = "${tour_city}"  WHERE tour_id = ${tour_id} `;
 
-  // };
+    let cover;
+
+    if (req.file) {
+      cover = req.file.filename;
+      sql = `UPDATE tour set tour_name = "${tour_name}" , tour_description = "${tour_description}", tour_acces = "${tour_acces}", location = "${location}", tour_city = "${tour_city}", cover = "${cover}"  WHERE tour_id = ${tour_id} `;
+    }
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json({ err });
+        console.log(err);
+      } else {
+        res.status(200).json({ result, cover });
+        console.log(result);
+      }
+    });
+  };
 
   waiting = (req, res) => {
     console.log("espera a que confirmen tu guía");
