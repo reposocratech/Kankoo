@@ -39,7 +39,7 @@ class toursControllers {
 
   addSection = (req, res) => {
     console.log(".------------------", req.files);
-    /*  const { section_name, section_description, travel_distance, tour_id } =
+    const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.addSection);
 
     let sql_cont = `SELECT max(section_id) as id from section where tour_id = ${tour_id}`;
@@ -59,10 +59,19 @@ class toursControllers {
           travel_distance
         )})`;
 
-        let files = [];
-        if (req.files) {
-          files = req.files;
+        let images = [];
+        if (req.files.images) {
+          images = req.files.images;
         }
+        let audios = [];
+        if (req.files.audios) {
+          audios = req.files.audios;
+        }
+        let videos = [];
+        if (req.files.videos) {
+          videos = req.files.videos;
+        }
+        console.log("ESTO ES EL REQ FILESSSSSSSSSS", req.files);
 
         connection.query(sql, (err, result) => {
           if (err) {
@@ -72,10 +81,12 @@ class toursControllers {
 
           res.status(201).json({ section_id });
 
-          this.saveSectionFiles(files, section_id, tour_id);
+          this.saveSectionFiles(images, section_id, tour_id);
+          this.saveSectionFiles(audios, section_id, tour_id);
+          this.saveSectionFiles(videos, section_id, tour_id);
         });
       }
-    }); */
+    });
   };
 
   saveSectionFiles = (files, section_id, tour_id) => {
