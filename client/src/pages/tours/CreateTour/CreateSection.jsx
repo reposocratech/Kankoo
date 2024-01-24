@@ -58,13 +58,13 @@ export const CreateSection = ({
 
       if (images) {
         for (const elem of images) {
-          newFormData.append("file", elem);
+          newFormData.append("images", elem);
         }
       }
 
       if (audios) {
         for (const elem of audios) {
-          newFormData.append("file", elem);
+          newFormData.append("audios", elem);
         }
       }
 
@@ -130,6 +130,7 @@ export const CreateSection = ({
                 onChange={handleImages}
                 multiple
                 accept="image/*"
+                name="image"
               />
             </Form.Group>
 
@@ -140,6 +141,7 @@ export const CreateSection = ({
                 onChange={handleAudios}
                 multiple
                 accept="audio/*"
+                name="audio"
               />
             </Form.Group>
 

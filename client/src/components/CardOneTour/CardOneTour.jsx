@@ -7,7 +7,7 @@ export const CardOneTour = ({ elem }) => {
   //showEdit(boton editar) se muestra si existe el ususario y su id coincide con el user_id del tour
 
   const navigate = useNavigate();
-  console.log(elem);
+  /* console.log(elem); */
   return (
     <Row className="CardOneTour d-flex flex-column align-items-center">
       <img
@@ -24,6 +24,12 @@ export const CardOneTour = ({ elem }) => {
         <Col className="CardOneTourLike d-flex justify-content-center align-items-center">
           <img src="/icons/like.png" alt="icono de corazón" />
         </Col>
+        <button
+          onClick={() => navigate(`/tours/edittour/${elem.tour_id}`)}
+          className="CardOneTourBoton"
+        >
+          Editar
+        </button>
       </Row>
     </Row>
   );

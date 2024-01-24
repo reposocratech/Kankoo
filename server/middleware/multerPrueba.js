@@ -1,20 +1,29 @@
 const multer = require("multer");
-function uploadImage(folder) {
+function uploadImage() {
   const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-      let folder_type;
-      console.log(req);
       console.log(file);
+      let path = "";
+      if (file.fieldname == "audios") {
+        path = "/resources/audios/";
+      } else if (file.fieldname == "images") {
+        path = "/resources/images/";
+      }
+      callback(null, `./public/${path}`);
 
+      /*       let folder_type;
+      console.log(req);
+      console.log(file); */
+      /* 
       if (file.mimetype.startsWith("image/")) {
         folder_type = "images";
       } else if (file.mimetype.startsWith("video/")) {
         folder_type = "videos";
       } else if (file.mimetype.startsWith("audio/")) {
         folder_type = "audios";
-      }
+      } */
 
-      callback(null, `./public/${folder}/${folder_type}`);
+      /*    callback(null, `./public/${folder}/${folder_type}`); */
     },
 
     filename: function (req, file, callback) {

@@ -1,0 +1,27 @@
+.backButton {
+  padding: 10px 17px;
+  font-size: 16px;
+  color: white;
+  background-color: #f07674;
+  border-radius: 2rem;
+  border: none;
+}
+
+.BackArrow {
+  width: 1.8rem;
+  margin: 0.5rem;
+}
+
+.BackCombo {
+  padding: 2rem 2rem 2rem 5rem;
+}
+
+.myToursHeader > h2 {
+  color: #f07674;
+  margin: 1rem 1rem 1rem 0rem;
+}
+
+.myToursIcono {
+  width: 3rem;
+  margin: 1rem 1rem 1.8rem 1rem;
+}/*# sourceMappingURL=MyTours.css.map */

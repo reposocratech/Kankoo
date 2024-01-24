@@ -1,0 +1,13 @@
+.galleryButton {
+  padding: 10px 17px;
+  font-size: 16px;
+  color: white;
+  background-color: #f07674;
+  border-radius: 2rem;
+  border: none;
+  margin-left: 0.5rem;
+}
+
+.gallerySearchbar {
+  margin: 1rem;
+}/*# sourceMappingURL=ToursGallery.css.map */
