@@ -5,7 +5,7 @@ import "../../users/UserProfile/UserProfile.scss";
 import { KankooContext } from "../../../context/KankooContext";
 
 export const AdminProfile = () => {
-  const { user } = useContext(KankooContext);
+  const { adminUsers } = useContext(KankooContext);
   const navigate = useNavigate();
 
   return (

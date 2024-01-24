@@ -42,7 +42,6 @@ export const AppRoutes = () => {
           {token && user && (
             <>
               <Route path="/users/mytours" element={<MyTours />} />
-              <Route path="/users/userprofile" element={<UserProfile />} />
               <Route path="/users/edituser" element={<EditUser />} />
               <Route path="/tours/newtour" element={<FatherCreateTour />} />
               <Route
@@ -55,6 +54,7 @@ export const AppRoutes = () => {
 
           {token && user?.type === 2 && (
             <>
+              <Route path="/users/userprofile" element={<UserProfile />} />
               <Route path="/users/favtours" element={<Favorites />} />
               <Route path="/users/boughttours" element={<BoughtTours />} />
               <Route path="/users/terms" element={<TermsConditions />} />
