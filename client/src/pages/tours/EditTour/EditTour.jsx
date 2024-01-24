@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import "./EditTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 
@@ -19,14 +19,20 @@ export const EditTour = () => {
   const [editFile, setFile] = useState();
   const navigate = useNavigate();
 
-  const { allTours, setAllTours } = useContext(KankooContext);
+  const { myTours, setMyTours } = useContext(KankooContext);
+
+  const { tour_id } = useParams();
 
   useEffect(() => {
-    if (allTours) {
-      setEditTour(allTours);
+    if (myTours) {
+      let temp = myTours?.filter((e) => e.tour_id === Number(tour_id));
+      setEditTour(temp[0]);
     }
-  }, [allTours]);
+  }, [myTours]);
 
+  console.log(editTour);
+
+  console.log(myTours);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditTour({ ...editTour, [name]: value });
@@ -44,25 +50,39 @@ export const EditTour = () => {
     const newFormData = new FormData();
 
     newFormData.append("editTour", JSON.stringify(editTour));
-    newFormData.append("file", file);
+    newFormData.append("file", editFile);
 
     axios
-      .post("http://localhost:3000/tours/edittour", newFormData)
+      .put(`http://localhost:3000/tours/edittour/"${tour_id}"`, newFormData)
       .then((res) => {
-        console.log(res);
-        if (res.data.img) {
-          setAllTours({ ...editTour, cover: res.data.img });
-        } else {
-          setAllTours(editTour);
-        }
+        console.log("Respuesta del servidor:", res.data);
+        let temp = [...myTours];
+        console.log(temp);
+
+        let finalTemp = temp.map((e) => {
+          if (e.tour_id === Number(tour_id)) {
+            let result = editTour;
+
+            if (res.data.cover) {
+              console.log("aquiiiii", res.data.cover);
+              result = { ...editTour, cover: res.data.cover };
+            }
+
+            return result;
+          } else {
+            return e;
+          }
+        });
+        console.log(finalTemp);
+        setMyTours(finalTemp);
+        navigate("/users/mytours");
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log("Error en la solicitud:", err.response);
       });
   };
 
-  console.log("touuuuur", allTours);
-  console.log("editTOOOuORR", editTour);
+  console.log("editTOOOuORR", editFile);
 
   return (
     <Row className="createTourGeneral">
@@ -75,7 +95,7 @@ export const EditTour = () => {
               type="text"
               placeholder="Nombre de la guía"
               name="tour_name"
-              value={editTour.tour_name}
+              value={editTour?.tour_name}
               onChange={handleChange}
             />
           </Form.Group>
@@ -85,7 +105,7 @@ export const EditTour = () => {
               type="text"
               placeholder="Descripción de la guía"
               name="tour_description"
-              value={editTour.tour_description}
+              value={editTour?.tour_description}
               onChange={handleChange}
             />
           </Form.Group>
@@ -95,7 +115,7 @@ export const EditTour = () => {
               type="text"
               placeholder="Ciudad"
               name="tour_city"
-              value={editTour.tour_city}
+              value={editTour?.tour_city}
               onChange={handleChange}
             />
           </Form.Group>
@@ -105,7 +125,7 @@ export const EditTour = () => {
               type="text"
               placeholder="Introduce el link de la ubicación"
               name="location"
-              value={editTour.location}
+              value={editTour?.location}
               onChange={handleChange}
             />
           </Form.Group>
@@ -115,7 +135,7 @@ export const EditTour = () => {
               type="text"
               placeholder="Info acces"
               name="tour_acces"
-              value={editTour.tour_acces}
+              value={editTour?.tour_acces}
               onChange={handleChange}
             />
           </Form.Group>

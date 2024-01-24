@@ -39,7 +39,7 @@ class toursControllers {
 
   addSection = (req, res) => {
     console.log(".------------------", req.files);
-    const { section_name, section_description, travel_distance, tour_id } =
+    /*  const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.addSection);
 
     let sql_cont = `SELECT max(section_id) as id from section where tour_id = ${tour_id}`;
@@ -75,7 +75,7 @@ class toursControllers {
           this.saveSectionFiles(files, section_id, tour_id);
         });
       }
-    });
+    }); */
   };
 
   saveSectionFiles = (files, section_id, tour_id) => {
@@ -102,6 +102,8 @@ class toursControllers {
   };
 
   editTour = (req, res) => {
+    console.log("Body de la solicitud:", req.body);
+
     const {
       tour_name,
       tour_description,
@@ -109,7 +111,7 @@ class toursControllers {
       location,
       tour_city,
       tour_id,
-    } = JSON.parse(req.boduy.editTour);
+    } = JSON.parse(req.body.editTour);
 
     let sql = `UPDATE tour set tour_name = "${tour_name}" , tour_description = "${tour_description}", tour_acces = "${tour_acces}", location = "${location}", tour_city = "${tour_city}"  WHERE tour_id = ${tour_id} `;
 
@@ -125,7 +127,7 @@ class toursControllers {
         console.log(err);
       } else {
         res.status(200).json({ result, cover });
-        console.log(result);
+        console.log("Resultado de la consulta SQL:", result);
       }
     });
   };

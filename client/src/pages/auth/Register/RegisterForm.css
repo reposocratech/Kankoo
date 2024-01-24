@@ -1,0 +1,23 @@
+.registerButton {
+  padding: 10px 17px;
+  font-size: 16px;
+  color: white;
+  background-color: #f07674;
+  border-radius: 2rem;
+  border: none;
+}
+
+.regLogo {
+  width: 20rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Termsandprivacytext p {
+  margin-bottom: 10px;
+}
+.Termsandprivacytext p a {
+  margin-right: 10px;
+}/*# sourceMappingURL=RegisterForm.css.map */
