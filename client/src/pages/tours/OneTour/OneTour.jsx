@@ -11,7 +11,7 @@ export const OneTour = () => {
   const { user } = useContext(KankooContext);
   const id = user?.user_id;
   //el precio se muestra si existe el tour y su valor es diferente de 0
-  const showPrice = oneTour && oneTour[0].price != 0;
+  const showPrice = oneTour && oneTour[0]?.price != 0;
   const navigate = useNavigate();
 
   const handleClickLike = () => {
@@ -141,6 +141,8 @@ export const OneTour = () => {
                       &#9733;
                     </a>
                   </div>
+                </div>
+                <div className="d-flex">
                   <button className="OneTourButton">Adquirir</button>
                   <button
                     onClick={() => navigate("/tours/edittour")}

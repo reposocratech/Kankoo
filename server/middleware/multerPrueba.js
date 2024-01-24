@@ -8,6 +8,8 @@ function uploadImage() {
         path = "/resources/audios/";
       } else if (file.fieldname == "images") {
         path = "/resources/images/";
+      } else if (file.fieldname == "videos") {
+        path = "/resources/videos/";
       }
       callback(null, `./public/${path}`);
 
@@ -34,6 +36,7 @@ function uploadImage() {
   const upload = multer({ storage: storage }).fields([
     { name: "images" },
     { name: "audios" },
+    { name: "videos" },
   ]);
 
   return upload;
