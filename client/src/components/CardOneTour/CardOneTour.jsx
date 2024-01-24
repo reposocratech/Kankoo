@@ -24,12 +24,6 @@ export const CardOneTour = ({ elem }) => {
         <Col className="CardOneTourLike d-flex justify-content-center align-items-center">
           <img src="/icons/like.png" alt="icono de corazón" />
         </Col>
-        <button
-          onClick={() => navigate(`/tours/edittour/${elem.tour_id}`)}
-          className="CardOneTourBoton"
-        >
-          Editar
-        </button>
       </Row>
     </Row>
   );
