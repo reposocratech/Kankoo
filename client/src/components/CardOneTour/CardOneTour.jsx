@@ -4,7 +4,7 @@ import "./CardOneTour.scss";
 import { useNavigate } from "react-router-dom";
 export const CardOneTour = ({ elem }) => {
   const navigate = useNavigate();
-  console.log(elem);
+  /* console.log(elem); */
   return (
     <Row className="CardOneTour d-flex flex-column align-items-center">
       <img
@@ -22,7 +22,7 @@ export const CardOneTour = ({ elem }) => {
           <img src="/icons/like.png" alt="icono de corazón" />
         </Col>
         <button
-          onClick={() => navigate("/tours/edittour")}
+          onClick={() => navigate(`/tours/edittour/${elem.tour_id}`)}
           className="CardOneTourBoton"
         >
           Editar

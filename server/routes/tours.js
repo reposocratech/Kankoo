@@ -9,12 +9,12 @@ var router = express.Router();
 //ruta base http://localhost:3000/tours/
 router.post("/newtour", multerSingle("tours"), toursControllers.newTour);
 router.get("/waiting", toursControllers.waiting);
-router.post(
-  "/addsection",
-  multerMulti("resources"),
-  toursControllers.addSection
+router.post("/addsection", multerPrueba(), toursControllers.addSection);
+router.put(
+  "/edittour/:tour_id",
+  multerSingle("tours"),
+  toursControllers.editTour
 );
-router.put("/edittour", multerSingle("tours"), toursControllers.editTour);
 router.get("/alltours", toursControllers.allTours);
 router.get("/onetour/:tour_id", toursControllers.oneTour);
 

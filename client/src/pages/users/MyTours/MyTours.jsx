@@ -9,10 +9,10 @@ import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
 import { useNavigate } from "react-router-dom";
 
 export const MyTours = () => {
-  const { setAllTours, user, token, setToken } = useContext(KankooContext);
-  const [myTours, setMyTours] = useState();
+  const { myTours } = useContext(KankooContext);
+
   const navigate = useNavigate();
-  useEffect(() => {
+  /*  useEffect(() => {
     const tokenLocalStorage = getLocalStorage("token");
     setToken(tokenLocalStorage);
 
@@ -22,13 +22,13 @@ export const MyTours = () => {
         .get(`http://localhost:3000/users/mytours/${id}`)
         .then((res) => {
           setMyTours(res.data.resultMyTours);
-          console.log(res.data.resultMyTours);
+          console.log("respuesta my tours", res.data.resultMyTours);
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, []);
+  }, []); */
   return (
     <Container>
       <Col>
