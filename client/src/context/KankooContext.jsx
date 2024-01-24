@@ -20,7 +20,6 @@ export const KankooProvider = ({ children }) => {
       .get(`http://localhost:3000/tours/alltours`)
       .then((res) => {
         setAllTours(res.data.resultTours);
-        console.log(res.data.resultTours);
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +33,6 @@ export const KankooProvider = ({ children }) => {
         .then((res) => {
           setUser(res.data.result);
           setIsLogged(true);
-          console.log(res.data.result);
         })
         .catch((err) => {
           console.log(err);

@@ -6,10 +6,12 @@ import { KankooContext } from "../../../context/KankooContext";
 import axios from "axios";
 import "./MyTours.scss";
 import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
+import { useNavigate } from "react-router-dom";
 
 export const MyTours = () => {
   const { setAllTours, user, token, setToken } = useContext(KankooContext);
   const [myTours, setMyTours] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
     const tokenLocalStorage = getLocalStorage("token");
     setToken(tokenLocalStorage);
@@ -31,13 +33,19 @@ export const MyTours = () => {
     <Container>
       <Col>
         <Row>
-          <div className="BackCombo" onClick={() => navigate(-1)}>
+          <div
+            className="BackCombo"
+            onClick={() => navigate("/users/userprofile")}
+          >
             <img
               className="BackArrow"
               src="/icons/back.png"
               alt="flecha a la izquierda"
             />
-            <button className="backButton" onClick={() => navigate(-1)}>
+            <button
+              className="backButton"
+              onClick={() => navigate("/users/userprofile")}
+            >
               Volver
             </button>
           </div>
