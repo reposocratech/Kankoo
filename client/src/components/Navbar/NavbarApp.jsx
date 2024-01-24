@@ -19,7 +19,9 @@ function NavBarApp() {
   };
 
   const handleAvatarClick = () => {
-    console.log(user?.user_type);
+
+  console.log(user?.user_type);
+
     if (user?.user_type === 1) {
       navigate("/admin/adminProfile");
     } else if (user?.user_type === 2) {
@@ -31,13 +33,15 @@ function NavBarApp() {
     if (user) {
       return (
         <>
+
           <Nav.Link className="navCsesion ml-auto">
+
             <button className="navBoton" onClick={handleLogout}>
               Cerrar sesión
             </button>
           </Nav.Link>
-          <Nav.Link className="navAvatarContainer" onClick={handleAvatarClick}>
-            <div className="navAvatar">
+          <Nav.Link className="navAvatarContainer">
+            <div className="navAvatar" onClick={handleAvatarClick}>
               {user.avatar ? (
                 <img
                   src={`http://localhost:3000/images/users/${user.avatar}`}
@@ -68,7 +72,7 @@ function NavBarApp() {
   };
 
   const renderAdminContent = () => {
-    if (token && user?.type === 1) {
+    if (token && user?.user_type === 1) {
       return (
         <Nav.Link
           className="navCsesion ml-auto"
