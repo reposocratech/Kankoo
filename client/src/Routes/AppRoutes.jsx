@@ -21,7 +21,9 @@ import { AdminProfile } from "../pages/admin/AdminProfile/AdminProfile";
 import { AdminStats } from "../pages/admin/AdminStats/AdminStats";
 import { AdminTours } from "../pages/admin/AdminTours/AdminTours";
 import { AdminUsers } from "../pages/admin/AdminUsers/AdminUsers";
-
+import { OneSection } from "../pages/tours/OneSection/OneSection";
+import { OneUser } from "../pages/users/OneUser/OneUser";
+import { EditTour } from "../pages/tours/EditTour/EditTour";
 export const AppRoutes = () => {
   const { token, user } = useContext(KankooContext);
   return (
@@ -32,7 +34,7 @@ export const AppRoutes = () => {
           <Route path="/" element={<ToursGallery />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/tours/onetour/:tour_id" element={<OneTour />} />
-
+          <Route path="/users/oneuser" element={<OneUser />} />
           {!token && !user && <></>}
           <Route path="/users/registeruser" element={<RegisterForm />} />
           <Route path="/users/login" element={<LoginForm />} />
@@ -43,6 +45,11 @@ export const AppRoutes = () => {
               <Route path="/users/userprofile" element={<UserProfile />} />
               <Route path="/users/edituser" element={<EditUser />} />
               <Route path="/tours/newtour" element={<FatherCreateTour />} />
+              <Route
+                path="/tours/onesection/:section_id"
+                element={<OneSection />}
+              />
+              <Route path="/tours/edittour" element={<EditTour />} />
             </>
           )}
 

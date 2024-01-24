@@ -1,3 +1,4 @@
+@import "../../styles/mixins.scss";
 .CarOneTourCover {
   width: 20rem;
   border-radius: 2rem;
@@ -18,4 +19,7 @@
     width: 3.4rem;
     text-align: center;
   }
+}
+.CardOneTourBoton {
+  @include BotonCoral;
 }
