@@ -59,6 +59,16 @@ class usersControllers {
   };
   favTours = (req, res) => {
     const { id, tour_id } = req.params;
+    let sql = `UPDATE user_likes_tour set liked = true WHERE tour_id = ${tour_id} and user_id = ${id}`;
+    connection.query(sql, (err, resultLiked) => {
+      if (err) {
+        res.status(400).json({ err });
+        console.log(err);
+      } else {
+        res.status(200).json({ resultLiked });
+        console.log("liiiiiiiiiiike", resultLiked);
+      }
+    });
     console.log("fav!");
   };
   boughtTours = (req, res) => {
