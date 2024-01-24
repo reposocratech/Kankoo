@@ -57,6 +57,7 @@ export const CreateTour = ({ tour, setTour, setShowSections }) => {
             cover: res.data.cover,
             tour_id: res.data.tour_id,
           });
+          setTours();
         })
         .catch((err) => {
           console.log(err.response);
