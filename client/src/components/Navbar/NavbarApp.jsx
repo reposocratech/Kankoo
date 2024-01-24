@@ -9,15 +9,19 @@ import { delLocalStorage } from "../../../helpers/localStorageUtils";
 
 function NavBarApp() {
   const { user, setUser, token, setIsLogged } = useContext(KankooContext);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const handleLogout = () => {
     delLocalStorage("token");
     setUser(null);
     setIsLogged(false);
+    navigate("/");
   };
 
   const handleAvatarClick = () => {
+
+  console.log(user?.user_type);
+
     if (user?.user_type === 1) {
       navigate("/admin/adminProfile");
     } else if (user?.user_type === 2) {
@@ -29,10 +33,9 @@ function NavBarApp() {
     if (user) {
       return (
         <>
-          <Nav.Link
-            className="navCsesion ml-auto"
-            onClick={() => navigate("/")}
-          >
+
+          <Nav.Link className="navCsesion ml-auto">
+
             <button className="navBoton" onClick={handleLogout}>
               Cerrar sesión
             </button>

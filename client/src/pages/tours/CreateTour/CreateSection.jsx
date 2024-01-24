@@ -22,6 +22,7 @@ export const CreateSection = ({
   const [addSection, setAddSection] = useState(initialValueSection);
   const [images, setImages] = useState();
   const [audios, setAudios] = useState();
+  const [videos, setVideos] = useState();
   const [msgError, setMsgError] = useState("");
 
   const handleChange = (e) => {
@@ -36,6 +37,10 @@ export const CreateSection = ({
 
   const handleAudios = (e) => {
     setAudios(e.target.files);
+  };
+
+  const handleVideos = (e) => {
+    setVideos(e.target.files);
   };
 
   const handleSubmit = (e) => {
@@ -65,6 +70,12 @@ export const CreateSection = ({
       if (audios) {
         for (const elem of audios) {
           newFormData.append("audios", elem);
+        }
+      }
+
+      if (videos) {
+        for (const elem of videos) {
+          newFormData.append("videos", elem);
         }
       }
 
@@ -128,6 +139,7 @@ export const CreateSection = ({
               <Form.Control
                 type="file"
                 onChange={handleImages}
+                required
                 multiple
                 accept="image/*"
                 name="image"
@@ -142,6 +154,17 @@ export const CreateSection = ({
                 multiple
                 accept="audio/*"
                 name="audio"
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formFileLg" className="mb-3">
+              <Form.Label>Videos</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleVideos}
+                multiple
+                accept="video/*"
+                name="video"
               />
             </Form.Group>
 
