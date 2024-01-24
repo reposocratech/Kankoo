@@ -3,7 +3,6 @@ import { Navbar, Row } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBarApp from "../components/Navbar/NavbarApp";
 import { ToursGallery } from "../pages/tours/HomeToursGallery/ToursGallery";
-import { UserProfile } from "../pages/users/UserProfile/UserProfile";
 import { MyTours } from "../pages/users/MyTours/MyTours";
 import { Favorites } from "../pages/users/Favorites/Favorites";
 import { EditUser } from "../pages/users/EditUser/EditUser";
@@ -24,8 +23,11 @@ import { AdminUsers } from "../pages/admin/AdminUsers/AdminUsers";
 import { OneSection } from "../pages/tours/OneSection/OneSection";
 import { OneUser } from "../pages/users/OneUser/OneUser";
 import { EditTour } from "../pages/tours/EditTour/EditTour";
+import { UserProfile } from "../pages/users/UserProfile/UserProfile";
 export const AppRoutes = () => {
+
   const { token, user } = useContext(KankooContext);
+
   return (
     <BrowserRouter>
       <Row>
@@ -38,6 +40,7 @@ export const AppRoutes = () => {
 
           <Route path="/users/registeruser" element={<RegisterForm />} />
           <Route path="/users/login" element={<LoginForm />} />
+
 
           <>
             <Route path="/users/mytours" element={<MyTours />} />
@@ -65,6 +68,7 @@ export const AppRoutes = () => {
             <Route path="/admin/adminTours" element={<AdminTours />} />
             <Route path="/admin/adminUsers" element={<AdminUsers />} />
           </>
+
         </Routes>
       </Row>
     </BrowserRouter>
