@@ -17,6 +17,7 @@ router.post(
 router.put("/edittour", multerSingle("tours"), toursControllers.editTour);
 router.get("/alltours", toursControllers.allTours);
 router.get("/onetour/:tour_id", toursControllers.oneTour);
+router.post("/:tour_id/rating/:id", toursControllers.rateTour);
 
 // router.put(
 //   "/addPics/:section_id",

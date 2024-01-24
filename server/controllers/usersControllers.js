@@ -58,7 +58,8 @@ class usersControllers {
     });
   };
   favTours = (req, res) => {
-    console.log("estas son mis guías favoritas");
+    const { id, tour_id } = req.params;
+    console.log("fav!");
   };
   boughtTours = (req, res) => {
     console.log("estas son mis guías adquiridas");
