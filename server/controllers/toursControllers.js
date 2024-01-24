@@ -164,6 +164,11 @@ class toursControllers {
       }
     });
   };
+  rateTour = (req, res) => {
+    const { tour_id, id } = req.params;
+    let sql = `UPDATE user_rates_tour set rating=${rating} WHERE tour_id=${tour_id} and user_id = ${user_id}`;
+    console.log("rating");
+  };
 }
 
 module.exports = new toursControllers();

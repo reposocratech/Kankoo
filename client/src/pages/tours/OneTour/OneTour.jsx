@@ -1,14 +1,41 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import "./OneTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 export const OneTour = () => {
   const [oneTour, setOneTour] = useState();
+  const [liked, setLiked] = useState(false);
   const { tour_id } = useParams();
   const { user } = useContext(KankooContext);
+  const id = user?.user_id;
+  //el precio se muestra si existe el tour y su valor es diferente de 0
+  const showPrice = oneTour && oneTour[0].price != 0;
   const navigate = useNavigate();
+
+  const handleClickLike = () => {
+    setLiked(!liked);
+    axios
+      .post(`http://localhost:3000/users/${id}/favtours/${tour_id}`, liked)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleClickRating = () => {
+    axios
+      .post(`http://localhost:3000/tours/${tour_id}/rating/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/onetour/${tour_id}`)
@@ -39,33 +66,92 @@ export const OneTour = () => {
             </div>
           </Row>
           <Row>
+            {/* -----------------INFO TOUR */}
             <Col md={6}>
-              <div className="OneTourInfo d-flex flex-column justify-content-center align-items-center">
-                <h2>{oneTour[0]?.tour_name}</h2>
-                <h3>{oneTour[0]?.tour_city}</h3>
+              <div className="OneTourInfo d-flex flex-column justify-content-center ">
+                <div className="d-flex align-items-center">
+                  <div>
+                    <h2>{oneTour[0]?.tour_name}</h2>
+                    <h3>{oneTour[0]?.tour_city}</h3>
+                  </div>
+                  <div>
+                    <Link to={oneTour[0]?.location}>
+                      <img
+                        className="OneTourLocation"
+                        src="/icons/location.png"
+                        alt="icono de avión de papel para ubicación"
+                      />
+                    </Link>
+                  </div>
+                </div>
                 <img
                   src={`http://localhost:3000/images/tours/${oneTour[0]?.cover}`}
                   alt="imagen de la guía turísitca"
                   className="OneTourImg"
                 />
-                <h4>{oneTour[0]?.price}</h4>
-              </div>
-              <div className="OneTourUserInfo d-flex justify-content-start align-items-center">
-                <img
-                  onClick={() => navigate("/users/oneuser")}
-                  className="OneTourProfilePicture"
-                  src={`http://localhost:3000/images/users/${user?.avatar}`}
-                  alt=""
-                />
-                <h5>
-                  {user?.first_name} {user?.last_name}
-                </h5>
-              </div>
-              <div className="OneTourInfo d-flex flex-column justify-content-center align-items-center">
-                <p>{oneTour[0]?.tour_description}</p>
-                <button className="OneTourButton">Adquirir</button>
+                {/* ---------------------PRECIO */}
+                {showPrice && <h4>{oneTour[0]?.price}</h4>}
+                {/* -----------------------INFO USUARIO, LIKE */}
+                <div className="OneTourUserInfo d-flex">
+                  {/* -------INFO USER */}
+                  <div className="d-flex">
+                    <img
+                      onClick={() => navigate("/users/oneuser")}
+                      className="OneTourProfilePicture"
+                      src={`http://localhost:3000/images/users/${user?.avatar}`}
+                      alt=""
+                    />
+                    <h5>
+                      {user?.first_name} {user?.last_name}
+                    </h5>
+                  </div>
+                  {/* --------------------LIKE */}
+                  {liked ? (
+                    <div className="OneTourLike d-flex justify-content-center align-items-center">
+                      <img src="/icons/liked.png" alt="icono de corazón" />
+                    </div>
+                  ) : (
+                    <div className="OneTourLike d-flex justify-content-center align-items-center">
+                      <img
+                        onClick={handleClickLike}
+                        src="/icons/like.png"
+                        alt="icono de corazón"
+                      />
+                    </div>
+                  )}
+                </div>
+                {/* -------------------------DESCRIPCION, RATING, BOTON ADQUIRIR*/}
+                <div className="OneTourInfo d-flex align-items-start flex-column p-0">
+                  <p>{oneTour[0]?.tour_description}</p>
+                  {/* -----------------------RATING */}
+                  <div className="ec-stars-wrapper">
+                    <a href="#" data-value="1" title="Votar con 1 estrellas">
+                      &#9733;
+                    </a>
+                    <a href="#" data-value="2" title="Votar con 2 estrellas">
+                      &#9733;
+                    </a>
+                    <a href="#" data-value="3" title="Votar con 3 estrellas">
+                      &#9733;
+                    </a>
+                    <a href="#" data-value="4" title="Votar con 4 estrellas">
+                      &#9733;
+                    </a>
+                    <a href="#" data-value="5" title="Votar con 5 estrellas">
+                      &#9733;
+                    </a>
+                  </div>
+                  <button className="OneTourButton">Adquirir</button>
+                  <button
+                    onClick={() => navigate("/tours/edittour")}
+                    className="CardOneTourBoton"
+                  >
+                    Editar
+                  </button>
+                </div>
               </div>
             </Col>
+            {/* ---------------------------SECCIONES DE RUTA */}
             <Col>
               <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
               <div md={4} className="d-flex">
