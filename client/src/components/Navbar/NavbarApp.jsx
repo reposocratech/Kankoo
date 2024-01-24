@@ -8,15 +8,22 @@ import { KankooContext } from "../../context/KankooContext";
 import { delLocalStorage } from "../../../helpers/localStorageUtils";
 
 function NavBarApp() {
-  const { user, setUser, token, setToken, setIsLogged } =
-    useContext(KankooContext);
+  const { user, setUser, token, setIsLogged } = useContext(KankooContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     delLocalStorage("token");
     setUser(null);
     setIsLogged(false);
-    setToken();
+  };
+
+  const handleAvatarClick = () => {
+    console.log("handleAvatarClick");
+    if (user?.type === 1) {
+      navigate("/admin/adminProfile");
+    } else if (user?.type === 2) {
+      navigate("/users/userprofile");
+    }
   };
 
   const renderUserContent = () => {
@@ -24,17 +31,14 @@ function NavBarApp() {
       return (
         <>
           <Nav.Link
-            className="navCsesion ml-auto" // Agregado ml-auto aquí
+            className="navCsesion ml-auto"
             onClick={() => navigate("/users/userprofile")}
           >
             <button className="navBoton" onClick={handleLogout}>
               Cerrar sesión
             </button>
           </Nav.Link>
-          <Nav.Link
-            className="navAvatarContainer"
-            onClick={() => navigate("/users/userprofile")}
-          >
+          <Nav.Link className="navAvatarContainer" onClick={handleAvatarClick}>
             <div className="navAvatar">
               {user.avatar ? (
                 <img
@@ -65,6 +69,20 @@ function NavBarApp() {
     }
   };
 
+  const renderAdminContent = () => {
+    if (token && user?.type === 1) {
+      return (
+        <Nav.Link
+          className="navCsesion ml-auto"
+          onClick={() => navigate("/admin/adminProfile")}
+        >
+          <button className="navBoton">Panel de administrador</button>
+        </Nav.Link>
+      );
+    }
+    return null;
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -78,7 +96,10 @@ function NavBarApp() {
               Guías Top
             </Nav.Link>
           </Nav>
-          <Nav className="ml-auto">{renderUserContent()}</Nav>
+          <Nav className="ml-auto">
+            {renderUserContent()}
+            {renderAdminContent()}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
