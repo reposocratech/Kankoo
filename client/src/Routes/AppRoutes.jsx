@@ -3,7 +3,7 @@ import { Navbar, Row } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBarApp from "../components/Navbar/NavbarApp";
 import { ToursGallery } from "../pages/tours/HomeToursGallery/ToursGallery";
-import { UserProfile } from "../pages/users/UserProfile/UserProfile";
+
 import { MyTours } from "../pages/users/MyTours/MyTours";
 import { Favorites } from "../pages/users/Favorites/Favorites";
 import { EditUser } from "../pages/users/EditUser/EditUser";
@@ -24,8 +24,10 @@ import { AdminUsers } from "../pages/admin/AdminUsers/AdminUsers";
 import { OneSection } from "../pages/tours/OneSection/OneSection";
 import { OneUser } from "../pages/users/OneUser/OneUser";
 import { EditTour } from "../pages/tours/EditTour/EditTour";
+import { UserProfile } from "../pages/users/UserProfile/UserProfile";
 export const AppRoutes = () => {
   const { token, user } = useContext(KankooContext);
+
   return (
     <BrowserRouter>
       <Row>
@@ -51,8 +53,7 @@ export const AppRoutes = () => {
               <Route path="/tours/edittour/:tour_id" element={<EditTour />} />
             </>
           )}
-
-          {token && user?.type === 2 && (
+          {token && user?.user_type === 2 && (
             <>
               <Route path="/users/userprofile" element={<UserProfile />} />
               <Route path="/users/favtours" element={<Favorites />} />
@@ -62,8 +63,7 @@ export const AppRoutes = () => {
               <Route path="/tours/waiting" element={<WaitingValidation />} />
             </>
           )}
-
-          {token && user?.type === 1 && (
+          {token && user?.user_type === 1 && (
             <>
               <Route path="/admin/adminProfile" element={<AdminProfile />} />
               <Route path="/admin/adminStats" element={<AdminStats />} />
