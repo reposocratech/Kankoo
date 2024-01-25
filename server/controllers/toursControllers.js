@@ -227,6 +227,21 @@ class toursControllers {
     let sql = `UPDATE user_rates_tour set rating=${rating} WHERE tour_id=${tour_id} and user_id = ${user_id}`;
     console.log("rating");
   };
+
+  delTour = (req, res) => {
+    const { tour_id } = req.params;
+    console.log("req params back", req.params);
+    let sql = `UPDATE tour SET tour_is_deleted = true
+WHERE tour_id = ${tour_id}`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+        console.log(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
 }
 
 module.exports = new toursControllers();

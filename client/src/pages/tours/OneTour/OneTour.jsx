@@ -11,7 +11,9 @@ export const OneTour = () => {
   const [oneTour, setOneTour] = useState();
   const [liked, setLiked] = useState(false);
   const { tour_id } = useParams();
-  const { user } = useContext(KankooContext);
+  console.log("tour_id antes de llamar a delTour:", tour_id);
+  const { user, myTours, setMyTours, resetMyTours, setResetMyTours } =
+    useContext(KankooContext);
   const id = user?.user_id;
   //el precio se muestra si existe el tour y su valor es diferente de 0
   const showPrice = oneTour && oneTour[0]?.price != 0;
@@ -52,6 +54,33 @@ export const OneTour = () => {
   }, [tour_id]);
   console.log("toooooooooooooooooooooour", oneTour);
   console.log(user);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/mytours/${user?.user_id}`)
+      .then((res) => {
+        setMyTours(res.data.resultMyTours);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [tour_id, user?.user_id]);
+
+  const delTour = (tour_id) => {
+    console.log("tour_id", tour_id);
+    axios
+      .put(`http://localhost:3000/tours/deltour/${tour_id}`)
+      .then((res) => {
+        console.log("respuesta de borradooooo chee", res.data);
+        /* let temp = myTours.filter((elem) => elem.tour_id !== tour_id);
+        setMyTours(temp); */
+        setResetMyTours(!resetMyTours);
+        navigate("/users/mytours");
+      })
+      .catch((err) => {
+        console.log("error borradooo cheee", err);
+      });
+  };
 
   return (
     <>
@@ -151,6 +180,19 @@ export const OneTour = () => {
                     className="CardOneTourBoton"
                   >
                     Editar
+                  </button>
+                  <button
+                    className="OneTourButton"
+                    type="button"
+                    onClick={() => {
+                      console.log(
+                        "tour_id al hacer clic en el botón:",
+                        tour_id
+                      );
+                      delTour(tour_id);
+                    }}
+                  >
+                    Eliminar
                   </button>
                 </div>
               </div>
