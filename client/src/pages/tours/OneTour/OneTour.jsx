@@ -4,6 +4,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import "./OneTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
+import { CardOneSection } from "../../../components/CardOneSection/CardOneSection";
+import { Starrating } from "../../../components/Starrating/Starrating";
+
 export const OneTour = () => {
   const [oneTour, setOneTour] = useState();
   const [liked, setLiked] = useState(false);
@@ -14,20 +17,21 @@ export const OneTour = () => {
   const showPrice = oneTour && oneTour[0]?.price != 0;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const likesData = JSON.parse(localStorage.getItem("likes")) || {};
+    const initialLikedState = likesData[tour_id];
+    setLiked(initialLikedState || false);
+  }, [tour_id]);
+
   const handleClickLike = () => {
-    setLiked(!liked);
+    setLiked((prevLiked) => !prevLiked);
+    const likesData = JSON.parse(localStorage.getItem("likes")) || {};
+    likesData[tour_id] = !liked;
+    localStorage.setItem("likes", JSON.stringify(likesData));
     axios
-      .post(`http://localhost:3000/users/${id}/favtours/${tour_id}`, liked)
-      .then((res) => {
-        console.log(res);
+      .post(`http://localhost:3000/users/${id}/favtours/${tour_id}`, {
+        liked: !liked,
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const handleClickRating = () => {
-    axios
-      .post(`http://localhost:3000/tours/${tour_id}/rating/${id}`)
       .then((res) => {
         console.log(res);
       })
@@ -105,26 +109,23 @@ export const OneTour = () => {
                       {user?.first_name} {user?.last_name}
                     </h5>
                   </div>
+
                   {/* --------------------LIKE */}
-                  {liked ? (
-                    <div className="OneTourLike d-flex justify-content-center align-items-center">
-                      <img src="/icons/liked.png" alt="icono de corazón" />
-                    </div>
-                  ) : (
-                    <div className="OneTourLike d-flex justify-content-center align-items-center">
-                      <img
-                        onClick={handleClickLike}
-                        src="/icons/like.png"
-                        alt="icono de corazón"
-                      />
-                    </div>
-                  )}
+                  <div className="OneTourLike d-flex justify-content-center align-items-center">
+                    <img
+                      onClick={handleClickLike}
+                      src={liked ? "/icons/liked.png" : "/icons/like.png"}
+                      alt="icono de corazón"
+                    />
+                  </div>
                 </div>
+
                 {/* -------------------------DESCRIPCION, RATING, BOTON ADQUIRIR*/}
                 <div className="OneTourInfo d-flex align-items-start flex-column p-0">
                   <p>{oneTour[0]?.tour_description}</p>
+
                   {/* -----------------------RATING */}
-                  <div className="ec-stars-wrapper">
+                  {/* <div className="ec-stars-wrapper">
                     <a href="#" data-value="1" title="Votar con 1 estrellas">
                       &#9733;
                     </a>
@@ -140,7 +141,8 @@ export const OneTour = () => {
                     <a href="#" data-value="5" title="Votar con 5 estrellas">
                       &#9733;
                     </a>
-                  </div>
+                  </div> */}
+                  <Starrating />
                 </div>
                 <div className="d-flex">
                   <button className="OneTourButton">Adquirir</button>
@@ -157,23 +159,8 @@ export const OneTour = () => {
             <Col>
               <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
               <div md={4} className="d-flex">
-                {oneTour?.map((elem, key) => {
-                  return (
-                    <div
-                      key={elem.section_id}
-                      className="d-flex flex-column align-items-center"
-                    >
-                      <img
-                        onClick={() =>
-                          navigate(`/tours/onesection/${elem.section_id}`)
-                        }
-                        className="OneTourSectionImg"
-                        src={`http://localhost:3000/images/section/${elem.text}`}
-                        alt="portada de seccion"
-                      />
-                      <h5>{elem.section_name}</h5>
-                    </div>
-                  );
+                {oneTour?.map((elem) => {
+                  return <CardOneSection elem={elem} />;
                 })}
               </div>
             </Col>

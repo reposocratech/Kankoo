@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CreateTour } from "./CreateTour";
 import { CreateSection } from "./CreateSection";
-
+import "./CreateTour.scss";
 export const FatherCreateTour = () => {
   const [showSections, setShowSections] = useState(false);
   const [showFormSection, setShowFormSection] = useState(false);
@@ -26,22 +26,34 @@ export const FatherCreateTour = () => {
 
       {showSections && (
         <>
-          <div>
+          <div className="fatherCover">
             <h2> {tour?.tour_name} </h2>
 
             {tour?.cover && (
               <img
                 src={`http://localhost:3000/images/tours/${tour.cover}`}
                 alt=""
-                style={{ width: "50px", height: "50" }}
+                style={{ width: "200px", height: "200" }}
               />
             )}
           </div>
-
-          {sections.map((elem) => {
-            return <p>{elem.section_name}</p>;
-          })}
-          <button onClick={() => setShowFormSection(true)}>Añadir punto</button>
+          <div className=" d-flex flex-column">
+            {sections.map((elem) => {
+              return (
+                <div className="fatherSectionAdded">
+                  <p>{elem.section_name}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <button
+              className="fatherButton"
+              onClick={() => setShowFormSection(true)}
+            >
+              Añadir punto
+            </button>
+          </div>
           {showFormSection && (
             <CreateSection
               setShowFormSection={setShowFormSection}
