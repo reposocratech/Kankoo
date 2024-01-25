@@ -59,17 +59,41 @@ class usersControllers {
   };
   favTours = (req, res) => {
     const { id, tour_id } = req.params;
-    let sql = `UPDATE user_likes_tour set liked = true WHERE tour_id = ${tour_id} and user_id = ${id}`;
-    connection.query(sql, (err, resultLiked) => {
-      if (err) {
-        res.status(400).json({ err });
-        console.log(err);
+    const { liked } = req.body;
+
+    let checkSql = `SELECT * FROM user_likes_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+
+    connection.query(checkSql, (checkErr, checkResult) => {
+      if (checkErr) {
+        res.status(500).json({ error: checkErr });
       } else {
-        res.status(200).json({ resultLiked });
-        console.log("liiiiiiiiiiike", resultLiked);
+        if (checkResult.length > 0) {
+          let updateSql = `UPDATE user_likes_tour SET liked = ${liked} WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+
+          connection.query(updateSql, (updateErr, updateResult) => {
+            if (updateErr) {
+              res.status(500).json({ error: updateErr });
+              console.log(updateErr);
+            } else {
+              res.status(200).json({ resultLiked: updateResult });
+              console.log("Like actualizado:", updateResult);
+            }
+          });
+        } else {
+          let insertSql = `INSERT INTO user_likes_tour (tour_id, user_id, liked) VALUES (${tour_id}, ${id}, ${liked});`;
+
+          connection.query(insertSql, (insertErr, insertResult) => {
+            if (insertErr) {
+              res.status(500).json({ error: insertErr });
+              console.log(insertErr);
+            } else {
+              res.status(200).json({ resultLiked: insertResult, liked });
+              console.log("Nuevo like insertado:", insertResult);
+            }
+          });
+        }
       }
     });
-    console.log("fav!");
   };
   boughtTours = (req, res) => {
     console.log("estas son mis guías adquiridas");
@@ -152,6 +176,14 @@ class usersControllers {
         });
       }
     });
+  };
+  rateTour = (req, res) => {
+    const { id, tour_id } = req.params;
+    const { rating } = req.body;
+
+    let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+
+    console.log("oleee");
   };
 }
 

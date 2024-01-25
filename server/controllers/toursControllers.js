@@ -38,7 +38,7 @@ class toursControllers {
   };
 
   addSection = (req, res) => {
-    console.log(".------------------", req.files);
+    console.log("files del ADD SECTION", req.files);
     const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.addSection);
 
@@ -55,7 +55,8 @@ class toursControllers {
         } else {
           section_id++;
         }
-        let sql = `INSERT INTO section (tour_id, section_id, section_name, section_description, travel_distance) VALUES ( ${tour_id} , ${section_id} ," ${section_name}", "${section_description}", ${Number(
+        const { filename } = req.files.cover[0];
+        let sql = `INSERT INTO section (tour_id, section_id, section_name, section_cover, section_description, travel_distance) VALUES ( ${tour_id} , ${section_id} ," ${section_name}", "${filename}", "${section_description}", ${Number(
           travel_distance
         )})`;
 
@@ -71,6 +72,7 @@ class toursControllers {
         if (req.files.videos) {
           videos = req.files.videos;
         }
+
         console.log("ESTO ES EL REQ FILESSSSSSSSSS", req.files);
 
         connection.query(sql, (err, result) => {
@@ -148,7 +150,7 @@ class toursControllers {
   };
 
   allTours = (req, res) => {
-    let sql = `SELECT * from tour`;
+    let sql = `SELECT * from tour WHERE tour_is_deleted = 0`;
     connection.query(sql, (err, resultTours) => {
       if (err) {
         res.status(400).json({ err });
@@ -197,19 +199,25 @@ class toursControllers {
     });
   };
 
-  oneTour = (req, res) => {
+  viewOneTour = (req, res) => {
     const { tour_id } = req.params;
-    let sql = `SELECT * 
-                from tour
-	              join section on tour.tour_id = section.tour_id
-                join section_resource on section.section_id = section_resource.section_id
-              where tour.tour_id = ${tour_id};`;
+    /*     let sql = `SELECT * 
+                FROM tour
+	              JOIN section on tour.tour_id = section.tour_id
+                JOIN section_resource on section.tour_id = section_resource.tour_id
+                    AND section.section_id = section_resource.section_id
+                WHERE tour.tour_id = ${tour_id}`; */
+    let sql = `SELECT *
+              FROM tour
+              JOIN section on tour.tour_id = section.tour_id
+              WHERE tour.tour_id = ${tour_id}`;
 
     connection.query(sql, (err, resultOneTour) => {
       if (err) {
         res.status(400).json({ err });
-        console.log(err);
+        /*         console.log(err); */
       } else {
+        console.log("-------------------", resultOneTour);
         res.status(200).json({ resultOneTour, tour_id });
       }
     });
