@@ -145,7 +145,7 @@ export const OneTour = () => {
                 <div className="d-flex">
                   <button className="OneTourButton">Adquirir</button>
                   <button
-                    onClick={() => navigate("/tours/edittour")}
+                    onClick={() => navigate(`/tours/edittour/${tour_id}`)}
                     className="CardOneTourBoton"
                   >
                     Editar
