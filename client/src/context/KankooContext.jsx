@@ -13,6 +13,7 @@ export const KankooProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [resetImg, setResetImg] = useState(false);
   const [adminUsers, setAdminUsers] = useState();
+  const [resetMyTours, setResetMyTours] = useState(false);
 
   useEffect(() => {
     const tokenLocalStorage = getLocalStorage("token");
@@ -64,7 +65,7 @@ export const KankooProvider = ({ children }) => {
           console.log(err);
         });
     }
-  }, []);
+  }, [resetMyTours]);
 
   return (
     <KankooContext.Provider
@@ -83,6 +84,8 @@ export const KankooProvider = ({ children }) => {
         setAdminUsers,
         setMyTours,
         myTours,
+        resetMyTours,
+        setResetMyTours,
       }}
     >
       {children}
