@@ -3,6 +3,10 @@
   @include BotonCoral;
   margin: 0.2rem;
 }
+.fatherButton {
+  @include BotonCoral;
+  margin: 1rem 0rem 1rem 1rem;
+}
 .createTourGeneral {
   padding: 3rem;
   > h2 {
@@ -11,4 +15,18 @@
 }
 .createTourSide {
   padding: 2rem 0rem 0rem 2rem;
+}
+.fatherSectionAdded {
+  border: 0.15rem solid #f07674;
+  border-radius: 1rem;
+  padding-top: 0.4rem;
+  margin: 1rem;
+  width: 15rem;
+  text-align: center;
+}
+.fatherCover {
+  margin: 1rem;
+  > img {
+    border-radius: 1rem;
+  }
 }

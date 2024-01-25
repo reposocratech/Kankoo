@@ -6,7 +6,7 @@ function uploadImage() {
       let path = "";
       if (file.fieldname == "audios") {
         path = "/resources/audios/";
-      } else if (file.fieldname == "images") {
+      } else if (file.fieldname == "images" || file.fieldname == "cover") {
         path = "/resources/images/";
       } else if (file.fieldname == "videos") {
         path = "/resources/videos/";
@@ -37,6 +37,7 @@ function uploadImage() {
     { name: "images" },
     { name: "audios" },
     { name: "videos" },
+    { name: "cover" },
   ]);
 
   return upload;

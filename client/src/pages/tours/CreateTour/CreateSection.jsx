@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useAsyncError } from "react-router-dom";
 import { useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
 
@@ -20,6 +20,7 @@ export const CreateSection = ({
   console.log("Tour prop:", tour);
 
   const [addSection, setAddSection] = useState(initialValueSection);
+  const [cover, setCover] = useState();
   const [images, setImages] = useState();
   const [audios, setAudios] = useState();
   const [videos, setVideos] = useState();
@@ -29,8 +30,6 @@ export const CreateSection = ({
     const { name, value } = e.target;
     setAddSection({ ...addSection, [name]: value });
   };
-
-  console.log(images);
   const handleImages = (e) => {
     setImages(e.target.files);
   };
@@ -42,13 +41,18 @@ export const CreateSection = ({
   const handleVideos = (e) => {
     setVideos(e.target.files);
   };
+  const handleFile = (e) => {
+    setCover(e.target.files[0]);
+    console.log(e.target.files);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
       !addSection.section_name ||
       !addSection.section_description ||
-      !addSection.travel_distance
+      !addSection.travel_distance ||
+      !cover
     ) {
       setMsgError("Rellena todos los campos");
     } else if (!/^\d{1,5}(\.\d{1,2})?$/.test(addSection.travel_distance)) {
@@ -56,7 +60,10 @@ export const CreateSection = ({
         "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
       );
     } else {
-      let temp = { ...addSection, tour_id: tour?.tour_id };
+      let temp = {
+        ...addSection,
+        tour_id: tour?.tour_id,
+      };
 
       const newFormData = new FormData();
       newFormData.append("addSection", JSON.stringify(temp));
@@ -78,7 +85,7 @@ export const CreateSection = ({
           newFormData.append("videos", elem);
         }
       }
-
+      newFormData.append("cover", cover);
       console.log(newFormData);
       axios
         .post(`http://localhost:3000/tours/addsection`, newFormData)
@@ -103,6 +110,10 @@ export const CreateSection = ({
         <h2>Crear puntos de guia</h2>
         <Col sm={2} md={2} lg={4}>
           <Form>
+            <Form.Group controlId="formFileLg" className="mb-3">
+              <Form.Label>Foto de portada</Form.Label>
+              <Form.Control type="file" onChange={handleFile} />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Nombre de punto </Form.Label>
               <Form.Control

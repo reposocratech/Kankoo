@@ -16,7 +16,7 @@ router.put(
   toursControllers.editTour
 );
 router.get("/alltours", toursControllers.allTours);
-router.get("/onetour/:tour_id", toursControllers.oneTour);
+router.get("/onetour/:tour_id", toursControllers.viewOneTour);
 router.post("/:tour_id/rating/:id", toursControllers.rateTour);
 
 // router.put(
