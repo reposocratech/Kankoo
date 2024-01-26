@@ -242,6 +242,87 @@ WHERE tour_id = ${tour_id}`;
       }
     });
   };
+  delSection = (req, res) => {
+    const { section_id } = req.params;
+    console.log("req params back section", req.params);
+    let sql = ``;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+        console.log(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
+  editSection = (req, res) => {
+    const { section_id } = req.params;
+    const { section_name, section_description, travel_distance, tour_id } =
+      JSON.parse(req.body.editSection);
+
+    const { filename } = req.files.cover[0];
+
+    let sql = `UPDATE section
+SET section_name = "${section_name}",
+    section_cover = "${filename}",
+    section_description ="${section_description}" ,
+    travel_distance = ${Number(travel_distance)}
+WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
+
+    let images = [];
+    if (req.files.images) {
+      images = req.files.images;
+    }
+    let audios = [];
+    if (req.files.audios) {
+      audios = req.files.audios;
+    }
+    let videos = [];
+    if (req.files.videos) {
+      videos = req.files.videos;
+    }
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json(err);
+      }
+
+      res.status(201).json({ section_id });
+
+      this.editSectionFiles(images, section_id, tour_id);
+      this.editSectionFiles(audios, section_id, tour_id);
+      this.editSectionFiles(videos, section_id, tour_id);
+    });
+  };
+
+  editSectionFiles = (files, section_id, tour_id) => {
+    files.forEach((elem) => {
+      let resource_type = elem.mimetype.split("/")[0];
+
+      if (resource_type == "image") {
+        resource_type = 1;
+      } else if (resource_type == "audio") {
+        resource_type = 2;
+      } else if (resource_type == "video") {
+        resource_type = 3;
+      }
+
+      let sql = `UPDATE section_resource
+SET resource_type = ${resource_type},
+    text = "${elem.filename}"
+WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
+
+      connection.query(sql, (err, result) => {
+        if (err) {
+          // res.status(500).json(err);
+          console.log(err);
+        }
+        console.log(result);
+      });
+    });
+  };
 }
 
 module.exports = new toursControllers();
