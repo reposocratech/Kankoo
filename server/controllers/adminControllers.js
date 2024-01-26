@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 class adminControllers {
   getAllUsers = (req, res) => {
-    let sql = "SELECT * FROM user where type = 2";
+    let sql = "SELECT * FROM user WHERE user_type = 2";
     connection.query(sql, (error, result) => {
       console.log(result);
       if (error) {
@@ -20,8 +20,8 @@ class adminControllers {
 
     let { id } = req.params;
     console.log(id);
-    let sql = `UPDATE user SET is_deleted = 1 WHERE user_id = "${id}"`;
-    let sql2 = "SELECT * from user where type=2";
+    let sql = `UPDATE user SET user_is_deleted = 1 WHERE user_id = "${id}"`;
+    let sql2 = "SELECT * from user where user_type=2";
 
     connection.query(sql, (error, result) => {
       if (error) throw error;
@@ -39,8 +39,8 @@ class adminControllers {
 
     let { id } = req.params;
     console.log(id);
-    let sql = `UPDATE user SET is_deleted = 0 WHERE user_id = "${id}"`;
-    let sql2 = "SELECT * from user where type = 2";
+    let sql = `UPDATE user SET user_is_deleted = 0 WHERE user_id = "${id}"`;
+    let sql2 = "SELECT * from user where user_type = 2";
 
     connection.query(sql, (error, result) => {
       if (error) throw error;

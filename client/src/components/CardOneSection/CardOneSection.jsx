@@ -5,14 +5,14 @@ import { KankooContext } from "../../context/KankooContext";
 
 export const CardOneSection = ({ elem }) => {
   const { setOneSection } = useContext(KankooContext);
-
   useEffect(() => {
     setOneSection(elem);
   }, [elem]);
 
+
   const navigate = useNavigate();
   return (
-    <div className="d-flex flex-column align-items-center">
+    <div className="CardOneSection d-flex flex-column align-items-center">
       <img
         onClick={() => navigate(`/tours/onesection/${elem?.section_id}`)}
         className="OneTourSectionImg"

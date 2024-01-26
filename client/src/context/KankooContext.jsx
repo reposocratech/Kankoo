@@ -19,18 +19,10 @@ export const KankooProvider = ({ children }) => {
   useEffect(() => {
     const tokenLocalStorage = getLocalStorage("token");
     setToken(tokenLocalStorage);
-    axios
-      .get(`http://localhost:3000/tours/alltours`)
-      .then((res) => {
-        setAllTours(res.data.resultTours);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
     if (tokenLocalStorage) {
       const { id, type } = jwtDecode(tokenLocalStorage).user;
-
+      console.log(jwtDecode(tokenLocalStorage));
       axios
         .get(`http://localhost:3000/users/userprofile/${id}`)
         .then((res) => {
@@ -40,11 +32,14 @@ export const KankooProvider = ({ children }) => {
         .catch((err) => {
           console.log(err);
         });
-
+      console.log(type);
       if (type === 1) {
         axios
           .get("http://localhost:3000/admin/getAllUsers")
-          .then((res) => setAdminUsers(res.data))
+          .then((res) => {
+            setAdminUsers(res.data);
+            console.log(res.data);
+          })
           .catch((err) => console.log(err));
       }
     }
@@ -53,6 +48,15 @@ export const KankooProvider = ({ children }) => {
   useEffect(() => {
     const tokenLocalStorage = getLocalStorage("token");
     setToken(tokenLocalStorage);
+
+    axios
+      .get(`http://localhost:3000/tours/alltours`)
+      .then((res) => {
+        setAllTours(res.data.resultTours);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     if (tokenLocalStorage) {
       const { id } = jwtDecode(tokenLocalStorage).user;
