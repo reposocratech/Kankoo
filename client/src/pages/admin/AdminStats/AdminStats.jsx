@@ -2,25 +2,35 @@ import React, { useContext, useEffect, useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
 import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const AdminStats = () => {
   const [totalUsers, setTotalUsers] = useState();
   const [totalUsersEnabled, setTotalUsersEnabled] = useState();
   const [totalUsersDisabled, setTotalUsersDisabled] = useState();
-  const { adminUsers, allTours } = useContext(KankooContext);
   const [totalTours, setTotalTours] = useState();
   const [totalToursEnabled, setTotalToursEnabled] = useState();
   const [totalToursDisabled, setTotalToursDisabled] = useState();
+  const { allTours, adminUsers } = useContext(KankooContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("AdminStats useEffect", adminUsers, allTours);
     setTotalUsers(adminUsers?.length);
-    setTotalUsersEnabled(adminUsers?.filter((e) => e.is_deleted === 0).length);
-    setTotalUsersDisabled(adminUsers?.filter((e) => e.is_deleted === 1).length);
+    setTotalUsersEnabled(
+      adminUsers?.filter((e) => e.user_is_deleted === 0).length
+    );
+    setTotalUsersDisabled(
+      adminUsers?.filter((e) => e.user_is_deleted === 1).length
+    );
     setTotalTours(allTours?.length);
-    setTotalToursEnabled(allTours?.filter((e) => e.is_deleted === 0).length);
-    setTotalToursDisabled(allTours?.filter((e) => e.is_deleted === 1).length);
+    setTotalToursEnabled(
+      allTours?.filter((e) => e.tour_is_deleted === 0).length
+    );
+    setTotalToursDisabled(
+      allTours?.filter((e) => e.tour_is_deleted === 1).length
+    );
   }, [adminUsers, allTours]);
 
   return (

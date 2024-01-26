@@ -154,6 +154,7 @@ class usersControllers {
         res.status(401).json("Email no registrado");
       } else {
         const user = result[0];
+        console.log(user);
         const hash = user.password;
         bcrypt.compare(password, hash, (error, response) => {
           if (error) return res.status(500).json(error);
@@ -162,7 +163,8 @@ class usersControllers {
               {
                 user: {
                   id: user.user_id,
-                  type: user.type,
+                  type: user.user_type,
+                  prueba: "hola",
                 },
               },
               process.env.SECRET,
@@ -184,6 +186,17 @@ class usersControllers {
     let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
 
     console.log("oleee");
+  };
+  favToursGallery = (req, res) => {
+    const { id } = req.params;
+    let sql = `SELECT * FROM user_likes_tour WHERE user_id = ${id} and liked = 1`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json({ err });
+      } else {
+        res.status(200).json({ result });
+      }
+    });
   };
 }
 
