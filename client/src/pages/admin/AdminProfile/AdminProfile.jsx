@@ -14,7 +14,7 @@ export const AdminProfile = () => {
         <Col className="perfilButton d-flex flex-column align-items-center">
           <div className="perfilCircle">
             <img
-              onClick={() => navigate("/admin/adminUsers)")}
+              onClick={() => navigate("/admin/adminUsers")}
               src="/icons/userIcon.png"
               alt="icono de usuario"
             />
@@ -25,7 +25,7 @@ export const AdminProfile = () => {
         <Col className="perfilButton d-flex flex-column align-items-center">
           <div className="perfilCircle">
             <img
-              onClick={() => navigate("/admin/adminTours)")}
+              onClick={() => navigate("/admin/adminTours")}
               src="/icons/iconUbi.png"
               alt="icono de ubicación"
             />
@@ -36,7 +36,7 @@ export const AdminProfile = () => {
         <Col className="perfilButton d-flex flex-column align-items-center">
           <div className="perfilCircle">
             <img
-              onClick={() => navigate("/admin/adminStats)")}
+              onClick={() => navigate("/admin/adminStats")}
               src="/icons/stats.png"
               alt="icono de grafico"
             />
