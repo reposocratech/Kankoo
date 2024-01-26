@@ -130,6 +130,7 @@ class usersControllers {
         res.status(401).json("Email no registrado");
       } else {
         const user = result[0];
+        console.log(user);
         const hash = user.password;
         bcrypt.compare(password, hash, (error, response) => {
           if (error) return res.status(500).json(error);
@@ -138,7 +139,8 @@ class usersControllers {
               {
                 user: {
                   id: user.user_id,
-                  type: user.type,
+                  type: user.user_type,
+                  prueba: "hola",
                 },
               },
               process.env.SECRET,
