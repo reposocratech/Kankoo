@@ -5,11 +5,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./OneTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 import { CardOneSection } from "../../../components/CardOneSection/CardOneSection";
-import { Starrating } from "../../../components/Starrating/Starrating";
+import { StarRating } from "../../../components/Starrating/StarRating.jsx";
 
 export const OneTour = () => {
   const [oneTour, setOneTour] = useState();
   const [liked, setLiked] = useState(false);
+  const [selectedStars, setSelectedStars] = useState(0);
   const { tour_id } = useParams();
   console.log("tour_id antes de llamar a delTour:", tour_id);
   const { user, myTours, setMyTours, resetMyTours, setResetMyTours } =
@@ -23,7 +24,26 @@ export const OneTour = () => {
     const likesData = JSON.parse(localStorage.getItem("likes")) || {};
     const initialLikedState = likesData[tour_id];
     setLiked(initialLikedState || false);
+    axios
+      .get(`http://localhost:3000/tours/onetour/${tour_id}`)
+      .then((res) => {
+        setOneTour(res.data.resultOneTour);
+      })
+      .catch((err) => {
+        console.log("Error en la solicitud Axios:", err);
+      });
   }, [tour_id]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/mytours/${user?.user_id}`)
+      .then((res) => {
+        setMyTours(res.data.resultMyTours);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [tour_id, user?.user_id]);
 
   const handleClickLike = () => {
     setLiked((prevLiked) => !prevLiked);
@@ -41,30 +61,6 @@ export const OneTour = () => {
         console.log(err);
       });
   };
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/tours/onetour/${tour_id}`)
-      .then((res) => {
-        setOneTour(res.data.resultOneTour);
-      })
-      .catch((err) => {
-        console.log("Error en la solicitud Axios:", err);
-      });
-  }, [tour_id]);
-  console.log("toooooooooooooooooooooour", oneTour);
-  console.log(user);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/users/mytours/${user?.user_id}`)
-      .then((res) => {
-        setMyTours(res.data.resultMyTours);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [tour_id, user?.user_id]);
 
   const delTour = (tour_id) => {
     console.log("tour_id", tour_id);
@@ -154,25 +150,7 @@ export const OneTour = () => {
                   <p>{oneTour[0]?.tour_description}</p>
 
                   {/* -----------------------RATING */}
-                  {/* <div className="ec-stars-wrapper">
-                    <a href="#" data-value="1" title="Votar con 1 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="2" title="Votar con 2 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="3" title="Votar con 3 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="4" title="Votar con 4 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="5" title="Votar con 5 estrellas">
-                      &#9733;
-                    </a>
-                  </div> */}
-
-                  <Starrating />
+                  <StarRating tour_id={tour_id} id={id} />
                 </div>
                 <div className="d-flex">
                   <button className="OneTourButton">Adquirir</button>

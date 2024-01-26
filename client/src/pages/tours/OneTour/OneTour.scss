@@ -40,6 +40,12 @@
     margin: 1rem;
   }
 }
+.starSelected {
+  color: #f07674;
+}
+.starNotSelected {
+  color: #888;
+}
 /* ---------------------RATING -------------------- */
 .ec-stars-wrapper {
   /* Espacio entre los inline-block (los hijos, los `a`) 
