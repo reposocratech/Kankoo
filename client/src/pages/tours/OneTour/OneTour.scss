@@ -1,10 +1,11 @@
 @import "./../../../styles/mixins.scss";
 .OneTourButton {
   @include BotonCoral;
-  margin-top: 1rem;
+  margin: 1rem;
 }
 .OneTourInfo {
-  padding-left: 8rem;
+  padding-left: 10rem;
+  padding-right: 20rem;
 }
 .OneTourImg {
   width: 25rem;
@@ -20,7 +21,7 @@
 .OneTourLike {
   > img {
     width: 3rem;
-    margin-left: 8rem;
+    margin-left: 4rem;
   }
   > img:hover {
     width: 3.2rem;
@@ -32,6 +33,12 @@
 }
 .OneTourLocation:hover {
   width: 2rem;
+}
+.OneTourUserInfo {
+  margin: 1rem;
+  > h5 {
+    margin: 1rem;
+  }
 }
 /* ---------------------RATING -------------------- */
 .ec-stars-wrapper {

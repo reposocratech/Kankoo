@@ -125,9 +125,9 @@ export const OneTour = () => {
                 {/* ---------------------PRECIO */}
                 {showPrice && <h4>{oneTour[0]?.price}</h4>}
                 {/* -----------------------INFO USUARIO, LIKE */}
-                <div className="OneTourUserInfo d-flex">
+                <div className="d-flex">
                   {/* -------INFO USER */}
-                  <div className="d-flex">
+                  <div className="OneTourUserInfo d-flex align-items-center">
                     <img
                       onClick={() => navigate("/users/oneuser")}
                       className="OneTourProfilePicture"
@@ -171,16 +171,20 @@ export const OneTour = () => {
                       &#9733;
                     </a>
                   </div> */}
+
                   <Starrating />
                 </div>
                 <div className="d-flex">
                   <button className="OneTourButton">Adquirir</button>
-                  <button
-                    onClick={() => navigate(`/tours/edittour/${tour_id}`)}
-                    className="CardOneTourBoton"
-                  >
-                    Editar
-                  </button>
+                  {oneTour[0]?.user_id === user?.user_id && (
+                    <button
+                      onClick={() => navigate(`/tours/edittour/${tour_id}`)}
+                      className="OneTourButton"
+                    >
+                      Editar
+                    </button>
+                  )}
+
                   <button
                     className="OneTourButton"
                     type="button"

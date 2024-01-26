@@ -1,9 +1,11 @@
 import React from "react";
 import "./CardOneSection.scss";
+import { useNavigate } from "react-router-dom";
 
 export const CardOneSection = ({ elem }) => {
+  const navigate = useNavigate();
   return (
-    <div className="d-flex flex-column align-items-center">
+    <div className="CardOneSection d-flex flex-column align-items-center">
       <img
         onClick={() => navigate(`/tours/onesection/${elem?.section_id}`)}
         className="OneTourSectionImg"

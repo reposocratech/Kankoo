@@ -27,6 +27,7 @@ export const FatherCreateTour = () => {
       {showSections && (
         <>
           <div className="fatherCover">
+            <h3>Guía turística de </h3>
             <h2> {tour?.tour_name} </h2>
 
             {tour?.cover && (
@@ -40,8 +41,11 @@ export const FatherCreateTour = () => {
           <div className=" d-flex flex-column">
             {sections.map((elem) => {
               return (
-                <div className="fatherSectionAdded">
-                  <p>{elem.section_name}</p>
+                <div className="fatherSectionTitle">
+                  <h4>Secciones añadidas</h4>
+                  <div className="fatherSectionAdded">
+                    <p>{elem.section_name}</p>
+                  </div>
                 </div>
               );
             })}
