@@ -15,6 +15,5 @@ router.get("/boughttours", usersControllers.boughtTours);
 router.get("/terms", usersControllers.terms);
 router.get("/privacy", usersControllers.privacy);
 router.put("/edituser", multerSingle("users"), usersControllers.editUser);
-router.post("/:id/ratetour/:tour_id", usersControllers.rateTour);
 
 module.exports = router;

@@ -224,8 +224,43 @@ class toursControllers {
   };
   rateTour = (req, res) => {
     const { tour_id, id } = req.params;
-    let sql = `UPDATE user_rates_tour set rating=${rating} WHERE tour_id=${tour_id} and user_id = ${user_id}`;
-    console.log("rating");
+    const { prevSelectedStars } = req.body;
+    console.log("ESTE ES EL REQ BODY, LAS ESTRELLICAS", prevSelectedStars);
+
+    let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+
+    connection.query(checkSql, (checkErr, checkResult) => {
+      if (checkErr) {
+        res.status(500).json({ error: checkErr });
+      } else {
+        if (checkResult.length > 0) {
+          let updateSql = `UPDATE user_rates_tour SET rating = ${prevSelectedStars} WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+          connection.query(updateSql, (updateErr, updateResult) => {
+            if (updateErr) {
+              res.status(500).json({ error: updateErr });
+              console.log(updateErr);
+            } else {
+              res.status(200).json({ resultRated: updateResult });
+              console.log("Rating actualizado:", updateResult);
+            }
+          });
+        } else {
+          let insertSql = `INSERT INTO user_rates_tour (tour_id, user_id, rating) VALUES (${tour_id}, ${id}, ${prevSelectedStars});`;
+
+          connection.query(insertSql, (insertErr, insertResult) => {
+            if (insertErr) {
+              res.status(500).json({ error: insertErr });
+              console.log(insertErr);
+            } else {
+              res
+                .status(200)
+                .json({ resultRated: insertResult, prevSelectedStars });
+              console.log("Nuevo rating insertado:", insertResult);
+            }
+          });
+        }
+      }
+    });
   };
 
   delTour = (req, res) => {

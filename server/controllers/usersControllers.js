@@ -189,7 +189,11 @@ class usersControllers {
   };
   favToursGallery = (req, res) => {
     const { id } = req.params;
-    let sql = `SELECT * FROM user_likes_tour WHERE user_id = ${id} and liked = 1`;
+    let sql = `SELECT tour.tour_id, tour.tour_name, tour.tour_city, tour.cover, user_likes_tour.user_id
+              FROM tour
+                JOIN user_likes_tour ON tour.tour_id = user_likes_tour.tour_id
+              WHERE user_likes_tour.liked = true
+              AND user_likes_tour.user_id = ${id};`;
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(500).json({ err });
