@@ -185,6 +185,17 @@ class usersControllers {
 
     console.log("oleee");
   };
+  favToursGallery = (req, res) => {
+    const { id } = req.params;
+    let sql = `SELECT * FROM user_likes_tour WHERE user_id = ${id} and liked = 1`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json({ err });
+      } else {
+        res.status(200).json({ result });
+      }
+    });
+  };
 }
 
 module.exports = new usersControllers();
