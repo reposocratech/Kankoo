@@ -9,7 +9,6 @@ export const CardOneSection = ({ elem }) => {
     setOneSection(elem);
   }, [elem]);
 
-
   const navigate = useNavigate();
   return (
     <div className="CardOneSection d-flex flex-column align-items-center">
