@@ -1,3 +1,9 @@
+@import "./../../styles/mixins.scss";
+
 .OneTourSectionImg {
   border-radius: 1rem;
+}
+
+.CardOneSectionButton {
+  @include BotonCoral;
 }
