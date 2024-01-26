@@ -15,19 +15,21 @@ export const Starrating = ({ totalStars = 5 }) => {
       });
   };
   return (
-    <>
-      {createArray(totalStars).map((n, i) => (
-        <Star
-          key={i}
-          selected={selectedStars > i}
-          onSelect={() => {
-            setSelectStars(i + 1);
-          }}
-        />
-      ))}
+    <div className="d-flex flex-column align-items-center">
+      <div className="d-flex align-items-center m-1">
+        {createArray(totalStars).map((n, i) => (
+          <Star
+            key={i}
+            selected={selectedStars > i}
+            onSelect={() => {
+              setSelectStars(i + 1);
+            }}
+          />
+        ))}
+      </div>
       <p>
         {selectedStars} de {totalStars} estrellas
       </p>
-    </>
+    </div>
   );
 };
