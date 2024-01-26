@@ -9,6 +9,7 @@ export const KankooProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [allTours, setAllTours] = useState();
   const [myTours, setMyTours] = useState();
+  const [oneSection, setOneSection] = useState();
   const [token, setToken] = useState();
   const [isLogged, setIsLogged] = useState(false);
   const [resetImg, setResetImg] = useState(false);
@@ -90,6 +91,8 @@ export const KankooProvider = ({ children }) => {
         myTours,
         resetMyTours,
         setResetMyTours,
+        oneSection,
+        setOneSection,
       }}
     >
       {children}
