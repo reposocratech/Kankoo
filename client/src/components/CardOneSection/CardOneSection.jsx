@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./CardOneSection.scss";
+import { useNavigate, Link, useParams } from "react-router-dom";
+import { KankooContext } from "../../context/KankooContext";
 
 export const CardOneSection = ({ elem }) => {
+  const { setOneSection } = useContext(KankooContext);
+
+  useEffect(() => {
+    setOneSection(elem);
+  }, [elem]);
+
+  const navigate = useNavigate();
   return (
     <div className="d-flex flex-column align-items-center">
       <img
@@ -11,6 +20,16 @@ export const CardOneSection = ({ elem }) => {
         alt="portada de seccion"
       />
       <h5>{elem.section_name}</h5>
+      <button type="button" className="CardOneSectionButton">
+        X
+      </button>
+      <button
+        type="button"
+        className="CardOneSectionButton"
+        onClick={() => navigate(`/tours/editsection/${elem?.section_id}`)}
+      >
+        Editar
+      </button>
     </div>
   );
 };
