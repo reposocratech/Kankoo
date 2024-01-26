@@ -49,7 +49,10 @@ export const ToursGallery = () => {
           </button>
         </Form>
       </Row>
-      <Row className="d-flex justify-content-around align-items-center" md={4}>
+      <Row
+        className="d-flex justify-content-around align-items-center flex-wrap p-3"
+        md={4}
+      >
         {showAllTours && (
           <>
             {allTours?.map((elem) => {
