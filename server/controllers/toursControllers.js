@@ -358,6 +358,35 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
       });
     });
   };
+  avgRating = (req, res) => {
+    const { tour_id } = req.params;
+    let sql = `SELECT AVG(rating) AS averageRating
+      FROM user_rates_tour
+      WHERE tour_id = ${tour_id};`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        // res.status(500).json(err);
+        console.log(err);
+      }
+      res.json({ averageRating: result[0].averageRating || null });
+    });
+  };
+  totalDistance = (req, res) => {
+    const { tour_id } = req.params;
+    console.log("ESOT ES EL TOUR ID", tour_id);
+    let sql = `SELECT SUM(section.travel_distance) as total_distance
+                  FROM section
+                  WHERE section.tour_id = ${tour_id}
+                  GROUP BY section.tour_id;`;
+    connection.query(sql, (err, resDistance) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({ resDistance });
+        console.log("esto es el total de distancia", resDistance);
+      }
+    });
+  };
 }
 
 module.exports = new toursControllers();
