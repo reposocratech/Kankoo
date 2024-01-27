@@ -52,75 +52,87 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Row className="d-flex align-items-center justify-content-center p-5">
-      <Col md={4} className="text-center">
+    <Row className="d-flex">
+      <Col
+        md={6}
+        className="d-flex align-items-center justify-content-center text-center"
+      >
         <img className="regLogo" src="/logofondoblanco.png" alt="Logo" />
       </Col>
-      <Col md={4}>
-        <Form>
-          <Form.Group className="mb-3" controlId="formGroupName">
-            <Form.Label className="fs-5">Nombre </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nombre"
-              value={registerForm.first_name}
-              onChange={handleChange}
-              name="first_name"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formGroupLastName">
-            <Form.Label>Apellidos </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Apellido"
-              value={registerForm.last_name}
-              onChange={handleChange}
-              name="last_name"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formGroupEmail">
-            <Form.Label>Email </Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              value={registerForm.email}
-              onChange={handleChange}
-              name="email"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formGroupPassword">
-            <Form.Label>Contraseña </Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              value={registerForm.password}
-              onChange={handleChange}
-              name="password"
-            />
-          </Form.Group>
-          {msgError && <p className="fs-6 text-danger"> {msgError} </p>}
-          <Button onClick={handleSubmit} className="registerButton">
-            Regístrate
-          </Button>
-          <Button className="registerButton" onClick={() => navigate("/")}>
-            Cancelar
-          </Button>
-          <div className="Termsandprivacytext">
-            Al registrarse, aceptará los
-            <p>
-              <Link to={"/users/terms"} className="fs-6">
-                términos y condiciones
-              </Link>
-              y la .
-              <Link to={"/users/privacy"} className="fs-6">
-                política de privacidad
+      <Col lg={6} md={12} sm={12} xs={12}>
+        <div className="divRegister">
+          <Form>
+            <h1 className="h1Login">Regístrate </h1>
+            <h2 className="h2Login mb-4">¡Comienza tu aventura!</h2>
+            <Form.Group className="mb-3" controlId="formGroupName">
+              <Form.Label className="fs-5">Nombre </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Nombre"
+                value={registerForm.first_name}
+                onChange={handleChange}
+                name="first_name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupLastName">
+              <Form.Label>Apellidos </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Apellido"
+                value={registerForm.last_name}
+                onChange={handleChange}
+                name="last_name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupEmail">
+              <Form.Label>Email </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={registerForm.email}
+                onChange={handleChange}
+                name="email"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupPassword">
+              <Form.Label>Contraseña </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                value={registerForm.password}
+                onChange={handleChange}
+                name="password"
+              />
+            </Form.Group>
+            {msgError && <p className="fs-6 text-danger"> {msgError} </p>}
+            <div className="botonsLogin">
+              <button onClick={handleSubmit} className="registerButton me-2">
+                Regístrate
+              </button>
+              <button className="registerButton" onClick={() => navigate("/")}>
+                Cancelar
+              </button>
+            </div>
+            <p className="pLink">
+              ¿Ya está registrado/a? Inicia sesión{" "}
+              <Link to={"/users/login"} className="linkRegister">
+                aquí
               </Link>
             </p>
-          </div>
-          <p>
-            ¿Ya está registrado? <span>Inicie sesión aquí</span>
-          </p>
-        </Form>
+            <div className="Termsandprivacytext">
+              <p className="pLink">
+                Al registrarte, aceptas nuestros{" "}
+                <Link to={"/users/terms"} className="linkRegister">
+                  términos y condiciones
+                </Link>{" "}
+                y nuestra{" "}
+                <Link to={"/users/privacy"} className="linkRegister">
+                  política de privacidad
+                </Link>
+              </p>
+            </div>
+          </Form>
+        </div>
       </Col>
     </Row>
   );
