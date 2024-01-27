@@ -46,12 +46,12 @@ export const AppRoutes = () => {
             <Route path="/users/edituser" element={<EditUser />} />
             <Route path="/tours/newtour" element={<FatherCreateTour />} />
             <Route
-              path="/tours/onesection/:section_id"
+              path="/tours/onesection/:tour_id/:section_id"
               element={<OneSection />}
             />
             <Route path="/tours/edittour/:tour_id" element={<EditTour />} />
             <Route
-              path="/tours/editsection/:section_id"
+              path="/tours/editsection/:tour_id/:section_id"
               element={<EditSection />}
             />
           </>
