@@ -1,0 +1,61 @@
+@import "./../../../styles/mixins.scss";
+.registerButton {
+  @include BotonCoral;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+
+.formlogin {
+  width: 26, 5rem;
+
+  Button {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.botonsLogin {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.divForm {
+  width: 35rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px -5px rgba(28, 28, 28, 0.271);
+  padding: 4rem;
+  margin-top: 4rem;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.h1Login {
+  font-size: 3rem;
+  font-family: "PT Sans", sans-serif;
+  font-weight: bold;
+  color: rgba(128, 128, 128, 0.331);
+}
+
+.h2Login {
+  font-size: 2, 5rem;
+  font-family: "PT Sans", sans-serif;
+  font-weight: bold;
+  color: rgba(128, 128, 128, 0.331);
+}
+
+.linkLogin {
+  color: #f07674;
+}
+
+.pLogin {
+  color: #857e7e;
+}
