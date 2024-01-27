@@ -1,21 +1,75 @@
 @import "./../../../styles/mixins.scss";
+
 .registerButton {
   @include BotonCoral;
 }
 
+Form {
+  Button {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Ajusta el margen inferior según tus necesidades
+// Ajusta el margen inferior según tus necesidades
+
+.divRegister {
+  width: 40rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px -5px rgba(28, 28, 28, 0.271);
+  padding: 4rem;
+  margin-top: 4rem;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  @media (max-width: 991px) {
+    width: 100%;
+    padding: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1366px) {
+    width: 100%;
+    margin-right: 1rem;
+  }
+}
+
 .regLogo {
-  width: 20rem;
-  height: 5rem;
+  width: 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  @media (max-width: 991px) {
+    display: none;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1366px) {
+    width: 20rem;
+  }
 }
 
-.Termsandprivacytext {
-  p {
-    margin-bottom: 10px; // Ajusta el margen inferior según tus necesidades
-    a {
-      margin-right: 10px; // Ajusta el margen derecho entre los enlaces según tus necesidades
-    }
-  }
+.linkRegister {
+  color: #f07674;
+}
+
+.pLink {
+  color: #857e7e;
 }
