@@ -2,7 +2,7 @@ const multer = require("multer");
 function uploadImage() {
   const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-      console.log(file);
+      /*    console.log(file); */
       let path = "";
       if (file.fieldname == "audios") {
         path = "/resources/audios/";
