@@ -9,11 +9,15 @@ export const CardOneSection = ({ elem }) => {
     setOneSection(elem);
   }, [elem]);
 
+  console.log("aqui", elem);
+
   const navigate = useNavigate();
   return (
     <div className="CardOneSection d-flex flex-column align-items-center">
       <img
-        onClick={() => navigate(`/tours/onesection/${elem?.section_id}`)}
+        onClick={() =>
+          navigate(`/tours/onesection/${elem?.tour_id}/${elem?.section_id}`)
+        }
         className="OneTourSectionImg"
         src={`http://localhost:3000/resources/images/${elem?.section_cover}`}
         alt="portada de seccion"
@@ -25,7 +29,9 @@ export const CardOneSection = ({ elem }) => {
       <button
         type="button"
         className="CardOneSectionButton"
-        onClick={() => navigate(`/tours/editsection/${elem?.section_id}`)}
+        onClick={() =>
+          navigate(`/tours/editsection/${elem?.tour_id}/${elem?.section_id}`)
+        }
       >
         Editar
       </button>
