@@ -25,16 +25,16 @@ router.put(
   multerPrueba(),
   toursControllers.editSection
 );
+router.get("/avgrating/:tour_id", toursControllers.avgRating);
+router.get("/distance/:tour_id", toursControllers.totalDistance);
 router.get(
   "/onesectionresource/:tour_id/:section_id",
   toursControllers.viewOneSectionsResources
 );
-
 router.get(
   "/getonesection/:section_id/:tour_id",
   toursControllers.getOneSection
 );
-
 // router.put(
 //   "/addPics/:section_id",
 //   multerMulti("imgsection"),
