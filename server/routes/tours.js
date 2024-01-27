@@ -25,6 +25,15 @@ router.put(
   multerPrueba(),
   toursControllers.editSection
 );
+router.get(
+  "/onesectionresource/:tour_id/:section_id",
+  toursControllers.viewOneSectionsResources
+);
+
+router.get(
+  "/getonesection/:section_id/:tour_id",
+  toursControllers.getOneSection
+);
 
 // router.put(
 //   "/addPics/:section_id",

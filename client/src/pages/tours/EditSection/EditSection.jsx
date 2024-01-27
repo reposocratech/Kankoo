@@ -1,23 +1,61 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EditSection.scss";
 import { KankooContext } from "../../../context/KankooContext";
-const initialEditValueSection = {
-  section_name: "",
-  section_description: "",
-  travel_distance: "",
-};
 
 export const EditSection = () => {
-  const { section_id } = useParams();
+  const [editSection, setEditSection] = useState();
 
-  const { oneSection, setOneSection } = useContext(KankooContext);
+  const [resourceExist, setResourceExist] = useState({
+    images: false,
+    image_id: null,
+    audio_id: null,
+    video_id: null,
+    audios: false,
+    videos: false,
+  });
 
-  console.log(oneSection);
+  const { section_id, tour_id } = useParams();
 
-  const [editSection, setEditSection] = useState(initialEditValueSection);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/tours/getonesection/${section_id}/${tour_id}`)
+      .then((res) => setEditSection(res.data[0]))
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:3000/tours/onesectionresource/${tour_id}/${section_id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        let temp = { ...resourceExist };
+        res.data.forEach((e) => {
+          if (e.resource_type === 1) {
+            temp.images = true;
+            temp.audio_id = e.resource_id;
+          }
+
+          if (e.resource_type === 2) {
+            temp.audios = true;
+            temp.image_id = e.resource_id;
+          }
+          if (e.resource_type === 3) {
+            temp.videos = true;
+            temp.video_id = e.resource_id;
+          }
+          setResourceExist(temp);
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  console.log(resourceExist);
+
   const [msgError, setMsgError] = useState("");
   const [editCover, setEditCover] = useState();
   const [editImages, setEditImages] = useState();
@@ -28,37 +66,32 @@ export const EditSection = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setOneSection({ ...oneSection, [name]: value });
-    console.log(e.target.value);
+    setEditSection({ ...editSection, [name]: value });
   };
 
-  const handleImages = (e) => {
-    setEditImages(e.target.files);
-  };
-
-  const handleAudios = (e) => {
-    setEditAudios(e.target.files);
-  };
-
-  const handleVideos = (e) => {
-    setEditVideos(e.target.files);
-  };
-
-  const handleFile = (e) => {
-    setEditCover(e.target.files[0]);
+  const handleResource = (e) => {
     console.log(e.target.files);
+
+    if (e.target.name === "cover") setEditCover(e.target.files[0]);
+    if (e.target.name === "image") setEditImages(e.target.files);
+    if (e.target.name === "audio") setEditAudios(e.target.files);
+    if (e.target.name === "video") setEditVideos(e.target.files);
   };
+
+  console.log(editCover);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!/^\d{1,5}(\.\d{1,2})?$/.test(oneSection.travel_distance)) {
+    if (!/^\d{1,5}(\.\d{1,2})?$/.test(editSection?.travel_distance)) {
       setMsgError(
         "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
       );
     } else {
       const newFormData = new FormData();
-      newFormData.append("editSection", JSON.stringify(oneSection));
+      newFormData.append("editSection", JSON.stringify(editSection));
+      newFormData.append("resourceExist", JSON.stringify(resourceExist));
+      newFormData.append("cover", editCover);
 
       if (editImages) {
         for (const elem of editImages) {
@@ -77,8 +110,6 @@ export const EditSection = () => {
           newFormData.append("videos", elem);
         }
       }
-      newFormData.append("cover", editCover);
-      console.log(newFormData);
 
       axios
         .put(
@@ -86,13 +117,8 @@ export const EditSection = () => {
           newFormData
         )
         .then((res) => {
-          /*  let temp = [
-            ...sections,
-            { ...oneSection, section_id: res.data.section_id },
-          ];
-          setSections(editSections); */
           console.log(res.data);
-          navigate(`/tours/onetour/${oneSection.tour_id}`);
+          navigate(`/tours/onetour/${editSection.tour_id}`);
         })
         .catch((err) => {
           console.log(err);
@@ -108,7 +134,11 @@ export const EditSection = () => {
           <Form>
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Foto de portada</Form.Label>
-              <Form.Control type="file" onChange={handleFile} />
+              <Form.Control
+                type="file"
+                onChange={handleResource}
+                name="cover"
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Nombre de punto </Form.Label>
@@ -117,7 +147,7 @@ export const EditSection = () => {
                 placeholder="Nombre del punto"
                 name="section_name"
                 onChange={handleChange}
-                value={oneSection?.section_name}
+                value={editSection?.section_name}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -127,7 +157,7 @@ export const EditSection = () => {
                 placeholder="Descripción del punto"
                 name="section_description"
                 onChange={handleChange}
-                value={oneSection?.section_description}
+                value={editSection?.section_description}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -137,7 +167,7 @@ export const EditSection = () => {
                 placeholder="Ej. 2.5"
                 name="travel_distance"
                 onChange={handleChange}
-                value={oneSection?.travel_distance}
+                value={editSection?.travel_distance}
               />
             </Form.Group>
 
@@ -145,7 +175,7 @@ export const EditSection = () => {
               <Form.Label>Imagenes</Form.Label>
               <Form.Control
                 type="file"
-                onChange={handleImages}
+                onChange={handleResource}
                 required
                 multiple
                 accept="image/*"
@@ -157,7 +187,7 @@ export const EditSection = () => {
               <Form.Label>Audios</Form.Label>
               <Form.Control
                 type="file"
-                onChange={handleAudios}
+                onChange={handleResource}
                 multiple
                 accept="audio/*"
                 name="audio"
@@ -168,7 +198,7 @@ export const EditSection = () => {
               <Form.Label>Videos</Form.Label>
               <Form.Control
                 type="file"
-                onChange={handleVideos}
+                onChange={handleResource}
                 multiple
                 accept="video/*"
                 name="video"
