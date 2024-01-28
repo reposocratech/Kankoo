@@ -1,0 +1,68 @@
+.table-container {
+  text-align: center;
+  margin-top: 20px;
+
+  .table-title {
+    color: gray;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .table-wrapper {
+    .table {
+      th {
+        background-color: #f07674; // Color rosado
+        color: white;
+        font-size: 18px;
+
+        &:first-child {
+          border-top-left-radius: 8px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 8px;
+        }
+      }
+    }
+
+    tbody {
+      td {
+        position: relative;
+
+        .status-circle {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 10px;
+
+          &.active {
+            background-color: #28a745; // Color verde
+          }
+
+          &.inactive {
+            background-color: #dc3545; // Color rojo
+          }
+        }
+      }
+    }
+
+    .btn-activate,
+    .btn-deactivate,
+    .btn-profile {
+      background-color: #f07674; // Color rosado
+      color: white;
+      border: none;
+
+      &:hover {
+        background-color: #d9534f; // Cambiar el color al hacer hover
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
