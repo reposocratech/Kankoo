@@ -1,9 +1,12 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const AdminTable = ({ adminUsers, setAdminUsers }) => {
   console.log(adminUsers);
+
+  const navigate = useNavigate;
 
   const handleClick = (id, isDel) => {
     console.log(id);
@@ -26,7 +29,6 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Avatar</th>
             <th>Id</th>
             <th>Nombre</th>
             <th>Apellidos</th>
@@ -39,7 +41,6 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
         <tbody>
           {adminUsers?.map((elem) => (
             <tr>
-              <td>{elem.avatar}</td>
               <td>{elem.user_id}</td>
               <td>{elem.first_name}</td>
               <td>{elem.last_name}</td>
@@ -53,6 +54,9 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
                 >
                   {elem.user_is_deleted ? "activar" : "bloquear"}
                 </Button>
+              </td>
+              <td>
+                <Button>Ver perfil</Button>
               </td>
             </tr>
           ))}

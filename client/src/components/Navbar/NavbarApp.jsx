@@ -19,8 +19,7 @@ function NavBarApp() {
   };
 
   const handleAvatarClick = () => {
-
-  console.log(user?.user_type);
+    console.log(user?.user_type);
 
     if (user?.user_type === 1) {
       navigate("/admin/adminProfile");
@@ -33,9 +32,7 @@ function NavBarApp() {
     if (user) {
       return (
         <>
-
           <Nav.Link className="navCsesion ml-auto">
-
             <button className="navBoton" onClick={handleLogout}>
               Cerrar sesión
             </button>

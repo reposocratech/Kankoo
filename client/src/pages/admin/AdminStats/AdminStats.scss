@@ -1,0 +1,38 @@
+@import "./../../../styles/mixins.scss";
+
+.registerButton {
+  @include BotonCoral;
+  &:hover {
+    background-color: grey;
+  }
+}
+.admin-stats-container {
+  margin-top: 20px;
+}
+
+.admin-stats-title {
+  text-align: center;
+  color: gray;
+}
+
+.admin-stats-table {
+  width: 80%;
+  margin: 20px auto;
+  background-color: #f8f9fa;
+
+  th {
+    background-color: #f07674;
+    color: white;
+  }
+
+  td,
+  th {
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .admin-stats-table {
+      width: 100%; // Ajusta el ancho al 100% en dispositivos más pequeños
+    }
+  }
+}

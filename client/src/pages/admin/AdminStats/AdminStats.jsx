@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, Table, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import "./AdminStats.scss";
 
 export const AdminStats = () => {
   const [totalUsers, setTotalUsers] = useState();
@@ -35,57 +35,54 @@ export const AdminStats = () => {
 
   return (
     <>
-      <Row>
-        <Col>
-          <h2>Estadísticas:</h2>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <div>
-            <h3>Usuarios Totales</h3>
-            {totalUsers}
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <h3>Usuarios Activados</h3>
-            {totalUsersEnabled}
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <h3>Usuarios Desactivados</h3>
-            {totalUsersDisabled}
-            <Button onClick={() => navigate("/admin/adminUsers")}>
-              Ver Listado de Usuarios
-            </Button>
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <div>
-            <h3>Guías Totales</h3>
-            {totalTours}
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <h3>Guías activas</h3>
-            {totalToursEnabled}
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <h3>Guías a la espera de aprobación</h3>
-            {totalToursDisabled}
-            <Button onClick={() => navigate("/admin/adminTours")}>
-              Ver Listado de Guías
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <Container className="admin-stats-container">
+        <Row>
+          <Col>
+            <h2 className="admin-stats-title">Estadísticas:</h2>
+          </Col>
+        </Row>
+        <Table striped bordered hover responsive className="admin-stats-table">
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Total</th>
+              <th>Activos</th>
+              <th>Desactivados</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Usuarios</td>
+              <td>{totalUsers}</td>
+              <td>{totalUsersEnabled}</td>
+              <td>{totalUsersDisabled}</td>
+              <td>
+                <Button
+                  onClick={() => navigate("/admin/adminUsers")}
+                  className="registerButton"
+                >
+                  Ver Listado
+                </Button>
+              </td>
+            </tr>
+            <tr>
+              <td>Guías</td>
+              <td>{totalTours}</td>
+              <td>{totalToursEnabled}</td>
+              <td>{totalToursDisabled}</td>
+              <td>
+                <Button
+                  onClick={() => navigate("/admin/adminTours")}
+                  className="registerButton"
+                >
+                  Ver Listado
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
     </>
   );
 };

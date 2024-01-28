@@ -150,7 +150,7 @@ class toursControllers {
   };
 
   allTours = (req, res) => {
-    let sql = `SELECT * from tour WHERE tour_is_deleted = 0`;
+    let sql = `SELECT * from tour WHERE tour_is_deleted = 1`;
     connection.query(sql, (err, resultTours) => {
       if (err) {
         res.status(400).json({ err });
@@ -164,38 +164,36 @@ class toursControllers {
   };
 
   disableTour = (req, res) => {
-    console.log(req.params);
-
     const { tour_id } = req.params;
     console.log(tour_id);
-    let sql = `UPDATE tour SET is_deleted = true WHERE tour_id = "${id}"`;
-    let sql2 = "SELECT * from tour where tour_is_disabled = false";
+    let sql = `UPDATE tour SET tour_is_disabled = 1 WHERE tour_id = "${tour_id}"`;
+    let sql2 = "SELECT * from tour where tour_is_disabled = 0";
 
     connection.query(sql, (error, result) => {
       if (error) throw error;
       console.log(error);
     });
-    connection.query(sql2, (error, resultUsers) => {
+    connection.query(sql2, (error, resultTours) => {
       error
         ? res.status(400).json({ error })
-        : res.status(200).json(resultUsers);
+        : res.status(200).json(resultTours);
     });
   };
 
   enableTour = (req, res) => {
     const { tour_id } = req.params;
     console.log(tour_id);
-    let sql = `UPDATE tour SET is_deleted = false WHERE tour_id = "${id}"`;
-    let sql2 = "SELECT * from tour where tour_is_disabled = true";
+    let sql = `UPDATE tour SET tour_is_disabled = 0 WHERE tour_id = "${tour_id}"`;
+    let sql2 = "SELECT * from tour where tour_is_disabled = 1";
 
     connection.query(sql, (error, result) => {
       if (error) throw error;
       console.log(error);
     });
-    connection.query(sql2, (error, resultUsers) => {
+    connection.query(sql2, (error, resultTours) => {
       error
         ? res.status(400).json({ error })
-        : res.status(200).json(resultUsers);
+        : res.status(200).json(resultTours);
     });
   };
 
