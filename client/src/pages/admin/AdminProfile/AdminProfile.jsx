@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "../../users/UserProfile/UserProfile.scss";
+import "./AdminProfile.scss";
 import { KankooContext } from "../../../context/KankooContext";
 
 export const AdminProfile = () => {

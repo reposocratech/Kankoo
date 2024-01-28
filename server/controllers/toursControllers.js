@@ -420,6 +420,10 @@ WHERE tour_id = ${tour_id}`;
       } else {
         res.status(200).json({ resDistance });
         console.log("esto es el total de distancia", resDistance);
+      }
+    });
+  };
+
   viewOneSectionsResources = (req, res) => {
     const { section_id, tour_id } = req.params;
 
