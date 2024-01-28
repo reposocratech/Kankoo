@@ -42,13 +42,6 @@ export const LoginForm = () => {
   return (
     <Row className="d-flex justify-content-center">
       <Col md={6}>
-        <p>
-          Entra y viaja sin ataduras con nuestras guías turísticas digitales.
-          Vídeos y audios en tu smartphone para descubrir destinos a tu propio
-          ritmo
-        </p>
-      </Col>
-      <Col md={6}>
         <Form>
           <h1>Bienvenid@</h1>
           <h3>Inicie sesión</h3>

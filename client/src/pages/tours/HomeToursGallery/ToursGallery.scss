@@ -1,8 +1,27 @@
 @import "./../../../styles/mixins.scss";
+
 .galleryButton {
   @include BotonCoral;
   margin-left: 0.5rem;
 }
 .gallerySearchbar {
   margin: 1rem;
+}
+
+.pHome {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  color: grey;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.divHome {
+  width: 80%;
+  background-color: rgb(237, 234, 234);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
