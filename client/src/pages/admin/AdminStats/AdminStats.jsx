@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
-import { Button, Col, Row, Table, Container } from "react-bootstrap";
+import { Button, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./AdminStats.scss";
 
@@ -16,7 +16,6 @@ export const AdminStats = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("AdminStats useEffect", adminUsers, allTours);
     setTotalUsers(adminUsers?.length);
     setTotalUsersEnabled(
       adminUsers?.filter((e) => e.user_is_deleted === 0).length
@@ -36,52 +35,37 @@ export const AdminStats = () => {
   return (
     <>
       <Container className="admin-stats-container">
-        <Row>
-          <Col>
-            <h2 className="admin-stats-title">Estadísticas:</h2>
-          </Col>
-        </Row>
-        <Table striped bordered hover responsive className="admin-stats-table">
-          <thead>
-            <tr>
-              <th>Categoría</th>
-              <th>Total</th>
-              <th>Activos</th>
-              <th>Desactivados</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Usuarios</td>
-              <td>{totalUsers}</td>
-              <td>{totalUsersEnabled}</td>
-              <td>{totalUsersDisabled}</td>
-              <td>
-                <Button
-                  onClick={() => navigate("/admin/adminUsers")}
-                  className="registerButton"
-                >
-                  Ver Listado
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <td>Guías</td>
-              <td>{totalTours}</td>
-              <td>{totalToursEnabled}</td>
-              <td>{totalToursDisabled}</td>
-              <td>
-                <Button
-                  onClick={() => navigate("/admin/adminTours")}
-                  className="registerButton"
-                >
-                  Ver Listado
-                </Button>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+        <h2 className="admin-stats-title">Estadísticas:</h2>
+        <div className="admin-stats-cards">
+          <Card>
+            <Card.Body>
+              <Card.Title>Usuarios</Card.Title>
+              <Card.Text>Total: {totalUsers}</Card.Text>
+              <Card.Text>Activos: {totalUsersEnabled}</Card.Text>
+              <Card.Text>Desactivados: {totalUsersDisabled}</Card.Text>
+              <Button
+                onClick={() => navigate("/admin/adminUsers")}
+                className="registerButton"
+              >
+                Ver Listado
+              </Button>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Body>
+              <Card.Title>Guías</Card.Title>
+              <Card.Text>Total: {totalTours}</Card.Text>
+              <Card.Text>Activos: {totalToursEnabled}</Card.Text>
+              <Card.Text>Desactivados: {totalToursDisabled}</Card.Text>
+              <Button
+                onClick={() => navigate("/admin/adminTours")}
+                className="registerButton"
+              >
+                Ver Listado
+              </Button>
+            </Card.Body>
+          </Card>
+        </div>
       </Container>
     </>
   );
