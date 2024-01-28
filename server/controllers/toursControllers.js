@@ -215,15 +215,50 @@ class toursControllers {
         res.status(400).json({ err });
         /*         console.log(err); */
       } else {
-        console.log("-------------------", resultOneTour);
+        /* console.log("-------------------", resultOneTour); */
         res.status(200).json({ resultOneTour, tour_id });
       }
     });
   };
   rateTour = (req, res) => {
     const { tour_id, id } = req.params;
-    let sql = `UPDATE user_rates_tour set rating=${rating} WHERE tour_id=${tour_id} and user_id = ${user_id}`;
-    console.log("rating");
+    const { prevSelectedStars } = req.body;
+    console.log("ESTE ES EL REQ BODY, LAS ESTRELLICAS", prevSelectedStars);
+
+    let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+
+    connection.query(checkSql, (checkErr, checkResult) => {
+      if (checkErr) {
+        res.status(500).json({ error: checkErr });
+      } else {
+        if (checkResult.length > 0) {
+          let updateSql = `UPDATE user_rates_tour SET rating = ${prevSelectedStars} WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+          connection.query(updateSql, (updateErr, updateResult) => {
+            if (updateErr) {
+              res.status(500).json({ error: updateErr });
+              console.log(updateErr);
+            } else {
+              res.status(200).json({ resultRated: updateResult });
+              console.log("Rating actualizado:", updateResult);
+            }
+          });
+        } else {
+          let insertSql = `INSERT INTO user_rates_tour (tour_id, user_id, rating) VALUES (${tour_id}, ${id}, ${prevSelectedStars});`;
+
+          connection.query(insertSql, (insertErr, insertResult) => {
+            if (insertErr) {
+              res.status(500).json({ error: insertErr });
+              console.log(insertErr);
+            } else {
+              res
+                .status(200)
+                .json({ resultRated: insertResult, prevSelectedStars });
+              console.log("Nuevo rating insertado:", insertResult);
+            }
+          });
+        }
+      }
+    });
   };
 
   delTour = (req, res) => {
@@ -231,6 +266,183 @@ class toursControllers {
     console.log("req params back", req.params);
     let sql = `UPDATE tour SET tour_is_deleted = true
 WHERE tour_id = ${tour_id}`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+        console.log(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+  delSection = (req, res) => {
+    const { section_id } = req.params;
+    console.log("req params back section", req.params);
+    let sql = ``;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+        console.log(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
+  editSection = (req, res) => {
+    const { section_id } = req.params;
+    const { section_name, section_description, travel_distance, tour_id } =
+      JSON.parse(req.body.editSection);
+    const resourceExist = JSON.parse(req.body.resourceExist);
+
+    console.log(resourceExist);
+
+    console.log("aqui req", req.files);
+    /*     const { filename } = req.files.cover[0]; */
+
+    let sql = `UPDATE section
+  SET section_name = "${section_name}",
+      section_description ="${section_description}" ,
+      travel_distance = ${Number(travel_distance)}
+  WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
+
+    if (req.files.cover) {
+      sql = `UPDATE section
+  SET section_name = "${section_name}",
+      section_cover = "${req.files.cover[0].filename}",
+      section_description ="${section_description}" ,
+      travel_distance = ${Number(travel_distance)}
+  WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
+    }
+    console.log("sqqql", sql);
+    let images = [];
+    if (req.files.images) {
+      images = req.files.images;
+    }
+    let audios = [];
+    if (req.files.audios) {
+      audios = req.files.audios;
+    }
+    let videos = [];
+    if (req.files.videos) {
+      videos = req.files.videos;
+    }
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json(err);
+      }
+
+      this.editSectionFiles(
+        images,
+        section_id,
+        tour_id,
+        resourceExist.images,
+        resourceExist.image_id
+      );
+      this.editSectionFiles(
+        audios,
+        section_id,
+        tour_id,
+        resourceExist.audios,
+        resourceExist.audio_id
+      );
+      this.editSectionFiles(
+        videos,
+        section_id,
+        tour_id,
+        resourceExist.videos,
+        resourceExist.video_id
+      );
+      res.status(201).json({ section_id });
+    });
+  };
+
+  editSectionFiles = (
+    files,
+    section_id,
+    tour_id,
+    resourceExist,
+    resource_id
+  ) => {
+    files.forEach((elem) => {
+      let resource_type = elem.mimetype.split("/")[0];
+
+      if (resource_type == "image") {
+        resource_type = 1;
+      } else if (resource_type == "audio") {
+        resource_type = 2;
+      } else if (resource_type == "video") {
+        resource_type = 3;
+      }
+      let sql = `UPDATE section_resource
+      SET resource_type = ${resource_type},
+      text = "${elem.filename}"
+      WHERE tour_id = ${tour_id} AND section_id = ${section_id} and resource_id = ${resource_id}`;
+
+      if (!resourceExist) {
+        sql = `INSERT INTO section_resource (resource_type, text, tour_id, section_id) VALUES ( ${resource_type}, "${elem.filename}", ${tour_id}, ${section_id}) `;
+      }
+
+      connection.query(sql, (err, result) => {
+        if (err) {
+          // res.status(500).json(err);
+          console.log(err);
+        }
+        console.log(result);
+      });
+    });
+  };
+  avgRating = (req, res) => {
+    const { tour_id } = req.params;
+    let sql = `SELECT AVG(rating) AS averageRating
+      FROM user_rates_tour
+      WHERE tour_id = ${tour_id};`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        // res.status(500).json(err);
+        console.log(err);
+      }
+      res.json({ averageRating: result[0].averageRating || null });
+    });
+  };
+  totalDistance = (req, res) => {
+    const { tour_id } = req.params;
+    console.log("ESOT ES EL TOUR ID", tour_id);
+    let sql = `SELECT SUM(section.travel_distance) as total_distance
+                  FROM section
+                  WHERE section.tour_id = ${tour_id}
+                  GROUP BY section.tour_id;`;
+    connection.query(sql, (err, resDistance) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({ resDistance });
+        console.log("esto es el total de distancia", resDistance);
+  viewOneSectionsResources = (req, res) => {
+    const { section_id, tour_id } = req.params;
+
+    console.log("tour_id y section_i  desde el back", tour_id, section_id);
+
+    let sql = `SELECT * FROM section_resource
+WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+        console.log(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
+  getOneSection = (req, res) => {
+    const { section_id, tour_id } = req.params;
+
+    let sql = `SELECT * FROM section WHERE section_id = ${section_id} and tour_id = ${tour_id} `;
+
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(400).json(err);

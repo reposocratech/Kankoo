@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col, Button, Form, Container } from "react-bootstrap";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { KankooContext } from "../../../context/KankooContext";
 import { saveLocalStorage } from "../../../../helpers/localStorageUtils";
+import "./LoginForm.scss";
 
 const initialValue = {
   first_name: "",
@@ -23,7 +24,8 @@ export const LoginForm = () => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     axios
       .post("http://localhost:3000/users/login", login)
       .then((res) => {
@@ -40,47 +42,60 @@ export const LoginForm = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-center">
-      <Col md={6}>
-        <Form>
-          <h1>Bienvenid@</h1>
-          <h3>Inicie sesión</h3>
-
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Email"
-              name="email"
-              value={login.email}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              name="password"
-              value={login.password}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <p>{msgError}</p>
-
-          <Button variant="primary me-2" onClick={handleSubmit}>
-            Iniciar sesión
-          </Button>
-          <Button variant="primary" onClick={() => navigate("/")}>
-            Cancelar
-          </Button>
-          <p>
-            No estás registrado?{" "}
-            <Link to={"/users/registeruser"}>Regístrate</Link>
-          </p>
-        </Form>
-      </Col>
-    </Row>
+    <Container>
+      <Row className="mt-5">
+        <Col
+          lg={12}
+          md={12}
+          sm={12}
+          xs={12}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <div className="divForm">
+            <Form className="formlogin">
+              <h1 className="h1Login">Inicia sesión</h1>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Email"
+                  name="email"
+                  value={login.email}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Contraseña"
+                  name="password"
+                  value={login.password}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <p>{msgError}</p>
+              <div className="botonsLogin">
+                <button className="registerButton me-2" onClick={handleSubmit}>
+                  Iniciar sesión
+                </button>
+                <button
+                  className="registerButton"
+                  onClick={() => navigate("/")}
+                >
+                  Cancelar
+                </button>
+              </div>
+              <p className="pLogin">
+                ¿No estás registrado/a? Regístrate{" "}
+                <Link className="linkLogin" to={"/users/registeruser"}>
+                  aquí
+                </Link>
+              </p>
+            </Form>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };

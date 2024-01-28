@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
-import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
+import { CardOneTourFav } from "../../../components/CardOneTour/CardOneTourFav";
 export const Favorites = () => {
   const [favTours, setFavTours] = useState([]);
   const { user } = useContext(KankooContext);
@@ -9,8 +9,9 @@ export const Favorites = () => {
     axios
       .get(`http://localhost:3000/users/${user?.user_id}/favtoursgallery`)
       .then((res) => {
-        console.log(res);
+        console.log("Response from server:", res);
         setFavTours(res.data.result);
+        console.log("A ESTO SE SETEAN LOS FAV TOURS", res.data.result);
       })
       .catch((err) => {
         console.log(err);
@@ -18,8 +19,8 @@ export const Favorites = () => {
   }, [user?.user_id]);
   return (
     <>
-      {favTours?.map((elem) => {
-        return <CardOneTour key={elem.tour_id} elem={elem} />;
+      {favTours?.map((tour) => {
+        return <CardOneTourFav key={tour.tour_id} tour={tour} />;
       })}
     </>
   );

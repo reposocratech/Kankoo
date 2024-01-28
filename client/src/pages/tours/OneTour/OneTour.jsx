@@ -5,14 +5,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./OneTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 import { CardOneSection } from "../../../components/CardOneSection/CardOneSection";
-import { Starrating } from "../../../components/Starrating/Starrating";
+import { StarRating } from "../../../components/Starrating/StarRating.jsx";
 
 export const OneTour = () => {
   const [oneTour, setOneTour] = useState();
   const [liked, setLiked] = useState(false);
+  const [totalDistance, setTotalDistance] = useState(0);
   const { tour_id } = useParams();
   console.log("tour_id antes de llamar a delTour:", tour_id);
-  const { user, myTours, setMyTours, resetMyTours, setResetMyTours } =
+  const { user, setMyTours, resetMyTours, setResetMyTours } =
     useContext(KankooContext);
   const id = user?.user_id;
   //el precio se muestra si existe el tour y su valor es diferente de 0
@@ -23,7 +24,39 @@ export const OneTour = () => {
     const likesData = JSON.parse(localStorage.getItem("likes")) || {};
     const initialLikedState = likesData[tour_id];
     setLiked(initialLikedState || false);
+    axios
+      .get(`http://localhost:3000/tours/onetour/${tour_id}`)
+      .then((res) => {
+        setOneTour(res.data.resultOneTour);
+      })
+      .catch((err) => {
+        console.log("Error en la solicitud Axios:", err);
+      });
   }, [tour_id]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/tours/distance/${tour_id}`)
+      .then((res) => {
+        setTotalDistance(res.data.resDistance[0]?.total_distance);
+        console.log("LO QUE VIENE DEL BACK", res.data.resDistance);
+        console.log("LO QUE SETEAMOS", totalDistance);
+      })
+      .catch((err) => {
+        console.log("Error en la solicitud Axios:", err);
+      });
+  });
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/mytours/${user?.user_id}`)
+      .then((res) => {
+        setMyTours(res.data.resultMyTours);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [tour_id, user?.user_id]);
 
   const handleClickLike = () => {
     setLiked((prevLiked) => !prevLiked);
@@ -41,30 +74,6 @@ export const OneTour = () => {
         console.log(err);
       });
   };
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/tours/onetour/${tour_id}`)
-      .then((res) => {
-        setOneTour(res.data.resultOneTour);
-      })
-      .catch((err) => {
-        console.log("Error en la solicitud Axios:", err);
-      });
-  }, [tour_id]);
-  console.log("toooooooooooooooooooooour", oneTour);
-  console.log(user);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/users/mytours/${user?.user_id}`)
-      .then((res) => {
-        setMyTours(res.data.resultMyTours);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [tour_id, user?.user_id]);
 
   const delTour = (tour_id) => {
     console.log("tour_id", tour_id);
@@ -154,50 +163,36 @@ export const OneTour = () => {
                   <p>{oneTour[0]?.tour_description}</p>
 
                   {/* -----------------------RATING */}
-                  {/* <div className="ec-stars-wrapper">
-                    <a href="#" data-value="1" title="Votar con 1 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="2" title="Votar con 2 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="3" title="Votar con 3 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="4" title="Votar con 4 estrellas">
-                      &#9733;
-                    </a>
-                    <a href="#" data-value="5" title="Votar con 5 estrellas">
-                      &#9733;
-                    </a>
-                  </div> */}
-
-                  <Starrating />
+                  <StarRating tour_id={tour_id} id={id} />
+                  <p>{parseFloat(totalDistance).toFixed(1)} km</p>
                 </div>
                 <div className="d-flex">
-                  <button className="OneTourButton">Adquirir</button>
-                  {oneTour[0]?.user_id === user?.user_id && (
-                    <button
-                      onClick={() => navigate(`/tours/edittour/${tour_id}`)}
-                      className="OneTourButton"
-                    >
-                      Editar
-                    </button>
+                  {oneTour[0]?.user_id != user?.user_id && (
+                    <button className="OneTourButton">Adquirir</button>
                   )}
-
-                  <button
-                    className="OneTourButton"
-                    type="button"
-                    onClick={() => {
-                      console.log(
-                        "tour_id al hacer clic en el botón:",
-                        tour_id
-                      );
-                      delTour(tour_id);
-                    }}
-                  >
-                    Eliminar
-                  </button>
+                  {oneTour[0]?.user_id === user?.user_id && (
+                    <div>
+                      <button
+                        onClick={() => navigate(`/tours/edittour/${tour_id}`)}
+                        className="OneTourButton"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="OneTourButton"
+                        type="button"
+                        onClick={() => {
+                          console.log(
+                            "tour_id al hacer clic en el botón:",
+                            tour_id
+                          );
+                          delTour(tour_id);
+                        }}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </Col>
