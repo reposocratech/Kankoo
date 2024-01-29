@@ -9,36 +9,36 @@ export const UserProfile = () => {
   const { user } = useContext(KankooContext);
   const navigate = useNavigate();
   return (
-    <Container className="perfilGeneral d-flex flex-column align-items-center">
+    <Container className="UserPerfilGeneral d-flex flex-column align-items-center">
       <h1>¡Bienvenido/a! {user?.first_name}</h1>
       <Row>
-        <Col className="perfilButton d-flex flex-column align-items-center">
-          <div className="perfilCircle">
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div className="UserPerfilCircle">
             <img
               onClick={() => navigate("/users/mytours")}
-              className="perfilIcono"
+              className="UserPerfilIcono"
               src="/icons/guiassubidas.png"
               alt="icono de ruta entre destinos"
             />
           </div>
           <p>Mis guías</p>
         </Col>
-        <Col className="perfilButton d-flex flex-column align-items-center">
-          <div className="perfilCircle">
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div className="UserPerfilCircle">
             <img
               onClick={() => navigate("/users/favtours")}
-              className="perfilIcono"
+              className="UserPerfilIcono"
               src="/icons/favoritas.png"
               alt="icono de corazón"
             />
           </div>
           <p>Guías favoritas</p>
         </Col>
-        <Col className="perfilButton d-flex flex-column align-items-center">
-          <div className="perfilCircle">
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div className="UserPerfilCircle">
             <img
               onClick={() => navigate("/users/boughttours")}
-              className="perfilIcono"
+              className="UserPerfilIcono"
               src="/icons/adquiridas.png"
               alt="icono de carrito de compra"
             />
@@ -47,22 +47,22 @@ export const UserProfile = () => {
         </Col>
       </Row>
       <Row>
-        <Col className="perfilButton d-flex flex-column align-items-center">
-          <div className="perfilCircle">
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div className="UserPerfilCircle">
             <img
               onClick={() => navigate("/users/edituser")}
-              className="perfilIcono"
+              className="UserPerfilIcono"
               src="/icons/editar.png"
               alt="icono con un lapiz y papel"
             />
           </div>
           <p>Editar perfil</p>
         </Col>
-        <Col className="perfilButton d-flex flex-column align-items-center">
-          <div className="perfilCircle">
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div className="UserPerfilCircle">
             <img
               onClick={() => navigate("/tours/newtour")}
-              className="perfilIcono"
+              className="UserPerfilIcono"
               src="/icons/nuevaguia.png"
               alt="icono de un mapa"
             />
