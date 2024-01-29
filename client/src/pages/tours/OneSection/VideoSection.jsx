@@ -1,12 +1,6 @@
 import React from "react";
 
-export const VideoSection = ({ sectionResources, loading }) => {
-  console.log("video", sectionResources);
-
-  /*  const videoResources = sectionResources
-    ? sectionResources.filter((resource) => resource.resource_type === 3)
-    : []; */
-
+export const VideoSection = ({ sectionResources }) => {
   return (
     <>
       <video controls width="300">

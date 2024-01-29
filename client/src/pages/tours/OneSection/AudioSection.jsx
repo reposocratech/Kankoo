@@ -1,12 +1,6 @@
 import React from "react";
 
-export const AudioSection = ({ sectionResources, loading }) => {
-  console.log(sectionResources);
-
-  /* const audioResources = sectionResources
-    ? sectionResources.filter((resource) => resource.resource_type === 2)
-    : [];
- */
+export const AudioSection = ({ sectionResources }) => {
   return (
     <>
       <audio controls>

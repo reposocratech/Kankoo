@@ -138,6 +138,7 @@ export const EditSection = () => {
                 type="file"
                 onChange={handleResource}
                 name="cover"
+                accept="image/*"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicName">
@@ -176,8 +177,6 @@ export const EditSection = () => {
               <Form.Control
                 type="file"
                 onChange={handleResource}
-                required
-                multiple
                 accept="image/*"
                 name="image"
               />
@@ -188,7 +187,6 @@ export const EditSection = () => {
               <Form.Control
                 type="file"
                 onChange={handleResource}
-                multiple
                 accept="audio/*"
                 name="audio"
               />
@@ -199,7 +197,6 @@ export const EditSection = () => {
               <Form.Control
                 type="file"
                 onChange={handleResource}
-                multiple
                 accept="video/*"
                 name="video"
               />
