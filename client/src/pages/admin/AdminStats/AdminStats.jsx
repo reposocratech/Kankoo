@@ -25,10 +25,10 @@ export const AdminStats = () => {
     );
     setTotalTours(allTours?.length);
     setTotalToursEnabled(
-      allTours?.filter((e) => e.tour_is_deleted === 0).length
+      allTours?.filter((e) => e.tour_is_disabled === 0).length
     );
     setTotalToursDisabled(
-      allTours?.filter((e) => e.tour_is_deleted === 1).length
+      allTours?.filter((e) => e.tour_is_disabled === 1).length
     );
   }, [adminUsers, allTours]);
 

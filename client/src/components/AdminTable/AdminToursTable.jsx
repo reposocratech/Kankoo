@@ -5,7 +5,7 @@ import axios from "axios";
 export const AdminToursTable = ({ allTours, setAllTours }) => {
   const handleClick = (id, isDisabled) => {
     const url = `http://localhost:3000/admin/${
-      isDisabled ? "enableTour" : "disableTour"
+      isDisabled === 1 ? "enableTour" : "disableTour"
     }/${id}`;
 
     axios
