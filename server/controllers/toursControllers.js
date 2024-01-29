@@ -164,7 +164,7 @@ class toursControllers {
   };
 
   disableTour = (req, res) => {
-    console.log(req.params);
+    /*     console.log(req.params); */
 
     const { tour_id } = req.params;
     console.log(tour_id);
@@ -201,9 +201,9 @@ class toursControllers {
 
   viewOneTour = (req, res) => {
     const { tour_id } = req.params;
-    /*     let sql = `SELECT * 
+    /*     let sql = `SELECT *
                 FROM tour
-	              JOIN section on tour.tour_id = section.tour_id
+                JOIN section on tour.tour_id = section.tour_id
                 JOIN section_resource on section.tour_id = section_resource.tour_id
                     AND section.section_id = section_resource.section_id
                 WHERE tour.tour_id = ${tour_id}`; */
@@ -211,13 +211,12 @@ class toursControllers {
               FROM tour
               JOIN section on tour.tour_id = section.tour_id
               WHERE tour.tour_id = ${tour_id}`;
-
     connection.query(sql, (err, resultOneTour) => {
       if (err) {
         res.status(400).json({ err });
-        /*         console.log(err); */
+        console.log(err);
       } else {
-        /* console.log("-------------------", resultOneTour); */
+        console.log("-------------------", resultOneTour);
         res.status(200).json({ resultOneTour, tour_id });
       }
     });
@@ -278,9 +277,12 @@ WHERE tour_id = ${tour_id}`;
     });
   };
   delSection = (req, res) => {
-    const { section_id } = req.params;
+    const { section_id, tour_id } = req.params;
     console.log("req params back section", req.params);
-    let sql = ``;
+    let sql = `DELETE FROM section
+WHERE tour_id = ${tour_id} AND section_id = ${section_id};
+
+`;
     connection.query(sql, (err, result) => {
       if (err) {
         res.status(400).json(err);
@@ -296,11 +298,6 @@ WHERE tour_id = ${tour_id}`;
     const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.editSection);
     const resourceExist = JSON.parse(req.body.resourceExist);
-
-    console.log(resourceExist);
-
-    console.log("aqui req", req.files);
-    /*     const { filename } = req.files.cover[0]; */
 
     let sql = `UPDATE section
   SET section_name = "${section_name}",

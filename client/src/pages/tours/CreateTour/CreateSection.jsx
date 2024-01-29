@@ -112,7 +112,11 @@ export const CreateSection = ({
           <Form>
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Foto de portada</Form.Label>
-              <Form.Control type="file" onChange={handleFile} />
+              <Form.Control
+                type="file"
+                onChange={handleFile}
+                accept="image/*"
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Nombre de punto </Form.Label>
@@ -162,7 +166,6 @@ export const CreateSection = ({
               <Form.Control
                 type="file"
                 onChange={handleAudios}
-                multiple
                 accept="audio/*"
                 name="audio"
               />
@@ -173,7 +176,6 @@ export const CreateSection = ({
               <Form.Control
                 type="file"
                 onChange={handleVideos}
-                multiple
                 accept="video/*"
                 name="video"
               />
