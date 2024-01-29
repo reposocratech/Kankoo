@@ -9,7 +9,7 @@ var router = express.Router();
 
 //ruta base http://localhost:3000/tours/
 router.post("/newtour", multerSingle("tours"), toursControllers.newTour);
-router.get("/waiting", toursControllers.waiting);
+router.post("/waiting", toursControllers.waiting);
 router.post("/addsection", multerPrueba(), toursControllers.addSection);
 router.put(
   "/edittour/:tour_id",
@@ -37,6 +37,9 @@ router.get(
   toursControllers.getOneSection
 );
 
+router.put("/enableTour/:tour_id", toursControllers.enableTour);
+router.put("/disableTour/:tour_id", toursControllers.disableTour);
+router.get("/toptours", toursControllers.topTours);
 // router.put(
 //   "/addPics/:section_id",
 //   multerMulti("imgsection"),

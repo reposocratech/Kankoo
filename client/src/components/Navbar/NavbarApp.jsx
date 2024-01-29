@@ -91,7 +91,7 @@ function NavBarApp() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
-            <Nav.Link className="navEnlaces" href="#action2">
+            <Nav.Link className="navEnlaces" href="/tours/toptours">
               Guías Top
             </Nav.Link>
           </Nav>
