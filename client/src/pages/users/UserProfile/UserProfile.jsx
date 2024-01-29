@@ -10,68 +10,101 @@ export const UserProfile = () => {
   const navigate = useNavigate();
   return (
     <Container className="UserPerfilGeneral d-flex flex-column align-items-center">
-      <h1>¡Bienvenido/a! {user?.first_name}</h1>
       <Row>
-        <Col className="UserPerfilButton d-flex flex-column align-items-center">
-          <div className="UserPerfilCircle">
-            <img
-              onClick={() => navigate("/users/mytours")}
-              className="UserPerfilIcono"
-              src="/icons/guiassubidas.png"
-              alt="icono de ruta entre destinos"
-            />
-          </div>
-          <p>Mis guías</p>
-        </Col>
-        <Col className="UserPerfilButton d-flex flex-column align-items-center">
-          <div className="UserPerfilCircle">
-            <img
-              onClick={() => navigate("/users/favtours")}
-              className="UserPerfilIcono"
-              src="/icons/favoritas.png"
-              alt="icono de corazón"
-            />
-          </div>
-          <p>Guías favoritas</p>
-        </Col>
-        <Col className="UserPerfilButton d-flex flex-column align-items-center">
-          <div className="UserPerfilCircle">
-            <img
-              onClick={() => navigate("/users/boughttours")}
-              className="UserPerfilIcono"
-              src="/icons/adquiridas.png"
-              alt="icono de carrito de compra"
-            />
-          </div>
-          <p>Guías adquiridas</p>
+        <Col className="UserCard d-flex align-items-center flex-column pt-5 pb-3">
+          <h3>¡Hola! Estás en tu perfil</h3>
+          <h5 className="h5perfil">
+            {user?.first_name} {user?.last_name}, <span>{user?.email}</span>
+          </h5>
         </Col>
       </Row>
       <Row>
-        {/* jshfiluhsdiulfffsbg */}
         <Col className="UserPerfilButton d-flex flex-column align-items-center">
-          <div className="UserPerfilCircle">
+          <div
+            className="UserPerfilCard"
+            onClick={() => navigate("/users/edituser")}
+          >
             <img
-              onClick={() => navigate("/users/edituser")}
               className="UserPerfilIcono"
               src="/icons/editar.png"
               alt="icono con un lapiz y papel"
             />
+            <h5 className="h5Profile mt-3">Editar perfil</h5>
+            <p className="pParrafo">
+              Personaliza y mantén siempre actualizada tu información.
+            </p>
           </div>
-          <p>Editar perfil</p>
         </Col>
         <Col className="UserPerfilButton d-flex flex-column align-items-center">
-          <div className="UserPerfilCircle">
+          <div
+            className="UserPerfilCard "
+            onClick={() => navigate("/users/favtours")}
+          >
             <img
-              onClick={() => navigate("/tours/newtour")}
+              className="UserPerfilIcono"
+              src="/icons/favoritas.png"
+              alt="icono de corazón"
+            />
+            <h5 className="h5Profile mt-3">Mis guías favoritas</h5>
+            <p className="pParrafo">
+              Este espacio contiene todas las guías a las que les has dado like.
+            </p>
+          </div>
+        </Col>
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div
+            className="UserPerfilCard "
+            onClick={() => navigate("/users/boughttours")}
+          >
+            <img
+              className="UserPerfilIcono"
+              src="/icons/adquiridas.png"
+              alt="icono de carrito de compra"
+            />
+            <h5 className="h5Profile mt-3">Mis guías adquiridas</h5>
+            <p className="pParrafo">
+              Aquí encontrarás todas las guías que has adquirido.
+            </p>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div
+            className="UserPerfilCard2"
+            onClick={() => navigate("/tours/newtour")}
+          >
+            <img
               className="UserPerfilIcono"
               src="/icons/nuevaguia.png"
               alt="icono de un mapa"
             />
+            <h5 className="h5Profile mt-3">Crear nueva guía</h5>
+            <p className="pParrafo">
+              Conviértete en guía y comparte tus lugares favoritos. Esta acción
+              requiere aprobación.
+            </p>
           </div>
-          <p>Crear nueva guía</p>
+        </Col>
+        <Col className="UserPerfilButton d-flex flex-column align-items-center">
+          <div
+            className="UserPerfilCard2"
+            onClick={() => navigate("/users/mytours")}
+          >
+            <img
+              className="UserPerfilIcono"
+              src="/icons/guiassubidas.png"
+              alt="icono de ruta entre destinos"
+            />
+            <h5 className="h5Profile mt-3">Mis guías creadas</h5>
+            <p className="pParrafo">
+              Explora y edita tu contenido para ofrecer experiencias únicas a
+              los/as viajeros/as.
+            </p>
+          </div>
         </Col>
       </Row>
-      <Row>
+      {/* <Row>
         <Col>
           <p>
             Revisa nuestros
@@ -80,7 +113,7 @@ export const UserProfile = () => {
             <a href="/users/privacy">Política de privacidad</a>
           </p>
         </Col>
-      </Row>
+      </Row> */}
     </Container>
   );
 };

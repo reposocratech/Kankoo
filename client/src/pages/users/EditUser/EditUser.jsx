@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-
 import { Col, Row, Form, Button } from "react-bootstrap";
 import { KankooContext } from "../../../context/KankooContext";
 import { useNavigate } from "react-router-dom";
+import "./EditUser.scss";
 
 const initialValue = {
   first_name: "",
@@ -68,12 +68,11 @@ export const EditUser = () => {
   console.log("editUSer", editUser);
 
   return (
-    <>
-      <h2>Hola {user?.first_name}</h2>
-      <Row className="d-flex justify-content-center p-5">
-        <h2>Edita tus datos:</h2>
-        <Col md={4}>
+    <Row className="d-flex align-items-center justify-content-center">
+      <Col lg={6} md={12} sm={12} xs={12}>
+        <div className="divEditUser">
           <Form>
+            <h2>Edita tus datos:</h2>
             <Form.Group className="mb-3" controlId="formGroupName">
               <Form.Label>Nombre </Form.Label>
               <Form.Control
@@ -94,20 +93,18 @@ export const EditUser = () => {
                 name="last_name"
               />
             </Form.Group>
-
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Imagen</Form.Label>
               <Form.Control type="file" onChange={handleFile} />
             </Form.Group>
-
             {msgError && <p> {msgError} </p>}
             <Button variant="danger me-2" onClick={handleSubmit}>
               Aceptar
             </Button>
             <Button variant="danger me-2">Cancelar</Button>
           </Form>
-        </Col>
-      </Row>
-    </>
+        </div>
+      </Col>
+    </Row>
   );
 };
