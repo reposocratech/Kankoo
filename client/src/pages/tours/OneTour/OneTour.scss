@@ -3,6 +3,10 @@
   @include BotonCoral;
   margin: 1rem;
 }
+.OneTourButtonDisabled {
+  @include BotonGris;
+  margin: 1rem;
+}
 .OneTourInfo {
   padding-left: 10rem;
   padding-right: 20rem;

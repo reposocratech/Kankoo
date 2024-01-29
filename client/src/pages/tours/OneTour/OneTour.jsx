@@ -6,13 +6,17 @@ import "./OneTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 import { CardOneSection } from "../../../components/CardOneSection/CardOneSection";
 import { StarRating } from "../../../components/Starrating/StarRating.jsx";
+import { OtherUser } from "./OtherUser.jsx";
 
 export const OneTour = () => {
-  const [oneTour, setOneTour] = useState();
+  const [oneTour, setOneTour] = useState([]);
   const [liked, setLiked] = useState(false);
+  const [acquired, setAcquired] = useState(false);
+  const [tourOwnerDetails, setTourOwnerDetails] = useState();
   const [totalDistance, setTotalDistance] = useState(0);
+  const [showOtherUser, setShowOtherUser] = useState(false);
+  const [creatorId, setCreatorId] = useState();
   const { tour_id } = useParams();
-  console.log("tour_id antes de llamar a delTour:", tour_id);
   const { user, setMyTours, resetMyTours, setResetMyTours } =
     useContext(KankooContext);
   const id = user?.user_id;
@@ -24,30 +28,51 @@ export const OneTour = () => {
     const likesData = JSON.parse(localStorage.getItem("likes")) || {};
     const initialLikedState = likesData[tour_id];
     setLiked(initialLikedState || false);
+    const acquiredData = JSON.parse(localStorage.getItem("acquired")) || {};
+    const initialAdcquiredState = acquiredData[tour_id];
+    setAcquired(initialAdcquiredState || false);
+  }, [tour_id]);
+
+  useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/onetour/${tour_id}`)
       .then((res) => {
+        console.log(res.data);
         setOneTour(res.data.resultOneTour);
+        setCreatorId(res.data.resultOneTour[0].user_id);
+        const tourOwnerUserId = res.data.resultOneTour[0]?.user_id;
+        if (tourOwnerUserId) {
+          axios
+            .get(`http://localhost:3000/users/otheruser/${tourOwnerUserId}`)
+            .then((result) => {
+              console.log(
+                "TOUR OWNER DETAILS DESDE EL BACK",
+                result.data.userDetails[0]
+              );
+              setTourOwnerDetails(result.data.userDetails[0]);
+              console.log("TOUR OWNER DETAILS SETEADOS", tourOwnerDetails);
+            })
+            .catch((userErr) => {
+              console.log("Error al obtener detalles del usuario:", userErr);
+            });
+        }
       })
       .catch((err) => {
         console.log("Error en la solicitud Axios:", err);
       });
   }, [tour_id]);
-
   useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/distance/${tour_id}`)
       .then((res) => {
         setTotalDistance(res.data.resDistance[0]?.total_distance);
-        console.log("LO QUE VIENE DEL BACK", res.data.resDistance);
-        console.log("LO QUE SETEAMOS", totalDistance);
       })
       .catch((err) => {
         console.log("Error en la solicitud Axios:", err);
       });
   });
 
-  useEffect(() => {
+  /*   useEffect(() => {
     axios
       .get(`http://localhost:3000/users/mytours/${user?.user_id}`)
       .then((res) => {
@@ -56,7 +81,7 @@ export const OneTour = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [tour_id, user?.user_id]);
+  }, [tour_id, user?.user_id]); */
 
   const handleClickLike = () => {
     setLiked((prevLiked) => !prevLiked);
@@ -75,12 +100,29 @@ export const OneTour = () => {
       });
   };
 
+
+  const handleClickAcquired = () => {
+    setAcquired((prevAcquired) => !prevAcquired);
+    const acquiredData = JSON.parse(localStorage.getItem("acquired")) || {};
+    acquiredData[tour_id] = !acquired;
+    localStorage.setItem("acquired", JSON.stringify(acquiredData));
+    axios
+      .post(`http://localhost:3000/users/${id}/boughttours/${tour_id}`, {
+        acquired: !acquired,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
   const delTour = (tour_id) => {
-    console.log("tour_id", tour_id);
     axios
       .put(`http://localhost:3000/tours/deltour/${tour_id}`)
       .then((res) => {
-        console.log("respuesta de borradooooo chee", res.data);
         /* let temp = myTours.filter((elem) => elem.tour_id !== tour_id);
         setMyTours(temp); */
         setResetMyTours(!resetMyTours);
@@ -90,11 +132,13 @@ export const OneTour = () => {
         console.log("error borradooo cheee", err);
       });
   };
-
+  const handleClickOtherUser = () => {
+    setShowOtherUser(true);
+  };
   return (
-    <>
+    <Container>
       {oneTour && (
-        <Container>
+        <>
           <Row>
             <div className="BackCombo" onClick={() => navigate(-1)}>
               <img
@@ -138,13 +182,14 @@ export const OneTour = () => {
                   {/* -------INFO USER */}
                   <div className="OneTourUserInfo d-flex align-items-center">
                     <img
-                      onClick={() => navigate("/users/oneuser")}
+                      onClick={() => navigate(`/users/oneuser/${creatorId}`)}
                       className="OneTourProfilePicture"
-                      src={`http://localhost:3000/images/users/${user?.avatar}`}
+                      src={`http://localhost:3000/images/users/${tourOwnerDetails?.avatar}`}
                       alt=""
                     />
                     <h5>
-                      {user?.first_name} {user?.last_name}
+                      {tourOwnerDetails?.first_name}
+                      {tourOwnerDetails?.last_name}
                     </h5>
                   </div>
 
@@ -168,15 +213,28 @@ export const OneTour = () => {
                 </div>
                 <div className="d-flex">
                   {oneTour[0]?.user_id != user?.user_id && (
-                    <button className="OneTourButton">Adquirir</button>
+                    <button
+                      className={
+                        acquired ? "OneTourButtonDisabled" : "OneTourButton"
+                      }
+                      onClick={handleClickAcquired}
+                    >
+                      {acquired ? "Borrar del carrito" : "Adquirir"}
+                    </button>
                   )}
                   {oneTour[0]?.user_id === user?.user_id && (
                     <div>
                       <button
-                        onClick={() => navigate(`/tours/edittour/${tour_id}`)}
+                        onClick={handleClickOtherUser}
                         className="OneTourButton"
                       >
                         Editar
+                      </button>
+                      <button
+                        className="OneTourButton"
+                        onClick={() => navigate(`/tours/newsection/${tour_id}`)}
+                      >
+                        Añadir Punto
                       </button>
                       <button
                         className="OneTourButton"
@@ -201,13 +259,15 @@ export const OneTour = () => {
               <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
               <div md={4} className="d-flex">
                 {oneTour?.map((elem) => {
-                  return <CardOneSection elem={elem} />;
+                  return (
+                    <CardOneSection elem={elem} oneTour={oneTour} user={user} />
+                  );
                 })}
               </div>
             </Col>
           </Row>
-        </Container>
+        </>
       )}
-    </>
+    </Container>
   );
 };

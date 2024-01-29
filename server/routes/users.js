@@ -7,13 +7,15 @@ const multerSingle = require("../middleware/multerSingle");
 router.post("/registeruser", usersControllers.registerUser);
 router.post("/login", usersControllers.login);
 router.get("/userprofile/:id", usersControllers.viewProfile);
-router.get("/otheruser/:id", usersControllers.otherUser);
+router.get("/otheruser/:tourOwnerUserId", usersControllers.otherUser);
 router.get("/mytours/:id", usersControllers.myTours);
 router.post("/:id/favtours/:tour_id", usersControllers.favTours);
 router.get("/:id/favtoursgallery", usersControllers.favToursGallery);
-router.get("/boughttours", usersControllers.boughtTours);
+router.post("/:id/boughttours/:tour_id", usersControllers.boughtTours);
+router.get("/:id/boughttoursgallery", usersControllers.boughtToursGallery);
 router.get("/terms", usersControllers.terms);
 router.get("/privacy", usersControllers.privacy);
 router.put("/edituser", multerSingle("users"), usersControllers.editUser);
+router.get("/viewotheruser/:id", usersControllers.viewOtherUser);
 
 module.exports = router;

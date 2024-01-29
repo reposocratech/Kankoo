@@ -21,10 +21,13 @@ import { AdminStats } from "../pages/admin/AdminStats/AdminStats";
 import { AdminTours } from "../pages/admin/AdminTours/AdminTours";
 import { AdminUsers } from "../pages/admin/AdminUsers/AdminUsers";
 import { OneSection } from "../pages/tours/OneSection/OneSection";
-import { OneUser } from "../pages/users/OneUser/OneUser";
 import { EditTour } from "../pages/tours/EditTour/EditTour";
 import { UserProfile } from "../pages/users/UserProfile/UserProfile";
 import { EditSection } from "../pages/tours/EditSection/EditSection";
+import { CreateSection } from "../pages/tours/CreateTour/CreateSection";
+import { OtherUser } from "../pages/tours/OneTour/OtherUser";
+import { TopTours } from "../pages/tours/TopTours/TopTours";
+
 export const AppRoutes = () => {
   const { token, user } = useContext(KankooContext);
 
@@ -36,8 +39,11 @@ export const AppRoutes = () => {
           <Route path="/" element={<ToursGallery />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/tours/onetour/:tour_id" element={<OneTour />} />
-          <Route path="/users/oneuser/:id" element={<OneUser />} />
-
+          <Route
+            path="/users/oneuser/:creator_user_id"
+            element={<OtherUser />}
+          />
+          <Route path="/tours/toptours" element={<TopTours />} />
           <Route path="/users/registeruser" element={<RegisterForm />} />
           <Route path="/users/login" element={<LoginForm />} />
 
@@ -45,6 +51,10 @@ export const AppRoutes = () => {
             <Route path="/users/mytours" element={<MyTours />} />
             <Route path="/users/edituser" element={<EditUser />} />
             <Route path="/tours/newtour" element={<FatherCreateTour />} />
+            <Route
+              path="/tours/newsection/:tour_id"
+              element={<CreateSection />}
+            />
             <Route
               path="/tours/onesection/:tour_id/:section_id"
               element={<OneSection />}
