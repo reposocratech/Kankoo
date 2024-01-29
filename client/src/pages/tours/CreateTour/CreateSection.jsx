@@ -1,7 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate, Link, useAsyncError } from "react-router-dom";
+import {
+  useNavigate,
+  Link,
+  useAsyncError,
+  useParams,
+  useLocation,
+} from "react-router-dom";
 import { useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
 import { sendMail } from "../../../../helpers/sendmail";
@@ -17,8 +23,12 @@ export const CreateSection = ({
   sections,
   setSections,
   setShowFormSection,
+  resetSections,
+  setResetSections,
 }) => {
   console.log("Tour prop:", tour);
+
+  const { tour_id } = useParams();
 
   const [addSection, setAddSection] = useState(initialValueSection);
   const [cover, setCover] = useState();
@@ -26,6 +36,10 @@ export const CreateSection = ({
   const [audios, setAudios] = useState();
   const [videos, setVideos] = useState();
   const [msgError, setMsgError] = useState("");
+
+  const { pathname } = useLocation();
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +77,7 @@ export const CreateSection = ({
     } else {
       let temp = {
         ...addSection,
-        tour_id: tour?.tour_id,
+        tour_id: tour_id || tour?.tour_id,
       };
 
       const newFormData = new FormData();
@@ -91,17 +105,27 @@ export const CreateSection = ({
       axios
         .post(`http://localhost:3000/tours/addsection`, newFormData)
         .then((res) => {
-          let tempSections = [
+          /*  let tempSections = [
             ...sections,
             { ...addSection, section_id: res.data.section_id },
           ];
-          setSections(tempSections);
-          setShowFormSection(false);
+
+          setSections(tempSections); */
+
+          if (pathname === `/tours/newsection/${tour_id}`) {
+            navigate(-1);
+          } else {
+            setResetSections(!resetSections);
+            setShowFormSection(false);
+          }
+
+       
           let url = "http://localhost:3000/tours/waiting";
           let msg = "ALguien ha subido una nueva guía, ¡acéptala!";
           let email = "joseluis_casares@hotmail.com";
           let asunto = "Nueva guía";
           sendMail(url, msg, email, asunto);
+
           console.log(res.data);
         })
         .catch((err) => {
