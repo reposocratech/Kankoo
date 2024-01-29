@@ -27,6 +27,7 @@ export const OneTour = () => {
     axios
       .get(`http://localhost:3000/tours/onetour/${tour_id}`)
       .then((res) => {
+        console.log(res.data);
         setOneTour(res.data.resultOneTour);
       })
       .catch((err) => {
@@ -74,6 +75,8 @@ export const OneTour = () => {
         console.log(err);
       });
   };
+
+  console.log("one tour", oneTour);
 
   const delTour = (tour_id) => {
     console.log("tour_id", tour_id);
@@ -180,6 +183,12 @@ export const OneTour = () => {
                       </button>
                       <button
                         className="OneTourButton"
+                        onClick={() => navigate(`/tours/newsection/${tour_id}`)}
+                      >
+                        Añadir Punto
+                      </button>
+                      <button
+                        className="OneTourButton"
                         type="button"
                         onClick={() => {
                           console.log(
@@ -201,7 +210,9 @@ export const OneTour = () => {
               <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
               <div md={4} className="d-flex">
                 {oneTour?.map((elem) => {
-                  return <CardOneSection elem={elem} />;
+                  return (
+                    <CardOneSection elem={elem} oneTour={oneTour} user={user} />
+                  );
                 })}
               </div>
             </Col>

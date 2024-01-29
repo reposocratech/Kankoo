@@ -3,7 +3,8 @@ import "./CardOneSection.scss";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { KankooContext } from "../../context/KankooContext";
 import axios from "axios";
-export const CardOneSection = ({ elem }) => {
+
+export const CardOneSection = ({ elem, oneTour, user }) => {
   const { setOneSection } = useContext(KankooContext);
   useEffect(() => {
     setOneSection(elem);
@@ -33,22 +34,37 @@ export const CardOneSection = ({ elem }) => {
         alt="portada de seccion"
       />
       <h5>{elem.section_name}</h5>
-      <button
-        type="button"
-        className="CardOneSectionButton"
-        onClick={() => delSection(elem.section_id)}
-      >
-        X
-      </button>
-      <button
-        type="button"
-        className="CardOneSectionButton"
-        onClick={() =>
-          navigate(`/tours/editsection/${elem?.tour_id}/${elem?.section_id}`)
-        }
-      >
-        Editar
-      </button>
+      {oneTour[0]?.user_id === user?.user_id && (
+        <div>
+          {oneTour.length > 1 && (
+            <button
+              type="button"
+              className="CardOneSectionButton"
+              onClick={() => delSection(elem.section_id)}
+            >
+              X
+            </button>
+          )}
+          {oneTour[0]?.user_id === user?.user_id && oneTour.length === 1 && (
+            <p>
+              Es requirido que cada guia tenga almenos una section, si quieres
+              borrarlas todas, debes borrar la guia.
+            </p>
+          )}
+
+          <button
+            type="button"
+            className="CardOneSectionButton"
+            onClick={() =>
+              navigate(
+                `/tours/editsection/${elem?.tour_id}/${elem?.section_id}`
+              )
+            }
+          >
+            Editar
+          </button>
+        </div>
+      )}
     </div>
   );
 };
