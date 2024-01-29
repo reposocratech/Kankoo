@@ -25,12 +25,9 @@ class usersControllers {
         }
       });
     });
-    console.log(req.body);
   };
 
   viewProfile = (req, res) => {
-    console.log("este es tu perfil personal");
-
     const user_id = req.params.id;
 
     let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND user_is_deleted = 0`;
@@ -42,8 +39,6 @@ class usersControllers {
         return res.status(200).json({ result: result[0] });
       }
     });
-
-    console.log(user_id);
   };
 
   myTours = (req, res) => {
@@ -96,7 +91,41 @@ class usersControllers {
     });
   };
   boughtTours = (req, res) => {
-    console.log("estas son mis guías adquiridas");
+    const { id, tour_id } = req.params;
+    const { acquired } = req.body;
+    let checkSql = `SELECT * FROM user_acquires_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+
+    connection.query(checkSql, (checkErr, checkResult) => {
+      if (checkErr) {
+        res.status(500).json({ error: checkErr });
+      } else {
+        if (checkResult.length > 0) {
+          let updateSql = `UPDATE user_acquires_tour SET acquired = ${acquired} WHERE tour_id = ${tour_id} AND user_id = ${id};`;
+
+          connection.query(updateSql, (updateErr, updateResult) => {
+            if (updateErr) {
+              res.status(500).json({ error: updateErr });
+              console.log(updateErr);
+            } else {
+              res.status(200).json({ resultAcquired: updateResult });
+              console.log("Adquirido actualizado:", updateResult);
+            }
+          });
+        } else {
+          let insertSql = `INSERT INTO user_acquires_tour (tour_id, user_id, acquired) VALUES (${tour_id}, ${id}, ${acquired});`;
+
+          connection.query(insertSql, (insertErr, insertResult) => {
+            if (insertErr) {
+              res.status(500).json({ error: insertErr });
+              console.log(insertErr);
+            } else {
+              res.status(200).json({ resultAcquired: insertResult, acquired });
+              console.log("Nuevo adquirido insertado:", insertResult);
+            }
+          });
+        }
+      }
+    });
   };
 
   editUser = (req, res) => {
@@ -131,14 +160,16 @@ class usersControllers {
   };
 
   otherUser = (req, res) => {
-    const user_id = req.params.id;
+    const user_id = req.params.tourOwnerUserId;
     let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND user_is_deleted = 0`;
 
-    connection.query(sql, (err, result) => {
+    connection.query(sql, (err, userDetails) => {
       if (err) {
-        res.status(500).json({ err });
+        res.status(500).json(err);
+        console.log(err);
       } else {
-        res.status(200).json({ result });
+        res.status(200).json({ userDetails });
+        console.log("DATILLOOOOOOOOOOOOOOOOS", { userDetails });
       }
     });
   };
@@ -184,8 +215,6 @@ class usersControllers {
     const { rating } = req.body;
 
     let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
-
-    console.log("oleee");
   };
   favToursGallery = (req, res) => {
     const { id } = req.params;
@@ -199,6 +228,33 @@ class usersControllers {
         res.status(500).json({ err });
       } else {
         res.status(200).json({ result });
+      }
+    });
+  };
+  boughtToursGallery = (req, res) => {
+    const { id } = req.params;
+    let sql = `SELECT tour.tour_id, tour.tour_name, tour.tour_city, tour.cover, user_acquires_tour.user_id
+              FROM tour
+                JOIN user_acquires_tour ON tour.tour_id = user_acquires_tour.tour_id
+              WHERE user_acquires_tour.acquired = true
+              AND user_acquires_tour.user_id = ${id};`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json({ err });
+      } else {
+        res.status(200).json({ result });
+      }
+    });
+  };
+  viewOtherUser = (req, res) => {
+    const user_id = req.params.id;
+    let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND user_is_deleted = 0`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        return res.status(500).json(err);
+      } else {
+        return res.status(200).json({ result: result[0] });
       }
     });
   };

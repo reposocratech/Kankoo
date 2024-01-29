@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate, Link, useAsyncError } from "react-router-dom";
 import { useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
+import { sendMail } from "../../../../helpers/sendmail";
 
 const initialValueSection = {
   section_name: "",
@@ -96,6 +97,11 @@ export const CreateSection = ({
           ];
           setSections(tempSections);
           setShowFormSection(false);
+          let url = "http://localhost:3000/tours/waiting";
+          let msg = "ALguien ha subido una nueva guía, ¡acéptala!";
+          let email = "joseluis_casares@hotmail.com";
+          let asunto = "Nueva guía";
+          sendMail(url, msg, email, asunto);
           console.log(res.data);
         })
         .catch((err) => {

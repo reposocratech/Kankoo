@@ -23,7 +23,7 @@ export const KankooProvider = ({ children }) => {
 
     if (tokenLocalStorage) {
       const { id, type } = jwtDecode(tokenLocalStorage).user;
-      console.log(jwtDecode(tokenLocalStorage));
+      /*       console.log(jwtDecode(tokenLocalStorage)); */
       axios
         .get(`http://localhost:3000/users/userprofile/${id}`)
         .then((res) => {
@@ -33,13 +33,11 @@ export const KankooProvider = ({ children }) => {
         .catch((err) => {
           console.log(err);
         });
-      console.log(type);
       if (type === 1) {
         axios
           .get("http://localhost:3000/admin/getAllUsers")
           .then((res) => {
             setAdminUsers(res.data);
-            console.log(res.data);
           })
           .catch((err) => console.log(err));
       }
@@ -54,7 +52,6 @@ export const KankooProvider = ({ children }) => {
       .get(`http://localhost:3000/tours/alltours`)
       .then((res) => {
         setAllTours(res.data.resultTours);
-        console.log("todos los Tours", res.data.resultTours);
       })
       .catch((err) => {
         console.log(err);
@@ -66,7 +63,6 @@ export const KankooProvider = ({ children }) => {
         .get(`http://localhost:3000/users/mytours/${id}`)
         .then((res) => {
           setMyTours(res.data.resultMyTours);
-          console.log("respuesta my tours del context", res.data.resultMyTours);
         })
         .catch((err) => {
           console.log(err);
