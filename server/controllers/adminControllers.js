@@ -60,6 +60,55 @@ class adminControllers {
       error ? res.status(400).json({ error }) : res.status(200).json(result);
     });
   };
+
+  disableTour = (req, res) => {
+    const { tour_id } = req.params;
+    console.log(tour_id);
+    let sql = `UPDATE tour SET tour_is_disabled = 1 WHERE tour_id = "${tour_id}"`;
+    let sql2 = "SELECT * from tour ";
+
+    connection.query(sql, (error, result) => {
+      if (error) throw error;
+      console.log(error);
+    });
+    connection.query(sql2, (error, resultTours) => {
+      error
+        ? res.status(400).json({ error })
+        : res.status(200).json(resultTours);
+    });
+  };
+
+  enableTour = (req, res) => {
+    const { tour_id } = req.params;
+    console.log(tour_id);
+    let sql = `UPDATE tour SET tour_is_disabled = 0 WHERE tour_id = "${tour_id}"`;
+    let sql2 = "SELECT * from tour";
+
+    connection.query(sql, (error, result) => {
+      if (error) throw error;
+      console.log(error);
+    });
+    connection.query(sql2, (error, resultTours) => {
+      error
+        ? res.status(400).json({ error })
+        : res.status(200).json(resultTours);
+    });
+  };
+
+  updateUserIsDeletedStatus = (req, res) => {
+    const { id } = req.params;
+    const { user_is_deleted } = req.body;
+
+    const sql = `UPDATE user SET user_is_deleted = ${user_is_deleted} WHERE user_id = ${id}`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err });
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
 }
 
 module.exports = new adminControllers();

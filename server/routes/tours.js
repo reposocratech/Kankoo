@@ -36,8 +36,6 @@ router.get(
   "/getonesection/:section_id/:tour_id",
   toursControllers.getOneSection
 );
-router.put("/enableTour/:tour_id", toursControllers.enableTour);
-router.put("/disableTour/:tour_id", toursControllers.disableTour);
 
 // router.put(
 //   "/addPics/:section_id",

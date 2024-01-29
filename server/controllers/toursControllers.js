@@ -163,41 +163,6 @@ class toursControllers {
     });
   };
 
-  disableTour = (req, res) => {
-
-    const { tour_id } = req.params;
-    console.log(tour_id);
-    let sql = `UPDATE tour SET tour_is_disabled = 1 WHERE tour_id = "${tour_id}"`;
-    let sql2 = "SELECT * from tour where tour_is_disabled = 0";
-
-    connection.query(sql, (error, result) => {
-      if (error) throw error;
-      console.log(error);
-    });
-    connection.query(sql2, (error, resultTours) => {
-      error
-        ? res.status(400).json({ error })
-        : res.status(200).json(resultTours);
-    });
-  };
-
-  enableTour = (req, res) => {
-    const { tour_id } = req.params;
-    console.log(tour_id);
-    let sql = `UPDATE tour SET tour_is_disabled = 0 WHERE tour_id = "${tour_id}"`;
-    let sql2 = "SELECT * from tour where tour_is_disabled = 1";
-
-    connection.query(sql, (error, result) => {
-      if (error) throw error;
-      console.log(error);
-    });
-    connection.query(sql2, (error, resultTours) => {
-      error
-        ? res.status(400).json({ error })
-        : res.status(200).json(resultTours);
-    });
-  };
-
   viewOneTour = (req, res) => {
     const { tour_id } = req.params;
     /*     let sql = `SELECT *

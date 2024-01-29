@@ -7,7 +7,7 @@ const multerSingle = require("../middleware/multerSingle");
 router.post("/registeruser", usersControllers.registerUser);
 router.post("/login", usersControllers.login);
 router.get("/userprofile/:id", usersControllers.viewProfile);
-router.get("/otheruser:id", usersControllers.otherUser);
+router.get("/otheruser/:id", usersControllers.otherUser);
 router.get("/mytours/:id", usersControllers.myTours);
 router.post("/:id/favtours/:tour_id", usersControllers.favTours);
 router.get("/:id/favtoursgallery", usersControllers.favToursGallery);

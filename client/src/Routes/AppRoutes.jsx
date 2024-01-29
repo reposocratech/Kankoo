@@ -36,7 +36,7 @@ export const AppRoutes = () => {
           <Route path="/" element={<ToursGallery />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/tours/onetour/:tour_id" element={<OneTour />} />
-          <Route path="/users/oneuser" element={<OneUser />} />
+          <Route path="/users/oneuser/:id" element={<OneUser />} />
 
           <Route path="/users/registeruser" element={<RegisterForm />} />
           <Route path="/users/login" element={<LoginForm />} />
