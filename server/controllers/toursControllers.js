@@ -29,16 +29,12 @@ class toursControllers {
         console.log(err);
       } else {
         let tour_id = result.insertId;
-
         res.status(200).json({ result, cover, tour_id });
-        // main();
-        console.log(result);
       }
     });
   };
 
   addSection = (req, res) => {
-    console.log("files del ADD SECTION", req.files);
     const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.addSection);
 
@@ -72,8 +68,6 @@ class toursControllers {
         if (req.files.videos) {
           videos = req.files.videos;
         }
-
-        console.log("ESTO ES EL REQ FILESSSSSSSSSS", req.files);
 
         connection.query(sql, (err, result) => {
           if (err) {
@@ -115,8 +109,6 @@ class toursControllers {
   };
 
   editTour = (req, res) => {
-    console.log("Body de la solicitud:", req.body);
-
     const {
       tour_name,
       tour_description,
@@ -140,13 +132,13 @@ class toursControllers {
         console.log(err);
       } else {
         res.status(200).json({ result, cover });
-        console.log("Resultado de la consulta SQL:", result);
       }
     });
   };
 
   waiting = (req, res) => {
-    console.log("espera a que confirmen tu guía");
+    const { email, msg, asunto } = req.body;
+    main(email, msg, asunto);
   };
 
   allTours = (req, res) => {
@@ -158,13 +150,11 @@ class toursControllers {
       } else {
         let tour_id = resultTours.insertId;
         res.status(200).json({ resultTours, tour_id });
-        console.log(resultTours);
       }
     });
   };
 
   disableTour = (req, res) => {
-
     const { tour_id } = req.params;
     console.log(tour_id);
     let sql = `UPDATE tour SET tour_is_disabled = 1 WHERE tour_id = "${tour_id}"`;
@@ -215,7 +205,6 @@ class toursControllers {
         res.status(400).json({ err });
         console.log(err);
       } else {
-        console.log("-------------------", resultOneTour);
         res.status(200).json({ resultOneTour, tour_id });
       }
     });
@@ -223,7 +212,6 @@ class toursControllers {
   rateTour = (req, res) => {
     const { tour_id, id } = req.params;
     const { prevSelectedStars } = req.body;
-    console.log("ESTE ES EL REQ BODY, LAS ESTRELLICAS", prevSelectedStars);
 
     let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
 
@@ -239,7 +227,6 @@ class toursControllers {
               console.log(updateErr);
             } else {
               res.status(200).json({ resultRated: updateResult });
-              console.log("Rating actualizado:", updateResult);
             }
           });
         } else {
@@ -253,7 +240,6 @@ class toursControllers {
               res
                 .status(200)
                 .json({ resultRated: insertResult, prevSelectedStars });
-              console.log("Nuevo rating insertado:", insertResult);
             }
           });
         }
@@ -263,7 +249,6 @@ class toursControllers {
 
   delTour = (req, res) => {
     const { tour_id } = req.params;
-    console.log("req params back", req.params);
     let sql = `UPDATE tour SET tour_is_deleted = true
 WHERE tour_id = ${tour_id}`;
     connection.query(sql, (err, result) => {
@@ -312,7 +297,7 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id};
       travel_distance = ${Number(travel_distance)}
   WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
     }
-    console.log("sqqql", sql);
+
     let images = [];
     if (req.files.images) {
       images = req.files.images;
@@ -407,7 +392,6 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id};
   };
   totalDistance = (req, res) => {
     const { tour_id } = req.params;
-    console.log("ESOT ES EL TOUR ID", tour_id);
     let sql = `SELECT SUM(section.travel_distance) as total_distance
                   FROM section
                   WHERE section.tour_id = ${tour_id}
@@ -417,15 +401,12 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id};
         console.log(err);
       } else {
         res.status(200).json({ resDistance });
-        console.log("esto es el total de distancia", resDistance);
       }
     });
   };
 
   viewOneSectionsResources = (req, res) => {
     const { section_id, tour_id } = req.params;
-
-    console.log("tour_id y section_i  desde el back", tour_id, section_id);
 
     let sql = `SELECT * FROM section_resource
 WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
@@ -451,6 +432,20 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
         console.log(err);
       } else {
         res.status(200).json(result);
+      }
+    });
+  };
+  topTours = (req, res) => {
+    let sql = `SELECT * from tour
+    left join user_rates_tour on tour.tour_id = user_rates_tour.tour_id
+    where rating > 4 and tour_is_deleted = 0`;
+    connection.query(sql, (err, topResult) => {
+      if (err) {
+        res.status(400).json({ err });
+        console.log(err);
+      } else {
+        res.status(200).json({ topResult });
+        console.log("MEJORES TOURS", topResult);
       }
     });
   };
