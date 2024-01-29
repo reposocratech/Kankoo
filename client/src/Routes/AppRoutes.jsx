@@ -25,6 +25,7 @@ import { OneUser } from "../pages/users/OneUser/OneUser";
 import { EditTour } from "../pages/tours/EditTour/EditTour";
 import { UserProfile } from "../pages/users/UserProfile/UserProfile";
 import { EditSection } from "../pages/tours/EditSection/EditSection";
+import { CreateSection } from "../pages/tours/CreateTour/CreateSection";
 export const AppRoutes = () => {
   const { token, user } = useContext(KankooContext);
 
@@ -45,6 +46,10 @@ export const AppRoutes = () => {
             <Route path="/users/mytours" element={<MyTours />} />
             <Route path="/users/edituser" element={<EditUser />} />
             <Route path="/tours/newtour" element={<FatherCreateTour />} />
+            <Route
+              path="/tours/newsection/:tour_id"
+              element={<CreateSection />}
+            />
             <Route
               path="/tours/onesection/:tour_id/:section_id"
               element={<OneSection />}
