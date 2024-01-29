@@ -199,7 +199,6 @@ export const OneTour = () => {
                   </div>
                 </div>
 
-                {/* -------------------------DESCRIPCION, RATING, BOTON ADQUIRIR*/}
                 <div className="OneTourInfo d-flex align-items-start flex-column p-0">
                   <p>{oneTour[0]?.tour_description}</p>
 
