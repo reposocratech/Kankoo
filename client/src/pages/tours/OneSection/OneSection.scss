@@ -1,0 +1,38 @@
+@import "./../../../styles/mixins.scss";
+.OneSectionFather {
+  padding-left: 50px;
+  margin-top: 50px;
+  .OneSectionBtn {
+    @include BotonCoral;
+    margin: 0.2rem;
+    margin-bottom: 10px;
+  }
+  .OneSectionImg {
+    margin-top: 15px;
+    border-radius: 20px;
+  }
+  .OneSectionSubline {
+    color: red;
+    background-color: red;
+    height: 5px;
+    width: 100px;
+  }
+}
+
+.OneSectionResourceOneIcon {
+  color: #f07674;
+  font-size: 3rem;
+  cursor: pointer;
+
+  &.active {
+    color: red;
+  }
+
+  &:hover {
+    color: red;
+  }
+}
+
+.OneSectionResourceInfo {
+  padding-top: 20px;
+}
