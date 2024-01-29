@@ -7,7 +7,6 @@ export const AdminUsers = () => {
 
   return (
     <div>
-      <h2>Listado de Usuarios</h2>
       <AdminTable adminUsers={adminUsers} setAdminUsers={setAdminUsers} />
     </div>
   );

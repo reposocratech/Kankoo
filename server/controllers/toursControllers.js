@@ -164,38 +164,37 @@ class toursControllers {
   };
 
   disableTour = (req, res) => {
-    /*     console.log(req.params); */
 
     const { tour_id } = req.params;
     console.log(tour_id);
-    let sql = `UPDATE tour SET is_deleted = true WHERE tour_id = "${id}"`;
-    let sql2 = "SELECT * from tour where tour_is_disabled = false";
+    let sql = `UPDATE tour SET tour_is_disabled = 1 WHERE tour_id = "${tour_id}"`;
+    let sql2 = "SELECT * from tour where tour_is_disabled = 0";
 
     connection.query(sql, (error, result) => {
       if (error) throw error;
       console.log(error);
     });
-    connection.query(sql2, (error, resultUsers) => {
+    connection.query(sql2, (error, resultTours) => {
       error
         ? res.status(400).json({ error })
-        : res.status(200).json(resultUsers);
+        : res.status(200).json(resultTours);
     });
   };
 
   enableTour = (req, res) => {
     const { tour_id } = req.params;
     console.log(tour_id);
-    let sql = `UPDATE tour SET is_deleted = false WHERE tour_id = "${id}"`;
-    let sql2 = "SELECT * from tour where tour_is_disabled = true";
+    let sql = `UPDATE tour SET tour_is_disabled = 0 WHERE tour_id = "${tour_id}"`;
+    let sql2 = "SELECT * from tour where tour_is_disabled = 1";
 
     connection.query(sql, (error, result) => {
       if (error) throw error;
       console.log(error);
     });
-    connection.query(sql2, (error, resultUsers) => {
+    connection.query(sql2, (error, resultTours) => {
       error
         ? res.status(400).json({ error })
-        : res.status(200).json(resultUsers);
+        : res.status(200).json(resultTours);
     });
   };
 
@@ -391,6 +390,35 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id};
         }
         console.log(result);
       });
+    });
+  };
+  avgRating = (req, res) => {
+    const { tour_id } = req.params;
+    let sql = `SELECT AVG(rating) AS averageRating
+      FROM user_rates_tour
+      WHERE tour_id = ${tour_id};`;
+    connection.query(sql, (err, result) => {
+      if (err) {
+        // res.status(500).json(err);
+        console.log(err);
+      }
+      res.json({ averageRating: result[0].averageRating || null });
+    });
+  };
+  totalDistance = (req, res) => {
+    const { tour_id } = req.params;
+    console.log("ESOT ES EL TOUR ID", tour_id);
+    let sql = `SELECT SUM(section.travel_distance) as total_distance
+                  FROM section
+                  WHERE section.tour_id = ${tour_id}
+                  GROUP BY section.tour_id;`;
+    connection.query(sql, (err, resDistance) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({ resDistance });
+        console.log("esto es el total de distancia", resDistance);
+      }
     });
   };
 

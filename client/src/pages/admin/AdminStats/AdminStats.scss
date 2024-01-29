@@ -1,0 +1,32 @@
+.admin-stats-container {
+  margin-top: 20px;
+
+  .admin-stats-title {
+    text-align: center;
+    color: gray;
+    margin-bottom: 20px;
+  }
+
+  .admin-stats-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .card {
+      width: 300px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .registerButton {
+      margin-top: 10px;
+      width: 100%;
+      background-color: #f07674;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: #afb4b7;
+      }
+    }
+  }
+}
