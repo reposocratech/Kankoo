@@ -1,24 +1,24 @@
-.perfilGeneral {
+.UserPerfilGeneral {
   padding: 2rem 10rem 2rem 6rem;
   > h1 {
     padding-bottom: 3rem;
   }
 }
-.perfilButton {
+.UserPerfilButton {
   padding: 3rem;
   > p {
     font-size: larger;
     font-weight: 700;
   }
 }
-.perfilButton:hover {
+.UserPerfilButton:hover {
   transform: scale(0.9);
 }
-.perfilIcono {
+.UserPerfilIcono {
   width: 10rem;
   padding: 2rem;
 }
-.perfilCircle {
+.UserPerfilCircle {
   border: 0.5rem solid #f07674;
   border-radius: 50%;
 }
