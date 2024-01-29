@@ -100,7 +100,6 @@ export const OneTour = () => {
       });
   };
 
-
   const handleClickAcquired = () => {
     setAcquired((prevAcquired) => !prevAcquired);
     const acquiredData = JSON.parse(localStorage.getItem("acquired")) || {};
@@ -118,7 +117,6 @@ export const OneTour = () => {
       });
   };
 
-
   const delTour = (tour_id) => {
     axios
       .put(`http://localhost:3000/tours/deltour/${tour_id}`)
@@ -132,9 +130,7 @@ export const OneTour = () => {
         console.log("error borradooo cheee", err);
       });
   };
-  const handleClickOtherUser = () => {
-    setShowOtherUser(true);
-  };
+
   return (
     <Container>
       {oneTour && (
@@ -225,7 +221,7 @@ export const OneTour = () => {
                   {oneTour[0]?.user_id === user?.user_id && (
                     <div>
                       <button
-                        onClick={handleClickOtherUser}
+                        onClick={() => navigate(`/tours/edittour/${tour_id}`)}
                         className="OneTourButton"
                       >
                         Editar
