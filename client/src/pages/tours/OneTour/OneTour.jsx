@@ -196,7 +196,7 @@ export const OneTour = () => {
                 </div>
               </div>
             </Col>
-            {/* ---------------------------SECCIONES DE RUTA */}
+            {/* ---------------------------SECCIONES DE RUTaaaaA */}
             <Col>
               <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
               <div md={4} className="d-flex">
