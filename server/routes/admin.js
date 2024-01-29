@@ -7,5 +7,10 @@ router.get("/getAllUsers", adminControllers.getAllUsers);
 router.put("/disableUser/:id", adminControllers.disableUser);
 router.put("/enableUser/:id", adminControllers.enableUser);
 router.get("/getAllPics", adminControllers.getAllPics);
-
+router.put("/enableTour/:tour_id", adminControllers.enableTour);
+router.put("/disableTour/:tour_id", adminControllers.disableTour);
+router.put(
+  "/admin/updateUserIsDeletedStatus/:id",
+  adminControllers.updateUserIsDeletedStatus
+);
 module.exports = router;

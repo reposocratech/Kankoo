@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./AdminProfile.scss";
@@ -11,7 +11,11 @@ export const AdminProfile = () => {
   return (
     <Container className="perfilGeneral d-flex flex-column align-items-center">
       <Row>
-        <Col className="perfilButton d-flex flex-column align-items-center">
+        <Col
+          xs={12}
+          md={4}
+          className="perfilButton d-flex flex-column align-items-center"
+        >
           <div className="perfilCircle">
             <img
               onClick={() => navigate("/admin/adminUsers")}
@@ -19,10 +23,14 @@ export const AdminProfile = () => {
               alt="icono de usuario"
             />
           </div>
-          <p>Listado de Usuarios</p>
+          <p className="pAdmin">Listado de Usuarios</p>
         </Col>
 
-        <Col className="perfilButton d-flex flex-column align-items-center">
+        <Col
+          xs={12}
+          md={4}
+          className="perfilButton d-flex flex-column align-items-center"
+        >
           <div className="perfilCircle">
             <img
               onClick={() => navigate("/admin/adminTours")}
@@ -33,7 +41,11 @@ export const AdminProfile = () => {
           <p>Listado de Guías</p>
         </Col>
 
-        <Col className="perfilButton d-flex flex-column align-items-center">
+        <Col
+          xs={12}
+          md={4}
+          className="perfilButton d-flex flex-column align-items-center"
+        >
           <div className="perfilCircle">
             <img
               onClick={() => navigate("/admin/adminStats")}
