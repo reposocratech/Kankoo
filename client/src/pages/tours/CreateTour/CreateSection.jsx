@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 import { KankooContext } from "../../../context/KankooContext";
+import { sendMail } from "../../../../helpers/sendmail";
 
 const initialValueSection = {
   section_name: "",
@@ -108,6 +109,7 @@ export const CreateSection = ({
             ...sections,
             { ...addSection, section_id: res.data.section_id },
           ];
+
           setSections(tempSections); */
 
           if (pathname === `/tours/newsection/${tour_id}`) {
@@ -116,6 +118,14 @@ export const CreateSection = ({
             setResetSections(!resetSections);
             setShowFormSection(false);
           }
+
+       
+          let url = "http://localhost:3000/tours/waiting";
+          let msg = "ALguien ha subido una nueva guía, ¡acéptala!";
+          let email = "joseluis_casares@hotmail.com";
+          let asunto = "Nueva guía";
+          sendMail(url, msg, email, asunto);
+
           console.log(res.data);
         })
         .catch((err) => {
