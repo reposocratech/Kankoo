@@ -10,10 +10,10 @@ import { StarRating } from "../../../components/Starrating/StarRating.jsx";
 export const OneTour = () => {
   const [oneTour, setOneTour] = useState();
   const [liked, setLiked] = useState(false);
-  const [selectedStars, setSelectedStars] = useState(0);
+  const [totalDistance, setTotalDistance] = useState(0);
   const { tour_id } = useParams();
   console.log("tour_id antes de llamar a delTour:", tour_id);
-  const { user, myTours, setMyTours, resetMyTours, setResetMyTours } =
+  const { user, setMyTours, resetMyTours, setResetMyTours } =
     useContext(KankooContext);
   const id = user?.user_id;
   //el precio se muestra si existe el tour y su valor es diferente de 0
@@ -33,6 +33,19 @@ export const OneTour = () => {
         console.log("Error en la solicitud Axios:", err);
       });
   }, [tour_id]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/tours/distance/${tour_id}`)
+      .then((res) => {
+        setTotalDistance(res.data.resDistance[0]?.total_distance);
+        console.log("LO QUE VIENE DEL BACK", res.data.resDistance);
+        console.log("LO QUE SETEAMOS", totalDistance);
+      })
+      .catch((err) => {
+        console.log("Error en la solicitud Axios:", err);
+      });
+  });
 
   useEffect(() => {
     axios
@@ -151,35 +164,39 @@ export const OneTour = () => {
 
                   {/* -----------------------RATING */}
                   <StarRating tour_id={tour_id} id={id} />
+                  <p>{parseFloat(totalDistance).toFixed(1)} km</p>
                 </div>
                 <div className="d-flex">
-                  <button className="OneTourButton">Adquirir</button>
-                  {oneTour[0]?.user_id === user?.user_id && (
-                    <button
-                      onClick={() => navigate(`/tours/edittour/${tour_id}`)}
-                      className="OneTourButton"
-                    >
-                      Editar
-                    </button>
+                  {oneTour[0]?.user_id != user?.user_id && (
+                    <button className="OneTourButton">Adquirir</button>
                   )}
-
-                  <button
-                    className="OneTourButton"
-                    type="button"
-                    onClick={() => {
-                      console.log(
-                        "tour_id al hacer clic en el botón:",
-                        tour_id
-                      );
-                      delTour(tour_id);
-                    }}
-                  >
-                    Eliminar
-                  </button>
+                  {oneTour[0]?.user_id === user?.user_id && (
+                    <div>
+                      <button
+                        onClick={() => navigate(`/tours/edittour/${tour_id}`)}
+                        className="OneTourButton"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="OneTourButton"
+                        type="button"
+                        onClick={() => {
+                          console.log(
+                            "tour_id al hacer clic en el botón:",
+                            tour_id
+                          );
+                          delTour(tour_id);
+                        }}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </Col>
-            {/* ---------------------------SECCIONES DE RUTA */}
+            {/* ------------------------------SECCIONES DE RUTaaaaA */}
             <Col>
               <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
               <div md={4} className="d-flex">

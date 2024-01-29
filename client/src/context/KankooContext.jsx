@@ -54,6 +54,7 @@ export const KankooProvider = ({ children }) => {
       .get(`http://localhost:3000/tours/alltours`)
       .then((res) => {
         setAllTours(res.data.resultTours);
+        console.log("todos los Tours", res.data.resultTours);
       })
       .catch((err) => {
         console.log(err);

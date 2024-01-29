@@ -1,9 +1,11 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "./AdminTable.scss";
 
 export const AdminTable = ({ adminUsers, setAdminUsers }) => {
-  console.log(adminUsers);
+  const navigate = useNavigate;
 
   const handleClick = (id, isDel) => {
     console.log(id);
@@ -20,44 +22,56 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
       })
       .catch((e) => console.log(e));
   };
+
   return (
-    <>
-      <div>Listado de todos los Usuarios:</div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Avatar</th>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>email</th>
-            <th>estado</th>
-            <th>habilitar/deshabilitar</th>
-            <th>Ir a su perfil</th>
-          </tr>
-        </thead>
-        <tbody>
-          {adminUsers?.map((elem) => (
+    <div className="table-container">
+      <h2 className="table-title">Listado de Usuarios</h2>
+      <div className="table-wrapper">
+        <Table striped bordered hover>
+          <thead>
             <tr>
-              <td>{elem.avatar}</td>
-              <td>{elem.user_id}</td>
-              <td>{elem.first_name}</td>
-              <td>{elem.last_name}</td>
-              <td>{elem.email}</td>
-              <td>{elem.user_is_deleted ? "inactivo" : "activo"}</td>
-              <td className="d-flex justify-content-center">
-                <Button
-                  onClick={() =>
-                    handleClick(elem.user_id, elem.user_is_deleted)
-                  }
-                >
-                  {elem.user_is_deleted ? "activar" : "bloquear"}
-                </Button>
-              </td>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+              <th>Ir a su perfil</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </>
+          </thead>
+          <tbody>
+            {adminUsers?.map((elem) => (
+              <tr key={elem.user_id}>
+                <td>{elem.user_id}</td>
+                <td>{elem.first_name}</td>
+                <td>{elem.last_name}</td>
+                <td>
+                  {elem.user_is_deleted ? (
+                    <span className="status-circle inactive"></span>
+                  ) : (
+                    <span className="status-circle active"></span>
+                  )}
+                  {elem.user_is_deleted ? "Inactivo" : "Activo"}
+                </td>
+                <td className="d-flex justify-content-center">
+                  <Button
+                    className={`btn-${
+                      elem.user_is_deleted ? "activate" : "deactivate"
+                    }`}
+                    onClick={() =>
+                      handleClick(elem.user_id, elem.user_is_deleted)
+                    }
+                  >
+                    {elem.user_is_deleted ? "Activar" : "Bloquear"}
+                  </Button>
+                </td>
+                <td>
+                  <Button className="btn-profile">Ver perfil</Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+    </div>
   );
 };
