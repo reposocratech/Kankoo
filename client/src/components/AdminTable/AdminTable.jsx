@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./AdminTable.scss";
 
 export const AdminTable = ({ adminUsers, setAdminUsers }) => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleClick = (id, isDel) => {
     console.log(id);
@@ -19,8 +19,17 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
       .put(url)
       .then((res) => {
         setAdminUsers(res.data);
+        const newUserIsDeletedValue = isDel === 1 ? true : false;
+        axios.put(
+          `http://localhost:3000/admin/updateUserIsDeletedStatus/${id}`,
+          { user_is_deleted: newUserIsDeletedValue }
+        );
       })
       .catch((e) => console.log(e));
+  };
+
+  const handleGoBack = () => {
+    navigate("/admin/adminProfile");
   };
 
   return (
@@ -72,6 +81,9 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
           </tbody>
         </Table>
       </div>
+      <Button className="btn-back" onClick={handleGoBack}>
+        Volver
+      </Button>
     </div>
   );
 };

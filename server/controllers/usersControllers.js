@@ -1,5 +1,6 @@
 const connection = require("../config/db");
 const bcrypt = require("bcrypt");
+const { response } = require("express");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -150,32 +151,38 @@ class usersControllers {
       if (error) return res.status(500).json(error);
       console.log(result);
 
-      if (!result || result.length === 0 || result[0].is_deleted == 1) {
+      if (!result || result.length === 0) {
         res.status(401).json("Email no registrado");
       } else {
         const user = result[0];
-        console.log(user);
-        const hash = user.password;
-        bcrypt.compare(password, hash, (error, response) => {
-          if (error) return res.status(500).json(error);
-          if (response == true) {
-            const token = jwt.sign(
-              {
-                user: {
-                  id: user.user_id,
-                  type: user.user_type,
-                  prueba: "hola",
-                },
-              },
-              process.env.SECRET,
-              { expiresIn: "1d" }
-            );
 
-            res.status(200).json({ token, user });
-          } else {
-            res.status(401).json("Contraseña no válida");
-          }
-        });
+        if (user.user_is_deleted == 1) {
+          res
+            .status(401)
+            .json("La cuenta ha sido bloqueada por el administrador");
+        } else {
+          const hash = user.password;
+          bcrypt.compare(password, hash, (error, response) => {
+            if (error) return res.status(500).json(error);
+            if (response == true) {
+              const token = jwt.sign(
+                {
+                  user: {
+                    id: user.user_id,
+                    type: user.user_type,
+                    prueba: "hola",
+                  },
+                },
+                process.env.SECRET,
+                { expiresIn: "1d" }
+              );
+
+              res.status(200).json({ token, user });
+            } else {
+              res.status(401).json("Contraseña no válida");
+            }
+          });
+        }
       }
     });
   };

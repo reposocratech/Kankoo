@@ -38,6 +38,7 @@ export const LoginForm = () => {
       })
       .catch((err) => {
         console.log(err);
+        setMsgError(err.response.data || "Error de inicio de sesión");
       });
   };
 
