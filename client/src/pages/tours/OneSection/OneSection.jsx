@@ -83,6 +83,12 @@ export const OneSection = () => {
                 return (
                   <Col>
                     <ImagesSection sectionResources={e} />;
+                    <div>
+                      <InfoSection
+                        className="OneSectionResourceInfo"
+                        oneSection={oneSection}
+                      />
+                    </div>
                   </Col>
                 );
               }
@@ -90,7 +96,10 @@ export const OneSection = () => {
                 return (
                   <Col>
                     {" "}
-                    <VideoSection sectionResources={e} />;
+                    <VideoSection
+                      sectionResources={e}
+                      className="VideoSection"
+                    />
                   </Col>
                 );
               }
@@ -103,12 +112,6 @@ export const OneSection = () => {
               }
             })}
           </>
-          <div>
-            <InfoSection
-              className="OneSectionResourceInfo"
-              oneSection={oneSection}
-            />
-          </div>
         </Row>
       </Container>
     </>

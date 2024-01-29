@@ -12,7 +12,9 @@ export const CardOneTour = ({ elem }) => {
     axios
       .get(`http://localhost:3000/tours/avgrating/${elem.tour_id}`)
       .then((res) => {
-        setAverageRating(res.data.averageRating, () => {});
+
+        setAverageRating(res.data.averageRating);
+
       })
       .catch((err) => {
         console.error("Error al obtener la media de los ratings:", err);
