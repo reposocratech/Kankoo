@@ -8,6 +8,10 @@ export const AudioSection = ({ sectionResources }) => {
           src={`http://localhost:3000/resources/audios/${sectionResources.text}`}
           type="audio/ogg"
         />
+        <source
+          src={`http://localhost:3000/resources/audios/${sectionResources.text}`}
+          type="audio/mpeg"
+        />
       </audio>
     </>
   );

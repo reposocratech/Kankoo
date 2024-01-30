@@ -7,7 +7,7 @@
 .guideTitle {
   font-size: 2rem;
 
-  @media (max-width: 767px) {
+  @media (max-width: 844px) {
     font-size: 1.5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -18,14 +18,20 @@
   font-size: 1.8rem;
   color: #c6c4c4;
 
-  @media (max-width: 767px) {
+  @media (max-width: 844px) {
     font-size: 1.5rem;
   }
 }
 
 .OneTourButton {
   @include BotonCoral;
-  margin: 1rem;
+  // margin: 1rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+
+  @media (max-width: 844px) {
+    margin-right: 0.4rem;
+  }
 }
 .OneTourButtonDisabled {
   @include BotonGris;
@@ -34,7 +40,7 @@
 .OneTourInfo {
   width: 30rem;
 
-  @media (max-width: 767px) {
+  @media (max-width: 844px) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
@@ -46,8 +52,9 @@
   margin-top: 1rem;
   margin-bottom: -0.5rem;
 
-  @media (max-width: 767px) {
-    width: 100%;
+  @media (max-width: 844px) {
+    padding-left: 0.5rem;
+    padding-right: 5rem;
   }
 }
 .custom-btn-container {
@@ -58,16 +65,20 @@
   width: 30rem;
   margin-bottom: 5rem;
 
-  @media (max-width: 767px) {
+  @media (max-width: 844px) {
     width: 100%;
   }
 }
 
 .OneTourImg {
   width: 30rem;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
   aspect-ratio: 1/1;
   object-fit: cover;
+
+  @media (max-width: 844px) {
+    width: 100%;
+  }
 }
 
 .createFor {
