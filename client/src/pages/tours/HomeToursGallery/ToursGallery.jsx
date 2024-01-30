@@ -76,6 +76,7 @@ export const ToursGallery = () => {
             onChange={onChange}
             value={filter}
           />
+
         </Form>
       </Row>
 
