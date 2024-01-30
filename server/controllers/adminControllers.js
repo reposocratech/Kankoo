@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 class adminControllers {
   getAllUsers = (req, res) => {
-    let sql = "SELECT * FROM user WHERE user_type = 2";
+    let sql = "SELECT * FROM user WHERE user_type = 2 or user_is_deleted = 1";
     connection.query(sql, (error, result) => {
       console.log(result);
       if (error) {
@@ -14,6 +14,20 @@ class adminControllers {
       res.status(200).json(result);
     });
   };
+
+  getOneUser = (req, res) => {
+    const { id } = req.params;
+    let sql = `SELECT * FROM user WHERE user_id = ${id}`;
+
+    connection.query(sql, (error, result) => {
+      if (error) {
+        res.status(400).json({ error });
+      } else {
+        res.status(200).json(result[0]);
+      }
+    });
+  };
+
   //deshabilita un usuario
   disableUser = (req, res) => {
     console.log(req.params);
