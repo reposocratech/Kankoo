@@ -19,8 +19,6 @@ function NavBarApp() {
   };
 
   const handleAvatarClick = () => {
-    console.log(user?.user_type);
-
     if (user?.user_type === 1) {
       navigate("/admin/adminProfile");
     } else if (user?.user_type === 2) {
@@ -32,11 +30,6 @@ function NavBarApp() {
     if (user) {
       return (
         <>
-          <Nav.Link className="navCsesion ml-auto">
-            <button className="navBoton" onClick={handleLogout}>
-              Cerrar sesión
-            </button>
-          </Nav.Link>
           <Nav.Link className="navAvatarContainer">
             <div className="navAvatar" onClick={handleAvatarClick}>
               {user.avatar ? (
@@ -52,15 +45,26 @@ function NavBarApp() {
               )}
             </div>
           </Nav.Link>
+          <Nav.Link className="navCsesion ml-auto">
+            <button className="navBoton" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
+          </Nav.Link>
         </>
       );
     } else {
       return (
         <>
-          <Nav.Link onClick={() => navigate("/users/registeruser")}>
+          <Nav.Link
+            className="responsiveBoton"
+            onClick={() => navigate("/users/registeruser")}
+          >
             <button className="navBoton">Registro</button>
           </Nav.Link>
-          <Nav.Link onClick={() => navigate("/users/login")}>
+          <Nav.Link
+            className="responsiveBoton"
+            onClick={() => navigate("/users/login")}
+          >
             <button className="navBoton">Inicia sesión</button>
           </Nav.Link>
         </>
@@ -74,9 +78,7 @@ function NavBarApp() {
         <Nav.Link
           className="navCsesion ml-auto"
           onClick={() => navigate("/admin/adminProfile")}
-        >
-          <button className="navBoton">Panel de administrador</button>
-        </Nav.Link>
+        ></Nav.Link>
       );
     }
     return null;

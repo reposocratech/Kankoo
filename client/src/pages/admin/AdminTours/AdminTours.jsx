@@ -7,7 +7,6 @@ export const AdminTours = () => {
 
   return (
     <div>
-      <h2>Listado de Guías:</h2>
       <AdminToursTable allTours={allTours} setAllTours={setAllTours} />
     </div>
   );
