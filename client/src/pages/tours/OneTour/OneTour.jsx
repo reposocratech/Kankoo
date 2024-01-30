@@ -124,7 +124,7 @@ export const OneTour = () => {
         <>
           <Row className="d-flex">
             {/* Card principalllllllllllllll */}
-            <Col md={6} className="d-flex flex-column">
+            <Col lg={5} md={12} xs={12} className="d-flex flex-column">
               <Row className="mt-5">
                 <h2 className="guideTitle">{oneTour[0]?.tour_name}</h2>
                 <div className="d-flex justify-content-between OneTourInfo">
@@ -158,11 +158,13 @@ export const OneTour = () => {
 
                   <div className="d-flex">
                     <img
-                      className="ml-auto"
+                      className="mb-2 me-1"
                       src="/assets/iconKm.jpg"
                       alt="icono de persona andando para km"
                     />
-                    <p>{parseFloat(totalDistance).toFixed(1)} km</p>
+                    <p className="mt-2">
+                      {parseFloat(totalDistance).toFixed(1)} km
+                    </p>
                   </div>
                 </div>
 
@@ -233,28 +235,27 @@ export const OneTour = () => {
                         delTour(tour_id);
                       }}
                     >
-                      Eliminar guía Eliminar guía Eliminar guía Eliminar guíaç
-                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
-                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
-                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
-                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
+
+                      Eliminar guía
+
                     </button>
                   </div>
                 )}
               </Row>
             </Col>
+            <Col lg={7} md={12} xs={12} className="d-flex flex-column">
+              <Row className="mt-5 mb-5">
+                <h3>Puntos de esta guía:</h3>
+              </Row>
+              <Row>
+                {oneTour?.map((elem, index) => (
+                  <Col key={index} lg={4} md={4} className="d-flex mb-3">
+                    <CardOneSection elem={elem} oneTour={oneTour} user={user} />
+                  </Col>
+                ))}
+              </Row>
+            </Col>
           </Row>
-
-          <Col>
-            <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
-            <div md={4} className="d-flex">
-              {oneTour?.map((elem) => {
-                return (
-                  <CardOneSection elem={elem} oneTour={oneTour} user={user} />
-                );
-              })}
-            </div>
-          </Col>
         </>
       )}
     </Container>
