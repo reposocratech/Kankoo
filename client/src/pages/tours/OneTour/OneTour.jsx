@@ -233,13 +233,28 @@ export const OneTour = () => {
                         delTour(tour_id);
                       }}
                     >
-                      Eliminar guía
+                      Eliminar guía Eliminar guía Eliminar guía Eliminar guíaç
+                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
+                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
+                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
+                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
                     </button>
                   </div>
                 )}
               </Row>
             </Col>
           </Row>
+
+          <Col>
+            <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
+            <div md={4} className="d-flex">
+              {oneTour?.map((elem) => {
+                return (
+                  <CardOneSection elem={elem} oneTour={oneTour} user={user} />
+                );
+              })}
+            </div>
+          </Col>
         </>
       )}
     </Container>
