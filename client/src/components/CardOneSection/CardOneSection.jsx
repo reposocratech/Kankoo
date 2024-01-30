@@ -67,7 +67,7 @@ export const CardOneSection = ({ elem, oneTour, user }) => {
                     )
                   }
                 >
-                  Editar
+                  Editar adfadfadfadfadfadfadfad
                 </button>
 
                 {oneTour[0]?.user_id === user?.user_id &&
