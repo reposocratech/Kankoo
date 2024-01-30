@@ -1,76 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
-import { jwtDecode } from "jwt-decode";
-import { getLocalStorage } from "../../../../helpers/localStorageUtils";
 import { KankooContext } from "../../../context/KankooContext";
-import axios from "axios";
-import "./MyTours.scss";
+import "./../UserMenu.scss";
 import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
 import { useNavigate } from "react-router-dom";
 
 export const MyTours = () => {
   const { myTours } = useContext(KankooContext);
-
   const navigate = useNavigate();
-  /*  useEffect(() => {
-    const tokenLocalStorage = getLocalStorage("token");
-    setToken(tokenLocalStorage);
-
-    if (tokenLocalStorage) {
-      const { id } = jwtDecode(tokenLocalStorage).user;
-      axios
-        .get(`http://localhost:3000/users/mytours/${id}`)
-        .then((res) => {
-          setMyTours(res.data.resultMyTours);
-          console.log("respuesta my tours", res.data.resultMyTours);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, []); */
   return (
     <Container>
-      <Col>
-        <Row>
-          <div
-            className="BackCombo"
-            onClick={() => navigate("/users/userprofile")}
-          >
-            <img
-              className="BackArrow"
-              src="/icons/back.png"
-              alt="flecha a la izquierda"
-            />
-            <button
-              className="backButton"
-              onClick={() => navigate("/users/userprofile")}
-            >
-              Volver
-            </button>
-          </div>
-        </Row>
-      </Col>
-      <Col>
-        <Row>
-          <div className="d-flex myToursHeader">
-            <img
-              className="myToursIcono"
-              src="/icons/guiassubidas.png"
-              alt="icono de ruta entre destinos"
-            />
-            <h2>Mis guías subidas</h2>
-          </div>
-        </Row>
-        <Row
-          className="d-flex justify-content-around align-items-center flex-wrap"
-          md={4}
-        >
-          {myTours?.map((elem) => {
-            return <CardOneTour key={elem.tour_id} elem={elem} />;
-          })}
-        </Row>
-      </Col>
+      <button
+        className="UserMenuButton"
+        onClick={() => navigate("/users/userprofile")}
+      >
+        Volver
+      </button>
+      <Row className="UserMenuTitle d-flex justify-content-center ">
+        <h1>Todas mis guías turísticas</h1>
+      </Row>
+      <Row className="d-flex justify-content-center">
+        {myTours?.map((elem) => {
+          return <CardOneTour key={elem.tour_id} elem={elem} />;
+        })}
+      </Row>
     </Container>
   );
 };

@@ -1,9 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
+import { Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import "./../../users/UserMenu.scss";
 
 export const TopTours = () => {
   const [topTours, setTopTours] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:3000/tours/toptours")
@@ -15,11 +19,18 @@ export const TopTours = () => {
       });
   }, []);
   return (
-    <>
-      <h1>Los tours mejor valorados</h1>
-      {topTours?.map((elem) => {
-        return <CardOneTour elem={elem} />;
-      })}
-    </>
+    <Container>
+      <button className="UserMenuButton" onClick={() => navigate(-1)}>
+        Volver
+      </button>
+      <Row className="UserMenuTitle d-flex justify-content-center ">
+        <h1>Las guías turísticas mejor valoradas</h1>
+      </Row>
+      <Row className="d-flex justify-content-center">
+        {topTours?.map((elem) => {
+          return <CardOneTour elem={elem} />;
+        })}
+      </Row>
+    </Container>
   );
 };

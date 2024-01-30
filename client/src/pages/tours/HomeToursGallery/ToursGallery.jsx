@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Form, FormControl, Col, Row } from "react-bootstrap";
+import { Form, FormControl, Container, Col, Row } from "react-bootstrap";
 import "./ToursGallery.scss";
 import { KankooContext } from "../../../context/KankooContext";
 import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
 import { textSensitive } from "../../../../helpers/utils";
 export const ToursGallery = () => {
-  const { allTours, setAllTours } = useContext(KankooContext);
+  const { allTours } = useContext(KankooContext);
   const [showAllTours, setShowAllTours] = useState(true);
   const [foundTours, setFoundTours] = useState();
   const [filter, setFilter] = useState("");
@@ -33,7 +33,18 @@ export const ToursGallery = () => {
   };
 
   return (
-    <Col>
+    <Container>
+      <Row className="s-flex justify-content-center">
+        <Col className="d-flex justify-content-center" md={8}>
+          <div className="HomeWelcome">
+            <p className="HomeText">
+              Entra y viaja sin ataduras con nuestras guías turísticas
+              digitales. Vídeos y audios en tu smartphone para descubrir
+              destinos a tu propio ritmo 📍
+            </p>
+          </div>
+        </Col>
+      </Row>
       <Row>
         <Form className="gallerySearchbar d-flex mx-auto">
           <FormControl
@@ -49,6 +60,7 @@ export const ToursGallery = () => {
           </button>
         </Form>
       </Row>
+
       <Row className="s-flex justify-content-center">
         <Col md={8}>
           <div className="divHome">
@@ -62,6 +74,7 @@ export const ToursGallery = () => {
           </div>
         </Col>
       </Row>
+
       <Row
         className="d-flex justify-content-around align-items-center flex-wrap p-3"
         md={4}
@@ -78,6 +91,6 @@ export const ToursGallery = () => {
           return <CardOneTour key={elem.tour_id} elem={elem} />;
         })}
       </Row>
-    </Col>
+    </Container>
   );
 };

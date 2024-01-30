@@ -1,16 +1,18 @@
 @import "./../../../styles/mixins.scss";
+
 .OneSectionFather {
   padding-left: 50px;
   margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   .OneSectionBtn {
     @include BotonCoral;
     margin: 0.2rem;
     margin-bottom: 10px;
   }
-  .OneSectionImg {
-    margin-top: 15px;
-    border-radius: 20px;
-  }
+
   .OneSectionSubline {
     color: red;
     background-color: red;
@@ -33,14 +35,39 @@
   }
 }
 
+.ImageSection {
+  margin-bottom: 50px;
+}
+
 .OneSectionResourceInfo {
   padding-top: 20px;
 }
 
 video {
   width: 35vw;
+  border-radius: 1.5rem;
 }
 
 audio {
   width: 35vw;
+  border-radius: 1.5rem;
+}
+
+.OneSectionImagesContainer {
+  gap: 16px; /* o el valor que prefieras para el espaciado entre imágenes */
+  align-items: stretch;
+}
+
+.OneSectionResourceImg {
+  width: 15rem;
+  height: 15rem;
+  display: block;
+  border-radius: 1.5rem; /* Otra opción: aplica bordes redondeados a las imágenes */
+}
+
+@media (max-width: 767px) {
+  .custom-audio-player,
+  .custom-video-player {
+    width: 65vw;
+  }
 }
