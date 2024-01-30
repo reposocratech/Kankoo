@@ -53,8 +53,8 @@ audio {
   border-radius: 1.5rem;
 }
 
-.OneSectionImagesContainer {
-  gap: 16px; /* o el valor que prefieras para el espaciado entre imágenes */
+.OneSectionResourcesContainer {
+  gap: 16px;
   align-items: stretch;
 }
 
@@ -62,12 +62,39 @@ audio {
   width: 15rem;
   height: 15rem;
   display: block;
-  border-radius: 1.5rem; /* Otra opción: aplica bordes redondeados a las imágenes */
+  border-radius: 1.5rem;
+}
+
+.OneSectionResourceInfoDescription {
+  text-wrap: balance;
 }
 
 @media (max-width: 767px) {
-  .custom-audio-player,
-  .custom-video-player {
+  .custom-audio-player {
     width: 65vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-video-player {
+    width: 75vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .OneSectionFather {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .OneSectionResourcesControls {
+    text-align: center;
+  }
+
+  .OneSectionSubline {
+    margin: 0 auto;
+  }
+  .OneSectionBtnContainer {
+    text-align: left;
   }
 }

@@ -43,46 +43,47 @@ export const OneSection = () => {
   return (
     <>
       <Container lg={6} md={12} sm={12} xs={12} className="OneSectionFather ">
-        <Row className="OneSectionImagesContainer ">
-          <div>
-            <button className="OneSectionBtn" onClick={() => navigate(-1)}>
-              Volver
-            </button>
-          </div>
-          <div>
-            <h2>{oneSection?.section_name}</h2>
-
-            <hr className="OneSectionSubline" />
-            <div>
-              <InfoSection
-                className="OneSectionResourceInfo"
-                oneSection={oneSection}
-              />
+        <Row className="OneSectionResourcesContainer ">
+          <div className="OneSectionResourcesControls">
+            <div className="OneSectionBtnContainer ">
+              <button className="OneSectionBtn " onClick={() => navigate(-1)}>
+                Volver
+              </button>
             </div>
-          </div>
-          <div className="OneSectionResourceIcons">
-            <i
-              className={`material-symbols-outlined OneSectionResourceOneIcon ${
-                !showResources && activeIcon !== "video" ? "active" : ""
-              }`}
-              onClick={() => {
-                setShowResources(false);
-                setActiveIcon("audio");
-              }}
-            >
-              headphones
-            </i>
-            <i
-              className={`material-symbols-outlined OneSectionResourceOneIcon ${
-                showResources || activeIcon === "video" ? "active" : ""
-              }`}
-              onClick={() => {
-                setShowResources(true);
-                setActiveIcon("video");
-              }}
-            >
-              video_library
-            </i>
+            <div>
+              <h2>{oneSection?.section_name}</h2>
+              <hr className="OneSectionSubline" />
+              <div>
+                <InfoSection
+                  className="OneSectionResourceInfo"
+                  oneSection={oneSection}
+                />
+              </div>
+            </div>
+            <div className="OneSectionResourceIcons">
+              <i
+                className={`material-symbols-outlined OneSectionResourceOneIcon ${
+                  !showResources && activeIcon !== "video" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setShowResources(false);
+                  setActiveIcon("audio");
+                }}
+              >
+                headphones
+              </i>
+              <i
+                className={`material-symbols-outlined OneSectionResourceOneIcon ${
+                  showResources || activeIcon === "video" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setShowResources(true);
+                  setActiveIcon("video");
+                }}
+              >
+                video_library
+              </i>
+            </div>
           </div>
           <>
             {sectionResources
@@ -102,24 +103,30 @@ export const OneSection = () => {
               .map((e) => {
                 if (e.resource_type === 3 && showResources) {
                   return (
-                    <Col key={e.id}>
-                      <VideoSection
-                        sectionResources={e}
-                        className="VideoSection"
-                      />
+                    <Col
+                      key={e.id}
+                      className="VideoSection d-flex justify-content-center"
+                    >
+                      <VideoSection sectionResources={e} />
                     </Col>
                   );
                 }
                 if (e.resource_type === 2 && !showResources) {
                   return (
-                    <Col key={e.id}>
-                      <AudioSection sectionResources={e} />;
+                    <Col
+                      key={e.id}
+                      className="AudioSection d-flex justify-content-center "
+                    >
+                      <AudioSection sectionResources={e} />
                     </Col>
                   );
                 }
                 if (e.resource_type === 1) {
                   return (
-                    <Col key={e.id} className="ImageSection">
+                    <Col
+                      key={e.id}
+                      className="ImageSection d-flex justify-content-center "
+                    >
                       <ImagesSection sectionResources={e} />
                     </Col>
                   );
