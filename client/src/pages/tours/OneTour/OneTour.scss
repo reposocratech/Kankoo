@@ -12,11 +12,23 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
+
+  @media (max-width: 1180px) {
+    font-size: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
 .h3OneTour {
   @media (max-width: 844px) {
     font-size: 1.5rem;
+    margin-bottom: 2rem;
+    margin-top: -2rem;
+  }
+
+  @media (max-width: 1180px) {
+    margin-left: 1rem;
   }
 }
 
@@ -26,6 +38,10 @@
 
   @media (max-width: 844px) {
     font-size: 1.5rem;
+  }
+
+  @media (max-width: 1180px) {
+    font-size: 2rem;
   }
 }
 
@@ -37,6 +53,10 @@
 
   @media (max-width: 844px) {
     margin-right: 0.4rem;
+  }
+
+  @media (max-width: 1180px) {
+    margin-left: 1rem;
   }
 }
 .OneTourButtonDisabled {
@@ -50,6 +70,10 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
+
+  @media (max-width: 1180px) {
+    width: 100%;
+  }
 }
 
 .OneTourDescription {
@@ -60,7 +84,11 @@
 
   @media (max-width: 844px) {
     padding-left: 0.5rem;
-    padding-right: 5rem;
+    padding-right: 0.1rem;
+  }
+
+  @media (max-width: 1180px) {
+    width: 100%;
   }
 }
 .custom-btn-container {
@@ -74,6 +102,9 @@
   @media (max-width: 844px) {
     width: 100%;
   }
+  @media (max-width: 1180px) {
+    width: 100%;
+  }
 }
 
 .OneTourImg {
@@ -83,6 +114,10 @@
   object-fit: cover;
 
   @media (max-width: 844px) {
+    width: 100%;
+  }
+
+  @media (max-width: 1180px) {
     width: 100%;
   }
 }

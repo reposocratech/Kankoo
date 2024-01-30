@@ -142,7 +142,7 @@ export const OneTour = () => {
                 </div>
               </Row>
 
-              <Row className="d-flex align-items-start">
+              <Row className="d-flex align-self-lg-start">
                 <img
                   src={`http://localhost:3000/images/tours/${oneTour[0]?.cover}`}
                   alt="imagen de la guía turísitca"
@@ -197,7 +197,7 @@ export const OneTour = () => {
               <Row className="OneTourDescription">
                 <p>{oneTour[0]?.tour_description}</p>
               </Row>
-              <Row className="OneTourBotones d-flex justify-content-start">
+              <Row className="OneTourBotones d-flex align-self-lg-start">
                 {oneTour[0]?.user_id != user?.user_id && (
                   <div className="custom-btn-container">
                     <button
@@ -235,9 +235,7 @@ export const OneTour = () => {
                         delTour(tour_id);
                       }}
                     >
-
                       Eliminar guía
-
                     </button>
                   </div>
                 )}

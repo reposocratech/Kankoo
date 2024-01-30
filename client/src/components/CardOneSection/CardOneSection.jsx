@@ -28,7 +28,7 @@ export const CardOneSection = ({ elem, oneTour, user }) => {
     <Container className="prueba">
       <Row>
         <Col>
-          <div className="CardOneSection d-flex flex-column align-items-start">
+          <div className="CardOneSection d-flex flex-column align-self-lg-start">
             <div>
               <img
                 onClick={() =>
