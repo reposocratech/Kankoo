@@ -7,6 +7,10 @@ export const VideoSection = ({ sectionResources }) => {
         src={`http://localhost:3000/resources/videos/${sectionResources.text}`}
         type="video/mp4"
       />
+      <source
+        src={`http://localhost:3000/resources/videos/${sectionResources.text}`}
+        type="video/webm"
+      />
     </video>
   );
 };

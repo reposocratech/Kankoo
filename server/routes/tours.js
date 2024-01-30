@@ -40,10 +40,5 @@ router.get(
 router.put("/enableTour/:tour_id", toursControllers.enableTour);
 router.put("/disableTour/:tour_id", toursControllers.disableTour);
 router.get("/toptours", toursControllers.topTours);
-// router.put(
-//   "/addPics/:section_id",
-//   multerMulti("imgsection"),
-//   toursControllers.addPics
-// );
 
 module.exports = router;

@@ -13,7 +13,7 @@ const initialValueTour = {
   tour_city: "",
 };
 
-export const CreateTour = ({ tour, setTour, setShowSections }) => {
+export const CreateTour = ({ setTour, setShowSections }) => {
   const [addTour, setAddTour] = useState(initialValueTour);
   const [msgError, setMsgError] = useState("");
   const [file, setFile] = useState();
@@ -24,8 +24,6 @@ export const CreateTour = ({ tour, setTour, setShowSections }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddTour({ ...addTour, [name]: value });
-
-    /*   console.log(e.target.value); */
   };
 
   const handleFile = (e) => {
@@ -68,12 +66,11 @@ export const CreateTour = ({ tour, setTour, setShowSections }) => {
         });
     }
   };
-  /*   console.log(addTour);
-   */
+
   return (
-    <Row className="createTourGeneral">
+    <Row className="createTourGeneral d-flex">
       <h2>Crear nueva guía turística</h2>
-      <Col sm={2} md={2} lg={4}>
+      <Col lg={6} md={12} sm={12} xs={12}>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Nombre de la guía</Form.Label>
