@@ -1,3 +1,5 @@
+@import "./../../styles/mixins.scss";
+
 .table-container {
   text-align: center;
   margin-top: 20px;
@@ -9,8 +11,7 @@
   }
 
   .btn-back {
-    background-color: #f07674;
-    border: none;
+    @include BotonCoral;
     display: flex;
     justify-content: flex-end;
 
@@ -20,7 +21,10 @@
   }
 
   .table-wrapper {
+    overflow-x: auto; // Añadir scroll horizontal en dispositivos pequeños
+
     .table {
+      width: 100%;
       th {
         background-color: #f07674;
         color: white;
@@ -39,33 +43,15 @@
     tbody {
       td {
         position: relative;
-
-        .status-circle {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 10px;
-
-          &.active {
-            background-color: #28a745;
-          }
-
-          &.inactive {
-            background-color: #dc3545;
-          }
-        }
       }
     }
 
     .btn-activate,
-    .btn-deactivate,
-    .btn-profile {
-      background-color: #f07674;
+    .btn-deactivate {
       color: white;
       border: none;
+      margin-bottom: 8px;
+      position: relative; // Añadir posición relativa
 
       &:hover {
         background-color: #d9534f;
@@ -74,6 +60,23 @@
       &:focus {
         outline: none;
       }
+
+      @media (min-width: 768px) {
+        margin-bottom: 0;
+      }
+
+      &.btn-activate {
+        background-color: #dc3545; // Cambiar color para Activar
+      }
+
+      &.btn-deactivate {
+        background-color: #28a745; // Cambiar color para Bloquear
+      }
+    }
+
+    .btn-profile {
+      background-color: #f07674;
+      border: none;
     }
   }
 }
