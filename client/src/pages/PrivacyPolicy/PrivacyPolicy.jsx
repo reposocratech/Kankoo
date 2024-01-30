@@ -23,22 +23,22 @@ export const PrivacyPolicy = () => {
           <div className="polGeneral">
             <h2 className="mb-4 h2Pol">Política de privacidad</h2>
             <p>
-              Política de privacidad para Kankoo Aplicación móvil En Kankoo,
-              estamos comprometidos a proteger tu privacidad e información
-              personal. Esta política de privacidad explica cómo recopilamos,
-              utilizamos y divulgamos tu información cuando utilizas nuestra
-              aplicación móvil Kankoo ("App"). Información que recopilamos
-              Cuando utilizas la App, podemos recopilar los siguientes tipos de
-              información: Información personal: Podemos recopilar información
-              personal que nos proporcionas, como tu nombre, dirección de correo
-              electrónico y credenciales de inicio de sesión en redes sociales
-              cuando creas una cuenta en nuestra App. Información de ubicación:
-              Podemos recopilar información sobre tu ubicación a través del GPS
-              de tu dispositivo u otras tecnologías basadas en la ubicación
-              cuando usas nuestra App. Información de uso: Podemos recopilar
-              información sobre cómo utilizas nuestra App, incluida la fecha y
-              hora de tu visita, las páginas o pantallas que visualizas y las
-              acciones que realizas mientras usas la App.
+              En Kankoo estamos comprometidos a proteger tu privacidad e
+              información personal. Esta política de privacidad explica cómo
+              recopilamos, utilizamos y divulgamos tu información cuando
+              utilizas nuestra aplicación móvil Kankoo ("App"). Información que
+              recopilamos Cuando utilizas la App, podemos recopilar los
+              siguientes tipos de información: Información personal: Podemos
+              recopilar información personal que nos proporcionas, como tu
+              nombre, dirección de correo electrónico y credenciales de inicio
+              de sesión en redes sociales cuando creas una cuenta en nuestra
+              App. Información de ubicación: Podemos recopilar información sobre
+              tu ubicación a través del GPS de tu dispositivo u otras
+              tecnologías basadas en la ubicación cuando usas nuestra App.
+              Información de uso: Podemos recopilar información sobre cómo
+              utilizas nuestra App, incluida la fecha y hora de tu visita, las
+              páginas o pantallas que visualizas y las acciones que realizas
+              mientras usas la App.
             </p>
             <p>
               Información del dispositivo: Podemos recopilar información sobre

@@ -49,7 +49,6 @@ export const EditUser = () => {
       axios
         .put("http://localhost:3000/users/edituser", newFormData)
         .then((res) => {
-          console.log(res);
           if (res.data.img) {
             setUser({ ...editUser, avatar: res.data.img });
           } else {
@@ -64,16 +63,13 @@ export const EditUser = () => {
     }
   };
 
-  console.log("user", user);
-  console.log("editUSer", editUser);
-
   return (
     <Container className="d-flex align-items-center justify-content-center">
       <Row>
         <Col lg={6} md={12} sm={12} xs={12}>
           <div className="divEditUser">
             <Form>
-              <h2>Edita tus datos:</h2>
+              <h1 className="h1Login">Edita tus datos</h1>
               <Form.Group className="mb-3" controlId="formGroupName">
                 <Form.Label>Nombre </Form.Label>
                 <Form.Control
@@ -94,15 +90,20 @@ export const EditUser = () => {
                   name="last_name"
                 />
               </Form.Group>
-              <Form.Group controlId="formFileLg" className="mb-3">
-                <Form.Label>Imagen</Form.Label>
+              <Form.Group controlId="formFileLg" className="mb-5">
+                <Form.Label>Imagen de perfil</Form.Label>
                 <Form.Control type="file" onChange={handleFile} />
               </Form.Group>
               {msgError && <p> {msgError} </p>}
-              <Button variant="danger me-2" onClick={handleSubmit}>
+              <button className="registerButton me-2" onClick={handleSubmit}>
                 Aceptar
-              </Button>
-              <Button variant="danger me-2">Cancelar</Button>
+              </button>
+              <button
+                className="registerButton"
+                onClick={() => navigate("/users/userprofile")}
+              >
+                Cancelar
+              </button>
             </Form>
           </div>
         </Col>

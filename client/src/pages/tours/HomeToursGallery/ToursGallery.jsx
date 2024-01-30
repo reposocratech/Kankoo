@@ -61,6 +61,20 @@ export const ToursGallery = () => {
         </Form>
       </Row>
 
+      <Row className="s-flex justify-content-center">
+        <Col md={8}>
+          <div className="divHome">
+            <p className="pHome">
+              Te damos la bienvenida a KanKoo, la mejor app para tener
+              experiencias de viaje sin restricciones con nuestras guías
+              turísticas digitales. Accede al contenido que sube nuestra
+              comunidad de viajeros/as y disfruta de imágenes espectaculares,
+              vídeos y audio-guías directamente desde tu smartphone.
+            </p>
+          </div>
+        </Col>
+      </Row>
+
       <Row
         className="d-flex justify-content-around align-items-center flex-wrap p-3"
         md={4}

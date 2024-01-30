@@ -72,17 +72,6 @@ export const OneTour = () => {
       });
   });
 
-  /*   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/users/mytours/${user?.user_id}`)
-      .then((res) => {
-        setMyTours(res.data.resultMyTours);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [tour_id, user?.user_id]); */
-
   const handleClickLike = () => {
     setLiked((prevLiked) => !prevLiked);
     const likesData = JSON.parse(localStorage.getItem("likes")) || {};
@@ -121,8 +110,6 @@ export const OneTour = () => {
     axios
       .put(`http://localhost:3000/tours/deltour/${tour_id}`)
       .then((res) => {
-        /* let temp = myTours.filter((elem) => elem.tour_id !== tour_id);
-        setMyTours(temp); */
         setResetMyTours(!resetMyTours);
         navigate("/users/mytours");
       })
@@ -132,64 +119,69 @@ export const OneTour = () => {
   };
 
   return (
-    <Container>
+    <Container fluid className="container-xxl mx-auto">
       {oneTour && (
         <>
-          <Row>
-            <div className="BackCombo" onClick={() => navigate(-1)}>
-              <img
-                className="BackArrow"
-                src="/icons/back.png"
-                alt="flecha a la izquierda"
-              />
-              <button className="backButton" onClick={() => navigate(-1)}>
-                Volver
-              </button>
-            </div>
-          </Row>
-          <Row>
-            {/* -----------------INFO TOUR */}
-            <Col md={6}>
-              <div className="OneTourInfo d-flex flex-column justify-content-center ">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <h2>{oneTour[0]?.tour_name}</h2>
-                    <h3>{oneTour[0]?.tour_city}</h3>
-                  </div>
-                  <div>
+          <Row className="d-flex">
+            {/* Card principalllllllllllllll */}
+            <Col md={6} className="d-flex flex-column">
+              <Row className="mt-5">
+                <h2 className="guideTitle">{oneTour[0]?.tour_name}</h2>
+                <div className="d-flex justify-content-between OneTourInfo">
+                  <h5 className="guideCity">{oneTour[0]?.tour_city}</h5>
+                  <div className="d-flex">
+                    <p className="me-2">ver ubicación</p>
                     <Link to={oneTour[0]?.location}>
                       <img
-                        className="OneTourLocation"
+                        className="OneTourLocation ml-auto"
                         src="/icons/location.png"
                         alt="icono de avión de papel para ubicación"
                       />
                     </Link>
                   </div>
                 </div>
+              </Row>
+
+              <Row className="d-flex align-items-start">
                 <img
                   src={`http://localhost:3000/images/tours/${oneTour[0]?.cover}`}
                   alt="imagen de la guía turísitca"
-                  className="OneTourImg"
+                  className="OneTourImg mt-2"
                 />
-                {/* ---------------------PRECIO */}
-                {showPrice && <h4>{oneTour[0]?.price}</h4>}
-                {/* -----------------------INFO USUARIO, LIKE */}
-                <div className="d-flex">
-                  {/* -------INFO USER */}
-                  <div className="OneTourUserInfo d-flex align-items-center">
+              </Row>
+              <Row className="mt-3">
+                <div className="d-flex justify-content-between OneTourInfo">
+                  <div className="d-flex">
+                    <p className="me-2 pStarts">Puntúa esta guía</p>
+                    <StarRating tour_id={tour_id} id={id} />
+                  </div>
+
+                  <div className="d-flex">
+                    <img
+                      className="ml-auto"
+                      src="/assets/iconKm.jpg"
+                      alt="icono de persona andando para km"
+                    />
+                    <p>{parseFloat(totalDistance).toFixed(1)} km</p>
+                  </div>
+                </div>
+
+                <div className="d-flex justify-content-between OneTourInfo">
+                  <div className="d-flex align-items-center">
                     <img
                       onClick={() => navigate(`/users/oneuser/${creatorId}`)}
-                      className="OneTourProfilePicture"
+                      className="OneTourProfilePicture mb-0 me-2"
                       src={`http://localhost:3000/images/users/${tourOwnerDetails?.avatar}`}
                       alt=""
                     />
-                    <h5>
-                      {tourOwnerDetails?.first_name}
-                      {tourOwnerDetails?.last_name}
-                    </h5>
+                    <div className="d-flex flex-column">
+                      <p className="createFor">Guía creada por:</p>
+                      <p className="nameCreatorGuide">
+                        {tourOwnerDetails?.first_name}{" "}
+                        {tourOwnerDetails?.last_name}
+                      </p>
+                    </div>
                   </div>
-
-                  {/* --------------------LIKE */}
                   <div className="OneTourLike d-flex justify-content-center align-items-center">
                     <img
                       onClick={handleClickLike}
@@ -198,16 +190,14 @@ export const OneTour = () => {
                     />
                   </div>
                 </div>
+              </Row>
 
-                <div className="OneTourInfo d-flex align-items-start flex-column p-0">
-                  <p>{oneTour[0]?.tour_description}</p>
-
-                  {/* -----------------------RATING */}
-                  <StarRating tour_id={tour_id} id={id} />
-                  <p>{parseFloat(totalDistance).toFixed(1)} km</p>
-                </div>
-                <div className="d-flex">
-                  {oneTour[0]?.user_id != user?.user_id && (
+              <Row className="OneTourDescription">
+                <p>{oneTour[0]?.tour_description}</p>
+              </Row>
+              <Row className="OneTourBotones d-flex justify-content-start">
+                {oneTour[0]?.user_id != user?.user_id && (
+                  <div className="custom-btn-container">
                     <button
                       className={
                         acquired ? "OneTourButtonDisabled" : "OneTourButton"
@@ -216,49 +206,38 @@ export const OneTour = () => {
                     >
                       {acquired ? "Borrar del carrito" : "Adquirir"}
                     </button>
-                  )}
-                  {oneTour[0]?.user_id === user?.user_id && (
-                    <div>
-                      <button
-                        onClick={() => navigate(`/tours/edittour/${tour_id}`)}
-                        className="OneTourButton"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        className="OneTourButton"
-                        onClick={() => navigate(`/tours/newsection/${tour_id}`)}
-                      >
-                        Añadir Punto
-                      </button>
-                      <button
-                        className="OneTourButton"
-                        type="button"
-                        onClick={() => {
-                          console.log(
-                            "tour_id al hacer clic en el botón:",
-                            tour_id
-                          );
-                          delTour(tour_id);
-                        }}
-                      >
-                        Eliminar
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </Col>
-            {/* ------------------------------SECCIONES DE RUTaaaaA */}
-            <Col>
-              <h3>Secciones de la ruta de {oneTour[0]?.tour_name}</h3>
-              <div md={4} className="d-flex">
-                {oneTour?.map((elem) => {
-                  return (
-                    <CardOneSection elem={elem} oneTour={oneTour} user={user} />
-                  );
-                })}
-              </div>
+                  </div>
+                )}
+                {oneTour[0]?.user_id === user?.user_id && (
+                  <div>
+                    <button
+                      onClick={() => navigate(`/tours/edittour/${tour_id}`)}
+                      className="OneTourButton"
+                    >
+                      Editar info
+                    </button>
+                    <button
+                      className="OneTourButton"
+                      onClick={() => navigate(`/tours/newsection/${tour_id}`)}
+                    >
+                      Añadir Punto
+                    </button>
+                    <button
+                      className="OneTourButton"
+                      type="button"
+                      onClick={() => {
+                        console.log(
+                          "tour_id al hacer clic en el botón:",
+                          tour_id
+                        );
+                        delTour(tour_id);
+                      }}
+                    >
+                      Eliminar guía
+                    </button>
+                  </div>
+                )}
+              </Row>
             </Col>
           </Row>
         </>
