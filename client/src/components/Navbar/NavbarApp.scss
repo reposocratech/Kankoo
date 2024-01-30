@@ -39,6 +39,9 @@
   font-size: large;
   font-weight: bold;
 }
+.navEnlaces:hover {
+  color: white;
+}
 
 .NavbarBrand {
   img {
@@ -75,6 +78,26 @@
   justify-content: flex-start;
   align-items: center;
 }
+/* BOTON / BOTON:HOVER DE TOP GUIAS */
+.btnfos-2 {
+  letter-spacing: 1px;
+  color: white;
+  font-weight: 600;
+}
+
+.btnfos-2:hover,
+.btnfos-2:active {
+  letter-spacing: 5px;
+  color: white;
+  transition: all 1s ease;
+}
+
+.btnfos-2:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
 .navBoton {
   @include BotonBlanco;
   transition: transform 0.3s;
