@@ -13,4 +13,5 @@ router.put(
   "/admin/updateUserIsDeletedStatus/:id",
   adminControllers.updateUserIsDeletedStatus
 );
+router.get("/getOneUser/:id", adminControllers.getOneUser);
 module.exports = router;
