@@ -233,7 +233,7 @@ export const OneTour = () => {
                         delTour(tour_id);
                       }}
                     >
-                      Eliminar guía
+                      Eliminar guía Eliminar guía Eliminar guía Eliminar guía
                     </button>
                   </div>
                 )}
