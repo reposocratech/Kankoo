@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import "./CardOneSection.scss";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { KankooContext } from "../../context/KankooContext";
+import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 export const CardOneSection = ({ elem, oneTour, user }) => {
@@ -24,47 +25,65 @@ export const CardOneSection = ({ elem, oneTour, user }) => {
   };
   const navigate = useNavigate();
   return (
-    <div className="CardOneSection d-flex flex-column align-items-center">
-      <img
-        onClick={() =>
-          navigate(`/tours/onesection/${elem?.tour_id}/${elem?.section_id}`)
-        }
-        className="OneTourSectionImg"
-        src={`http://localhost:3000/resources/images/${elem?.section_cover}`}
-        alt="portada de seccion"
-      />
-      <h5>{elem.section_name}</h5>
-      {oneTour[0]?.user_id === user?.user_id && (
-        <div>
-          {oneTour.length > 1 && (
-            <button
-              type="button"
-              className="CardOneSectionButton"
-              onClick={() => delSection(elem.section_id)}
-            >
-              X
-            </button>
-          )}
-          {oneTour[0]?.user_id === user?.user_id && oneTour.length === 1 && (
-            <p>
-              Es requirido que cada guia tenga almenos una section, si quieres
-              borrarlas todas, debes borrar la guia.
-            </p>
-          )}
+    <Container className="prueba">
+      <Row>
+        <Col>
+          <div className="CardOneSection d-flex flex-column align-items-start">
+            <div>
+              <img
+                onClick={() =>
+                  navigate(
+                    `/tours/onesection/${elem?.tour_id}/${elem?.section_id}`
+                  )
+                }
+                className="TourSectionImg"
+                src={`http://localhost:3000/resources/images/${elem?.section_cover}`}
+                alt="portada de seccion"
+              />
+            </div>
 
-          <button
-            type="button"
-            className="CardOneSectionButton"
-            onClick={() =>
-              navigate(
-                `/tours/editsection/${elem?.tour_id}/${elem?.section_id}`
-              )
-            }
-          >
-            Editar
-          </button>
-        </div>
-      )}
-    </div>
+            <div className="h5CardOneSection mt-3">
+              <p>{elem.section_name}</p>
+            </div>
+
+            {oneTour[0]?.user_id === user?.user_id && (
+              <div>
+                {oneTour.length > 1 && (
+                  <button
+                    type="button"
+                    className="CardOneSectionButton me-1"
+                    onClick={() => delSection(elem.section_id)}
+                  >
+                    Eliminar
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  className="CardOneSectionButton"
+                  onClick={() =>
+                    navigate(
+                      `/tours/editsection/${elem?.tour_id}/${elem?.section_id}`
+                    )
+                  }
+                >
+                  Editar
+                </button>
+
+                {oneTour[0]?.user_id === user?.user_id &&
+                  oneTour.length === 1 && (
+                    <div className="pInfo mt-3 d-flex align-items-center text-center">
+                      <p className="mt-3">
+                        ¡Atención! Si quieres borrar todas los puntos de tu
+                        guía, deberás borrar la guía completa.
+                      </p>
+                    </div>
+                  )}
+              </div>
+            )}
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
