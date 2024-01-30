@@ -10,7 +10,7 @@ export const ToursGallery = () => {
   const [foundTours, setFoundTours] = useState();
   const [filter, setFilter] = useState("");
 
-  const onChange = (e) => {
+  /* const onChange = (e) => {
     e.preventDefault();
     setFilter(e.target.value);
   };
@@ -29,6 +29,25 @@ export const ToursGallery = () => {
       });
       setFoundTours(tempArray);
       setShowAllTours(false);
+    }
+  }; */
+  const onChange = (e) => {
+    const inputValue = e.target.value;
+    setFilter(inputValue);
+
+    if (inputValue === "") {
+      setShowAllTours(true);
+      setFoundTours(null);
+    } else {
+      const tempArray = allTours.filter((elem) => {
+        return (
+          textSensitive(elem.tour_name, inputValue) ||
+          textSensitive(elem.tour_description, inputValue) ||
+          textSensitive(elem.tour_city, inputValue)
+        );
+      });
+      setShowAllTours(false);
+      setFoundTours(tempArray);
     }
   };
 
