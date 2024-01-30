@@ -1,13 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import "./OneSection.scss";
-import { KankooContext } from "../../../context/KankooContext";
 import { InfoSection } from "./InfoSection";
 import { AudioSection } from "./AudioSection";
 import { VideoSection } from "./VideoSection";
 import { ImagesSection } from "./ImagesSection";
+
 export const OneSection = () => {
   const [sectionResources, setSectionResources] = useState([]);
   const [showResources, setShowResources] = useState(false);
@@ -39,19 +39,26 @@ export const OneSection = () => {
         console.log(error);
       });
   }, [section_id, tour_id]);
-  console.log("section resorucers", sectionResources);
+
   return (
     <>
-      <Container className="OneSectionFather">
-        <Row>
+      <Container lg={6} md={12} sm={12} xs={12} className="OneSectionFather ">
+        <Row className="OneSectionImagesContainer ">
           <div>
             <button className="OneSectionBtn" onClick={() => navigate(-1)}>
-              Atras
+              Volver
             </button>
           </div>
           <div>
             <h2>{oneSection?.section_name}</h2>
+
             <hr className="OneSectionSubline" />
+            <div>
+              <InfoSection
+                className="OneSectionResourceInfo"
+                oneSection={oneSection}
+              />
+            </div>
           </div>
           <div className="OneSectionResourceIcons">
             <i
@@ -78,39 +85,47 @@ export const OneSection = () => {
             </i>
           </div>
           <>
-            {sectionResources?.map((e) => {
-              if (e.resource_type === 1) {
+            {sectionResources
+              .sort((a, b) => {
+                // Ordenar por tipo de recurso: Video y Audio primero, luego Imágenes
+                const orderPriority = {
+                  3: 0, // Video
+                  2: 1, // Audio
+                  1: 2, // Imágenes
+                };
+
                 return (
-                  <Col>
-                    <ImagesSection sectionResources={e} />;
-                    <div>
-                      <InfoSection
-                        className="OneSectionResourceInfo"
-                        oneSection={oneSection}
+                  orderPriority[a.resource_type] -
+                  orderPriority[b.resource_type]
+                );
+              })
+              .map((e) => {
+                if (e.resource_type === 3 && showResources) {
+                  return (
+                    <Col key={e.id}>
+                      <VideoSection
+                        sectionResources={e}
+                        className="VideoSection"
                       />
-                    </div>
-                  </Col>
-                );
-              }
-              if (e.resource_type === 3 && showResources) {
-                return (
-                  <Col>
-                    {" "}
-                    <VideoSection
-                      sectionResources={e}
-                      className="VideoSection"
-                    />
-                  </Col>
-                );
-              }
-              if (e.resource_type === 2 && !showResources) {
-                return (
-                  <Col>
-                    <AudioSection sectionResources={e} />;
-                  </Col>
-                );
-              }
-            })}
+                    </Col>
+                  );
+                }
+                if (e.resource_type === 2 && !showResources) {
+                  return (
+                    <Col key={e.id}>
+                      <AudioSection sectionResources={e} />;
+                    </Col>
+                  );
+                }
+                if (e.resource_type === 1) {
+                  return (
+                    <Col key={e.id} className="ImageSection">
+                      <ImagesSection sectionResources={e} />
+                    </Col>
+                  );
+                }
+                return null; // Añadir esta línea para manejar tipos desconocidos o no deseados
+              })}
           </>
         </Row>
       </Container>
