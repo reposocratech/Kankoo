@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
 .UserPerfilGeneral {
   display: flex;
   flex-wrap: wrap;
@@ -38,6 +39,10 @@
 
 .UserCard {
   width: 25rem;
+  > h3 {
+    font-weight: 600;
+    font-family: "PT Sans", sans-serif;
+  }
 }
 
 .UserPerfilCard2 {
