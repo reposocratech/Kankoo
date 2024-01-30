@@ -1,10 +1,11 @@
 @import "./../../styles/mixins.scss";
-@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
 
 .UserMenuTitle {
   text-align: center;
   > h1 {
-    font-family: Cabin;
+    font-family: "PT Sans", sans-serif;
+    font-weight: 600;
     margin: 0rem 1rem 0.5rem 1rem;
     color: #f07674;
   }
