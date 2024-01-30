@@ -36,8 +36,8 @@ export const AdminToursTable = ({ allTours, setAllTours }) => {
               <tr>
                 <th>Nombre</th>
                 <th>Ciudad</th>
-                <th>Estado</th>
-                <th>Habilitar/Deshabilitar</th>
+
+                <th>Act/Desact</th>
                 <th>Ver Guía</th>
               </tr>
             </thead>
@@ -46,14 +46,7 @@ export const AdminToursTable = ({ allTours, setAllTours }) => {
                 <tr key={elem.tour_id}>
                   <td>{elem.tour_name}</td>
                   <td>{elem.tour_city}</td>
-                  <td>
-                    {elem.tour_is_disabled ? (
-                      <span className="status-circle inactive"></span>
-                    ) : (
-                      <span className="status-circle active"></span>
-                    )}
-                    {elem.tour_is_disabled ? "Inactivo" : "Activo"}
-                  </td>
+
                   <td className="d-flex justify-content-center">
                     <Button
                       className={`btn-${

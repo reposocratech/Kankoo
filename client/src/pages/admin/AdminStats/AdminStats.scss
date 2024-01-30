@@ -1,5 +1,11 @@
+@import "./../../../styles/mixins.scss";
+
 .admin-stats-container {
   margin-top: 20px;
+
+  .btn-back {
+    @include BotonCoral;
+  }
 
   .admin-stats-title {
     text-align: center;
