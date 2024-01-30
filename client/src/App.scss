@@ -3,3 +3,22 @@
 * {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+::-webkit-scrollbar {
+  width: 0.75rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f07674;
+  border-radius: 1rem;
+  border: 2px solid black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: white;
+}
