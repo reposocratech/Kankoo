@@ -32,9 +32,16 @@ export const AdminStats = () => {
     );
   }, [adminUsers, allTours]);
 
+  const handleGoBack = () => {
+    navigate("/admin/adminProfile");
+  };
+
   return (
     <>
       <Container className="admin-stats-container">
+        <Button className="btn-back" onClick={handleGoBack}>
+          Volver
+        </Button>
         <h2 className="admin-stats-title">Estadísticas:</h2>
         <div className="admin-stats-cards">
           <Card>
