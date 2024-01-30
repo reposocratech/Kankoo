@@ -26,12 +26,14 @@ export const AdminToursTable = ({ allTours, setAllTours }) => {
   return (
     <>
       <div className="table-container">
+        <Button className="btn-back" onClick={handleGoBack}>
+          Volver
+        </Button>
         <h2 className="table-title">Listado de todas las Guías:</h2>
         <div className="table-wrapper">
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Id</th>
                 <th>Nombre</th>
                 <th>Ciudad</th>
                 <th>Estado</th>
@@ -42,7 +44,6 @@ export const AdminToursTable = ({ allTours, setAllTours }) => {
             <tbody>
               {allTours?.map((elem) => (
                 <tr key={elem.tour_id}>
-                  <td>{elem.tour_id}</td>
                   <td>{elem.tour_name}</td>
                   <td>{elem.tour_city}</td>
                   <td>
@@ -78,9 +79,6 @@ export const AdminToursTable = ({ allTours, setAllTours }) => {
             </tbody>
           </Table>
         </div>
-        <Button className="btn-back" onClick={handleGoBack}>
-          Volver
-        </Button>
       </div>
     </>
   );

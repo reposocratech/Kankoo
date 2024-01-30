@@ -74,7 +74,7 @@ export const ToursGallery = () => {
             onChange={onChange}
             value={filter}
           />
-          <button type="button" className="galleryButton" onClick={handleClick}>
+          <button type="button" className="galleryButton">
             Buscar
           </button>
         </Form>
