@@ -53,9 +53,11 @@ export const ToursGallery = () => {
         <Col md={8}>
           <div className="divHome">
             <p className="pHome">
-              Entra y viaja sin ataduras con nuestras guías turísticas
-              digitales. Vídeos y audios en tu smartphone para descubrir
-              destinos a tu propio ritmo.
+              Te damos la bienvenida a KanKoo, la mejor app para tener
+              experiencias de viaje sin restricciones con nuestras guías
+              turísticas digitales. Accede al contenido que sube nuestra
+              comunidad de viajeros/as y disfruta de imágenes espectaculares,
+              vídeos y audio-guías directamente desde tu smartphone.
             </p>
           </div>
         </Col>
