@@ -1,15 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
-import {
-  useNavigate,
-  Link,
-  useAsyncError,
-  useParams,
-  useLocation,
-} from "react-router-dom";
+
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { KankooContext } from "../../../context/KankooContext";
+
 import { sendMail } from "../../../../helpers/sendmail";
 
 const initialValueSection = {
@@ -20,8 +15,7 @@ const initialValueSection = {
 
 export const CreateSection = ({
   tour,
-  sections,
-  setSections,
+
   setShowFormSection,
   resetSections,
   setResetSections,
@@ -105,13 +99,6 @@ export const CreateSection = ({
       axios
         .post(`http://localhost:3000/tours/addsection`, newFormData)
         .then((res) => {
-          /*  let tempSections = [
-            ...sections,
-            { ...addSection, section_id: res.data.section_id },
-          ];
-
-          setSections(tempSections); */
-
           if (pathname === `/tours/newsection/${tour_id}`) {
             navigate(-1);
           } else {
@@ -119,7 +106,6 @@ export const CreateSection = ({
             setShowFormSection(false);
           }
 
-       
           let url = "http://localhost:3000/tours/waiting";
           let msg = "ALguien ha subido una nueva guía, ¡acéptala!";
           let email = "joseluis_casares@hotmail.com";

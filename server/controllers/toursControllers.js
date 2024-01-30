@@ -436,9 +436,12 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
     });
   };
   topTours = (req, res) => {
-    let sql = `SELECT * from tour
-    left join user_rates_tour on tour.tour_id = user_rates_tour.tour_id
-    where rating > 4 and tour_is_deleted = 0`;
+    let sql = `SELECT tour.*
+      FROM tour
+      LEFT JOIN user_rates_tour ON tour.tour_id = user_rates_tour.tour_id
+      WHERE tour_is_deleted = 0
+      GROUP BY tour.tour_id
+      HAVING AVG(user_rates_tour.rating) >= 4;`;
     connection.query(sql, (err, topResult) => {
       if (err) {
         res.status(400).json({ err });

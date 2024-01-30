@@ -22,3 +22,12 @@
   border-radius: 2rem;
   border: none;
 }
+
+@mixin BotonBordeGris {
+  padding: 10px 17px;
+  font-size: 16px;
+  color: #c5c3c3;
+  background-color: white;
+  border-radius: 2rem;
+  border: 1px solid #c5c3c3;
+}
