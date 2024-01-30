@@ -244,8 +244,8 @@ export const OneTour = () => {
               </Row>
             </Col>
             <Col lg={7} md={12} xs={12} className="d-flex flex-column">
-              <Row className="mt-5 mb-5">
-                <h3>Puntos de esta guía:</h3>
+              <Row className="mt-lg-5 mt-mb-5">
+                <h3 className="h3OneTour">Puntos de esta guía:</h3>
               </Row>
               <Row>
                 {oneTour?.map((elem, index) => (
