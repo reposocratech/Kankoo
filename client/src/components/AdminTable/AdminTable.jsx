@@ -39,6 +39,9 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
 
   return (
     <div className="table-container">
+      <Button className="btn-back" onClick={handleGoBack}>
+        Volver
+      </Button>
       <h2 className="table-title">Listado de Usuarios</h2>
       <div className="table-wrapper">
         <Table striped bordered hover>
@@ -84,9 +87,6 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
           </tbody>
         </Table>
       </div>
-      <Button className="btn-back" onClick={handleGoBack}>
-        Volver
-      </Button>
     </div>
   );
 };
