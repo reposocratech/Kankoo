@@ -26,7 +26,7 @@ export const AdminToursTable = ({ everyTour, setEveryTour }) => {
 
   return (
     <>
-      <div className="table-container">
+      <div className="table-container  container-xxl">
         <Button className="btn-back" onClick={handleGoBack}>
           Volver
         </Button>
@@ -51,7 +51,7 @@ export const AdminToursTable = ({ everyTour, setEveryTour }) => {
                   <td className="d-flex justify-content-center">
                     <Button
                       className={`btn-${
-                        elem.tour_is_deleted === 1 ? "activate" : "deactivate"
+                        elem.tour_is_deleted === 1 ? "deactivate" : "activate"
                       }`}
                       onClick={() =>
                         handleClick(elem.tour_id, elem.tour_is_deleted)
