@@ -14,6 +14,8 @@ export const OneTour = () => {
   const [tourOwnerDetails, setTourOwnerDetails] = useState();
   const [totalDistance, setTotalDistance] = useState(0);
   const [creatorId, setCreatorId] = useState();
+  const [resetOneTour, setResetOneTour] = useState(false);
+
   const { tour_id } = useParams();
   const { user, resetMyTours, setResetMyTours } = useContext(KankooContext);
   const id = user?.user_id;
@@ -52,7 +54,7 @@ export const OneTour = () => {
       .catch((err) => {
         console.log("Error en la solicitud Axios:", err);
       });
-  }, [tour_id]);
+  }, [tour_id, resetOneTour]);
   useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/distance/${tour_id}`)
@@ -243,7 +245,13 @@ export const OneTour = () => {
               <Row>
                 {oneTour?.map((elem, index) => (
                   <Col key={index} lg={4} md={4} className="d-flex mb-3">
-                    <CardOneSection elem={elem} oneTour={oneTour} user={user} />
+                    <CardOneSection
+                      elem={elem}
+                      oneTour={oneTour}
+                      user={user}
+                      resetOneTour={resetOneTour}
+                      setResetOneTour={setResetOneTour}
+                    />
                   </Col>
                 ))}
               </Row>

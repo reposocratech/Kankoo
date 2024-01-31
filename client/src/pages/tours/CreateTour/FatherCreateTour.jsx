@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CreateTour } from "./CreateTour";
 import { CreateSection } from "./CreateSection";
 import "./CreateTour.scss";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { sendMail } from "../../../../helpers/sendmail";

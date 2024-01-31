@@ -92,6 +92,7 @@ export const EditSection = () => {
       newFormData.append("editSection", JSON.stringify(editSection));
       newFormData.append("resourceExist", JSON.stringify(resourceExist));
       newFormData.append("cover", editCover);
+      newFormData.append("image", editImages);
 
       if (editImages) {
         for (const elem of editImages) {
@@ -128,21 +129,38 @@ export const EditSection = () => {
 
   return (
     <>
-      <Row className="createSectionGeneral">
-        <h2>Editar puntos de tu guia</h2>
-        <Col sm={2} md={2} lg={4}>
+      <Col
+        ref={scroll}
+        lg={12}
+        md={12}
+        sm={12}
+        xs={12}
+        className="d-flex justify-content-center align-items-center"
+      >
+        <div className="divFormEditSection">
           <Form>
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Foto de portada</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleResource}
-                name="cover"
-                accept="image/*"
+            <h1 className="h1Login mb-3">Edición de sección</h1>
+            <p className="mt-1">Cambia la foto de portada</p>
+
+            <label
+              className="label-img d-flex align-items-center justify-content-center"
+              htmlFor="file"
+            >
+              <img
+                className="iconSubirImg me-2"
+                src="/assets/subirImg.png"
+                alt=""
               />
-            </Form.Group>
+            </label>
+            <input
+              id="file"
+              name="cover"
+              type="file"
+              onChange={handleResource}
+              hidden
+            ></input>
             <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Nombre de punto </Form.Label>
+              <Form.Label>Nombre del punto </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Nombre del punto"
@@ -152,7 +170,7 @@ export const EditSection = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Descripción </Form.Label>
+              <Form.Label>Descripción del punto </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Descripción del punto"
@@ -162,7 +180,7 @@ export const EditSection = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Distancia(km)</Form.Label>
+              <Form.Label>Distancia (en km)</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Ej. 2.5"
@@ -172,42 +190,98 @@ export const EditSection = () => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Imagenes</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleResource}
-                accept="image/*"
-                name="image"
-              />
-            </Form.Group>
+            <Row>
+              <Col lg={4}>
+                <p className="mt-1">Añade más imágenes</p>
 
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Audios</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleResource}
-                accept="audio/*"
-                name="audio"
-              />
-            </Form.Group>
+                <label
+                  className="label-img d-flex align-items-center justify-content-center"
+                  htmlFor="file"
+                >
+                  <img
+                    className="iconSubirImg me-2"
+                    src="/assets/subirImg.png"
+                    alt=""
+                  />
+                </label>
+                <input
+                  id="file"
+                  name="image"
+                  type="file"
+                  onChange={handleResource}
+                  hidden
+                  multiple
+                ></input>
+              </Col>
+              <Col lg={4}>
+                <p className="mt-1">Cambia el audio-guía</p>
 
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Videos</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleResource}
-                accept="video/*"
-                name="video"
-              />
-            </Form.Group>
+                <label
+                  className="label-img d-flex align-items-center justify-content-center"
+                  htmlFor="file"
+                >
+                  <img
+                    className="iconSubirImg me-2"
+                    src="/assets/auriculares.png"
+                    alt=""
+                  />
+                </label>
+                <input
+                  id="file"
+                  type="file"
+                  onChange={handleResource}
+                  accept="video/*"
+                  name="video"
+                  hidden
+                ></input>
+              </Col>
+              <Col lg={4}>
+                <p className="mt-1">Cambia el vídeo</p>
+
+                <label
+                  className="label-img d-flex align-items-center justify-content-center"
+                  htmlFor="file"
+                >
+                  <img
+                    className="iconSubirImg me-2"
+                    src="/assets/video.png"
+                    alt=""
+                  />
+                </label>
+                <input
+                  id="file"
+                  type="file"
+                  onChange={handleResource}
+                  accept="audio/*"
+                  name="audio"
+                  hidden
+                ></input>
+              </Col>
+            </Row>
 
             {msgError && <p> {msgError} </p>}
-            <Button onClick={handleSubmit}>Editar punto</Button>
-            <Button>Cancelar</Button>
+            <div>
+              <button
+                type="button"
+                className="botonsLogin me-3"
+                variant="primary me-2"
+                onClick={handleSubmit}
+              >
+                Aceptar
+              </button>
+
+              <button
+                type="button"
+                className="botonsLogin"
+                variant="primary"
+                onClick={() => navigate(-1)}
+              >
+                Cancelar
+              </button>
+            </div>
           </Form>
-        </Col>
-      </Row>
+        </div>
+      </Col>
     </>
   );
 };
