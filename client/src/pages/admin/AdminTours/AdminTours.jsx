@@ -1,13 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AdminToursTable } from "../../../components/AdminTable/AdminToursTable";
-import { KankooContext } from "../../../context/KankooContext";
+import axios from "axios";
 
 export const AdminTours = () => {
-  const { allTours, setAllTours } = useContext(KankooContext);
-
+  const [everyTour, setEveryTour] = useState();
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/admin/everyTour")
+      .then((res) => {
+        setEveryTour(res.data.resultEveryTour);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
   return (
     <div>
-      <AdminToursTable allTours={allTours} setAllTours={setAllTours} />
+      <AdminToursTable everyTour={everyTour} setEveryTour={setEveryTour} />
     </div>
   );
 };

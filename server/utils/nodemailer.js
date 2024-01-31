@@ -12,11 +12,10 @@ async function main(email, msg, asunto) {
   });
 
   const info = await transporter.sendMail({
-    from: '"Aviso de verificación" <kankoo.app.validation@gmail.com>', // sender address
-    to: email, // list of receivers
-    subject: asunto, // Subject line
-    text: msg, // plain text body
-    /*  html: "<b>Entra en tu cuenta antes de que pase mucho tiempo y el guía se duerma en los laureles 😪😉 Confirma que está todo correcto para que los usuarios puedan disfrutar cuanto antes de su guía ✈️</b>", // html body */
+    from: '"Aviso de verificación" <kankoo.app.validation@gmail.com>',
+    to: email,
+    subject: asunto,
+    text: msg,
   });
   console.log("Message sent: %s", info.messageId);
 }
