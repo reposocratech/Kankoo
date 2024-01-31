@@ -31,6 +31,7 @@ export const CreateTour = ({ setTour, setShowSections }) => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     if (
       !file ||
       !addTour.tour_name ||

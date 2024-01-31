@@ -4,22 +4,29 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { KankooContext } from "../../context/KankooContext";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
+import { OneTour } from "../../pages/tours/OneTour/OneTour";
 
-export const CardOneSection = ({ elem, oneTour, user }) => {
+export const CardOneSection = ({
+  elem,
+  oneTour,
+  user,
+  resetOneTour,
+  setResetOneTour,
+}) => {
   const { setOneSection } = useContext(KankooContext);
+  console.log(oneTour);
   const navigate = useNavigate();
   useEffect(() => {
     setOneSection(elem);
   }, [elem]);
 
-  const delSection = (e) => {
+  const delSection = () => {
     axios
       .put(
         `http://localhost:3000/tours/delsection/${elem?.tour_id}/${elem?.section_id}`
       )
       .then((res) => {
-        console.log("eliminacion", res);
-        navigate(`/tours/onetour/${elem?.tour_id}`);
+        setResetOneTour(!resetOneTour);
       })
       .catch((err) => {
         console.log(err);
@@ -54,7 +61,7 @@ export const CardOneSection = ({ elem, oneTour, user }) => {
                   <button
                     type="button"
                     className="CardOneSectionButton me-1"
-                    onClick={() => delSection(elem.section_id)}
+                    onClick={delSection}
                   >
                     Eliminar
                   </button>
