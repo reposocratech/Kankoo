@@ -44,7 +44,7 @@
 }
 
 video {
-  width: 35vw;
+  width: 45vw;
   border-radius: 1.5rem;
 }
 
@@ -59,8 +59,7 @@ audio {
 }
 
 .OneSectionResourceImg {
-  width: 15rem;
-  height: 15rem;
+  width: 25vw;
   display: block;
   border-radius: 1.5rem;
 }
@@ -78,6 +77,12 @@ audio {
 @media (max-width: 767px) {
   .custom-video-player {
     width: 75vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .OneSectionResourceImg {
+    width: 55vw;
   }
 }
 
