@@ -73,9 +73,8 @@ export const EditTour = () => {
             return e;
           }
         });
-        console.log(finalTemp);
         setMyTours(finalTemp);
-        navigate("/users/mytours");
+        navigate(-1);
       })
       .catch((err) => {
         console.log("Error en la solicitud:", err.response);
@@ -85,11 +84,18 @@ export const EditTour = () => {
   console.log("editTOOOuORR", editFile);
 
   return (
-    <Row className="createTourGeneral">
-      <h2>Editar guía turística</h2>
-      <Col sm={2} md={2} lg={4}>
+    <Col
+      ref={scroll}
+      lg={12}
+      md={12}
+      sm={12}
+      xs={12}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <div className="divFormEditSection">
         <Form>
           <Form.Group className="mb-3" controlId="formBasicName">
+            <h1 className="h1Login mb-3">Edición de guía</h1>
             <Form.Label>Nombre de la guía</Form.Label>
             <Form.Control
               type="text"
@@ -140,15 +146,30 @@ export const EditTour = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formFileLg" className="mb-3">
-            <Form.Label>Imagen</Form.Label>
-            <Form.Control type="file" onChange={handleFile} />
-          </Form.Group>
+          <p className="mt-1">Cambia tu imagen de portada</p>
+
+          <label
+            className="label-img d-flex align-items-center justify-content-center"
+            htmlFor="file"
+          >
+            <img
+              className="iconSubirImg me-2"
+              src="/assets/subirImg.png"
+              alt=""
+            />
+          </label>
+          <input
+            id="file"
+            name="img"
+            type="file"
+            onChange={handleFile}
+            hidden
+          ></input>
           {msgError && <p> {msgError} </p>}
           <div>
             <button
               type="button"
-              className="createTourButton"
+              className="botonsLogin me-3"
               variant="primary me-2"
               onClick={handleSubmit}
             >
@@ -157,15 +178,15 @@ export const EditTour = () => {
 
             <button
               type="button"
-              className="createTourButton"
+              className="botonsLogin"
               variant="primary"
-              onClick={() => navigate("/")}
+              onClick={() => navigate(-1)}
             >
               Cancelar
             </button>
           </div>
         </Form>
-      </Col>
-    </Row>
+      </div>
+    </Col>
   );
 };
