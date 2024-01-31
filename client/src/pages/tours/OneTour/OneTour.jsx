@@ -216,7 +216,7 @@ export const OneTour = () => {
                       onClick={() => navigate(`/tours/edittour/${tour_id}`)}
                       className="OneTourButton"
                     >
-                      Editar info
+                      Editar
                     </button>
                     <button
                       className="OneTourButton"
@@ -235,16 +235,14 @@ export const OneTour = () => {
                         delTour(tour_id);
                       }}
                     >
-
-                      Eliminar guía
-
+                      Eliminar
                     </button>
                   </div>
                 )}
               </Row>
             </Col>
             <Col lg={7} md={12} xs={12} className="d-flex flex-column">
-              <Row className="mt-lg-5 mt-mb-5">
+              <Row className="mb-5 mt-5">
                 <h3 className="h3OneTour">Puntos de esta guía:</h3>
               </Row>
               <Row>

@@ -1,41 +1,99 @@
 @import "./../../../styles/mixins.scss";
+
+.createSectionButton {
+  @include BotonCoral;
+  margin-right: 1rem;
+}
+
 .createTourButton {
   @include BotonCoral;
-  margin: 0.2rem;
+  margin-right: 1rem;
+  margin-top: 1.5rem;
 }
-.fatherButton {
-  @include BotonCoral;
-  margin: 1rem 0rem 1rem 1rem;
-}
-.createTourGeneral {
-  padding: 3rem;
-  > h2 {
-    padding-bottom: 1rem;
+
+.Creando {
+  width: 40rem;
+  background-color: white;
+  margin-top: 4rem;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0px 0px 20px -5px rgba(28, 28, 28, 0.271);
+
+  .CreandoImg {
+    width: 4rem;
+    margin-bottom: 1rem;
   }
-}
-.createTourSide {
-  padding: 2rem 0rem 0rem 2rem;
-}
-.fatherSectionAdded {
-  border: 0.15rem solid #f07674;
-  border-radius: 1rem;
-  padding-top: 0.4rem;
-  margin: 1rem;
-  width: 15rem;
-  text-align: center;
-}
-.fatherCover {
-  margin: 1rem;
-  > img {
-    border-radius: 1rem;
-  }
-  > h3 {
+
+  .h4Creando {
     color: #f07674;
   }
-}
-.fatherSectionTitle {
-  > h4 {
-    color: gray;
-    padding: 2rem 0rem 0rem 1rem;
+
+  .pCreando {
+    color: grey;
+    margin-top: 1rem;
+    margin-bottom: 1.9rem;
   }
+
+  @media (max-width: 884px) {
+    width: 26rem;
+    margin-left: 1.3rem;
+  }
+
+  @media (max-width: 1180px) {
+    width: 36rem;
+    margin-left: 1.3rem;
+  }
+}
+
+.iconPunto {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+}
+
+.portadaCreando {
+  width: 12rem;
+  border-radius: 1.5rem;
+
+  @media (max-width: 884px) {
+    width: 8rem;
+  }
+}
+
+.divFormSection {
+  width: 65rem;
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0px 0px 20px -5px rgba(28, 28, 28, 0.271);
+  padding: 4rem;
+  margin-top: 4rem;
+  margin-bottom: 8rem;
+
+  @media (max-width: 884px) {
+    width: 10rem;
+  }
+
+  @media (max-width: 1180px) {
+    width: 40rem;
+    padding: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.formlogin {
+  width: 26, 5rem;
+
+  Button {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.botonsLogin {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
