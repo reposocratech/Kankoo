@@ -131,15 +131,31 @@ export const CreateTour = ({ setTour, setShowSections }) => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formFileLg" className="mb-3">
-                <Form.Label>Imagen de portada para tu guía</Form.Label>
-                <Form.Control type="file" onChange={handleFile} />
-              </Form.Group>
+              <p className="mt-1">Añade una foto de portada</p>
+
+              <label
+                className="label-img d-flex align-items-center justify-content-center"
+                htmlFor="file"
+              >
+                <img
+                  className="iconSubirImg me-2"
+                  src="/assets/subirImg.png"
+                  alt=""
+                />
+              </label>
+              <input
+                id="file"
+                name="img"
+                type="file"
+                onChange={handleFile}
+                hidden
+              ></input>
+
               {msgError && <p> {msgError} </p>}
               <div>
                 <button
                   type="button"
-                  className="createTourButton"
+                  className="createSectionButton"
                   variant="primary me-2"
                   onClick={handleSubmit}
                 >
@@ -148,7 +164,7 @@ export const CreateTour = ({ setTour, setShowSections }) => {
 
                 <button
                   type="button"
-                  className="createTourButton"
+                  className="createSectionButton"
                   variant="primary"
                   onClick={() => navigate("/users/userprofile")}
                 >

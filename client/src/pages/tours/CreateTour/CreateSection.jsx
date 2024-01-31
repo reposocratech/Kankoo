@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 
@@ -31,6 +31,11 @@ export const CreateSection = ({
   const [audios, setAudios] = useState();
   const [videos, setVideos] = useState();
   const [msgError, setMsgError] = useState("");
+  const scroll = useRef();
+
+  useEffect(() => {
+    scroll.current.scrollIntoView();
+  }, []);
 
   const { pathname } = useLocation();
 
@@ -123,6 +128,7 @@ export const CreateSection = ({
 
   return (
     <Col
+      ref={scroll}
       lg={12}
       md={12}
       sm={12}
@@ -133,18 +139,31 @@ export const CreateSection = ({
         <Form className="formlogin">
           <h1 className="h1Login mb-3">Nuevo punto</h1>
           <Row>
-            <Col lg={6}>
-              <Form.Group controlId="formFileLg" className="mb-3">
-                <Form.Label>Foto de portada</Form.Label>
-                <Form.Control
-                  type="file"
-                  onChange={handleFile}
-                  accept="image/*"
-                />
-              </Form.Group>
-            </Col>
+            <Col lg={12}>
+              <p className="mt-1">Añade una foto de portada</p>
 
-            <Col lg={6}>
+              <label
+                className="label-img d-flex align-items-center justify-content-center"
+                htmlFor="file"
+              >
+                <img
+                  className="iconSubirImg me-2"
+                  src="/assets/subirImg.png"
+                  alt=""
+                />
+              </label>
+              <input
+                id="file"
+                name="img"
+                type="file"
+                onChange={handleImages}
+                hidden
+              ></input>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col lg={8}>
               <Form.Group className="mb-3" controlId="formBasicName">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control
@@ -156,10 +175,7 @@ export const CreateSection = ({
                 />
               </Form.Group>
             </Col>
-          </Row>
-
-          <Row>
-            <Col lg={2}>
+            <Col lg={4}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Distancia (en km)</Form.Label>
                 <Form.Control
@@ -171,7 +187,9 @@ export const CreateSection = ({
                 />
               </Form.Group>
             </Col>
-            <Col lg={10}>
+          </Row>
+          <Row>
+            <Col lg={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Descripción </Form.Label>
                 <Form.Control
@@ -186,50 +204,87 @@ export const CreateSection = ({
           </Row>
 
           <Row>
-            <Col lg={6}>
-              <Form.Group controlId="formFileLg" className="mb-3">
-                <Form.Label>Imágenes</Form.Label>
-                <Form.Control
-                  type="file"
-                  onChange={handleImages}
-                  required
-                  multiple
-                  accept="image/*"
-                  name="image"
+            <Col lg={4}>
+              <p className="mt-1">Añade imágenes</p>
+
+              <label
+                className="label-img d-flex align-items-center justify-content-center"
+                htmlFor="file"
+              >
+                <img
+                  className="iconSubirImg me-2"
+                  src="/assets/subirImg.png"
+                  alt=""
                 />
-              </Form.Group>
+              </label>
+              <input
+                id="file"
+                name="img"
+                type="file"
+                onChange={handleImages}
+                hidden
+              ></input>
             </Col>
-            <Col lg={6}>
-              <Form.Group controlId="formFileLg" className="mb-3">
-                <Form.Label>Audio-guía</Form.Label>
-                <Form.Control
-                  type="file"
-                  onChange={handleAudios}
-                  accept="audio/*"
-                  name="audio"
+            <Col lg={4}>
+              <p className="mt-1">Añade un audio-guía</p>
+
+              <label
+                className="label-img d-flex align-items-center justify-content-center"
+                htmlFor="file"
+              >
+                <img
+                  className="iconSubirImg me-2"
+                  src="/assets/auriculares.png"
+                  alt=""
                 />
-              </Form.Group>
+              </label>
+              <input
+                id="file"
+                type="file"
+                onChange={handleVideos}
+                accept="video/*"
+                name="video"
+                hidden
+              ></input>
+            </Col>
+            <Col lg={4}>
+              <p className="mt-1">Añade un vídeo</p>
+
+              <label
+                className="label-img d-flex align-items-center justify-content-center"
+                htmlFor="file"
+              >
+                <img
+                  className="iconSubirImg me-2"
+                  src="/assets/video.png"
+                  alt=""
+                />
+              </label>
+              <input
+                id="file"
+                type="file"
+                onChange={handleAudios}
+                accept="audio/*"
+                name="audio"
+                hidden
+              ></input>
             </Col>
           </Row>
           <Row>
-            <Col lg={6}>
-              <Form.Group controlId="formFileLg" className="mb-3">
-                <Form.Label>Vídeo</Form.Label>
-                <Form.Control
-                  type="file"
-                  onChange={handleVideos}
-                  accept="video/*"
-                  name="video"
-                />
-              </Form.Group>
-            </Col>
             <Col lg={6}>
               {msgError && <p> {msgError} </p>}
               <div className="botonsLogin">
                 <button className="createSectionButton" onClick={handleSubmit}>
                   Crear punto
                 </button>
-                <button className="createSectionButton">Cancelar</button>
+                <button
+                  onClick={() => {
+                    setShowFormSection(false);
+                  }}
+                  className="createSectionButton"
+                >
+                  Cancelar
+                </button>
               </div>
             </Col>
           </Row>
