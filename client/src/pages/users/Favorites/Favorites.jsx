@@ -25,7 +25,6 @@ export const Favorites = () => {
         className="UserMenuButton"
         onClick={() => navigate("/users/userprofile")}
       >
-        {" "}
         Volver
       </button>
       <Row className="UserMenuTitle d-flex justify-content-center ">

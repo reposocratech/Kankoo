@@ -6,7 +6,6 @@ import "./OneTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 import { CardOneSection } from "../../../components/CardOneSection/CardOneSection";
 import { StarRating } from "../../../components/Starrating/StarRating.jsx";
-import { OtherUser } from "./OtherUser.jsx";
 
 export const OneTour = () => {
   const [oneTour, setOneTour] = useState([]);
@@ -14,11 +13,9 @@ export const OneTour = () => {
   const [acquired, setAcquired] = useState(false);
   const [tourOwnerDetails, setTourOwnerDetails] = useState();
   const [totalDistance, setTotalDistance] = useState(0);
-  const [showOtherUser, setShowOtherUser] = useState(false);
   const [creatorId, setCreatorId] = useState();
   const { tour_id } = useParams();
-  const { user, setMyTours, resetMyTours, setResetMyTours } =
-    useContext(KankooContext);
+  const { user, resetMyTours, setResetMyTours } = useContext(KankooContext);
   const id = user?.user_id;
   //el precio se muestra si existe el tour y su valor es diferente de 0
   const showPrice = oneTour && oneTour[0]?.price != 0;
@@ -45,12 +42,7 @@ export const OneTour = () => {
           axios
             .get(`http://localhost:3000/users/otheruser/${tourOwnerUserId}`)
             .then((result) => {
-              console.log(
-                "TOUR OWNER DETAILS DESDE EL BACK",
-                result.data.userDetails[0]
-              );
               setTourOwnerDetails(result.data.userDetails[0]);
-              console.log("TOUR OWNER DETAILS SETEADOS", tourOwnerDetails);
             })
             .catch((userErr) => {
               console.log("Error al obtener detalles del usuario:", userErr);
@@ -120,6 +112,9 @@ export const OneTour = () => {
 
   return (
     <Container fluid className="container-xxl mx-auto">
+      <button className="OneTourButton" onClick={() => navigate(-1)}>
+        Volver
+      </button>
       {oneTour && (
         <>
           <Row className="d-flex">

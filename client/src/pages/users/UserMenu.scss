@@ -1,6 +1,6 @@
 @import "./../../styles/mixins.scss";
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
-
+@import "animate.css";
 .UserMenuTitle {
   text-align: center;
   > h1 {
@@ -8,6 +8,8 @@
     font-weight: 600;
     margin: 0rem 1rem 0.5rem 1rem;
     color: #f07674;
+    animation: backInLeft;
+    animation-duration: 1s;
   }
 }
 .UserMenuButton {

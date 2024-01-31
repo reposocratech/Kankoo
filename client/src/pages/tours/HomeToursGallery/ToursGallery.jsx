@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl, Container, Col, Row } from "react-bootstrap";
 import "./ToursGallery.scss";
 import { KankooContext } from "../../../context/KankooContext";
@@ -10,27 +10,6 @@ export const ToursGallery = () => {
   const [foundTours, setFoundTours] = useState();
   const [filter, setFilter] = useState("");
 
-  /* const onChange = (e) => {
-    e.preventDefault();
-    setFilter(e.target.value);
-  };
-
-  const handleClick = (e) => {
-    if (filter === "") {
-      setFoundTours(allTours);
-      console.log(allTours);
-    } else {
-      const tempArray = allTours.filter((e) => {
-        return (
-          textSensitive(e.tour_name, filter) ||
-          textSensitive(e.tour_description, filter) ||
-          textSensitive(e.tour_city, filter)
-        );
-      });
-      setFoundTours(tempArray);
-      setShowAllTours(false);
-    }
-  }; */
   const onChange = (e) => {
     const inputValue = e.target.value;
     setFilter(inputValue);
@@ -76,9 +55,6 @@ export const ToursGallery = () => {
             onChange={onChange}
             value={filter}
           />
-          <button type="button" className="galleryButton">
-            Buscar
-          </button>
         </Form>
       </Row>
 

@@ -14,4 +14,5 @@ router.put(
   adminControllers.updateUserIsDeletedStatus
 );
 router.get("/getOneUser/:id", adminControllers.getOneUser);
+router.get("/everyTour", adminControllers.everyTour);
 module.exports = router;
