@@ -53,7 +53,7 @@ export const EditTour = () => {
     newFormData.append("file", editFile);
 
     axios
-      .put(`http://localhost:3000/tours/edittour/"${tour_id}"`, newFormData)
+      .put(`http://localhost:3000/tours/edittour/${tour_id}`, newFormData)
       .then((res) => {
         console.log("Respuesta del servidor:", res.data);
         let temp = [...myTours];

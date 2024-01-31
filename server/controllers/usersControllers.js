@@ -217,12 +217,7 @@ class usersControllers {
       }
     });
   };
-  rateTour = (req, res) => {
-    const { id, tour_id } = req.params;
-    const { rating } = req.body;
 
-    let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
-  };
   favToursGallery = (req, res) => {
     const { id } = req.params;
     let sql = `SELECT tour.tour_id, tour.tour_name, tour.tour_city, tour.cover, user_likes_tour.user_id
