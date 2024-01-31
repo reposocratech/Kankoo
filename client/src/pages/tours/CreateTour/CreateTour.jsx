@@ -68,87 +68,97 @@ export const CreateTour = ({ setTour, setShowSections }) => {
   };
 
   return (
-    <Row className="createTourGeneral d-flex">
-      <h2>Crear nueva guía turística</h2>
-      <Col lg={6} md={12} sm={12} xs={12}>
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Nombre de la guía</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nombre de la guía"
-              name="tour_name"
-              value={addTour.tour_name}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Descripción de la guía</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Descripción de la guía"
-              name="tour_description"
-              value={addTour.tour_description}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Ciudad</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Ciudad"
-              name="tour_city"
-              value={addTour.tour_city}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Ubicación</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Introduce el link de la ubicación"
-              name="location"
-              value={addTour.location}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Accesibilidad</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Info acces"
-              name="tour_acces"
-              value={addTour.tour_acces}
-              onChange={handleChange}
-            />
-          </Form.Group>
+    <Container>
+      <Row className="mt-5">
+        <Col
+          lg={12}
+          md={12}
+          sm={12}
+          xs={12}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <div className="divRegister">
+            <Form>
+              <h1 className="h1Login">Guía nueva</h1>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Nombre de la guía</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. Málaga ciudad"
+                  name="tour_name"
+                  value={addTour.tour_name}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Descripción de la guía</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. Málaga es una ciudad andaluza..."
+                  name="tour_description"
+                  value={addTour.tour_description}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Población</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. Málaga"
+                  name="tour_city"
+                  value={addTour.tour_city}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Ubicación</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Introduce el link de la ubicación"
+                  name="location"
+                  value={addTour.location}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Información sobre accesibilidad</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. En la calle Pez hay escaleras y no rampa"
+                  name="tour_acces"
+                  value={addTour.tour_acces}
+                  onChange={handleChange}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formFileLg" className="mb-3">
-            <Form.Label>Imagen</Form.Label>
-            <Form.Control type="file" onChange={handleFile} />
-          </Form.Group>
-          {msgError && <p> {msgError} </p>}
-          <div>
-            <button
-              type="button"
-              className="createTourButton"
-              variant="primary me-2"
-              onClick={handleSubmit}
-            >
-              Siguiente
-            </button>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <Form.Label>Imagen de portada para tu guía</Form.Label>
+                <Form.Control type="file" onChange={handleFile} />
+              </Form.Group>
+              {msgError && <p> {msgError} </p>}
+              <div>
+                <button
+                  type="button"
+                  className="createTourButton"
+                  variant="primary me-2"
+                  onClick={handleSubmit}
+                >
+                  Siguiente
+                </button>
 
-            <button
-              type="button"
-              className="createTourButton"
-              variant="primary"
-              onClick={() => navigate("/")}
-            >
-              Cancelar
-            </button>
+                <button
+                  type="button"
+                  className="createTourButton"
+                  variant="primary"
+                  onClick={() => navigate("/users/userprofile")}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </Form>
           </div>
-        </Form>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 };
