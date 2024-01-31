@@ -1,4 +1,6 @@
-import React, { useEffect, useRef } from "react";
+
+import React from "react";
+import { useEffect, useRef } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
@@ -71,10 +73,10 @@ export const CreateSection = ({
       setMsgError(
         "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
       );
-      // } else if (!audios && !videos) {
-      //   setMsgError("Debe proporcionar al menos un audio o video.");
-      // } else if (!images) {
-      //   setMsgError("Debe proporcionar al menos una imagen.");
+      } else if (!audios && !videos) {
+        setMsgError("Debe proporcionar al menos un audio o video.");
+       } else if (!images) {
+        setMsgError("Debe proporcionar al menos una imagen.");
     } else {
       let temp = {
         ...addSection,
