@@ -29,7 +29,7 @@ export const UserProfile = () => {
               src="/icons/editar.png"
               alt="icono con un lapiz y papel"
             />
-            <h5 className="h5Profile mt-3">Editar perfil</h5>
+            <h5 className="h5Profile mt-3">Editar mi perfil</h5>
             <p className="pParrafo">
               Personaliza y mantén siempre actualizada tu información.
             </p>
@@ -46,8 +46,9 @@ export const UserProfile = () => {
               alt="icono de corazón"
             />
             <h5 className="h5Profile mt-3">Mis guías favoritas</h5>
+
             <p className="pParrafo">
-              Este espacio contiene todas las guías a las que les has dado like.
+              Aquí todas las guías a las que les has dado like.
             </p>
           </div>
         </Col>

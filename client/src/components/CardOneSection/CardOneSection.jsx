@@ -7,28 +7,30 @@ import axios from "axios";
 
 export const CardOneSection = ({ elem, oneTour, user }) => {
   const { setOneSection } = useContext(KankooContext);
+  const navigate = useNavigate();
   useEffect(() => {
     setOneSection(elem);
   }, [elem]);
-  const delSection = () => {
+
+  const delSection = (e) => {
     axios
       .put(
         `http://localhost:3000/tours/delsection/${elem?.tour_id}/${elem?.section_id}`
       )
       .then((res) => {
         console.log("eliminacion", res);
-        navigate(-1);
+        navigate(`/tours/onetour/${elem?.tour_id}`);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const navigate = useNavigate();
+
   return (
     <Container className="prueba">
       <Row>
         <Col>
-          <div className="CardOneSection d-flex flex-column align-items-start">
+          <div className="CardOneSection d-flex flex-column align-self-lg-start align-self-xs-center">
             <div>
               <img
                 onClick={() =>
