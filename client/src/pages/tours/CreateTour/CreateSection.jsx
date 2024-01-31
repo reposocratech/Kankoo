@@ -6,6 +6,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import { sendMail } from "../../../../helpers/sendmail";
+import "./CreateTour.scss";
 
 const initialValueSection = {
   section_name: "",
@@ -121,88 +122,119 @@ export const CreateSection = ({
   };
 
   return (
-    <>
-      <Row className="createSectionGeneral">
-        <h2>Crear puntos de guia</h2>
-        <Col sm={2} md={2} lg={4}>
-          <Form>
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Foto de portada</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleFile}
-                accept="image/*"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Nombre de punto </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nombre del punto"
-                name="section_name"
-                onChange={handleChange}
-                value={addSection.section_name}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Descripción </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Descripción del punto"
-                name="section_description"
-                onChange={handleChange}
-                value={addSection.section_description}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Distancia(km)</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Ej. 2.5"
-                name="travel_distance"
-                onChange={handleChange}
-                value={addSection.travel_distance}
-              />
-            </Form.Group>
+    <Col
+      lg={12}
+      md={12}
+      sm={12}
+      xs={12}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <div className="divFormSection">
+        <Form className="formlogin">
+          <h1 className="h1Login mb-3">Nuevo punto</h1>
+          <Row>
+            <Col lg={6}>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <Form.Label>Foto de portada</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={handleFile}
+                  accept="image/*"
+                />
+              </Form.Group>
+            </Col>
 
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Imagenes</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleImages}
-                required
-                multiple
-                accept="image/*"
-                name="image"
-              />
-            </Form.Group>
+            <Col lg={6}>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Nombre</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. Calle Larios"
+                  name="section_name"
+                  onChange={handleChange}
+                  value={addSection.section_name}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Audios</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleAudios}
-                accept="audio/*"
-                name="audio"
-              />
-            </Form.Group>
+          <Row>
+            <Col lg={2}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Distancia (en km)</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Ej. 2.5"
+                  name="travel_distance"
+                  onChange={handleChange}
+                  value={addSection.travel_distance}
+                />
+              </Form.Group>
+            </Col>
+            <Col lg={10}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Descripción </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. Es la calle más emblemática de..."
+                  name="section_description"
+                  onChange={handleChange}
+                  value={addSection.section_description}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-            <Form.Group controlId="formFileLg" className="mb-3">
-              <Form.Label>Videos</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleVideos}
-                accept="video/*"
-                name="video"
-              />
-            </Form.Group>
-
-            {msgError && <p> {msgError} </p>}
-            <Button onClick={handleSubmit}>Crear punto</Button>
-            <Button>Cancelar</Button>
-          </Form>
-        </Col>
-      </Row>
-    </>
+          <Row>
+            <Col lg={6}>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <Form.Label>Imágenes</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={handleImages}
+                  required
+                  multiple
+                  accept="image/*"
+                  name="image"
+                />
+              </Form.Group>
+            </Col>
+            <Col lg={6}>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <Form.Label>Audio-guía</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={handleAudios}
+                  accept="audio/*"
+                  name="audio"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={6}>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <Form.Label>Vídeo</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={handleVideos}
+                  accept="video/*"
+                  name="video"
+                />
+              </Form.Group>
+            </Col>
+            <Col lg={6}>
+              {msgError && <p> {msgError} </p>}
+              <div className="botonsLogin">
+                <button className="createSectionButton" onClick={handleSubmit}>
+                  Crear punto
+                </button>
+                <button className="createSectionButton">Cancelar</button>
+              </div>
+            </Col>
+          </Row>
+        </Form>
+      </div>
+    </Col>
   );
 };
