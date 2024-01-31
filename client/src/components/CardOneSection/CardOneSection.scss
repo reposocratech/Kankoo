@@ -22,6 +22,10 @@
     margin-top: -3rem;
   }
 }
+.CardOneSection:hover {
+  transform: scale(1.1);
+  transition: all 1s ease;
+}
 
 .TourSectionImg {
   width: 11rem;

@@ -4,17 +4,18 @@ import axios from "axios";
 import "./AdminTable.scss";
 import { useNavigate } from "react-router-dom";
 
-export const AdminToursTable = ({ allTours, setAllTours }) => {
+export const AdminToursTable = ({ everyTour, setEveryTour }) => {
   const navigate = useNavigate();
-  const handleClick = (id, isDisabled) => {
+
+  const handleClick = (id, isDeleted) => {
     const url = `http://localhost:3000/admin/${
-      isDisabled === 1 ? "enableTour" : "disableTour"
+      isDeleted === 1 ? "enableTour" : "disableTour"
     }/${id}`;
 
     axios
       .put(url)
       .then((res) => {
-        setAllTours(res.data);
+        setEveryTour(res.data);
       })
       .catch((e) => console.log(e));
   };
@@ -42,7 +43,7 @@ export const AdminToursTable = ({ allTours, setAllTours }) => {
               </tr>
             </thead>
             <tbody>
-              {allTours?.map((elem) => (
+              {everyTour?.map((elem) => (
                 <tr key={elem.tour_id}>
                   <td>{elem.tour_name}</td>
                   <td>{elem.tour_city}</td>
@@ -50,13 +51,13 @@ export const AdminToursTable = ({ allTours, setAllTours }) => {
                   <td className="d-flex justify-content-center">
                     <Button
                       className={`btn-${
-                        elem.tour_is_disabled ? "activate" : "deactivate"
+                        elem.tour_is_deleted === 1 ? "activate" : "deactivate"
                       }`}
                       onClick={() =>
-                        handleClick(elem.tour_id, elem.tour_is_disabled)
+                        handleClick(elem.tour_id, elem.tour_is_deleted)
                       }
                     >
-                      {elem.tour_is_disabled ? "Activar" : "Desactivar"}
+                      {elem.tour_is_deleted === 1 ? "Activar" : "Desactivar"}
                     </Button>
                   </td>
                   <td>
