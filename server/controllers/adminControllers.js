@@ -78,7 +78,7 @@ class adminControllers {
   disableTour = (req, res) => {
     const { tour_id } = req.params;
     console.log(tour_id);
-    let sql = `UPDATE tour SET tour_is_disabled = 1 WHERE tour_id = "${tour_id}"`;
+    let sql = `UPDATE tour SET tour_is_deleted = 1 WHERE tour_id = "${tour_id}"`;
     let sql2 = "SELECT * from tour ";
 
     connection.query(sql, (error, result) => {
@@ -95,7 +95,7 @@ class adminControllers {
   enableTour = (req, res) => {
     const { tour_id } = req.params;
     console.log(tour_id);
-    let sql = `UPDATE tour SET tour_is_disabled = 0 WHERE tour_id = "${tour_id}"`;
+    let sql = `UPDATE tour SET tour_is_deleted = 0 WHERE tour_id = "${tour_id}"`;
     let sql2 = "SELECT * from tour";
 
     connection.query(sql, (error, result) => {
@@ -120,6 +120,18 @@ class adminControllers {
         res.status(500).json({ error: err });
       } else {
         res.status(200).json(result);
+      }
+    });
+  };
+  everyTour = (req, res) => {
+    let sql = `SELECT * FROM tour
+    ORDER BY tour_is_deleted DESC, tour_id DESC;`;
+    connection.query(sql, (err, resultEveryTour) => {
+      if (err) {
+        res.status(400).json({ err });
+        console.log(err);
+      } else {
+        res.status(200).json({ resultEveryTour });
       }
     });
   };

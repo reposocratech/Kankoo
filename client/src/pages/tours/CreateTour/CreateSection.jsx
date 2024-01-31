@@ -1,11 +1,10 @@
+
+import React from "react";
 import React, { useEffect, useRef } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
-
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useState } from "react";
-
-import { sendMail } from "../../../../helpers/sendmail";
 import "./CreateTour.scss";
 
 const initialValueSection = {
@@ -16,21 +15,18 @@ const initialValueSection = {
 
 export const CreateSection = ({
   tour,
-
   setShowFormSection,
   resetSections,
   setResetSections,
 }) => {
-  console.log("Tour prop:", tour);
-
   const { tour_id } = useParams();
-
   const [addSection, setAddSection] = useState(initialValueSection);
   const [cover, setCover] = useState();
   const [images, setImages] = useState();
   const [audios, setAudios] = useState();
   const [videos, setVideos] = useState();
   const [msgError, setMsgError] = useState("");
+
   const scroll = useRef();
 
   useEffect(() => {
@@ -115,14 +111,6 @@ export const CreateSection = ({
             setResetSections(!resetSections);
             setShowFormSection(false);
           }
-
-          let url = "http://localhost:3000/tours/waiting";
-          let msg = "ALguien ha subido una nueva guía, ¡acéptala!";
-          let email = "joseluis_casares@hotmail.com";
-          let asunto = "Nueva guía";
-          sendMail(url, msg, email, asunto);
-
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

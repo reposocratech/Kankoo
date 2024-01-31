@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { CreateTour } from "./CreateTour";
 import { CreateSection } from "./CreateSection";
+import "./CreateTour.scss";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
-import "./CreateTour.scss";
+import { useNavigate } from "react-router-dom";
+import { sendMail } from "../../../../helpers/sendmail";
 export const FatherCreateTour = () => {
   const [showSections, setShowSections] = useState(false);
   const [showFormSection, setShowFormSection] = useState(false);
   const [sections, setSections] = useState([]);
   const [resetSections, setResetSections] = useState(false);
-
   const [tour, setTour] = useState({});
-
-  console.log("padreee", tour);
-  console.log(sections);
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -25,7 +25,19 @@ export const FatherCreateTour = () => {
         console.log("Error en la solicitud Axios:", err);
       });
   }, [resetSections, tour]);
-
+  const getValidation = () => {
+    if (sections.length === 0) {
+      setMsg("¡Añade, al menos, un punto a tu guía!");
+    } else {
+      let url = "http://localhost:3000/tours/waiting";
+      let msg = "Alguien ha subido una nueva guía, ¡acéptala!";
+      let email = "kankoo.app.validation@gmail.com";
+      let asunto = "Nueva guía";
+      sendMail(url, msg, email, asunto);
+      navigate("/tours/waiting");
+    }
+  };
+  console.log(sections);
   return (
     <>
       {!showSections && (
@@ -95,10 +107,14 @@ export const FatherCreateTour = () => {
                           Añadir punto
                         </button>
                       </div>
-                      <div>
-                        <button className="createSectionButton mt-4">
+                      <div className="validationCheck">
+                        <button
+                          onClick={getValidation}
+                          className="createSectionButton mt-4"
+                        >
                           Solicitar aprobación
                         </button>
+                        <p>{msg}</p>
                       </div>
                     </div>
                   </Row>

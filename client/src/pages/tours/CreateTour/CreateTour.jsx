@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Col, Row, Form, Container } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./CreateTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 

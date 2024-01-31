@@ -15,8 +15,11 @@ export const WaitingValidation = () => {
         />
         <h2>¡Gracias por el contenido!</h2>
         <p>Tu solicitud está a la espera de validación por el administrador.</p>
-        <button className="waitingVolver" onClick={() => navigate(-1)}>
-          Volver
+        <button
+          className="waitingVolver"
+          onClick={() => navigate("/users/userprofile")}
+        >
+          Vuelve a tu perfil
         </button>
       </Col>
     </Row>
