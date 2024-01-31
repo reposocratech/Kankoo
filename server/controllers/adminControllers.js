@@ -5,7 +5,8 @@ const dotenv = require("dotenv");
 
 class adminControllers {
   getAllUsers = (req, res) => {
-    let sql = "SELECT * FROM user WHERE user_type = 2 or user_is_deleted = 1";
+    let sql =
+      "SELECT * FROM user WHERE user_type = 2 ORDER BY user_is_deleted DESC";
     connection.query(sql, (error, result) => {
       console.log(result);
       if (error) {
