@@ -13,7 +13,7 @@ export const AdminTours = () => {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
   return (
     <div>
       <AdminToursTable everyTour={everyTour} setEveryTour={setEveryTour} />

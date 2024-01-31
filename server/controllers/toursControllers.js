@@ -38,6 +38,8 @@ class toursControllers {
     const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.addSection);
 
+    console.log("tour_id recibido en el backend:", tour_id);
+
     let sql_cont = `SELECT max(section_id) as id from section where tour_id = ${tour_id}`;
 
     connection.query(sql_cont, (err, result_id) => {

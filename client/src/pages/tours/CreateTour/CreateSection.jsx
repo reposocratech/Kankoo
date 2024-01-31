@@ -1,5 +1,3 @@
-
-import React from "react";
 import React, { useEffect, useRef } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
@@ -59,21 +57,24 @@ export const CreateSection = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (
       !addSection.section_name ||
       !addSection.section_description ||
       !addSection.travel_distance ||
       !cover
     ) {
+      console.log("1");
       setMsgError("Rellena todos los campos");
     } else if (!/^\d{1,5}(\.\d{1,2})?$/.test(addSection.travel_distance)) {
+      console.log("2");
       setMsgError(
         "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
       );
-    } else if (!audios && !videos) {
-      setMsgError("Debe proporcionar al menos un audio o video.");
-    } else if (!images) {
-      setMsgError("Debe proporcionar al menos una imagen.");
+      // } else if (!audios && !videos) {
+      //   setMsgError("Debe proporcionar al menos un audio o video.");
+      // } else if (!images) {
+      //   setMsgError("Debe proporcionar al menos una imagen.");
     } else {
       let temp = {
         ...addSection,
@@ -88,7 +89,7 @@ export const CreateSection = ({
           newFormData.append("images", elem);
         }
       }
-
+      console.log("images, audios y videos", audios, images, videos);
       if (audios) {
         for (const elem of audios) {
           newFormData.append("audios", elem);
@@ -148,7 +149,7 @@ export const CreateSection = ({
                 id="file"
                 name="img"
                 type="file"
-                onChange={handleImages}
+                onChange={handleFile}
                 hidden
               ></input>
             </Col>
@@ -201,7 +202,7 @@ export const CreateSection = ({
 
               <label
                 className="label-img d-flex align-items-center justify-content-center"
-                htmlFor="file"
+                htmlFor="fileImages"
               >
                 <img
                   className="iconSubirImg me-2"
@@ -210,41 +211,18 @@ export const CreateSection = ({
                 />
               </label>
               <input
-                id="file"
-                name="img"
                 type="file"
+                id="fileImages"
                 onChange={handleImages}
-                hidden
-              ></input>
-            </Col>
-            <Col lg={4}>
-              <p className="mt-1">Añade un audio-guía</p>
-
-              <label
-                className="label-img d-flex align-items-center justify-content-center"
-                htmlFor="file"
-              >
-                <img
-                  className="iconSubirImg me-2"
-                  src="/assets/auriculares.png"
-                  alt=""
-                />
-              </label>
-              <input
-                id="file"
-                type="file"
-                onChange={handleVideos}
-                accept="video/*"
-                name="video"
-                hidden
-              ></input>
+                multiple
+              />
             </Col>
             <Col lg={4}>
               <p className="mt-1">Añade un vídeo</p>
 
               <label
                 className="label-img d-flex align-items-center justify-content-center"
-                htmlFor="file"
+                htmlFor="fileVideos"
               >
                 <img
                   className="iconSubirImg me-2"
@@ -253,7 +231,29 @@ export const CreateSection = ({
                 />
               </label>
               <input
-                id="file"
+                id="fileVideos"
+                type="file"
+                onChange={handleVideos}
+                accept="video/*"
+                name="video"
+                hidden
+              ></input>
+            </Col>
+            <Col lg={4}>
+              <p className="mt-1">Añade un audio</p>
+
+              <label
+                className="label-img d-flex align-items-center justify-content-center"
+                htmlFor="fileAudios"
+              >
+                <img
+                  className="iconSubirImg me-2"
+                  src="/assets/auriculares.png"
+                  alt=""
+                />
+              </label>
+              <input
+                id="fileAudios"
                 type="file"
                 onChange={handleAudios}
                 accept="audio/*"
