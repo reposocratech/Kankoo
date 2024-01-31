@@ -73,10 +73,12 @@ export const CreateSection = ({
       setMsgError(
         "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
       );
-      } else if (!audios && !videos) {
-        setMsgError("Debe proporcionar al menos un audio o video.");
-       } else if (!images) {
-        setMsgError("Debe proporcionar al menos una imagen.");
+
+    } else if (!audios && !videos) {
+      setMsgError("Debe proporcionar al menos un audio o video.");
+    } else if (!images) {
+      setMsgError("Debe proporcionar al menos una imagen.");
+
     } else {
       let temp = {
         ...addSection,
@@ -200,7 +202,7 @@ export const CreateSection = ({
 
           <Row>
             <Col lg={4}>
-              <p className="mt-1">Añade imágenes</p>
+              <p className="mt-1">Añade una imagen</p>
 
               <label
                 className="label-img d-flex align-items-center justify-content-center"
@@ -215,8 +217,8 @@ export const CreateSection = ({
               <input
                 type="file"
                 id="fileImages"
+                hidden
                 onChange={handleImages}
-                multiple
               />
             </Col>
             <Col lg={4}>
@@ -267,7 +269,7 @@ export const CreateSection = ({
           <Row>
             <Col lg={6}>
               {msgError && <p> {msgError} </p>}
-              <div className="botonsLogin">
+              <div className="mt-4">
                 <button className="createSectionButton" onClick={handleSubmit}>
                   Crear punto
                 </button>

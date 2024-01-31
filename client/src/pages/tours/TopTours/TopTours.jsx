@@ -20,7 +20,7 @@ export const TopTours = () => {
   }, []);
   return (
     <Container>
-      <button className="UserMenuButton" onClick={() => navigate(-1)}>
+      <button className="UserMenuButton" onClick={() => navigate("/")}>
         Volver
       </button>
       <Row className="UserMenuTitle d-flex justify-content-center ">

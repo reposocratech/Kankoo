@@ -76,7 +76,7 @@ export const LoginForm = () => {
                 />
               </Form.Group>
               <p>{msgError}</p>
-              <div className="botonsLogin">
+              <div className="mt-4">
                 <button className="registerButton me-2" onClick={handleSubmit}>
                   Iniciar sesión
                 </button>
@@ -87,7 +87,7 @@ export const LoginForm = () => {
                   Cancelar
                 </button>
               </div>
-              <p className="pLogin">
+              <p className="pLogin mt-4">
                 ¿No estás registrado/a? Regístrate{" "}
                 <Link className="linkLogin" to={"/users/registeruser"}>
                   aquí

@@ -37,12 +37,12 @@ export const EditSection = () => {
         res.data.forEach((e) => {
           if (e.resource_type === 1) {
             temp.images = true;
-            temp.audio_id = e.resource_id;
+            temp.image_id = e.resource_id;
           }
 
           if (e.resource_type === 2) {
             temp.audios = true;
-            temp.image_id = e.resource_id;
+            temp.audio_id = e.resource_id;
           }
           if (e.resource_type === 3) {
             temp.videos = true;
@@ -192,7 +192,7 @@ export const EditSection = () => {
 
             <Row>
               <Col lg={4}>
-                <p className="mt-1">Añade más imágenes</p>
+                <p className="mt-1">Cambia tus imágenes</p>
 
                 <label
                   className="label-img d-flex align-items-center justify-content-center"
@@ -210,7 +210,6 @@ export const EditSection = () => {
                   type="file"
                   onChange={handleResource}
                   hidden
-                  multiple
                 ></input>
               </Col>
               <Col lg={4}>
@@ -230,8 +229,8 @@ export const EditSection = () => {
                   id="fileAudios"
                   type="file"
                   onChange={handleResource}
-                  accept="video/*"
-                  name="video"
+                  accept="audio/*"
+                  name="audio"
                   hidden
                 ></input>
               </Col>
@@ -252,8 +251,8 @@ export const EditSection = () => {
                   id="fileVideos"
                   type="file"
                   onChange={handleResource}
-                  accept="audio/*"
-                  name="audio"
+                  accept="video/*"
+                  name="video"
                   hidden
                 ></input>
               </Col>
