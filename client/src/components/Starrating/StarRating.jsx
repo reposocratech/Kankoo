@@ -5,7 +5,7 @@ import axios from "axios";
 
 const createArray = (length) => [...Array(length)];
 
-export const StarRating = ({ totalStars = 5, tour_id, id }) => {
+export const StarRating = ({ totalStars = 5, tour_id, id, setMsg, user }) => {
   const [selectedStars, setSelectedStars] = useState(0);
 
   console.log("totalllll", totalStars);
@@ -34,6 +34,8 @@ export const StarRating = ({ totalStars = 5, tour_id, id }) => {
           setSelectedStars={setSelectedStars}
           tour_id={tour_id}
           id={id}
+          setMsg={setMsg}
+          user={user}
         />
       ))}
     </div>
