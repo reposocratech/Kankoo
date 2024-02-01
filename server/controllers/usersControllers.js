@@ -53,6 +53,37 @@ class usersControllers {
       }
     });
   };
+
+  getOneLike = (req, res) => {
+    const { tour_id, user_id } = req.params;
+    console.log("-----------------------------", tour_id, user_id);
+
+    let sql = `SELECT * FROM user_likes_tour WHERE tour_id = ${tour_id} AND user_id = ${user_id};`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
+  getOneAcquired = (req, res) => {
+    const { tour_id, user_id } = req.params;
+    console.log("-----------------------------", tour_id, user_id);
+
+    let sql = `SELECT * FROM user_acquires_tour WHERE tour_id = ${tour_id} AND user_id = ${user_id};`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
   favTours = (req, res) => {
     const { id, tour_id } = req.params;
     const { liked } = req.body;
