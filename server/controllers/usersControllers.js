@@ -217,7 +217,6 @@ class usersControllers {
       }
     });
   };
-
   favToursGallery = (req, res) => {
     const { id } = req.params;
     let sql = `SELECT tour.tour_id, tour.tour_name, tour.tour_city, tour.cover, user_likes_tour.user_id
