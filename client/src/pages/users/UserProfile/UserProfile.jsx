@@ -9,9 +9,12 @@ export const UserProfile = () => {
   const { user } = useContext(KankooContext);
   const navigate = useNavigate();
   return (
-    <Container className="UserPerfilGeneral d-flex flex-column align-items-center">
+    <Container
+      fluid
+      className="UserPerfilGeneral d-flex flex-column align-items-center"
+    >
       <Row>
-        <Col className="UserCard d-flex align-items-center flex-column pt-5 pb-3">
+        <Col className="UserCard d-flex align-items-center flex-column pb-3">
           <h3>¡Hola! Estás en tu perfil</h3>
           <h5 className="h5perfil">
             {user?.first_name} {user?.last_name}, <span>{user?.email}</span>

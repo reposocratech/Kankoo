@@ -1,5 +1,10 @@
 @import "./../../../styles/mixins.scss";
 @import "animate.css";
+
+.mainApp {
+  margin-top: 9rem;
+}
+
 .container-xxl {
   max-width: 75rem;
 }
