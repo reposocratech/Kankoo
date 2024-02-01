@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import "./CardOneSection.scss";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { KankooContext } from "../../context/KankooContext";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import { OneTour } from "../../pages/tours/OneTour/OneTour";
 
 export const CardOneSection = ({
   elem,
@@ -14,12 +13,17 @@ export const CardOneSection = ({
   setResetOneTour,
 }) => {
   const { setOneSection } = useContext(KankooContext);
-
   const navigate = useNavigate();
   useEffect(() => {
     setOneSection(elem);
   }, [elem]);
-
+  const handleClickSection = () => {
+    if (user) {
+      navigate(`/tours/onesection/${elem?.tour_id}/${elem?.section_id}`);
+    } else {
+      navigate("/users/stop");
+    }
+  };
   const delSection = () => {
     axios
       .put(
@@ -40,11 +44,7 @@ export const CardOneSection = ({
           <div className="CardOneSection d-flex flex-column align-self-lg-start align-self-xs-center">
             <div>
               <img
-                onClick={() =>
-                  navigate(
-                    `/tours/onesection/${elem?.tour_id}/${elem?.section_id}`
-                  )
-                }
+                onClick={handleClickSection}
                 className="TourSectionImg"
                 src={`http://localhost:3000/resources/images/${elem?.section_cover}`}
                 alt="portada de seccion"
