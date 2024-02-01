@@ -71,7 +71,7 @@ function NavBarApp() {
       );
     }
   };
-
+  /* jolines */
   const renderAdminContent = () => {
     if (token && user?.user_type === 1) {
       return (
