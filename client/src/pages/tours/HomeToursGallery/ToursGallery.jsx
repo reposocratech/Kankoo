@@ -63,19 +63,19 @@ export const ToursGallery = () => {
         className="d-flex justify-content-around align-items-center flex-wrap p-3"
         md={4}
       >
-        {showAllTours && allTours?.length != 0 ? (
+        {showAllTours && allTours?.length !== 0 ? (
           <>
-            {allTours?.map((elem) => {
-              return <CardOneTour key={elem.tour_id} elem={elem} />;
-            })}
+            {allTours?.map((elem) => (
+              <CardOneTour key={elem.tour_id} elem={elem} />
+            ))}
           </>
+        ) : foundTours?.length !== 0 ? (
+          foundTours.map((elem) => (
+            <CardOneTour key={elem.tour_id} elem={elem} />
+          ))
         ) : (
           <NoContent />
         )}
-
-        {foundTours?.map((elem) => {
-          return <CardOneTour key={elem.tour_id} elem={elem} />;
-        })}
       </Row>
     </Container>
   );
