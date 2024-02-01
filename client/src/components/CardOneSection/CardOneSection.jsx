@@ -14,7 +14,7 @@ export const CardOneSection = ({
   setResetOneTour,
 }) => {
   const { setOneSection } = useContext(KankooContext);
-  console.log(oneTour);
+
   const navigate = useNavigate();
   useEffect(() => {
     setOneSection(elem);

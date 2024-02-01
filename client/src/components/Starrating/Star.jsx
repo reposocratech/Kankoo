@@ -12,12 +12,12 @@ export const Star = ({
     `rating_${tour_id}_${id}`
   );
 
-  useEffect(() => {
-    const storedRating = localStorage.getItem(localStorageKey);
-    if (storedRating !== null) {
-      setSelectedStars(parseInt(storedRating, 10));
-    }
-  }, [localStorageKey, setSelectedStars]);
+  // useEffect(() => {
+  //   const storedRating = localStorage.getItem(localStorageKey);
+  //   if (storedRating !== null) {
+  //     setSelectedStars(parseInt(storedRating, 10));
+  //   }
+  // }, [localStorageKey, setSelectedStars]);
 
   const handleClickRating = () => {
     onSelect();
@@ -33,7 +33,7 @@ export const Star = ({
         .catch((err) => {
           console.log(err);
         });
-      localStorage.setItem(localStorageKey, prevSelectedStars.toString());
+      // localStorage.setItem(localStorageKey, prevSelectedStars.toString());
 
       return prevSelectedStars;
     });

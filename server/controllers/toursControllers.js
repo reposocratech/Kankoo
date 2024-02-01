@@ -211,12 +211,26 @@ class toursControllers {
       }
     });
   };
+
+  getOneRate = (req, res) => {
+    const { tour_id, user_id } = req.params;
+    console.log("-----------------------------", tour_id, user_id);
+
+    let sql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${user_id};`;
+
+    connection.query(sql, (err, result) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  };
+
   rateTour = (req, res) => {
     const { tour_id, id } = req.params;
     const { prevSelectedStars } = req.body;
-
     let checkSql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${id};`;
-
     connection.query(checkSql, (checkErr, checkResult) => {
       if (checkErr) {
         res.status(500).json({ error: checkErr });
@@ -233,7 +247,6 @@ class toursControllers {
           });
         } else {
           let insertSql = `INSERT INTO user_rates_tour (tour_id, user_id, rating) VALUES (${tour_id}, ${id}, ${prevSelectedStars});`;
-
           connection.query(insertSql, (insertErr, insertResult) => {
             if (insertErr) {
               res.status(500).json({ error: insertErr });
@@ -284,7 +297,7 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id};
     const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.editSection);
     const resourceExist = JSON.parse(req.body.resourceExist);
-
+    console.log(resourceExist);
     let sql = `UPDATE section
   SET section_name = "${section_name}",
       section_description ="${section_description}" ,
