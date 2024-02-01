@@ -6,7 +6,9 @@ export const InfoSection = ({ oneSection }) => {
     <>
       <h5>Descripcion</h5>
       <div className="OneSectionResourceInfoDescription">
-        <p> {oneSection?.section_description} </p>
+        <p>{oneSection?.section_description}</p>
+        <h5>Distancia</h5>
+        <p>{oneSection?.travel_distance}km</p>
       </div>
     </>
   );
