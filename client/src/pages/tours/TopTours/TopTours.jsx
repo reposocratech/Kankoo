@@ -4,6 +4,7 @@ import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
 import { Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./../../users/UserMenu.scss";
+import { NoContent } from "../../../components/NoContent/NoContent";
 
 export const TopTours = () => {
   const [topTours, setTopTours] = useState();
@@ -27,9 +28,15 @@ export const TopTours = () => {
         <h1>Las guías turísticas mejor valoradas</h1>
       </Row>
       <Row className="d-flex justify-content-center">
-        {topTours?.map((elem) => {
-          return <CardOneTour elem={elem} />;
-        })}
+        {topTours?.length != 0 ? (
+          <>
+            {topTours?.map((elem) => {
+              return <CardOneTour elem={elem} />;
+            })}
+          </>
+        ) : (
+          <NoContent />
+        )}
       </Row>
     </Container>
   );

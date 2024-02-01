@@ -4,6 +4,7 @@ import { KankooContext } from "../../../context/KankooContext";
 import "./../UserMenu.scss";
 import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
 import { useNavigate } from "react-router-dom";
+import { NoProfileContent } from "../../../components/NoContent/NoProfileContent";
 
 export const MyTours = () => {
   const { myTours } = useContext(KankooContext);
@@ -20,9 +21,15 @@ export const MyTours = () => {
         <h1>Todas mis guías turísticas</h1>
       </Row>
       <Row className="d-flex justify-content-center">
-        {myTours?.map((elem) => {
-          return <CardOneTour key={elem.tour_id} elem={elem} />;
-        })}
+        {myTours?.length != 0 ? (
+          <>
+            {myTours?.map((elem) => {
+              return <CardOneTour key={elem.tour_id} elem={elem} />;
+            })}
+          </>
+        ) : (
+          <NoProfileContent />
+        )}
       </Row>
     </Container>
   );
