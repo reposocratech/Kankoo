@@ -38,7 +38,7 @@ export const AdminTable = ({ adminUsers, setAdminUsers }) => {
   };
 
   return (
-    <div className="table-container">
+    <div className="table-container  container-xxl">
       <Button className="btn-back" onClick={handleGoBack}>
         Volver
       </Button>

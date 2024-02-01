@@ -1,11 +1,19 @@
+@import "./../../styles/mixins.scss";
+
 .error-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin-top: 1rem;
+  height: 50%;
 }
 
 .error-image {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
+}
+
+.error-btn {
+  @include BotonCoral;
+  margin-top: 2rem;
 }
