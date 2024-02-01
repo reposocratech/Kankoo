@@ -21,6 +21,14 @@
   }
 }
 
+.OneSectionResourcesControls {
+  background-color: #dbd9d9;
+  width: 54rem;
+  border-radius: 1.5rem;
+  margin-left: 2rem;
+  padding: 2rem;
+}
+
 .OneSectionResourceOneIcon {
   color: #f07674;
   font-size: 3rem;
@@ -66,6 +74,7 @@ audio {
 
 .OneSectionResourceInfoDescription {
   text-wrap: balance;
+  width: 50rem;
 }
 
 @media (max-width: 767px) {

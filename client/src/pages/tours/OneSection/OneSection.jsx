@@ -44,47 +44,53 @@ export const OneSection = () => {
     <>
       <Container lg={6} md={12} sm={12} xs={12} className="OneSectionFather ">
         <Row className="OneSectionResourcesContainer ">
-          <div className="OneSectionResourcesControls">
+          <Row>
             <div className="OneSectionBtnContainer ">
               <button className="OneSectionBtn " onClick={() => navigate(-1)}>
                 Volver
               </button>
             </div>
-            <div>
-              <h2>{oneSection?.section_name}</h2>
-              <hr className="OneSectionSubline" />
-              <div>
-                <InfoSection
-                  className="OneSectionResourceInfo"
-                  oneSection={oneSection}
-                />
+          </Row>
+          <Row>
+            <Col>
+              <div className="OneSectionResourcesControls">
+                <div>
+                  <h2>{oneSection?.section_name}</h2>
+                  <hr className="OneSectionSubline" />
+                  <div>
+                    <InfoSection
+                      className="OneSectionResourceInfo"
+                      oneSection={oneSection}
+                    />
+                  </div>
+                </div>
+                <div className="OneSectionResourceIcons">
+                  <i
+                    className={`material-symbols-outlined OneSectionResourceOneIcon ${
+                      !showResources && activeIcon !== "video" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setShowResources(false);
+                      setActiveIcon("audio");
+                    }}
+                  >
+                    headphones
+                  </i>
+                  <i
+                    className={`material-symbols-outlined OneSectionResourceOneIcon ${
+                      showResources || activeIcon === "video" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setShowResources(true);
+                      setActiveIcon("video");
+                    }}
+                  >
+                    video_library
+                  </i>
+                </div>
               </div>
-            </div>
-            <div className="OneSectionResourceIcons">
-              <i
-                className={`material-symbols-outlined OneSectionResourceOneIcon ${
-                  !showResources && activeIcon !== "video" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setShowResources(false);
-                  setActiveIcon("audio");
-                }}
-              >
-                headphones
-              </i>
-              <i
-                className={`material-symbols-outlined OneSectionResourceOneIcon ${
-                  showResources || activeIcon === "video" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setShowResources(true);
-                  setActiveIcon("video");
-                }}
-              >
-                video_library
-              </i>
-            </div>
-          </div>
+            </Col>
+          </Row>
           <>
             {sectionResources
               .sort((a, b) => {
