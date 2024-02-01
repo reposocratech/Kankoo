@@ -38,8 +38,6 @@ class toursControllers {
     const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.addSection);
 
-    console.log("tour_id recibido en el backend:", tour_id);
-
     let sql_cont = `SELECT max(section_id) as id from section where tour_id = ${tour_id}`;
 
     connection.query(sql_cont, (err, result_id) => {
@@ -158,7 +156,7 @@ class toursControllers {
 
   disableTour = (req, res) => {
     const { tour_id } = req.params;
-    console.log(tour_id);
+
     let sql = `UPDATE tour SET tour_is_disabled = 1 WHERE tour_id = "${tour_id}"`;
     let sql2 = "SELECT * from tour where tour_is_disabled = 0";
 
@@ -175,7 +173,7 @@ class toursControllers {
 
   enableTour = (req, res) => {
     const { tour_id } = req.params;
-    console.log(tour_id);
+
     let sql = `UPDATE tour SET tour_is_disabled = 0 WHERE tour_id = "${tour_id}"`;
     let sql2 = "SELECT * from tour where tour_is_disabled = 1";
 
@@ -192,12 +190,7 @@ class toursControllers {
 
   viewOneTour = (req, res) => {
     const { tour_id } = req.params;
-    /*     let sql = `SELECT *
-                FROM tour
-                JOIN section on tour.tour_id = section.tour_id
-                JOIN section_resource on section.tour_id = section_resource.tour_id
-                    AND section.section_id = section_resource.section_id
-                WHERE tour.tour_id = ${tour_id}`; */
+
     let sql = `SELECT *
               FROM tour
               JOIN section on tour.tour_id = section.tour_id
@@ -276,7 +269,7 @@ WHERE tour_id = ${tour_id}`;
   };
   delSection = (req, res) => {
     const { section_id, tour_id } = req.params;
-    console.log("req params back section", req.params);
+
     let sql = `DELETE FROM section
 WHERE tour_id = ${tour_id} AND section_id = ${section_id};
 
@@ -296,7 +289,7 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id};
     const { section_name, section_description, travel_distance, tour_id } =
       JSON.parse(req.body.editSection);
     const resourceExist = JSON.parse(req.body.resourceExist);
-    console.log(resourceExist);
+
     let sql = `UPDATE section
   SET section_name = "${section_name}",
       section_description ="${section_description}" ,

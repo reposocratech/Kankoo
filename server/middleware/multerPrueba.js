@@ -2,7 +2,6 @@ const multer = require("multer");
 function uploadImage() {
   const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-      /*    console.log(file); */
       let path = "";
       if (file.fieldname == "audios") {
         path = "/resources/audios/";
@@ -12,20 +11,6 @@ function uploadImage() {
         path = "/resources/videos/";
       }
       callback(null, `./public/${path}`);
-
-      /*       let folder_type;
-      console.log(req);
-      console.log(file); */
-      /* 
-      if (file.mimetype.startsWith("image/")) {
-        folder_type = "images";
-      } else if (file.mimetype.startsWith("video/")) {
-        folder_type = "videos";
-      } else if (file.mimetype.startsWith("audio/")) {
-        folder_type = "audios";
-      } */
-
-      /*    callback(null, `./public/${folder}/${folder_type}`); */
     },
 
     filename: function (req, file, callback) {
