@@ -1,35 +1,16 @@
 @import "./../../../styles/mixins.scss";
 
 .divRegister {
-  width: 40rem;
+  width: 35rem;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 20px -5px rgba(28, 28, 28, 0.271);
   padding: 4rem;
-  margin-top: 2rem;
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
 
   @media (max-width: 767px) {
     width: 100%;
-    padding: 2rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
-  @media (max-width: 991px) {
-    width: 100%;
-    padding: 3rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
-  @media (min-width: 1024px) and (max-width: 1366px) {
-    width: 100%;
-    margin-right: 1rem;
+    margin-top: -4rem;
   }
 }
 
@@ -39,7 +20,7 @@
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 767px) {
+  @media (max-width: 844px) {
     display: none;
   }
 

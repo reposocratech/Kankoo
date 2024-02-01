@@ -38,7 +38,14 @@ export const OneSection = () => {
   }, [section_id, tour_id]);
   return (
     <>
-      <Container lg={6} md={12} sm={12} xs={12} className="OneSectionFather ">
+      <Container
+        fluid
+        lg={6}
+        md={12}
+        sm={12}
+        xs={12}
+        className="OneSectionFather "
+      >
         <Row className="OneSectionResourcesContainer ">
           <div className="OneSectionBtnContainer ">
             <button className="OneSectionBtn " onClick={() => navigate(-1)}>

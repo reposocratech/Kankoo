@@ -29,6 +29,7 @@ import { OtherUser } from "../pages/tours/OneTour/OtherUser";
 import { TopTours } from "../pages/tours/TopTours/TopTours";
 import { AdminOneUser } from "../pages/admin/AdminOneUser/AdminOneUser";
 import { ProteccionRuta } from "../pages/ProteccionRuta/ProteccionRuta";
+import "../pages/tours/OneTour/OneTour.scss";
 
 export const AppRoutes = () => {
   const { token, user } = useContext(KankooContext);
@@ -37,58 +38,62 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Row>
         <NavBarApp />
-        <Routes>
-          {/* RUTAS ABIERTAS */}
-          <Route path="/" element={<ToursGallery />} />
-          <Route path="*" element={<ErrorPage />} />
-          <Route path="/users/registeruser" element={<RegisterForm />} />
-          <Route path="/users/login" element={<LoginForm />} />
-          <Route path="/tours/onetour/:tour_id" element={<OneTour />} />
-          <Route path="/tours/toptours" element={<TopTours />} />
-          <Route
-            path="/users/oneuser/:creator_user_id"
-            element={<OtherUser />}
-          />
-          <Route path="/users/terms" element={<TermsConditions />} />
-          <Route path="/users/privacy" element={<PrivacyPolicy />} />
-          <Route path="/users/stop" element={<ProteccionRuta />} />
-          {/* RUTAS PARA UN USUARIO (TIPO 2) */}
-          {token && user?.user_type === 2 && (
-            <>
-              <Route path="/users/mytours" element={<MyTours />} />
-              <Route path="/users/edituser" element={<EditUser />} />
-              <Route path="/tours/newtour" element={<FatherCreateTour />} />
-              <Route
-                path="/tours/newsection/:tour_id"
-                element={<CreateSection />}
-              />
-              <Route
-                path="/tours/onesection/:tour_id/:section_id"
-                element={<OneSection />}
-              />
-              <Route path="/tours/edittour/:tour_id" element={<EditTour />} />
-              <Route
-                path="/tours/editsection/:tour_id/:section_id"
-                element={<EditSection />}
-              />
-              <Route path="/users/userprofile" element={<UserProfile />} />
-              <Route path="/users/favtours" element={<Favorites />} />
-              <Route path="/users/boughttours" element={<BoughtTours />} />
-              <Route path="/tours/waiting" element={<WaitingValidation />} />
-            </>
-          )}
-
-          {/* RUTAS PARA EL ADMIN (USER TIPO 1) */}
-          {token && user?.user_type === 1 && (
-            <>
-              <Route path="/admin/adminProfile" element={<AdminProfile />} />
-              <Route path="/admin/adminStats" element={<AdminStats />} />
-              <Route path="/admin/adminTours" element={<AdminTours />} />
-              <Route path="/admin/adminUsers" element={<AdminUsers />} />
-              <Route path="/admin/getOneUser/:id" element={<AdminOneUser />} />
-            </>
-          )}
-        </Routes>
+        <main className="mainApp">
+          <Routes>
+            {/* RUTAS ABIERTAS */}
+            <Route path="/" element={<ToursGallery />} />
+            <Route path="*" element={<ErrorPage />} />
+            <Route path="/users/registeruser" element={<RegisterForm />} />
+            <Route path="/users/login" element={<LoginForm />} />
+            <Route path="/tours/onetour/:tour_id" element={<OneTour />} />
+            <Route path="/tours/toptours" element={<TopTours />} />
+            <Route
+              path="/users/oneuser/:creator_user_id"
+              element={<OtherUser />}
+            />
+            <Route path="/users/terms" element={<TermsConditions />} />
+            <Route path="/users/privacy" element={<PrivacyPolicy />} />
+            <Route path="/users/stop" element={<ProteccionRuta />} />
+            {/* RUTAS PARA UN USUARIO (TIPO 2) */}
+            {token && user?.user_type === 2 && (
+              <>
+                <Route path="/users/mytours" element={<MyTours />} />
+                <Route path="/users/edituser" element={<EditUser />} />
+                <Route path="/tours/newtour" element={<FatherCreateTour />} />
+                <Route
+                  path="/tours/newsection/:tour_id"
+                  element={<CreateSection />}
+                />
+                <Route
+                  path="/tours/onesection/:tour_id/:section_id"
+                  element={<OneSection />}
+                />
+                <Route path="/tours/edittour/:tour_id" element={<EditTour />} />
+                <Route
+                  path="/tours/editsection/:tour_id/:section_id"
+                  element={<EditSection />}
+                />
+                <Route path="/users/userprofile" element={<UserProfile />} />
+                <Route path="/users/favtours" element={<Favorites />} />
+                <Route path="/users/boughttours" element={<BoughtTours />} />
+                <Route path="/tours/waiting" element={<WaitingValidation />} />
+              </>
+            )}
+            {/* RUTAS PARA EL ADMIN (USER TIPO 1) */}
+            {token && user?.user_type === 1 && (
+              <>
+                <Route path="/admin/adminProfile" element={<AdminProfile />} />
+                <Route path="/admin/adminStats" element={<AdminStats />} />
+                <Route path="/admin/adminTours" element={<AdminTours />} />
+                <Route path="/admin/adminUsers" element={<AdminUsers />} />
+                <Route
+                  path="/admin/getOneUser/:id"
+                  element={<AdminOneUser />}
+                />
+              </>
+            )}
+          </Routes>
+        </main>
       </Row>
     </BrowserRouter>
   );

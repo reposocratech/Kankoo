@@ -34,11 +34,11 @@
   margin: 0;
 }
 .mapeoTours {
-  @media (max-width: 767px) {
-    width: 80%;
-    padding: 2rem;
-    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
-    margin-left: 1rem;
-    margin-right: 1rem;
+  @media (max-width: 844px) {
+    width: 100%;
+    // padding: 2rem;
+    // margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
+    margin-left: 0.5rem;
+    margin-right: 0.8rem;
   }
 }

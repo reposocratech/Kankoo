@@ -8,7 +8,10 @@ export const AdminProfile = () => {
   const navigate = useNavigate();
 
   return (
-    <Container className="perfilGeneral d-flex flex-column align-items-center">
+    <Container
+      fluid
+      className="perfilGeneral d-flex flex-column align-items-center"
+    >
       <Row>
         <Col
           xs={12}
