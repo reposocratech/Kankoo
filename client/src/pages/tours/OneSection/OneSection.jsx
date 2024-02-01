@@ -7,16 +7,13 @@ import { InfoSection } from "./InfoSection";
 import { AudioSection } from "./AudioSection";
 import { VideoSection } from "./VideoSection";
 import { ImagesSection } from "./ImagesSection";
-
 export const OneSection = () => {
   const [sectionResources, setSectionResources] = useState([]);
   const [showResources, setShowResources] = useState(false);
   const { section_id, tour_id } = useParams();
   const [oneSection, setOneSection] = useState();
   const [activeIcon, setActiveIcon] = useState("");
-
   const navigate = useNavigate();
-
   useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/getonesection/${section_id}/${tour_id}`)
@@ -39,31 +36,28 @@ export const OneSection = () => {
         console.log(error);
       });
   }, [section_id, tour_id]);
-
   return (
     <>
       <Container lg={6} md={12} sm={12} xs={12} className="OneSectionFather ">
         <Row className="OneSectionResourcesContainer ">
-          <Row>
-            <div className="OneSectionBtnContainer ">
-              <button className="OneSectionBtn " onClick={() => navigate(-1)}>
-                Volver
-              </button>
-            </div>
-          </Row>
+          <div className="OneSectionBtnContainer ">
+            <button className="OneSectionBtn " onClick={() => navigate(-1)}>
+              Volver
+            </button>
+          </div>
           <Row>
             <Col>
               <div className="OneSectionResourcesControls">
-                <div>
-                  <h2>{oneSection?.section_name}</h2>
-                  <hr className="OneSectionSubline" />
-                  <div>
+                <Col>
+                  <div className="Textosofresources">
+                    <h2>{oneSection?.section_name}</h2>
+                    <hr className="OneSectionSubline" />
                     <InfoSection
                       className="OneSectionResourceInfo"
                       oneSection={oneSection}
                     />
                   </div>
-                </div>
+                </Col>
                 <div className="OneSectionResourceIcons">
                   <i
                     className={`material-symbols-outlined OneSectionResourceOneIcon ${
@@ -100,7 +94,6 @@ export const OneSection = () => {
                   2: 1, // Audio
                   1: 2, // Imágenes
                 };
-
                 return (
                   orderPriority[a.resource_type] -
                   orderPriority[b.resource_type]

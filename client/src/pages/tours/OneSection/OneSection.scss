@@ -21,14 +21,6 @@
   }
 }
 
-.OneSectionResourcesControls {
-  background-color: #dbd9d9;
-  width: 54rem;
-  border-radius: 1.5rem;
-  margin-left: 2rem;
-  padding: 2rem;
-}
-
 .OneSectionResourceOneIcon {
   color: #f07674;
   font-size: 3rem;
@@ -52,7 +44,7 @@
 }
 
 video {
-  width: 45vw;
+  width: 40vw;
   border-radius: 1.5rem;
 }
 
@@ -68,13 +60,10 @@ audio {
 
 .OneSectionResourceImg {
   width: 25vw;
+  height: 45vh;
   display: block;
   border-radius: 1.5rem;
-}
-
-.OneSectionResourceInfoDescription {
-  text-wrap: balance;
-  width: 50rem;
+  object-fit: cover;
 }
 
 @media (max-width: 767px) {
@@ -92,6 +81,13 @@ audio {
 @media (max-width: 767px) {
   .OneSectionResourceImg {
     width: 55vw;
+    height: 35vh;
+  }
+}
+
+@media (max-width: 767px) {
+  .Textosofresources {
+    padding: 1rem;
   }
 }
 
@@ -110,5 +106,19 @@ audio {
   }
   .OneSectionBtnContainer {
     text-align: left;
+    padding-left: 2rem;
   }
+}
+
+.Textosofresources {
+  box-sizing: border-box;
+  max-width: 25rem;
+  min-width: 25rem;
+  overflow-wrap: break-word;
+  padding: 1rem;
+  margin: 5px;
+  border-radius: 0.5rem;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.1);
 }
