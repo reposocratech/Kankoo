@@ -1,4 +1,5 @@
 import React from "react";
+import "./OneSection.scss";
 
 export const InfoSection = ({ oneSection }) => {
   return (
