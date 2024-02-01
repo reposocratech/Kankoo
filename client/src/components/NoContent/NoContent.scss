@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+
+.firstCreatorContainer {
+  border: 0.2rem dashed lightgray;
+  border-radius: 2.5rem;
+  padding: 1rem;
+  margin: 2rem;
+  width: 30%;
+  > p {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: large;
+    background-color: #f39594;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  > p:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 767px) {
+    width: 90%;
+    padding: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem; // Ajusta el margen inferior según tus necesidades
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.firstCreator {
+  width: 12rem;
+  margin: 3rem;
+}

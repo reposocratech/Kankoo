@@ -4,6 +4,7 @@ import "./ToursGallery.scss";
 import { KankooContext } from "../../../context/KankooContext";
 import { CardOneTour } from "../../../components/CardOneTour/CardOneTour";
 import { textSensitive } from "../../../../helpers/utils";
+import { NoContent } from "../../../components/NoContent/NoContent";
 export const ToursGallery = () => {
   const { allTours } = useContext(KankooContext);
   const [showAllTours, setShowAllTours] = useState(true);
@@ -29,7 +30,7 @@ export const ToursGallery = () => {
       setFoundTours(tempArray);
     }
   };
-
+  console.log("TODOS LOS TOOOOOOOOOOOOURS", allTours);
   return (
     <Container>
       <Row className="s-flex justify-content-center">
@@ -62,12 +63,14 @@ export const ToursGallery = () => {
         className="d-flex justify-content-around align-items-center flex-wrap p-3"
         md={4}
       >
-        {showAllTours && (
+        {showAllTours && allTours?.length != 0 ? (
           <>
             {allTours?.map((elem) => {
               return <CardOneTour key={elem.tour_id} elem={elem} />;
             })}
           </>
+        ) : (
+          <NoContent />
         )}
 
         {foundTours?.map((elem) => {
