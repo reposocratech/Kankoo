@@ -9,9 +9,9 @@ export const ProteccionRuta = () => {
     <Row md={3} className="d-flex justify-content-center m-0">
       <Col className="waitingFrame d-flex flex-column justify-content-center align-items-center">
         <img
-          src="/icons/clock.png"
-          alt="icono de reloj"
-          className="waitingIcon"
+          src="/icons/prohibicion.png"
+          alt="icono de prohibido"
+          className="stopIcon"
         />
         <h2>¿Aún no te has registrado?</h2>
 

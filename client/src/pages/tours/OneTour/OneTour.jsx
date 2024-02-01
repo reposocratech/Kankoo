@@ -15,7 +15,7 @@ export const OneTour = () => {
   const [totalDistance, setTotalDistance] = useState(0);
   const [creatorId, setCreatorId] = useState();
   const [resetOneTour, setResetOneTour] = useState(false);
-
+  const [msg, setMsg] = useState();
   const { tour_id } = useParams();
   const { user, resetMyTours, setResetMyTours } = useContext(KankooContext);
   const id = user?.user_id;
@@ -24,15 +24,8 @@ export const OneTour = () => {
   const showPrice = oneTour && oneTour[0]?.price != 0;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const likesData = JSON.parse(localStorage.getItem("likes")) || {};
-    const initialLikedState = likesData[tour_id];
-    setLiked(initialLikedState || false);
-    const acquiredData = JSON.parse(localStorage.getItem("acquired")) || {};
-    const initialAdcquiredState = acquiredData[tour_id];
-    setAcquired(initialAdcquiredState || false);
-  }, [tour_id]);
-
+  useEffect(() => {}, [tour_id]);
+  //llamada a base de datos para la info del usuario que ha creado esta guía
   useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/onetour/${tour_id}`)
@@ -56,6 +49,8 @@ export const OneTour = () => {
         console.log("Error en la solicitud Axios:", err);
       });
   }, [tour_id, resetOneTour]);
+
+  //llamada a base de datos para el total de distancia del tour
   useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/distance/${tour_id}`)
@@ -66,39 +61,41 @@ export const OneTour = () => {
         console.log("Error en la solicitud Axios:", err);
       });
   });
-
+  //llamada a la base de datos para dar like
   const handleClickLike = () => {
-    setLiked((prevLiked) => !prevLiked);
-    const likesData = JSON.parse(localStorage.getItem("likes")) || {};
-    likesData[tour_id] = !liked;
-    localStorage.setItem("likes", JSON.stringify(likesData));
-    axios
-      .post(`http://localhost:3000/users/${id}/favtours/${tour_id}`, {
-        liked: !liked,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (user) {
+      setLiked((prevLiked) => !prevLiked);
+      axios
+        .post(`http://localhost:3000/users/${id}/favtours/${tour_id}`, {
+          liked: !liked,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setMsg("Regístrate para marcar como favorita una guía");
+    }
   };
-
+  //llamada a la base de datos para adquirir tour
   const handleClickAcquired = () => {
-    setAcquired((prevAcquired) => !prevAcquired);
-    const acquiredData = JSON.parse(localStorage.getItem("acquired")) || {};
-    acquiredData[tour_id] = !acquired;
-    localStorage.setItem("acquired", JSON.stringify(acquiredData));
-    axios
-      .post(`http://localhost:3000/users/${id}/boughttours/${tour_id}`, {
-        acquired: !acquired,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (user) {
+      setAcquired((prevAcquired) => !prevAcquired);
+      axios
+        .post(`http://localhost:3000/users/${id}/boughttours/${tour_id}`, {
+          acquired: !acquired,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setMsg("Regístrate para adquirir una guía");
+    }
   };
 
   const delTour = (tour_id) => {
@@ -151,7 +148,12 @@ export const OneTour = () => {
                 <div className="d-flex justify-content-between OneTourInfo">
                   <div className="d-flex">
                     <p className="me-2 pStarts">Puntúa esta guía</p>
-                    <StarRating tour_id={tour_id} id={id} />
+                    <StarRating
+                      tour_id={tour_id}
+                      id={id}
+                      setMsg={setMsg}
+                      user={user}
+                    />
                   </div>
 
                   <div className="d-flex">
@@ -196,6 +198,7 @@ export const OneTour = () => {
                 <p>{oneTour[0]?.tour_description}</p>
               </Row>
               <Row className="OneTourBotones d-flex justify-content-start">
+                <p className="starSelected">{msg}</p>
                 {oneTour[0]?.user_id != user?.user_id && (
                   <div className="custom-btn-container">
                     <button

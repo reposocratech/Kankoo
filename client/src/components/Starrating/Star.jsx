@@ -7,11 +7,12 @@ export const Star = ({
   onSelect = (f) => f,
   tour_id,
   id,
+  setMsg,
+  user,
 }) => {
   const [localStorageKey, setLocalStorageKey] = useState(
     `rating_${tour_id}_${id}`
   );
-
   // useEffect(() => {
   //   const storedRating = localStorage.getItem(localStorageKey);
   //   if (storedRating !== null) {
@@ -22,20 +23,22 @@ export const Star = ({
   const handleClickRating = () => {
     onSelect();
     setSelectedStars((prevSelectedStars) => {
-      console.log("COSILLAS", prevSelectedStars, tour_id, id);
-      axios
-        .post(`http://localhost:3000/tours/${tour_id}/rating/${id}`, {
-          prevSelectedStars,
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      // localStorage.setItem(localStorageKey, prevSelectedStars.toString());
+      if (user) {
+        axios
+          .post(`http://localhost:3000/tours/${tour_id}/rating/${id}`, {
+            prevSelectedStars,
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
-      return prevSelectedStars;
+        return prevSelectedStars;
+      } else {
+        setMsg("Regístrate para valorar una guía");
+      }
     });
   };
 
