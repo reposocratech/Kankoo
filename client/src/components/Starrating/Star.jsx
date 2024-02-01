@@ -23,7 +23,7 @@ export const Star = ({
   const handleClickRating = () => {
     onSelect();
     setSelectedStars((prevSelectedStars) => {
-      if (user) {
+      if (user && user.user_type != 1) {
         axios
           .post(`http://localhost:3000/tours/${tour_id}/rating/${id}`, {
             prevSelectedStars,
@@ -37,7 +37,7 @@ export const Star = ({
 
         return prevSelectedStars;
       } else {
-        setMsg("Regístrate para valorar una guía");
+        setMsg("Regístrate como usuario para valorar una guía");
       }
     });
   };
