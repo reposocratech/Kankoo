@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import { Col, Row, Form } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./EditTour.scss";
 import { KankooContext } from "../../../context/KankooContext";
 
@@ -80,8 +80,6 @@ export const EditTour = () => {
         console.log("Error en la solicitud:", err.response);
       });
   };
-
-  console.log("editTOOOuORR", editFile);
 
   return (
     <Col

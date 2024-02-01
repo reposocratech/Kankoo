@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CreateTour } from "./CreateTour";
 import { CreateSection } from "./CreateSection";
 import "./CreateTour.scss";
-import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { sendMail } from "../../../../helpers/sendmail";
@@ -17,7 +17,6 @@ export const FatherCreateTour = () => {
 
   useEffect(() => {
     if (tour.tour_id) {
-      console.log("tour.tour_id:------------", tour.tour_id);
       axios
         .get(`http://localhost:3000/tours/onetour/${tour.tour_id}`)
         .then((res) => {
@@ -40,7 +39,7 @@ export const FatherCreateTour = () => {
       navigate("/tours/waiting");
     }
   };
-  console.log(sections);
+
   return (
     <>
       {!showSections && (

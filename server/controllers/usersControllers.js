@@ -56,7 +56,6 @@ class usersControllers {
 
   getOneLike = (req, res) => {
     const { tour_id, user_id } = req.params;
-    console.log("-----------------------------", tour_id, user_id);
 
     let sql = `SELECT * FROM user_likes_tour WHERE tour_id = ${tour_id} AND user_id = ${user_id};`;
 
@@ -71,7 +70,6 @@ class usersControllers {
 
   getOneAcquired = (req, res) => {
     const { tour_id, user_id } = req.params;
-    console.log("-----------------------------", tour_id, user_id);
 
     let sql = `SELECT * FROM user_acquires_tour WHERE tour_id = ${tour_id} AND user_id = ${user_id};`;
 
@@ -184,13 +182,6 @@ class usersControllers {
     });
   };
 
-  terms = (req, res) => {
-    console.log("terminos y condiciones");
-  };
-  privacy = (req, res) => {
-    console.log("esta es la pagina de privacidad");
-  };
-
   otherUser = (req, res) => {
     const user_id = req.params.tourOwnerUserId;
     let sql = `SELECT * FROM user WHERE user_id = ${user_id} AND user_is_deleted = 0`;
@@ -211,7 +202,6 @@ class usersControllers {
     let sql = `SELECT * FROM user WHERE email = '${email}'`;
     connection.query(sql, (error, result) => {
       if (error) return res.status(500).json(error);
-      console.log(result);
 
       if (!result || result.length === 0) {
         res.status(401).json("Email no registrado");

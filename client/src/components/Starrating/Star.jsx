@@ -10,16 +10,6 @@ export const Star = ({
   setMsg,
   user,
 }) => {
-  const [localStorageKey, setLocalStorageKey] = useState(
-    `rating_${tour_id}_${id}`
-  );
-  // useEffect(() => {
-  //   const storedRating = localStorage.getItem(localStorageKey);
-  //   if (storedRating !== null) {
-  //     setSelectedStars(parseInt(storedRating, 10));
-  //   }
-  // }, [localStorageKey, setSelectedStars]);
-
   const handleClickRating = () => {
     onSelect();
     setSelectedStars((prevSelectedStars) => {

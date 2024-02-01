@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Row, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EditSection.scss";
-import { KankooContext } from "../../../context/KankooContext";
 
 export const EditSection = () => {
   const [editSection, setEditSection] = useState();
@@ -32,7 +31,6 @@ export const EditSection = () => {
         `http://localhost:3000/tours/onesectionresource/${tour_id}/${section_id}`
       )
       .then((res) => {
-        console.log(res.data);
         let temp = { ...resourceExist };
         res.data.forEach((e) => {
           if (e.resource_type === 1) {
@@ -54,8 +52,6 @@ export const EditSection = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(resourceExist);
-
   const [msgError, setMsgError] = useState("");
   const [editCover, setEditCover] = useState();
   const [editImages, setEditImages] = useState();
@@ -70,15 +66,11 @@ export const EditSection = () => {
   };
 
   const handleResource = (e) => {
-    console.log(e.target.files);
-
     if (e.target.name === "cover") setEditCover(e.target.files[0]);
     if (e.target.name === "image") setEditImages(e.target.files);
     if (e.target.name === "audio") setEditAudios(e.target.files);
     if (e.target.name === "video") setEditVideos(e.target.files);
   };
-
-  console.log(editCover);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -118,7 +110,6 @@ export const EditSection = () => {
           newFormData
         )
         .then((res) => {
-          console.log(res.data);
           navigate(`/tours/onetour/${editSection.tour_id}`);
         })
         .catch((err) => {
