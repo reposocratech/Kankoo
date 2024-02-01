@@ -49,6 +49,7 @@ export const OneTour = () => {
         console.log("Error en la solicitud Axios:", err);
       });
   }, [tour_id, resetOneTour]);
+  //llamada a la base de datos para traer la informacion del like y el adquirir
 
   //llamada a base de datos para el total de distancia del tour
   useEffect(() => {
@@ -63,7 +64,7 @@ export const OneTour = () => {
   });
   //llamada a la base de datos para dar like
   const handleClickLike = () => {
-    if (user) {
+    if (user && user.user_type != 1) {
       setLiked((prevLiked) => !prevLiked);
       axios
         .post(`http://localhost:3000/users/${id}/favtours/${tour_id}`, {
@@ -76,12 +77,12 @@ export const OneTour = () => {
           console.log(err);
         });
     } else {
-      setMsg("Regístrate para marcar como favorita una guía");
+      setMsg("Regístrate como usuario para marcar como favorita una guía");
     }
   };
   //llamada a la base de datos para adquirir tour
   const handleClickAcquired = () => {
-    if (user) {
+    if (user && user.user_type != 1) {
       setAcquired((prevAcquired) => !prevAcquired);
       axios
         .post(`http://localhost:3000/users/${id}/boughttours/${tour_id}`, {
@@ -94,7 +95,7 @@ export const OneTour = () => {
           console.log(err);
         });
     } else {
-      setMsg("Regístrate para adquirir una guía");
+      setMsg("Regístrate como usuario para adquirir una guía");
     }
   };
 

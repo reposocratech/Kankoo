@@ -5,6 +5,7 @@ import { CardOneTourFav } from "../../../components/CardOneTour/CardOneTourFav";
 import { Container, Row } from "react-bootstrap";
 import "./../UserMenu.scss";
 import { useNavigate } from "react-router-dom";
+import { NoProfileContent } from "../../../components/NoContent/NoProfileContent";
 export const Favorites = () => {
   const [favTours, setFavTours] = useState([]);
   const { user } = useContext(KankooContext);
@@ -31,9 +32,15 @@ export const Favorites = () => {
         <h1>Mis guías turísticas favoritas</h1>
       </Row>
       <Row className="d-flex justify-content-center">
-        {favTours?.map((tour) => {
-          return <CardOneTourFav key={tour.tour_id} tour={tour} />;
-        })}
+        {favTours?.length != 0 ? (
+          <>
+            {favTours?.map((tour) => {
+              return <CardOneTourFav key={tour.tour_id} tour={tour} />;
+            })}
+          </>
+        ) : (
+          <NoProfileContent />
+        )}
       </Row>
     </Container>
   );
