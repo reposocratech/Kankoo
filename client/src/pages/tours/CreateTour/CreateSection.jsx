@@ -39,6 +39,13 @@ export const CreateSection = ({
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddSection({ ...addSection, [name]: value });
+
+    if (name === "section_name" && value.length > 200) {
+      setMsgError("El nombre no puede exceder los 200 caracteres.");
+    } else {
+      setMsgError(""); // Limpiar el mensaje de error si no hay problema con la longitud
+      setAddSection({ ...addSection, [name]: value });
+    }
   };
   const handleImages = (e) => {
     setImages(e.target.files);
@@ -68,7 +75,6 @@ export const CreateSection = ({
       console.log("1");
       setMsgError("Rellena todos los campos");
     } else if (!/^\d{1,5}(\.\d{1,2})?$/.test(addSection.travel_distance)) {
-      console.log("2");
       setMsgError(
         "El formato de travel_distance no es válido. Debe tener un máximo de 5 dígitos antes del punto y 2 dígitos después del punto."
       );
@@ -81,7 +87,6 @@ export const CreateSection = ({
         ...addSection,
         tour_id: tour_id || tour?.tour_id,
       };
-
       const newFormData = new FormData();
       newFormData.append("addSection", JSON.stringify(temp));
 
