@@ -9,7 +9,6 @@ import { delLocalStorage } from "../../../helpers/localStorageUtils";
 
 function NavBarApp() {
   const { user, setUser, token, setIsLogged } = useContext(KankooContext);
-
   const navigate = useNavigate();
   const handleLogout = () => {
     delLocalStorage("token");
@@ -17,7 +16,6 @@ function NavBarApp() {
     setIsLogged(false);
     navigate("/");
   };
-
   const handleAvatarClick = () => {
     if (user?.user_type === 1) {
       navigate("/admin/adminProfile");
@@ -71,7 +69,6 @@ function NavBarApp() {
       );
     }
   };
-
   const renderAdminContent = () => {
     if (token && user?.user_type === 1) {
       return (
@@ -85,7 +82,7 @@ function NavBarApp() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary " fixed="top">
+    <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand className="NavbarBrand" as={Link} to="/">
           <img src="/logoFondoRosa.png" alt="Logo" />
