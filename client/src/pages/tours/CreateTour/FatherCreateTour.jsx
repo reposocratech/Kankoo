@@ -16,14 +16,17 @@ export const FatherCreateTour = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/tours/onetour/${tour.tour_id}`)
-      .then((res) => {
-        setSections(res.data.resultOneTour);
-      })
-      .catch((err) => {
-        console.log("Error en la solicitud Axios:", err);
-      });
+    if (tour.tour_id) {
+      console.log("tour.tour_id:------------", tour.tour_id);
+      axios
+        .get(`http://localhost:3000/tours/onetour/${tour.tour_id}`)
+        .then((res) => {
+          setSections(res.data.resultOneTour);
+        })
+        .catch((err) => {
+          console.log("Error en la solicitud Axios:", err);
+        });
+    }
   }, [resetSections, tour]);
   const getValidation = () => {
     if (sections.length === 0) {

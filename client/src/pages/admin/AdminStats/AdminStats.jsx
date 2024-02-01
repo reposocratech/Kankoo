@@ -38,7 +38,7 @@ export const AdminStats = () => {
 
   return (
     <>
-      <Container className="admin-stats-container">
+      <Container className="admin-stats-container container-xxl">
         <Button className="btn-back" onClick={handleGoBack}>
           Volver
         </Button>

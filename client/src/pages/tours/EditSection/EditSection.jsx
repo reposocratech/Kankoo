@@ -196,7 +196,7 @@ export const EditSection = () => {
 
                 <label
                   className="label-img d-flex align-items-center justify-content-center"
-                  htmlFor="file"
+                  htmlFor="fileImages"
                 >
                   <img
                     className="iconSubirImg me-2"
@@ -205,7 +205,7 @@ export const EditSection = () => {
                   />
                 </label>
                 <input
-                  id="file"
+                  id="fileImages"
                   name="image"
                   type="file"
                   onChange={handleResource}
@@ -218,7 +218,7 @@ export const EditSection = () => {
 
                 <label
                   className="label-img d-flex align-items-center justify-content-center"
-                  htmlFor="file"
+                  htmlFor="fileAudios"
                 >
                   <img
                     className="iconSubirImg me-2"
@@ -227,7 +227,7 @@ export const EditSection = () => {
                   />
                 </label>
                 <input
-                  id="file"
+                  id="fileAudios"
                   type="file"
                   onChange={handleResource}
                   accept="video/*"
@@ -240,7 +240,7 @@ export const EditSection = () => {
 
                 <label
                   className="label-img d-flex align-items-center justify-content-center"
-                  htmlFor="file"
+                  htmlFor="fileVideos"
                 >
                   <img
                     className="iconSubirImg me-2"
@@ -249,7 +249,7 @@ export const EditSection = () => {
                   />
                 </label>
                 <input
-                  id="file"
+                  id="fileVideos"
                   type="file"
                   onChange={handleResource}
                   accept="audio/*"
