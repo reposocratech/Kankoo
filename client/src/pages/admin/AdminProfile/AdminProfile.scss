@@ -13,6 +13,10 @@
   margin-top: 2rem;
   margin-bottom: 8rem;
   text-align: center;
+
+  @media (max-width: 844px) {
+    width: 100%;
+  }
 }
 .perfilButton {
   padding: 3rem;
