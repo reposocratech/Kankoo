@@ -82,7 +82,7 @@ function NavBarApp() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
       <Container fluid>
         <Navbar.Brand className="NavbarBrand" as={Link} to="/">
           <img src="/logoFondoRosa.png" alt="Logo" />

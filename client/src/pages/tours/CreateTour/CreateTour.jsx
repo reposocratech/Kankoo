@@ -153,7 +153,7 @@ export const CreateTour = ({ setTour, setShowSections }) => {
               ></input>
 
               {msgError && <p> {msgError} </p>}
-              <div>
+              <div className="mt-4">
                 <button
                   type="button"
                   className="createSectionButton"

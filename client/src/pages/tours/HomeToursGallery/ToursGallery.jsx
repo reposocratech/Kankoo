@@ -32,7 +32,7 @@ export const ToursGallery = () => {
   };
   console.log("TODOS LOS TOOOOOOOOOOOOURS", allTours);
   return (
-    <Container>
+    <Container fluid>
       <Row className="s-flex justify-content-center">
         <Col className="d-flex justify-content-center" md={8}>
           <div className="HomeWelcome">
