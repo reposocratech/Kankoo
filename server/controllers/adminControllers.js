@@ -8,7 +8,6 @@ class adminControllers {
     let sql =
       "SELECT * FROM user WHERE user_type = 2 ORDER BY user_is_deleted DESC";
     connection.query(sql, (error, result) => {
-      console.log(result);
       if (error) {
         res.status(400).json({ error });
       }
@@ -31,10 +30,8 @@ class adminControllers {
 
   //deshabilita un usuario
   disableUser = (req, res) => {
-    console.log(req.params);
-
     let { id } = req.params;
-    console.log(id);
+
     let sql = `UPDATE user SET user_is_deleted = 1 WHERE user_id = "${id}"`;
     let sql2 = "SELECT * from user where user_type=2";
 
@@ -50,10 +47,8 @@ class adminControllers {
   };
 
   enableUser = (req, res) => {
-    console.log(req.params);
-
     let { id } = req.params;
-    console.log(id);
+
     let sql = `UPDATE user SET user_is_deleted = 0 WHERE user_id = "${id}"`;
     let sql2 = "SELECT * from user where user_type = 2";
 
@@ -78,7 +73,7 @@ class adminControllers {
 
   disableTour = (req, res) => {
     const { tour_id } = req.params;
-    console.log(tour_id);
+
     let sql = `UPDATE tour SET tour_is_deleted = 1 WHERE tour_id = "${tour_id}"`;
     let sql2 = "SELECT * from tour ";
 
@@ -95,7 +90,7 @@ class adminControllers {
 
   enableTour = (req, res) => {
     const { tour_id } = req.params;
-    console.log(tour_id);
+
     let sql = `UPDATE tour SET tour_is_deleted = 0 WHERE tour_id = "${tour_id}"`;
     let sql2 = "SELECT * from tour";
 

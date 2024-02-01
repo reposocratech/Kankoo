@@ -23,7 +23,7 @@ export const KankooProvider = ({ children }) => {
 
     if (tokenLocalStorage) {
       const { id, type } = jwtDecode(tokenLocalStorage).user;
-      /*       console.log(jwtDecode(tokenLocalStorage)); */
+
       axios
         .get(`http://localhost:3000/users/userprofile/${id}`)
         .then((res) => {

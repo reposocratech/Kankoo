@@ -43,7 +43,7 @@ export const CreateSection = ({
     if (name === "section_name" && value.length > 200) {
       setMsgError("El nombre no puede exceder los 200 caracteres.");
     } else {
-      setMsgError(""); // Limpiar el mensaje de error si no hay problema con la longitud
+      setMsgError("");
       setAddSection({ ...addSection, [name]: value });
     }
   };

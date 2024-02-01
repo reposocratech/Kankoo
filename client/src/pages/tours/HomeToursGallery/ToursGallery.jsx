@@ -30,7 +30,7 @@ export const ToursGallery = () => {
       setFoundTours(tempArray);
     }
   };
-  console.log("TODOS LOS TOOOOOOOOOOOOURS", allTours);
+
   return (
     <Container>
       <Row className="s-flex justify-content-center">

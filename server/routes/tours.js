@@ -1,7 +1,6 @@
 var express = require("express");
 const toursControllers = require("../controllers/toursControllers");
 const multerSingle = require("../middleware/multerSingle");
-const multerMulti = require("../middleware/multerMulti");
 const multerPrueba = require("../middleware/multerPrueba");
 const { route } = require("./admin");
 

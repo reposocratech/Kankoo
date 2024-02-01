@@ -18,8 +18,7 @@ router.get(
 );
 router.post("/:id/boughttours/:tour_id", usersControllers.boughtTours);
 router.get("/:id/boughttoursgallery", usersControllers.boughtToursGallery);
-router.get("/terms", usersControllers.terms);
-router.get("/privacy", usersControllers.privacy);
+
 router.put("/edituser", multerSingle("users"), usersControllers.editUser);
 router.get("/viewotheruser/:id", usersControllers.viewOtherUser);
 
