@@ -24,8 +24,28 @@ export const OneTour = () => {
   const showPrice = oneTour && oneTour[0]?.price != 0;
   const navigate = useNavigate();
 
-  useEffect(() => {}, [tour_id]);
-  //llamada a base de datos para la info del usuario que ha creado esta guía
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/getoneacquired/${tour_id}/${id}`)
+      .then((res) => {
+        setAcquired(res.data[0].acquired);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/getonelike/${tour_id}/${id}`)
+      .then((res) => {
+        setLiked(res.data[0].liked);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:3000/tours/onetour/${tour_id}`)
@@ -170,13 +190,25 @@ export const OneTour = () => {
 
                 <div className="d-flex justify-content-between OneTourInfo">
                   <div className="d-flex align-items-center">
-                    <img
-                      onClick={() => navigate(`/users/oneuser/${creatorId}`)}
-                      className="OneTourProfilePicture mb-0 me-2"
-                      src={`http://localhost:3000/images/users/${tourOwnerDetails?.avatar}`}
-                      alt=""
-                    />
-                    <div className="d-flex flex-column">
+                    <div className="oneTourAvatarContainer me-2">
+                      <div
+                        className="oneTourAvatar"
+                        onClick={() => navigate(`/users/oneuser/${creatorId}`)}
+                      >
+                        {tourOwnerDetails?.avatar ? (
+                          <img
+                            src={`http://localhost:3000/images/users/${tourOwnerDetails?.avatar}`}
+                            alt="User Avatar"
+                            className="navAvatarImg"
+                          />
+                        ) : (
+                          <p className="oneTourAvatarInitial">
+                            {user?.first_name.charAt(0).toUpperCase()}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="d-flex flex-column mt-3">
                       <p className="createFor">Guía creada por:</p>
                       <p className="nameCreatorGuide">
                         {tourOwnerDetails?.first_name}{" "}
@@ -194,11 +226,28 @@ export const OneTour = () => {
                 </div>
               </Row>
 
+              {msg && (
+                <div className="divmensajeValidacion">
+                  <p className="mensajeValidacion">{msg}</p>
+                </div>
+              )}
+
               <Row className="OneTourDescription">
                 <p>{oneTour[0]?.tour_description}</p>
               </Row>
+              <Row className="OneTourDescription">
+                <div className="divDescriptionYAcces d-flex">
+                  <img
+                    className="iconAccesibilidad mt-2 me-3"
+                    src="/assets/silla-de-ruedas.png"
+                    alt="icono de persona andando para km"
+                  />
+                  <div className="infoAccesibilidad">
+                    <p className="ms-1">{oneTour[0]?.tour_acces}</p>
+                  </div>
+                </div>
+              </Row>
               <Row className="OneTourBotones d-flex justify-content-start">
-                <p className="starSelected">{msg}</p>
                 {oneTour[0]?.user_id != user?.user_id && (
                   <div className="custom-btn-container">
                     <button
@@ -207,7 +256,7 @@ export const OneTour = () => {
                       }
                       onClick={handleClickAcquired}
                     >
-                      {acquired ? "Borrar del carrito" : "Adquirir"}
+                      {!acquired ? "Adquirir" : "Borrar del carrito"}
                     </button>
                   </div>
                 )}

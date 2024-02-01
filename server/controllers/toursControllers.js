@@ -214,7 +214,6 @@ class toursControllers {
 
   getOneRate = (req, res) => {
     const { tour_id, user_id } = req.params;
-    console.log("-----------------------------", tour_id, user_id);
 
     let sql = `SELECT * FROM user_rates_tour WHERE tour_id = ${tour_id} AND user_id = ${user_id};`;
 
@@ -467,8 +466,6 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
       }
     });
   };
-  getOneLike = (req, res) => {};
-  getOneAdquired = (req, res) => {};
 }
 
 module.exports = new toursControllers();
