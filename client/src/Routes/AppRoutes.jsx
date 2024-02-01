@@ -28,6 +28,7 @@ import { CreateSection } from "../pages/tours/CreateTour/CreateSection";
 import { OtherUser } from "../pages/tours/OneTour/OtherUser";
 import { TopTours } from "../pages/tours/TopTours/TopTours";
 import { AdminOneUser } from "../pages/admin/AdminOneUser/AdminOneUser";
+import { ProteccionRuta } from "../pages/ProteccionRuta/ProteccionRuta";
 
 export const AppRoutes = () => {
   const { token, user } = useContext(KankooContext);
@@ -50,7 +51,7 @@ export const AppRoutes = () => {
           />
           <Route path="/users/terms" element={<TermsConditions />} />
           <Route path="/users/privacy" element={<PrivacyPolicy />} />
-
+          <Route path="/users/stop" element={<ProteccionRuta />} />
           {/* RUTAS PARA UN USUARIO (TIPO 2) */}
           {token && user?.user_type === 2 && (
             <>

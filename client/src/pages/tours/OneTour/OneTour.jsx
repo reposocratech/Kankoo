@@ -19,6 +19,7 @@ export const OneTour = () => {
   const { tour_id } = useParams();
   const { user, resetMyTours, setResetMyTours } = useContext(KankooContext);
   const id = user?.user_id;
+  console.log(user);
   //el precio se muestra si existe el tour y su valor es diferente de 0
   const showPrice = oneTour && oneTour[0]?.price != 0;
   const navigate = useNavigate();

@@ -199,7 +199,7 @@ export const CreateSection = ({
 
           <Row>
             <Col lg={4}>
-              <p className="mt-1">Añade imágenes</p>
+              <p className="mt-1">Añade una imagen</p>
 
               <label
                 className="label-img d-flex align-items-center justify-content-center"
@@ -214,8 +214,8 @@ export const CreateSection = ({
               <input
                 type="file"
                 id="fileImages"
+                hidden
                 onChange={handleImages}
-                multiple
               />
             </Col>
             <Col lg={4}>
@@ -266,7 +266,7 @@ export const CreateSection = ({
           <Row>
             <Col lg={6}>
               {msgError && <p> {msgError} </p>}
-              <div className="botonsLogin">
+              <div className="mt-4">
                 <button className="createSectionButton" onClick={handleSubmit}>
                   Crear punto
                 </button>
