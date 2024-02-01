@@ -45,7 +45,7 @@ export const CreateTour = ({ setTour, setShowSections }) => {
       const temp = { ...addTour, user_id: user?.user_id };
       newFormData.append("addTour", JSON.stringify(temp));
       newFormData.append("file", file);
-      console.log(setShowSections);
+
       axios
         .post("http://localhost:3000/tours/newtour", newFormData)
         .then((res) => {

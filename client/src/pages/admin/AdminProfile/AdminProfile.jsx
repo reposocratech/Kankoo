@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./AdminProfile.scss";
-import { KankooContext } from "../../../context/KankooContext";
 
 export const AdminProfile = () => {
   const navigate = useNavigate();

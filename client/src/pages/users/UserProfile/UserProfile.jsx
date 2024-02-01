@@ -105,16 +105,6 @@ export const UserProfile = () => {
           </div>
         </Col>
       </Row>
-      {/* <Row>
-        <Col>
-          <p>
-            Revisa nuestros
-            <a href="/users/terms">Términos y condiciones de uso</a>
-            ,así como nuestra
-            <a href="/users/privacy">Política de privacidad</a>
-          </p>
-        </Col>
-      </Row> */}
     </Container>
   );
 };
