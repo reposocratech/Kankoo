@@ -467,6 +467,8 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
       }
     });
   };
+  getOneLike = (req, res) => {};
+  getOneAdquired = (req, res) => {};
 }
 
 module.exports = new toursControllers();
