@@ -88,16 +88,16 @@ class toursControllers {
   saveSectionFiles = (files, section_id, tour_id) => {
     files.forEach((elem) => {
       let resource_type = elem.mimetype.split("/")[0];
-
+      let type = null;
       if (resource_type == "image") {
-        resource_type = 1;
+        type = 1;
       } else if (resource_type == "audio") {
-        resource_type = 2;
+        type = 2;
       } else if (resource_type == "video") {
-        resource_type = 3;
+        type = 3;
       }
 
-      let sql = `INSERT INTO section_resource (tour_id, section_id, resource_type, text) VALUES (${tour_id}, ${section_id}, ${resource_type}, "${elem.filename}")`;
+      let sql = `INSERT INTO section_resource (tour_id, section_id, resource_type, text) VALUES (${tour_id}, ${section_id}, ${type}, "${elem.filename}")`;
       connection.query(sql, (err, result) => {
         if (err) {
           // res.status(500).json(err);
