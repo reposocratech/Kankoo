@@ -7,6 +7,7 @@ import { InfoSection } from "./InfoSection";
 import { AudioSection } from "./AudioSection";
 import { VideoSection } from "./VideoSection";
 import { ImagesSection } from "./ImagesSection";
+
 export const OneSection = () => {
   const [sectionResources, setSectionResources] = useState([]);
   const [showResources, setShowResources] = useState(false);
@@ -24,6 +25,7 @@ export const OneSection = () => {
         console.log("Error en la solicitud Axios:", err);
       });
   }, [tour_id, section_id]);
+
   useEffect(() => {
     axios
       .get(
@@ -36,6 +38,7 @@ export const OneSection = () => {
         console.log(error);
       });
   }, [section_id, tour_id]);
+
   return (
     <>
       <Container
@@ -137,7 +140,6 @@ export const OneSection = () => {
                     </Col>
                   );
                 }
-                return null; // Añadir esta línea para manejar tipos desconocidos o no deseados
               })}
           </>
         </Row>
