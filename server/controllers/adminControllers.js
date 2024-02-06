@@ -121,7 +121,7 @@ class adminControllers {
   };
   everyTour = (req, res) => {
     let sql = `SELECT * FROM tour
-    ORDER BY tour_is_deleted DESC, tour_id DESC;`;
+    ORDER BY tour_is_deleted DESC, tour_id DESC`;
     connection.query(sql, (err, resultEveryTour) => {
       if (err) {
         res.status(400).json({ err });

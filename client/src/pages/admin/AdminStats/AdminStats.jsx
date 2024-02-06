@@ -3,6 +3,7 @@ import { KankooContext } from "../../../context/KankooContext";
 import { Button, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./AdminStats.scss";
+import axios from "axios";
 
 export const AdminStats = () => {
   const [totalUsers, setTotalUsers] = useState();
@@ -16,6 +17,15 @@ export const AdminStats = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    axios
+      .get("http://localhost:3000/admin/everyTour")
+      .then((res) => {
+        setTotalTours(res.data.resultEveryTour);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setTotalUsers(adminUsers?.length);
     setTotalUsersEnabled(
       adminUsers?.filter((e) => e.user_is_deleted === 0).length
@@ -23,14 +33,14 @@ export const AdminStats = () => {
     setTotalUsersDisabled(
       adminUsers?.filter((e) => e.user_is_deleted === 1).length
     );
-    setTotalTours(allTours?.length);
+
     setTotalToursEnabled(
-      allTours?.filter((e) => e.tour_is_disabled === 0).length
+      allTours?.filter((e) => e.tour_is_deleted === 0).length
     );
     setTotalToursDisabled(
-      allTours?.filter((e) => e.tour_is_disabled === 1).length
+      totalTours?.filter((e) => e.tour_is_deleted === 1).length
     );
-  }, [adminUsers, allTours]);
+  }, [adminUsers]);
 
   const handleGoBack = () => {
     navigate("/admin/adminProfile");
@@ -61,7 +71,7 @@ export const AdminStats = () => {
           <Card>
             <Card.Body>
               <Card.Title>Guías</Card.Title>
-              <Card.Text>Total: {totalTours}</Card.Text>
+              <Card.Text>Total: {totalTours?.length}</Card.Text>
               <Card.Text>Activos: {totalToursEnabled}</Card.Text>
               <Card.Text>Desactivados: {totalToursDisabled}</Card.Text>
               <Button
