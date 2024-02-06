@@ -455,7 +455,6 @@ WHERE tour_id = ${tour_id} AND section_id = ${section_id}`;
         console.log(err);
       } else {
         res.status(200).json({ topResult });
-        console.log("MEJORES TOURS", topResult);
       }
     });
   };
