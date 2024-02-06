@@ -30,9 +30,6 @@ export const EditTour = () => {
     }
   }, [myTours]);
 
-  console.log(editTour);
-
-  console.log(myTours);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditTour({ ...editTour, [name]: value });
@@ -55,9 +52,7 @@ export const EditTour = () => {
     axios
       .put(`http://localhost:3000/tours/edittour/${tour_id}`, newFormData)
       .then((res) => {
-        console.log("Respuesta del servidor:", res.data);
         let temp = [...myTours];
-        console.log(temp);
 
         let finalTemp = temp.map((e) => {
           if (e.tour_id === Number(tour_id)) {

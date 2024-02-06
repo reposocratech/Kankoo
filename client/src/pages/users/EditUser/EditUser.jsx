@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import { Col, Row, Form, Container } from "react-bootstrap";
 import { KankooContext } from "../../../context/KankooContext";
 import { useNavigate } from "react-router-dom";
 import "./EditUser.scss";
@@ -29,7 +29,6 @@ export const EditUser = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditUser({ ...editUser, [name]: value });
-    console.log(e.target.value);
   };
 
   const handleFile = (e) => {

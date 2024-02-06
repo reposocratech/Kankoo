@@ -49,7 +49,6 @@ export const CreateTour = ({ setTour, setShowSections }) => {
       axios
         .post("http://localhost:3000/tours/newtour", newFormData)
         .then((res) => {
-          console.log(res.data);
           setShowSections(true);
           setTour({
             ...addTour,
