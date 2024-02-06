@@ -50,7 +50,6 @@ export const OneTour = () => {
     axios
       .get(`http://localhost:3000/tours/onetour/${tour_id}`)
       .then((res) => {
-        console.log(res.data);
         setOneTour(res.data.resultOneTour);
         setCreatorId(res.data.resultOneTour[0].user_id);
         const tourOwnerUserId = res.data.resultOneTour[0]?.user_id;
@@ -69,7 +68,6 @@ export const OneTour = () => {
         console.log("Error en la solicitud Axios:", err);
       });
   }, [tour_id, resetOneTour]);
-  //llamada a la base de datos para traer la informacion del like y el adquirir
 
   //llamada a base de datos para el total de distancia del tour
   useEffect(() => {
@@ -127,7 +125,7 @@ export const OneTour = () => {
         navigate("/users/mytours");
       })
       .catch((err) => {
-        console.log("error borradooo cheee", err);
+        console.log("Error", err);
       });
   };
 
@@ -139,7 +137,6 @@ export const OneTour = () => {
       {oneTour && (
         <>
           <Row className="d-flex">
-            {/* Card principalllllllllllllll */}
             <Col lg={5} md={12} xs={12} className="d-flex flex-column">
               <Row className="mt-5">
                 <h2 className="guideTitle">{oneTour[0]?.tour_name}</h2>
