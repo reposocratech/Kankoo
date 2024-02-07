@@ -69,7 +69,9 @@ export const ToursGallery = () => {
               <CardOneTour key={elem.tour_id} elem={elem} />
             ))}
           </>
+
         ) : foundTours && foundTours.length !== 0 ? (
+
           foundTours.map((elem) => (
             <CardOneTour key={elem.tour_id} elem={elem} />
           ))
