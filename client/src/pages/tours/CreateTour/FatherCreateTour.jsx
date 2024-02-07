@@ -27,6 +27,7 @@ export const FatherCreateTour = () => {
         });
     }
   }, [resetSections, tour]);
+
   const getValidation = () => {
     if (sections.length === 0) {
       setMsg("¡Añade, al menos, un punto a tu guía!");
